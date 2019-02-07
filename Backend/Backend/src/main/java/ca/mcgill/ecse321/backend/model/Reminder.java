@@ -7,7 +7,10 @@ import java.sql.Time;
 public class Reminder{
 	
 	private String message;
-	private Time createdAt;
-	private boolean markedAsRead;
+	
+	@CreationTimestamp
+	private Time createDateTime;
+	
+	private Time readDateTime;
 	
 }
