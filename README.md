@@ -1,11 +1,13 @@
-# ECSE321 Project Group _number_
+# ECSE321 Project 01
 
-_This README.md is a fillable template for the project submissions. Use the table provided below to document the hours and the responsibilities of team members individually. Create a separate table for each deliverable. Remove this comment before the first submission._
 
-## Deliverable _number_
+## Deliverable 1
 
 |Team member's name|Total hours|Responsibility         |
 |------------------|-----------|-----------------------|
-|Team Member 1     |  _x_ hours|Mobile frontend lead   |
-|Team Member 2     |  _y_ hours|Project management lead|
-|...               |...        |                       |
+|Zurui He          |  _y_ hours|Build tools and Continuous integration setup|
+|Binyuan Sun       |  _y_ hours|Tech lead|
+|Tri-tin Truong    |  _y_ hours|Project management lead|
+|Zhong Yu Yang     |  _y_ hours|Testing lead|
+|Mark Zhu          |  _y_ hours|Backend lead|
+
