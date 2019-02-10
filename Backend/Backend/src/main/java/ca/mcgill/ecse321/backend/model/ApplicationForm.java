@@ -44,6 +44,62 @@ public class ApplicationForm{
 	private String jobID;
 	private String jobDescription;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getJobDescription() {
+		return jobDescription;
+	}
+
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
+	}
+
+	public String getEmployer() {
+		return employer;
+	}
+
+	public void setEmployer(String employer) {
+		this.employer = employer;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public boolean isWorkPermit() {
+		return workPermit;
+	}
+
+	public void setWorkPermit(boolean workPermit) {
+		this.workPermit = workPermit;
+	}
+
 	private String employer;
 
 	private String location;
@@ -59,6 +115,14 @@ public class ApplicationForm{
 
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+
+	public String getJobID() {
+		return jobID;
+	}
+
+	public void setJobID(String jobID) {
+		this.jobID = jobID;
 	}
 
 }

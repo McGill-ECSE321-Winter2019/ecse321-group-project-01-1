@@ -20,5 +20,37 @@ public class Reminder{
 	private Time createDateTime;
 	
 	private Time readDateTime;
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Time getReadDateTime() {
+		return readDateTime;
+	}
+
+	public void setReadDateTime(Time readDateTime) {
+		this.readDateTime = readDateTime;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Time getCreateDateTime() {
+		return createDateTime;
+	}
+
+	public void setCreateDateTime(Time createDateTime) {
+		this.createDateTime = createDateTime;
+	}
 	
 }
