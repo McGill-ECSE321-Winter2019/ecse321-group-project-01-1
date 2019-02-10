@@ -29,15 +29,20 @@ public class BackendApplicationRepository {
 	
 	//Student
 	@Transactional
-	public Student createStudent(int studentID, String firstName, 
+	public Student createStudent(String studentID, String firstName, 
 								String lastName, String email, String password) {
 		Student S = new Student();
+		S.setStudentID(studentID);
+		S.setFirstName(firstName);
+		S.setLastName(lastName);
+		S.setEmail(email);
+		S.setPassword(password);
 		entityManager.persist(S);
 		return new Student();
 	}
 	
 	@Transactional
-	public Student readStudent(int studentID) {
+	public Student readStudent(String studentID) {
 		Student S = entityManager.find(Student.class,studentID);
 		return S;
 	}

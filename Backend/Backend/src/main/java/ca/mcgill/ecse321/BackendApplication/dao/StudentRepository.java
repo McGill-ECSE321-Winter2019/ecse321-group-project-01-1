@@ -4,8 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.backend.model.Student;
 
-public interface StudentRepository extends CrudRepository<Student, Integer>{
+public interface StudentRepository extends CrudRepository<Student, String>{
 
-	Student findStudentByID(int studentID);
+	Student findStudentByID(String studentID);
 
 }

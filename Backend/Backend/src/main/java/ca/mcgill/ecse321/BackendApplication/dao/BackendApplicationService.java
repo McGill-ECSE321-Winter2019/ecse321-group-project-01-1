@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.mcgill.ecse321.backend.model.AcademicSemester;
+//import ca.mcgill.ecse321.backend.model.AcademicSemester;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
 import ca.mcgill.ecse321.backend.model.Document;
 import ca.mcgill.ecse321.backend.model.DocumentType;
@@ -26,15 +26,20 @@ public class BackendApplicationService {
 	
 	//Student
 	@Transactional
-	public Student createStudent(int studentID, String firstName, 
+	public Student createStudent(String studentID, String firstName, 
 								String lastName, String email, String password) {
 		Student S = new Student();
+		S.setStudentID(studentID);
+		S.setFirstName(firstName);
+		S.setLastName(lastName);
+		S.setEmail(email);
+		S.setPassword(password);
 		studentRepository.save(S);
 		return new Student();
 	}
 	
 	@Transactional
-	public Student readStudent(int studentID) {
+	public Student readStudent(String studentID) {
 		Student S = studentRepository.findStudentByID(studentID);
 		return S;
 	}
