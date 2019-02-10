@@ -1,35 +1,45 @@
 package ca.mcgill.ecse321.backend.model;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import java.util.Set;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Document{
-	
+
+	@Id
+	@GeneratedValue
+	private int id;
+
 	private String path;
-	
-private Set<ApplicationForm> applicationForm;
 
-@OneToMany(mappedBy="document")
-public Set<ApplicationForm> getApplicationForm() {
-   return this.applicationForm;
-}
+	@OneToMany
+	private Set<ApplicationForm> applicationForm;
 
-public void setApplicationForm(Set<ApplicationForm> applicationForms) {
-   this.applicationForm = applicationForms;
-}
+	public Set<ApplicationForm> getApplicationForm() {
+		return this.applicationForm;
+	}
 
-private DocumentType documentType;
+	public void setApplicationForm(Set<ApplicationForm> applicationForms) {
+		this.applicationForm = applicationForms;
+	}
 
-@OneToOne(optional=false)
-public DocumentType getDocumentType() {
-   return this.documentType;
-}
+	@Enumerated(EnumType.STRING)
+	private DocumentType documentType;
 
-public void setDocumentType(DocumentType documentType) {
-   this.documentType = documentType;
-}
+	public DocumentType getDocumentType() {
+		return this.documentType;
+	}
+
+	public void setDocumentType(DocumentType documentType) {
+		this.documentType = documentType;
+	}
 
 }
