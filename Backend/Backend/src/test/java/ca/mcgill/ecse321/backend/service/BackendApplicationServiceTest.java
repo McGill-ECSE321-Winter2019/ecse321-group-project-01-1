@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,8 +74,8 @@ public class BackendApplicationServiceTest {
 		}
 
 		//assert only 1 student
-		List<Student> allPersons = service.getAllStudents();
-		assertEquals(1, allPersons.size());
+		List<Student> allStudents = service.getAllStudents();
+		assertEquals(1, allStudents.size());
 		
 		//read student
 			Student test = service.readStudent(id);
@@ -99,6 +100,40 @@ public class BackendApplicationServiceTest {
 			assertEquals(test.getPassword(),"654321");
 			
 			
+			
+		
+	}
+	
+	@Test
+	
+	public void testReminder() {
+		//assert no student in repository
+		assertEquals(0, service.getAllStudents().size());
+
+		String id = "000000000";
+		String fname = "John";
+		String lname = "Doe";
+		String email = "john.doe@mail.mcgill.ca";
+		String pass = "123456";
+
+		
+		String message = "Reminder";
+		
+		Student test = service.createStudent(id, fname, lname, email, pass);
+		
+		
+		
+		List<Reminder> allReminder = service.getAllReminders();
+		assertEquals(0, allReminder.size());
+		
+		service.createReminder(test, message);
+		
+		assertEquals(1, allReminder.size());
+
+	
+		
+		
+		
 		
 	}
 	
