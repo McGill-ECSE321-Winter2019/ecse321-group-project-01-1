@@ -4,8 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
 
-public interface ApplicationForm extends CrudRepository<ApplicationForm, Integer>{
+public interface ApplicationFormRepository extends CrudRepository<ApplicationForm, Integer>{
 
-	ApplicationForm findFormByID(int id);
+	ApplicationForm findFormById(int id);
 
 }

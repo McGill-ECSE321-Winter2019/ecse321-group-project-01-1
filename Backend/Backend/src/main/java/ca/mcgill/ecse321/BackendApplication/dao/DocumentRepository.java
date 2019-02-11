@@ -6,6 +6,6 @@ import ca.mcgill.ecse321.backend.model.Document;
 
 public interface DocumentRepository extends CrudRepository<Document, Integer>{
 
-	Document findDocumentByID(Integer ID);
+	Document findDocumentById(int id);
 
 }

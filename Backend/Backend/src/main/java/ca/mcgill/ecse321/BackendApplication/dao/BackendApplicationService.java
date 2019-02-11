@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import ca.mcgill.ecse321.BackendApplication.dao.ApplicationFormRepository;
 import ca.mcgill.ecse321.BackendApplication.dao.DocumentRepository;
+import ca.mcgill.ecse321.BackendApplication.dao.ReminderRepository;
+import ca.mcgill.ecse321.BackendApplication.dao.StudentRepository;
 
-import ca.mcgill.ecse321.backend.model.
 import ca.mcgill.ecse321.backend.model.AcademicSemester;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
 import ca.mcgill.ecse321.backend.model.Document;
@@ -47,7 +48,7 @@ public class BackendApplicationService {
 	
 	@Transactional
 	public Student readStudent(String studentID) {
-		Student S = studentRepository.findStudentByID(studentID);
+		Student S = studentRepository.findStudentByStudentID(studentID);
 		return S;
 	}
 	
@@ -62,7 +63,7 @@ public class BackendApplicationService {
 	
 	@Transactional
 	public Document readDocument (int ID) {
-		Document D = documentRepository.findDocumentByID(ID);
+		Document D = documentRepository.findDocumentById(ID);
 		return D;
 	}
 	
@@ -77,14 +78,14 @@ public class BackendApplicationService {
 	
 	@Transactional
 	public ApplicationForm readApplicationForm (int ID) {
-		ApplicationForm A = applicationFormRepository.findFormByID(ID);
+		ApplicationForm A = applicationFormRepository.findFormById(ID);
 		return A;
 	}
 	
 	//Reminder
 	@Transactional
 	public Reminder createReminder (String message) {
-		Reminder R;
+		Reminder R = new Reminder();
 		R.setMessage(message);
 		reminderRepository.save(R);
 		return R;
@@ -92,7 +93,7 @@ public class BackendApplicationService {
 	
 	@Transactional
 	public Reminder readReminder (int ID) {
-		Reminder R = reminderRepository.findReminderByID(ID);
+		Reminder R = reminderRepository.findReminderById(ID);
 		return R;
 	}
 }

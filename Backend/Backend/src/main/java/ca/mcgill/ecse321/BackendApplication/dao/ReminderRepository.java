@@ -6,6 +6,6 @@ import ca.mcgill.ecse321.backend.model.Reminder;
 
 public interface ReminderRepository extends CrudRepository<Reminder, Integer>{
 
-	Reminder findReminderByID(int id);
+	Reminder findReminderById(int id);
 
 }

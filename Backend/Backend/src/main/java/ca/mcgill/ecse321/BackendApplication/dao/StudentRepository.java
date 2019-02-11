@@ -6,6 +6,6 @@ import ca.mcgill.ecse321.backend.model.Student;
 
 public interface StudentRepository extends CrudRepository<Student, String>{
 
-	Student findStudentByID(String studentID);
+	Student findStudentByStudentID(String studentID);
 
 }
