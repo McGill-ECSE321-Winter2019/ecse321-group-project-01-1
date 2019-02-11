@@ -83,9 +83,9 @@ public class BackendApplicationService {
 	
 	//ApplicationForm
 	@Transactional
-	public ApplicationForm createApplicationForm (Student S, int jobID) {
+	public ApplicationForm createApplicationForm (Student S, String jobID) {
 		ApplicationForm A = new ApplicationForm();
-		A.setId(jobID);
+		A.setJobID(jobID);
 		applicationFormRepository.save(A);
 		
 		Set<ApplicationForm> SA = S.getApplicationForms();

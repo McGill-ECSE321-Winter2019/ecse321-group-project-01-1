@@ -105,7 +105,6 @@ public class BackendApplicationServiceTest {
 	}
 	
 	@Test
-	
 	public void testReminder() {
 		//assert no student in repository
 		assertEquals(0, service.getAllStudents().size());
@@ -119,25 +118,100 @@ public class BackendApplicationServiceTest {
 		
 		String message = "Reminder";
 		
-		Student test = service.createStudent(id, fname, lname, email, pass);
+		Student teststudent = service.createStudent(id, fname, lname, email, pass);
 		
+		/*
+		Reminder r = new Reminder();
 		
+		r.setMessage(message);
+		
+		List<Reminder> allReminder = service.getAllReminders();
+		assertEquals(1, allReminder.size());
+		
+		*/
+		
+		//create reminder
 		
 		List<Reminder> allReminder = service.getAllReminders();
 		assertEquals(0, allReminder.size());
 		
-		service.createReminder(test, message);
-		
+		Reminder r = service.createReminder(teststudent, message);
+	
 		assertEquals(1, allReminder.size());
 
+		//read reminder
+				
+		assertEquals(r.getMessage(),message);
+		
+		//write reminder
+		r.setMessage("Alert");	
+		assertEquals(r.getMessage(),"Alert");
 	
-		
-		
-		
-		
 	}
 	
+	@Test
+	public void testDocument() {
+		assertEquals(0, service.getAllStudents().size());
+
+		String id = "000000000";
+		String fname = "John";
+		String lname = "Doe";
+		String email = "john.doe@mail.mcgill.ca";
+		String pass = "123456";
+
+		
+		String path = "C:";	
+		Student teststudent = service.createStudent(id, fname, lname, email, pass);
+		
+		//create document
+		List<Document> allDocuments = service.getAllDocuments();
+		assertEquals(0, allDocuments.size());
+		
+		Document d = service.createDocument(teststudent, path);
 	
+		assertEquals(1, allDocuments.size());
+		
+		//read document
+				
+		assertEquals(d.getPath(),path);
+		
+		//write document
+		d.setPath("D:");	
+		assertEquals(d.getPath(),"D:");
+
+	}
+	
+	@Test
+	public void testApplicationForm() {
+		assertEquals(0, service.getAllStudents().size());
+
+		String id = "000000000";
+		String fname = "John";
+		String lname = "Doe";
+		String email = "john.doe@mail.mcgill.ca";
+		String pass = "123456";
+
+		
+		String jobid = "123456";	
+		Student teststudent = service.createStudent(id, fname, lname, email, pass);
+		
+		//create application form
+		List<Document> allApplicationForm = service.getAllDocuments();
+		assertEquals(0, allApplicationForm.size());
+		
+		ApplicationForm af = service.createApplicationForm(teststudent, jobid);
+	
+		assertEquals(1, allApplicationForm.size());
+		
+		//read application form
+				
+		assertEquals(af.getJobID(),jobid);
+		
+		//write application form
+		af.setJobID("654321");	
+		assertEquals(af.getJobID(),"654321");
+
+	}
 	
 
 
