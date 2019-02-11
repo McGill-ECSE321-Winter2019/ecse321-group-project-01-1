@@ -8,7 +8,7 @@ The main goals for our viewpoint are to create a web and mobile application capa
 
 |Team member's name|Total hours|Responsibility         |
 |------------------|-----------|-----------------------|
-|Zirui He          |  _9_ hours|Build tools and Continuous integration setup|
+|Zirui He          |  _9_ hours|Dev ops lead|
 |Binyuan Sun       |  _11_ hours|Tech lead|
 |Tri-tin Truong    |  _9_ hours|Project management lead|
 |Zhong Yu Yang     |  _10_ hours|Testing lead|
