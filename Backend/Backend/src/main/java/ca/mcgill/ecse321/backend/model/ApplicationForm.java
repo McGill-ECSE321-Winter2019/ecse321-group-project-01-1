@@ -1,9 +1,13 @@
 package ca.mcgill.ecse321.backend.model;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.sql.Date;
@@ -22,7 +26,7 @@ public class ApplicationForm{
 	public void setDocument(Document document) {
 		this.document = document;
 	}
-	
+
 	@Enumerated(EnumType.STRING)
 	private AcademicSemester academicSemester;
 
@@ -35,12 +39,19 @@ public class ApplicationForm{
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(
+	    strategy= GenerationType.AUTO,
+	    generator="native"
+	)
+	@GenericGenerator(
+	    name = "native",
+	    strategy = "native"
+	)
 	private int id;
 
 	@ManyToOne(optional=false)
 	private Student student;
-	
+
 	private String jobID;
 	private String jobDescription;
 
