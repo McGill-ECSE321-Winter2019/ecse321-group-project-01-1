@@ -46,12 +46,9 @@ public class BackendApplicationServiceTest {
 
 	@After
 	public void clearDatabase() {
-		
-		reminderRepository.deleteAll();
-		applicationFormRepository.deleteAll();
-		documentRepository.deleteAll();
 		studentRepository.deleteAll();
 
+		
 	}
 	
 	@Test
@@ -158,7 +155,6 @@ public class BackendApplicationServiceTest {
 		String lname = "Doe";
 		String email = "john.doe@mail.mcgill.ca";
 		String pass = "123456";
-
 		
 		String path = "C:";	
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);

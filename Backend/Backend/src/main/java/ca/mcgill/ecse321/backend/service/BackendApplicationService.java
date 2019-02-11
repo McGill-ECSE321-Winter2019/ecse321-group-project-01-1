@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.backend.service;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -67,6 +68,14 @@ public class BackendApplicationService {
 		Document D = new Document();
 		D.setPath(path);
 		documentRepository.save(D);
+		
+		Set<Reminder> reminders = S.getReminder();
+		if (reminders == null) {
+			reminders = new HashSet<Reminder>();
+		}
+		
+		reminders.add(D);
+		
 		return D;
 	}
 	
@@ -86,12 +95,8 @@ public class BackendApplicationService {
 	public ApplicationForm createApplicationForm (Student S, String jobID) {
 		ApplicationForm A = new ApplicationForm();
 		A.setJobID(jobID);
+		A.setStudent(S);
 		applicationFormRepository.save(A);
-		
-		Set<ApplicationForm> SA = S.getApplicationForms();
-		SA.add(A);
-		S.setApplicationForms(SA);
-		studentRepository.save(S);
 		
 		return A;
 	}
@@ -115,6 +120,9 @@ public class BackendApplicationService {
 		reminderRepository.save(R);
 		
 		Set<Reminder> SR = S.getReminder();
+		if (SR == null) {
+			SR = new HashSet<Reminder>();
+		}
 		SR.add(R);
 		S.setReminder(SR);
 		studentRepository.save(S);

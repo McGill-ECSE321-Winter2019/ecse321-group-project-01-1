@@ -1,4 +1,8 @@
 package ca.mcgill.ecse321.backend.model;
+import javax.persistence.OneToMany;
+
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -15,17 +19,19 @@ import java.sql.Date;
 
 @Entity
 public class ApplicationForm{
+	
+	@OneToMany(mappedBy="applicationForm")
+	private Set<Document> document = new HashSet<Document>();
 
-	@OneToOne(optional=false)
-	private Document document;
-
-	public Document getDocument() {
+	public Set<Document> getDocument() {
 		return this.document;
 	}
 
-	public void setDocument(Document document) {
-		this.document = document;
+	public void setDocument(Set<Document> documents) {
+		this.document = documents;
 	}
+
+
 
 	@Enumerated(EnumType.STRING)
 	private AcademicSemester academicSemester;
@@ -40,13 +46,13 @@ public class ApplicationForm{
 
 	@Id
 	@GeneratedValue(
-	    strategy= GenerationType.AUTO,
-	    generator="native"
-	)
+			strategy= GenerationType.AUTO,
+			generator="native"
+			)
 	@GenericGenerator(
-	    name = "native",
-	    strategy = "native"
-	)
+			name = "native",
+			strategy = "native"
+			)
 	private int id;
 
 	@ManyToOne(optional=false)
