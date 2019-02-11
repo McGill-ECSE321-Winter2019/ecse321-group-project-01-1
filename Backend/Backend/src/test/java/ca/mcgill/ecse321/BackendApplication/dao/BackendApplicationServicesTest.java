@@ -18,8 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.backend.model.*;
-import ca.mcgill.ecse321.BackendApplication.dao.BackendApplicationService;
 import ca.mcgill.ecse321.BackendApplication.dao.StudentRepository;
+import ca.mcgill.ecse321.BackendApplication.service.BackendApplicationService;
 
 
 
