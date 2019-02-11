@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.backend.model;
 import javax.persistence.OneToMany;
+
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -12,8 +14,7 @@ public class Student{
 	private Set<Reminder> reminder;
 
 	@OneToMany(mappedBy="student")
-	private Set<ApplicationForm> applicationForms;
-
+	private Set<ApplicationForm> applicationForms= new HashSet<ApplicationForm>();
 
 	@Id
 	private String studentID;

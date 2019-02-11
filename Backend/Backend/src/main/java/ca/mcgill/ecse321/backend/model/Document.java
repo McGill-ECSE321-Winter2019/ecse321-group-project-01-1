@@ -1,35 +1,46 @@
 package ca.mcgill.ecse321.backend.model;
+import javax.persistence.ManyToOne;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import java.util.Set;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class Document{
+	@ManyToOne(optional=false)
+	private ApplicationForm applicationForm;
 
-	@Id
-	@GeneratedValue
-	private int id;
 
-	private String path;
-
-	@OneToMany
-	private Set<ApplicationForm> applicationForm;
-
-	public Set<ApplicationForm> getApplicationForm() {
+	public ApplicationForm getApplicationForm() {
 		return this.applicationForm;
 	}
 
-	public void setApplicationForm(Set<ApplicationForm> applicationForms) {
-		this.applicationForm = applicationForms;
+	public void setApplicationForm(ApplicationForm applicationForm) {
+		this.applicationForm = applicationForm;
 	}
+
+	@Id
+	@GeneratedValue(
+			strategy= GenerationType.AUTO,
+			generator="native"
+			)
+	@GenericGenerator(
+			name = "native",
+			strategy = "native"
+			)
+	private int id;
+
+	private String path;
 
 	@Enumerated(EnumType.STRING)
 	private DocumentType documentType;
@@ -48,14 +59,6 @@ public class Document{
 
 	public void setPath(String path) {
 		this.path = path;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 }
