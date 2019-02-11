@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-//import ca.mcgill.ecse321.backend.model.AcademicSemester;
+
+import ca.mcgill.ecse321.BackendApplication.dao.DocumentRepository;
+
+import ca.mcgill.ecse321.backend.model.
+import ca.mcgill.ecse321.backend.model.AcademicSemester;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
 import ca.mcgill.ecse321.backend.model.Document;
 import ca.mcgill.ecse321.backend.model.DocumentType;
@@ -20,6 +24,9 @@ public class BackendApplicationService {
 	
 	@Autowired
 	StudentRepository studentRepository;
+	DocumentRepository documentRepository;
+	ApplicationFormRepository applicationFormRepository;
+	ReminderRepository reminderRepository;
 	
 	
 	//CRUD - Create, Read, Update, Delete
@@ -35,7 +42,7 @@ public class BackendApplicationService {
 		S.setEmail(email);
 		S.setPassword(password);
 		studentRepository.save(S);
-		return new Student();
+		return S;
 	}
 	
 	@Transactional
@@ -44,5 +51,48 @@ public class BackendApplicationService {
 		return S;
 	}
 	
+	//Document
+	@Transactional
+	public Document createDocument(String path) {
+		Document D = new Document();
+		D.setPath(path);
+		documentRepository.save(D);
+		return D;
+	}
 	
+	@Transactional
+	public Document readDocument (int ID) {
+		Document D = documentRepository.findDocumentByID(ID);
+		return D;
+	}
+	
+	//ApplicationForm
+	@Transactional
+	public ApplicationForm createApplicationForm (int jobID) {
+		ApplicationForm A = new ApplicationForm();
+		A.setId(jobID);
+		applicationFormRepository.save(A);
+		return A;
+	}
+	
+	@Transactional
+	public ApplicationForm readApplicationForm (int ID) {
+		ApplicationForm A = applicationFormRepository.findFormByID(ID);
+		return A;
+	}
+	
+	//Reminder
+	@Transactional
+	public Reminder createReminder (String message) {
+		Reminder R;
+		R.setMessage(message);
+		reminderRepository.save(R);
+		return R;
+	}
+	
+	@Transactional
+	public Reminder readReminder (int ID) {
+		Reminder R = reminderRepository.findReminderByID(ID);
+		return R;
+	}
 }
