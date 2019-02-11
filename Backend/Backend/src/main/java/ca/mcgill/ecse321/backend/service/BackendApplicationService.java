@@ -64,17 +64,11 @@ public class BackendApplicationService {
 	
 	//Document
 	@Transactional
-	public Document createDocument(Student S, String path) {
+	public Document createDocument(ApplicationForm AF, String path) {
 		Document D = new Document();
 		D.setPath(path);
+		D.setApplicationForm(AF);
 		documentRepository.save(D);
-		
-		Set<Reminder> reminders = S.getReminder();
-		if (reminders == null) {
-			reminders = new HashSet<Reminder>();
-		}
-		
-		reminders.add(D);
 		
 		return D;
 	}
@@ -94,8 +88,10 @@ public class BackendApplicationService {
 	@Transactional
 	public ApplicationForm createApplicationForm (Student S, String jobID) {
 		ApplicationForm A = new ApplicationForm();
+		
 		A.setJobID(jobID);
 		A.setStudent(S);
+		
 		applicationFormRepository.save(A);
 		
 		return A;
@@ -140,7 +136,6 @@ public class BackendApplicationService {
 	public List<Reminder> getAllReminders() {
 		return toList(reminderRepository.findAll());
 	}
-	
 	
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();

@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Ignore;
@@ -129,12 +130,11 @@ public class BackendApplicationServiceTest {
 		
 		//create reminder
 		
-		List<Reminder> allReminder = service.getAllReminders();
-		assertEquals(0, allReminder.size());
+		assertEquals(0, service.getAllReminders().size());
 		
 		Reminder r = service.createReminder(teststudent, message);
 	
-		assertEquals(1, allReminder.size());
+		assertEquals(1, service.getAllReminders().size());
 
 		//read reminder
 				
@@ -155,17 +155,18 @@ public class BackendApplicationServiceTest {
 		String lname = "Doe";
 		String email = "john.doe@mail.mcgill.ca";
 		String pass = "123456";
-		
+
+		String jobid = "123456";	
+
 		String path = "C:";	
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
 		
 		//create document
-		List<Document> allDocuments = service.getAllDocuments();
-		assertEquals(0, allDocuments.size());
-		
-		Document d = service.createDocument(teststudent, path);
+		assertEquals(0, service.getAllDocuments().size());
+		ApplicationForm af = service.createApplicationForm(teststudent, jobid);
+		Document d = service.createDocument(af, path);
 	
-		assertEquals(1, allDocuments.size());
+		assertEquals(1, service.getAllDocuments().size());
 		
 		//read document
 				
@@ -192,12 +193,11 @@ public class BackendApplicationServiceTest {
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
 		
 		//create application form
-		List<Document> allApplicationForm = service.getAllDocuments();
-		assertEquals(0, allApplicationForm.size());
+		assertEquals(0, service.getAllApplicationForms().size());
 		
 		ApplicationForm af = service.createApplicationForm(teststudent, jobid);
-	
-		assertEquals(1, allApplicationForm.size());
+		
+		assertEquals(1, service.getAllApplicationForms().size());
 		
 		//read application form
 				
