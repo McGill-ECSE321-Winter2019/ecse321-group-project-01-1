@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.BackendApplication.dao;
+package ca.mcgill.ecse321.backend.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -17,9 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.model.*;
-import ca.mcgill.ecse321.BackendApplication.dao.StudentRepository;
-import ca.mcgill.ecse321.BackendApplication.service.BackendApplicationService;
+import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 
 
 
@@ -40,12 +40,11 @@ public class BackendApplicationServicesTest {
 		
 		studentRepository.deleteAll();
 		
-
 	}
 	
 	@Test
 	public void testCreateStudent() {
-		assertEquals(0, service.getAllStudent().size());
+		assertEquals(0, service.getAllStudents().size());
 
 		String name = "Oscar";
 
@@ -56,10 +55,10 @@ public class BackendApplicationServicesTest {
 			fail();
 		}
 
-		List<Person> allPersons = service.getAllPersons();
+		List<Student> allPersons = service.getAllStudents();
 
 		assertEquals(1, allPersons.size());
-		assertEquals(name, allPersons.get(0).getName());
+		assertEquals(name, allPersons.get(0).getFirstName());
 	}
 	
 

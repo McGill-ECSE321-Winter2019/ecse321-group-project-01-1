@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.BackendApplication.dao;
+package ca.mcgill.ecse321.backend.dao;
 
 import org.springframework.data.repository.CrudRepository;
 

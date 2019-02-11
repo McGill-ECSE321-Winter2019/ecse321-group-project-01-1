@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.BackendApplication.service;
+package ca.mcgill.ecse321.backend.service;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.mcgill.ecse321.BackendApplication.dao.ApplicationFormRepository;
-import ca.mcgill.ecse321.BackendApplication.dao.DocumentRepository;
-import ca.mcgill.ecse321.BackendApplication.dao.ReminderRepository;
-import ca.mcgill.ecse321.BackendApplication.dao.StudentRepository;
-
+import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
+import ca.mcgill.ecse321.backend.dao.DocumentRepository;
+import ca.mcgill.ecse321.backend.dao.ReminderRepository;
+import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.model.AcademicSemester;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
 import ca.mcgill.ecse321.backend.model.Document;
@@ -130,11 +129,9 @@ public class BackendApplicationService {
 	}
 	
 	@Transactional
-	public List<Reminder> getAllReminderss() {
+	public List<Reminder> getAllReminders() {
 		return toList(reminderRepository.findAll());
 	}
-	
-	
 	
 	
 	private <T> List<T> toList(Iterable<T> iterable){
