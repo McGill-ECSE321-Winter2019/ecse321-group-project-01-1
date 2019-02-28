@@ -1,4 +1,5 @@
 package ca.mcgill.ecse321.backend.model;
+import javax.persistence.ManyToOne;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,24 +13,36 @@ import java.sql.Time;
 
 @Entity
 public class Reminder{
-    @Id
+
+	@Id
 	@GeneratedValue(
-	    strategy= GenerationType.AUTO,
-	    generator="native"
-	)
+			strategy= GenerationType.AUTO,
+			generator="native"
+			)
 	@GenericGenerator(
-	    name = "native",
-	    strategy = "native"
-	)
-    private int id;
-	
+			name = "native",
+			strategy = "native"
+			)
+	private int id;
+
 	private String message;
-	
+
 	@CreationTimestamp
 	private Time createDateTime;
-	
+
 	private Time readDateTime;
 
+	@ManyToOne(optional=false)
+	private Student student;
+
+	public Student getStudent() {
+		return this.student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	
 	public String getMessage() {
 		return message;
 	}
@@ -61,5 +74,5 @@ public class Reminder{
 	public void setCreateDateTime(Time createDateTime) {
 		this.createDateTime = createDateTime;
 	}
-	
+
 }

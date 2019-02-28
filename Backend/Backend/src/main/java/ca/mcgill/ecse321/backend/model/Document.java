@@ -17,17 +17,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Document{
-	@ManyToOne(optional=false)
-	private ApplicationForm applicationForm;
-
-
-	public ApplicationForm getApplicationForm() {
-		return this.applicationForm;
-	}
-
-	public void setApplicationForm(ApplicationForm applicationForm) {
-		this.applicationForm = applicationForm;
-	}
 
 	@Id
 	@GeneratedValue(
@@ -40,6 +29,18 @@ public class Document{
 			)
 	private int id;
 
+	@ManyToOne(optional=false)
+	private Internship internship;
+
+
+	public Internship getInternship() {
+		return this.internship;
+	}
+
+	public void setInternship(Internship internship) {
+		this.internship = internship;
+	}
+	
 	private String path;
 
 	@Enumerated(EnumType.STRING)
