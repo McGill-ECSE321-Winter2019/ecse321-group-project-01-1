@@ -3,25 +3,11 @@ package ca.mcgill.ecse321.backend.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-<<<<<<< HEAD
 import java.util.*;
 
 import javax.transaction.Transactional;
 
 import org.junit.*;
-=======
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
-
-import org.junit.After;
-import org.junit.Ignore;
-import org.junit.Test;
->>>>>>> master
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,12 +26,6 @@ public class BackendApplicationServiceTest {
 	
 	@Autowired
 	private BackendApplicationService service;
-
-<<<<<<< HEAD
-=======
-	
-	
->>>>>>> master
 	@Autowired
 	private StudentRepository studentRepository;
 	@Autowired
@@ -56,20 +36,12 @@ public class BackendApplicationServiceTest {
 	private ReminderRepository reminderRepository;
 	
 
-<<<<<<< HEAD
 	@Before
 	public void clearDatabase() {
 		studentRepository.deleteAll();
 		documentRepository.deleteAll();
 		applicationFormRepository.deleteAll();		
 		reminderRepository.deleteAll();
-=======
-	@After
-	public void clearDatabase() {
-		studentRepository.deleteAll();
-
-		
->>>>>>> master
 	}
 	
 	@Test
@@ -117,19 +89,13 @@ public class BackendApplicationServiceTest {
 			assertEquals(test.getEmail(),"bob.thing@mail.mcgill.ca");
 			assertEquals(test.getPassword(),"654321");
 			
-<<<<<<< HEAD
-	}
-	
-	@Test
-	@Transactional
-=======
 			
 			
 		
 	}
 	
 	@Test
->>>>>>> master
+	@Transactional
 	public void testReminder() {
 		//assert no student in repository
 		assertEquals(0, service.getAllStudents().size());
