@@ -68,8 +68,6 @@ public class Document{
 		return data;
 	}
 
-	private String path;
-
 	@Enumerated(EnumType.STRING)
 	private DocumentType documentType;
 
@@ -80,13 +78,4 @@ public class Document{
 	public void setDocumentType(DocumentType documentType) {
 		this.documentType = documentType;
 	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
 }

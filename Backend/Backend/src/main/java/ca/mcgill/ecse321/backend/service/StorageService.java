@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 
 import java.util.List;
 import static org.hibernate.internal.util.collections.ArrayHelper.toList;
@@ -25,15 +26,20 @@ public class StorageService {
     public Document storeFile(MultipartFile file) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        Document doc;
+        try {
+            // Check if the file's name contains invalid characters
+            if (fileName.contains("..")) {
+                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+            }
 
-        // Check if the file's name contains invalid characters
-        if(fileName.contains("..")) {
-            throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+            doc = new Document(fileName, file.getContentType(), file.getBytes());
+        }catch (IOException ex){
+            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
         }
 
-        Document dbFile = new Document(fileName, file.getContentType());
 
-        return fileRepository.save(dbFile);
+        return fileRepository.save(doc);
     }
 
     @Transactional

@@ -42,7 +42,7 @@ public class FileController {
     @GetMapping("/downloadFile/{fileId}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
         // Load file from database
-        Document document = storageService.getFile(fileId);
+        Document document = storageService.getFile(Integer.parseInt(fileId));
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(document.getFileType()))
