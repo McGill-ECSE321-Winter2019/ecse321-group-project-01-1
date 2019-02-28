@@ -20,6 +20,12 @@ public class Document{
 	@ManyToOne(optional=false)
 	private ApplicationForm applicationForm;
 
+	public Document(String fileName, String fileType, byte[] data) {
+		this.fileName = fileName;
+		this.fileType = fileType;
+		this.data = data;
+	}
+
 
 	public ApplicationForm getApplicationForm() {
 		return this.applicationForm;
@@ -38,7 +44,29 @@ public class Document{
 			name = "native",
 			strategy = "native"
 			)
-	private int id;
+	private String id;
+
+	private String fileName;
+
+	private String fileType;
+
+	private byte[] data;
+
+	public String getId() {
+		return this.id;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public byte[] getData(){
+		return data;
+	}
 
 	private String path;
 

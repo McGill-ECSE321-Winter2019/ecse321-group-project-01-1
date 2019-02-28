@@ -63,26 +63,22 @@ public class BackendApplicationService {
 	}
 	
 	//Document
-	@Transactional
-	public Document createDocument(ApplicationForm AF, String path) {
-		Document D = new Document();
-		D.setPath(path);
-		D.setApplicationForm(AF);
-		documentRepository.save(D);
-		
-		return D;
-	}
-	
-	@Transactional
-	public Document readDocument (int ID) {
-		Document D = documentRepository.findDocumentById(ID);
-		return D;
-	}
-	
-	@Transactional
-	public List<Document> getAllDocuments() {
-		return toList(documentRepository.findAll());
-	}
+//	@Transactional
+//	public Document createDocument(ApplicationForm AF, String path) {
+//		Document D = new Document();
+//		D.setPath(path);
+//		D.setApplicationForm(AF);
+//		documentRepository.save(D);
+//
+//		return D;
+//	}
+//
+//	@Transactional
+//	public Document readDocument (int ID) {
+//		Document D = documentRepository.findDocumentById(ID);
+//		return D;
+//	}
+
 	
 	//ApplicationForm
 	@Transactional

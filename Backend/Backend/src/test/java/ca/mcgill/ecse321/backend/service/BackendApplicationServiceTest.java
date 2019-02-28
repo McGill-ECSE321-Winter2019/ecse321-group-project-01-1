@@ -146,38 +146,38 @@ public class BackendApplicationServiceTest {
 	
 	}
 	
-	@Test
-	public void testDocument() {
-		assertEquals(0, service.getAllStudents().size());
-
-		String id = "000000000";
-		String fname = "John";
-		String lname = "Doe";
-		String email = "john.doe@mail.mcgill.ca";
-		String pass = "123456";
-
-		String jobid = "123456";	
-
-		String path = "C:";	
-		Student teststudent = service.createStudent(id, fname, lname, email, pass);
-		
-		//create document
-		assertEquals(0, service.getAllDocuments().size());
-		ApplicationForm af = service.createApplicationForm(teststudent, jobid);
-		Document d = service.createDocument(af, path);
-	
-		assertEquals(1, service.getAllDocuments().size());
-		
-		//read document
-				
-		assertEquals(d.getPath(),path);
-		
-		//write document
-		d.setPath("D:");	
-		assertEquals(d.getPath(),"D:");
-
-	}
-	
+//	@Test
+//	public void testDocument() {
+//		assertEquals(0, service.getAllStudents().size());
+//
+//		String id = "000000000";
+//		String fname = "John";
+//		String lname = "Doe";
+//		String email = "john.doe@mail.mcgill.ca";
+//		String pass = "123456";
+//
+//		String jobid = "123456";
+//
+//		String path = "C:";
+//		Student teststudent = service.createStudent(id, fname, lname, email, pass);
+//
+//		//create document
+//		assertEquals(0, service.getAllDocuments().size());
+//		ApplicationForm af = service.createApplicationForm(teststudent, jobid);
+//		Document d = service.createDocument(af, path);
+//
+//		assertEquals(1, service.getAllDocuments().size());
+//
+//		//read document
+//
+//		assertEquals(d.getPath(),path);
+//
+//		//write document
+//		d.setPath("D:");
+//		assertEquals(d.getPath(),"D:");
+//
+//	}
+//
 	@Test
 	public void testApplicationForm() {
 		assertEquals(0, service.getAllStudents().size());
