@@ -3,17 +3,11 @@ package ca.mcgill.ecse321.backend.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-import org.junit.After;
-import org.junit.Ignore;
-import org.junit.Test;
+import javax.transaction.Transactional;
+
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,9 +26,6 @@ public class BackendApplicationServiceTest {
 	
 	@Autowired
 	private BackendApplicationService service;
-
-	
-	
 	@Autowired
 	private StudentRepository studentRepository;
 	@Autowired
@@ -45,11 +36,12 @@ public class BackendApplicationServiceTest {
 	private ReminderRepository reminderRepository;
 	
 
-	@After
+	@Before
 	public void clearDatabase() {
 		studentRepository.deleteAll();
-
-		
+		documentRepository.deleteAll();
+		applicationFormRepository.deleteAll();
+		reminderRepository.deleteAll();
 	}
 	
 	@Test
@@ -103,6 +95,7 @@ public class BackendApplicationServiceTest {
 	}
 	
 	@Test
+	@Transactional
 	public void testReminder() {
 		//assert no student in repository
 		assertEquals(0, service.getAllStudents().size());
@@ -129,7 +122,6 @@ public class BackendApplicationServiceTest {
 		*/
 		
 		//create reminder
-		
 		assertEquals(0, service.getAllReminders().size());
 		
 		Reminder r = service.createReminder(teststudent, message);
@@ -146,38 +138,38 @@ public class BackendApplicationServiceTest {
 	
 	}
 	
-//	@Test
-//	public void testDocument() {
-//		assertEquals(0, service.getAllStudents().size());
-//
-//		String id = "000000000";
-//		String fname = "John";
-//		String lname = "Doe";
-//		String email = "john.doe@mail.mcgill.ca";
-//		String pass = "123456";
-//
-//		String jobid = "123456";
-//
-//		String path = "C:";
-//		Student teststudent = service.createStudent(id, fname, lname, email, pass);
-//
-//		//create document
-//		assertEquals(0, service.getAllDocuments().size());
-//		ApplicationForm af = service.createApplicationForm(teststudent, jobid);
-//		Document d = service.createDocument(af, path);
-//
-//		assertEquals(1, service.getAllDocuments().size());
-//
-//		//read document
-//
-//		assertEquals(d.getPath(),path);
-//
-//		//write document
-//		d.setPath("D:");
-//		assertEquals(d.getPath(),"D:");
-//
-//	}
-//
+	@Test
+	public void testDocument() {
+		assertEquals(0, service.getAllStudents().size());
+
+		String id = "000000000";
+		String fname = "John";
+		String lname = "Doe";
+		String email = "john.doe@mail.mcgill.ca";
+		String pass = "123456";
+
+		String jobid = "123456";	
+
+		String path = "C:";	
+		Student teststudent = service.createStudent(id, fname, lname, email, pass);
+		
+		//create document
+		assertEquals(0, service.getAllDocuments().size());
+		ApplicationForm af = service.createApplicationForm(teststudent, jobid);
+		Document d = service.createDocument(af, path);
+	
+		assertEquals(1, service.getAllDocuments().size());
+		
+		//read document
+				
+		assertEquals(d.getPath(),path);
+		
+		//write document
+		d.setPath("D:");	
+		assertEquals(d.getPath(),"D:");
+
+	}
+	
 	@Test
 	public void testApplicationForm() {
 		assertEquals(0, service.getAllStudents().size());

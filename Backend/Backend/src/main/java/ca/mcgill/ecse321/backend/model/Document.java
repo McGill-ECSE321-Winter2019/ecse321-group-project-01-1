@@ -56,6 +56,19 @@ public class Document{
 		return this.id;
 	}
 
+	@ManyToOne(optional=false)
+	private Internship internship;
+
+
+	public Internship getInternship() {
+		return this.internship;
+	}
+
+	public void setInternship(Internship internship) {
+		this.internship = internship;
+	}
+
+	private String path;
 	public String getFileName() {
 		return fileName;
 	}
@@ -78,4 +91,13 @@ public class Document{
 	public void setDocumentType(DocumentType documentType) {
 		this.documentType = documentType;
 	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
 }

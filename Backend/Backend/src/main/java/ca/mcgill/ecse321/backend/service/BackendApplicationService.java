@@ -12,13 +12,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
+import ca.mcgill.ecse321.backend.dao.CourseRepository;
 import ca.mcgill.ecse321.backend.dao.DocumentRepository;
+import ca.mcgill.ecse321.backend.dao.InternshipRepository;
 import ca.mcgill.ecse321.backend.dao.ReminderRepository;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.model.AcademicSemester;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
+import ca.mcgill.ecse321.backend.model.Course;
 import ca.mcgill.ecse321.backend.model.Document;
 import ca.mcgill.ecse321.backend.model.DocumentType;
+import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.model.Reminder;
 import ca.mcgill.ecse321.backend.model.Student;
 
@@ -33,7 +37,10 @@ public class BackendApplicationService {
 	ApplicationFormRepository applicationFormRepository;
 	@Autowired
 	ReminderRepository reminderRepository;
-	
+	@Autowired
+	CourseRepository courseRepository;
+	@Autowired
+	InternshipRepository internshipRepository;
 	
 	//CRUD - Create, Read, Update, Delete
 	
@@ -47,7 +54,7 @@ public class BackendApplicationService {
 		S.setLastName(lastName);
 		S.setEmail(email);
 		S.setPassword(password);
-		studentRepository.save(S);
+		S = studentRepository.save(S);
 		return S;
 	}
 	
@@ -63,32 +70,59 @@ public class BackendApplicationService {
 	}
 	
 	//Document
-//	@Transactional
-//	public Document createDocument(ApplicationForm AF, String path) {
-//		Document D = new Document();
-//		D.setPath(path);
-//		D.setApplicationForm(AF);
-//		documentRepository.save(D);
-//
-//		return D;
-//	}
-//
-//	@Transactional
-//	public Document readDocument (int ID) {
-//		Document D = documentRepository.findDocumentById(ID);
-//		return D;
-//	}
+	@Transactional
+	public Document createDocument(Internship internship, String path) {
+		Document D = new Document();
+		D.setPath(path);
+		D.setInternship(internship);
 
+		D = documentRepository.save(D);
+		
+		return D;
+	}
 	
+	@Transactional
+	public Document readDocument (int ID) {
+		Document D = documentRepository.findDocumentById(ID);
+		return D;
+	}
+	
+	@Transactional
+	public List<Document> getAllDocuments() {
+		return toList(documentRepository.findAll());
+	}
+
+	//Internship
+	@Transactional
+	public Internship createInternship(Student student, Course course) {
+		Internship internship = new Internship();
+		internship.setCourse(course);
+		internship.setStudent(student);
+
+		internship = internshipRepository.save(internship);
+
+		return internship;
+	}
+
+	@Transactional
+	public Internship readInternship (int id) {
+		return internshipRepository.findInternshipById(id);
+	}
+
+	@Transactional
+	public List<Internship> getAllInternships() {
+		return toList(internshipRepository.findAll());
+	}
+
 	//ApplicationForm
 	@Transactional
-	public ApplicationForm createApplicationForm (Student S, String jobID) {
+	public ApplicationForm createApplicationForm (Internship internship, String jobID) {
 		ApplicationForm A = new ApplicationForm();
 		
 		A.setJobID(jobID);
-		A.setStudent(S);
+		A.setInternship(internship);
 		
-		applicationFormRepository.save(A);
+		A = applicationFormRepository.save(A);
 		
 		return A;
 	}
@@ -109,15 +143,8 @@ public class BackendApplicationService {
 	public Reminder createReminder (Student S, String message) {
 		Reminder R = new Reminder();
 		R.setMessage(message);
-		reminderRepository.save(R);
-		
-		Set<Reminder> SR = S.getReminder();
-		if (SR == null) {
-			SR = new HashSet<Reminder>();
-		}
-		SR.add(R);
-		S.setReminder(SR);
-		studentRepository.save(S);
+		R.setStudent(S);
+		R = reminderRepository.save(R);
 		
 		return R;
 	}
@@ -139,6 +166,26 @@ public class BackendApplicationService {
 			resultList.add(t);
 		}
 		return resultList;
+	}
+
+	// Course
+
+	@Transactional
+	public Course createCourse (String courseID) {
+		Course course = new Course();
+		course.setCourseID(courseID);
+		course = courseRepository.save(course);
+		return course;
+	}
+
+	@Transactional
+	public Course readCourse(int id) {
+		return courseRepository.findCourseById(id);
+	}
+
+	@Transactional
+	public List<Course> getAllCourses() {
+		return toList(courseRepository.findAll());
 	}
 
 }
