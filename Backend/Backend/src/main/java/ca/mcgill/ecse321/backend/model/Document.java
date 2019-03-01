@@ -45,19 +45,6 @@ public class Document{
 	
 	private String path;
 
-	@Id
-	@GeneratedValue(
-			strategy= GenerationType.AUTO,
-			generator="native"
-			)
-	@GenericGenerator(
-			name = "native",
-			strategy = "native"
-			)
-	private int id;
-
-	private String path;
-
 	@Enumerated(EnumType.STRING)
 	private DocumentType documentType;
 
