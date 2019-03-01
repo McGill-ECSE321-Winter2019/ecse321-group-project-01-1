@@ -25,7 +25,9 @@ public class Document{
 		this.fileType = fileType;
 		this.data = data;
 	}
+	public Document(){
 
+	}
 
 	public ApplicationForm getApplicationForm() {
 		return this.applicationForm;

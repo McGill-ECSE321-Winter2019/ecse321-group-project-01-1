@@ -155,8 +155,11 @@ public class BackendApplicationServiceTest {
 		
 		//create document
 		assertEquals(0, service.getAllDocuments().size());
-		ApplicationForm af = service.createApplicationForm(teststudent, jobid);
-		Document d = service.createDocument(af, path);
+        Course testcourse = service.createCourse("123");
+        Internship internship = service.createInternship(teststudent,testcourse);
+
+		ApplicationForm af = service.createApplicationForm(internship, jobid);
+		Document d = service.createDocument(internship, path);
 	
 		assertEquals(1, service.getAllDocuments().size());
 		
@@ -183,11 +186,13 @@ public class BackendApplicationServiceTest {
 		
 		String jobid = "123456";	
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
-		
+		Course testcourse = service.createCourse("123");
+        Internship internship = service.createInternship(teststudent,testcourse);
 		//create application form
 		assertEquals(0, service.getAllApplicationForms().size());
-		
-		ApplicationForm af = service.createApplicationForm(teststudent, jobid);
+
+
+		ApplicationForm af = service.createApplicationForm(internship, jobid);
 		
 		assertEquals(1, service.getAllApplicationForms().size());
 		
