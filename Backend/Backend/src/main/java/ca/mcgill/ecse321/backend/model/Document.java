@@ -38,21 +38,24 @@ public class Document{
 	}
 
 	@Id
-	@GeneratedValue(
-			strategy= GenerationType.AUTO,
-			generator="native"
-			)
-	@GenericGenerator(
-			name = "native",
-			strategy = "native"
-			)
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
+
+	private String path;
 
 	private String fileName;
 
 	private String fileType;
 
 	private byte[] data;
+
+	public Internship getInternship() {
+		return this.internship;
+	}
+
+	@Enumerated(EnumType.STRING)
+	private DocumentType documentType;
 
 	public String getId() {
 		return this.id;
@@ -61,16 +64,10 @@ public class Document{
 	@ManyToOne(optional=false)
 	private Internship internship;
 
-
-	public Internship getInternship() {
-		return this.internship;
-	}
-
 	public void setInternship(Internship internship) {
 		this.internship = internship;
 	}
 
-	private String path;
 	public String getFileName() {
 		return fileName;
 	}
@@ -82,9 +79,6 @@ public class Document{
 	public byte[] getData(){
 		return data;
 	}
-
-	@Enumerated(EnumType.STRING)
-	private DocumentType documentType;
 
 	public DocumentType getDocumentType() {
 		return this.documentType;

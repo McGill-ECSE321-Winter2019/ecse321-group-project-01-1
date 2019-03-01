@@ -13,6 +13,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import static org.hibernate.internal.util.collections.ArrayHelper.toList;
 
@@ -32,13 +35,10 @@ public class StorageService {
             if (fileName.contains("..")) {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
-
             doc = new Document(fileName, file.getContentType(), file.getBytes());
         }catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
         }
-
-
         return fileRepository.save(doc);
     }
 
@@ -48,8 +48,4 @@ public class StorageService {
                 .orElseThrow(() -> new FileNotFoundException("File not found with id " + fileId));
     }
 
-    @Transactional
-    public List<Document> getAllDocuments() {
-        return toList(fileRepository.findAll());
-    }
 }
