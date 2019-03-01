@@ -20,14 +20,30 @@ public class Document{
 	@ManyToOne(optional=false)
 	private ApplicationForm applicationForm;
 
+	@Id
+	@GeneratedValue(
+			strategy= GenerationType.AUTO,
+			generator="native"
+			)
+	@GenericGenerator(
+			name = "native",
+			strategy = "native"
+			)
+	private int id;
 
-	public ApplicationForm getApplicationForm() {
-		return this.applicationForm;
+	@ManyToOne(optional=false)
+	private Internship internship;
+
+
+	public Internship getInternship() {
+		return this.internship;
 	}
 
-	public void setApplicationForm(ApplicationForm applicationForm) {
-		this.applicationForm = applicationForm;
+	public void setInternship(Internship internship) {
+		this.internship = internship;
 	}
+	
+	private String path;
 
 	@Id
 	@GeneratedValue(
