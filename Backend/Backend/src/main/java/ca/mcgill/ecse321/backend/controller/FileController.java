@@ -34,7 +34,6 @@ public class FileController {
                 .path("/downloadFile/")
                 .path(doc.getId())
                 .toUriString();
-
         return doc;
     }
 
