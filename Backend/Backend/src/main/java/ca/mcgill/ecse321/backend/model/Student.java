@@ -1,6 +1,4 @@
 package ca.mcgill.ecse321.backend.model;
-import javax.persistence.OneToOne;
-import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 
 import java.util.HashSet;
@@ -11,7 +9,13 @@ import javax.persistence.Id;
 
 @Entity
 public class Student{
-	
+
+	@OneToMany
+	private Set<Reminder> reminder;
+
+	@OneToMany(mappedBy="student")
+	private Set<ApplicationForm> applicationForms= new HashSet<ApplicationForm>();
+
 	@Id
 	private String studentID;
 
@@ -23,9 +27,7 @@ public class Student{
 
 	private String password;
 
-	@OneToMany(cascade={CascadeType.ALL}, mappedBy="student")
-	private Set<Reminder> reminder;
-	
+
 	public String getStudentID() {
 		return studentID;
 	}
@@ -66,22 +68,19 @@ public class Student{
 		this.password = password;
 	}
 
+	public Set<ApplicationForm> getApplicationForms() {
+		return this.applicationForms;
+	}
+
+	public void setApplicationForms(Set<ApplicationForm> applicationFormss) {
+		this.applicationForms = applicationFormss;
+	}
+
 	public Set<Reminder> getReminder() {
 		return this.reminder;
 	}
 
 	public void setReminder(Set<Reminder> reminders) {
 		this.reminder = reminders;
-	}
-	
-	@OneToOne(mappedBy="student", cascade={CascadeType.ALL}, optional=false)
-	private Internship internship;
-
-	public Internship getInternship() {
-		return this.internship;
-	}
-
-	public void setInternship(Internship internship) {
-		this.internship = internship;
 	}
 }

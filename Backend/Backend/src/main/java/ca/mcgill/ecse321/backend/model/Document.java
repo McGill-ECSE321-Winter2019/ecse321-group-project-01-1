@@ -27,7 +27,9 @@ public class Document{
 	}
 	public Document(){
 
-	}
+    }
+
+	private String path;
 
 	public ApplicationForm getApplicationForm() {
 		return this.applicationForm;
@@ -42,8 +44,6 @@ public class Document{
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 
-	private String path;
-
 	private String fileName;
 
 	private String fileType;
@@ -57,9 +57,6 @@ public class Document{
 	@Enumerated(EnumType.STRING)
 	private DocumentType documentType;
 
-	public String getId() {
-		return this.id;
-	}
 
 	@ManyToOne(optional=false)
 	private Internship internship;
@@ -94,6 +91,14 @@ public class Document{
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

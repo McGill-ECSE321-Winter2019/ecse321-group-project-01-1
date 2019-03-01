@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
+import ca.mcgill.ecse321.backend.dao.DocumentRepository;
 import ca.mcgill.ecse321.backend.dao.CourseRepository;
 import ca.mcgill.ecse321.backend.dao.DocumentRepository;
 import ca.mcgill.ecse321.backend.dao.InternshipRepository;
@@ -54,7 +55,7 @@ public class BackendApplicationService {
 		S.setLastName(lastName);
 		S.setEmail(email);
 		S.setPassword(password);
-		S = studentRepository.save(S);
+		studentRepository.save(S);
 		return S;
 	}
 	
@@ -71,12 +72,11 @@ public class BackendApplicationService {
 	
 	//Document
 	@Transactional
-	public Document createDocument(Internship internship, String path) {
+	public Document createDocument(ApplicationForm AF, String path) {
 		Document D = new Document();
 		D.setPath(path);
-		D.setInternship(internship);
-
-		D = documentRepository.save(D);
+		D.setApplicationForm(AF);
+		documentRepository.save(D);
 		
 		return D;
 	}
@@ -92,37 +92,15 @@ public class BackendApplicationService {
 		return toList(documentRepository.findAll());
 	}
 
-	//Internship
-	@Transactional
-	public Internship createInternship(Student student, Course course) {
-		Internship internship = new Internship();
-		internship.setCourse(course);
-		internship.setStudent(student);
-
-		internship = internshipRepository.save(internship);
-
-		return internship;
-	}
-
-	@Transactional
-	public Internship readInternship (int id) {
-		return internshipRepository.findInternshipById(id);
-	}
-
-	@Transactional
-	public List<Internship> getAllInternships() {
-		return toList(internshipRepository.findAll());
-	}
-
 	//ApplicationForm
 	@Transactional
-	public ApplicationForm createApplicationForm (Internship internship, String jobID) {
+	public ApplicationForm createApplicationForm (Student S, String jobID) {
 		ApplicationForm A = new ApplicationForm();
-		
+
 		A.setJobID(jobID);
-		A.setInternship(internship);
-		
-		A = applicationFormRepository.save(A);
+		A.setStudent(S);
+
+		applicationFormRepository.save(A);
 		
 		return A;
 	}
@@ -143,8 +121,15 @@ public class BackendApplicationService {
 	public Reminder createReminder (Student S, String message) {
 		Reminder R = new Reminder();
 		R.setMessage(message);
-		R.setStudent(S);
-		R = reminderRepository.save(R);
+		reminderRepository.save(R);
+
+		Set<Reminder> SR = S.getReminder();
+		if (SR == null) {
+			SR = new HashSet<Reminder>();
+		}
+		SR.add(R);
+		S.setReminder(SR);
+		studentRepository.save(S);
 		
 		return R;
 	}
