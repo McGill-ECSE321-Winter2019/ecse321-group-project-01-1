@@ -102,7 +102,6 @@ public class BackendApplicationServiceTest {
 		String lname = "Doe";
 		String email = "john.doe@mail.mcgill.ca";
 		String pass = "123456";
-
 		
 		String message = "Reminder";
 		
@@ -140,7 +139,9 @@ public class BackendApplicationServiceTest {
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
 		Course testCourse = service.createCourse("FACC300");
 
-
+		assertEquals(0, service.getAllInternships().size());
+		Internship internship = service.createInternship(teststudent,testCourse);
+//		assertEquals(1, service.getAllInternships().size());
 
 	}
 
@@ -165,7 +166,7 @@ public class BackendApplicationServiceTest {
 
 	}
 
-	@Test
+
 	@Transactional
 	public void testApplicationForm() {
 		assertEquals(0, service.getAllStudents().size());

@@ -37,6 +37,4 @@ public class ProfileViewingController {
         StudentDto personDto = new StudentDto(s.getFirstName(),s.getLastName());
         return personDto;
     }
-
-
 }

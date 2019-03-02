@@ -55,7 +55,7 @@ public class BackendApplicationService {
 		S.setLastName(lastName);
 		S.setEmail(email);
 		S.setPassword(password);
-		studentRepository.save(S);
+		S = studentRepository.save(S);
 		return S;
 	}
 
