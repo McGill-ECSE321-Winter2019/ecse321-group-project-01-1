@@ -17,17 +17,15 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Document{
-
 	public Document(String fileName, String fileType, byte[] data) {
 		this.fileName = fileName;
 		this.fileType = fileType;
 		this.data = data;
 	}
-	public Document(){
-
-    }
+	public Document(){}
 
 	private String path;
+
 
 	@Id
 	@GeneratedValue(generator = "uuid")
@@ -82,9 +80,10 @@ public class Document{
 	public void setPath(String path) {
 		this.path = path;
 	}
-
+  
 	public String getId() {
 		return id;
 	}
+
 
 }
