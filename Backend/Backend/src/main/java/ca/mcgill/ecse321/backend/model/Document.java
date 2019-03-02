@@ -62,4 +62,12 @@ public class Document{
 		this.path = path;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 }

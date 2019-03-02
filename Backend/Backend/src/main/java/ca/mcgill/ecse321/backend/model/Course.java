@@ -39,7 +39,14 @@ public class Course {
 
 
 	private String courseID;
-
+	
+	public int getId() {
+		return this.id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getCourseID() {
 		return courseID;

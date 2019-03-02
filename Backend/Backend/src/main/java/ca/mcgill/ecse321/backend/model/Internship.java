@@ -78,7 +78,7 @@ public class Internship{
 		this.academicSemester = academicSemester;
 	}
 
-	@OneToOne(optional=false)
+	@ManyToOne(optional=false)
 	private Student student;
 
 	public int getId() {
