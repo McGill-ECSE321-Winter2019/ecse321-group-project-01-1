@@ -38,8 +38,6 @@ public class FileController {
                 .path(dbFile.getId())
                 .toUriString();
 
-        System.out.println();
-
         return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
                 file.getContentType(), file.getSize());
     }

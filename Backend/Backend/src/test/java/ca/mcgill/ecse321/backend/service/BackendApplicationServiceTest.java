@@ -56,6 +56,8 @@ public class BackendApplicationServiceTest {
 		documentRepository.deleteAll();
 		applicationFormRepository.deleteAll();
 		reminderRepository.deleteAll();
+		courseRepository.deleteAll();
+		internshipRepository.deleteAll();
 	}
 
 	@Test
