@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ca.mcgill.ecse321.backend.model.*;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 import ca.mcgill.ecse321.backend.dao.*;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @RunWith(SpringRunner.class)
@@ -74,10 +75,10 @@ public class StudentTest {
         assertEquals(test.getStudentID(),id);
         assertEquals(test.getEmail(),email);
         assertEquals(test.getPassword(),pass);
-
     }
 
     @Test
+    @Transactional
     public void testStudentUpdate(){
         assertEquals(0, service.getAllStudents().size());
         //create new student

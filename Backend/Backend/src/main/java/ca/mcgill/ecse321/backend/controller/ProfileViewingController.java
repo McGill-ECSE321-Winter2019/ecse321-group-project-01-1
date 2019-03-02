@@ -26,17 +26,13 @@ public class ProfileViewingController {
     private BackendApplicationService service;
 
     @GetMapping(value = {"/students","/students"})
-    public StudentDto getStudentProfile(@RequestParam String id){
-        Student student  = service.readStudent(id);
+    public StudentDto getStudentProfile(@RequestParam("student") Student student){
         return convertToDto(student);
     }
 
-
-
-
     private StudentDto convertToDto(Student s) {
         if (s == null) {
-            throw new IllegalArgumentException("There is no such Person!");
+            throw new IllegalArgumentException("There is no such Student!");
         }
         StudentDto personDto = new StudentDto(s.getFirstName(),s.getLastName());
         return personDto;
