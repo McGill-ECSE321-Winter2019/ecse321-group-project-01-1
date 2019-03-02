@@ -154,18 +154,8 @@ public class BackendApplicationServiceTest {
 		//create document
 		assertEquals(0, service.getAllDocuments().size());
 		ApplicationForm af = service.createApplicationForm(internship, jobid);
-		Document d = service.createDocument(af, path);
 
 		assertEquals(1, service.getAllDocuments().size());
-
-		//read document
-
-		assertEquals(d.getPath(),path);
-
-		//write document
-		d.setPath("D:");
-		assertEquals(d.getPath(),"D:");
-
 	}
 
 	@Test
