@@ -63,7 +63,7 @@ public class BackendApplicationService {
 		studentRepository.save(student);
 		return student;
 	}
-	
+
 	@Transactional
 	public Student readStudent(String studentID) {
 		Student S = studentRepository.findStudentByStudentID(studentID);
@@ -77,11 +77,12 @@ public class BackendApplicationService {
 	
 	//Document
 	@Transactional
-	public Document createDocument(ApplicationForm AF, String path) {
+	public Document createDocument(Internship internship, String path) {
 		Document D = new Document();
 		D.setPath(path);
-		D.setApplicationForm(AF);
-		documentRepository.save(D);
+		D.setInternship(internship);
+
+		D = documentRepository.save(D);
 		
 		return D;
 	}
@@ -97,30 +98,6 @@ public class BackendApplicationService {
 		return toList(documentRepository.findAll());
 	}
 
-	//ApplicationForm
-	@Transactional
-	public ApplicationForm createApplicationForm (Internship internship, String jobID) {
-		ApplicationForm A = new ApplicationForm();
-
-		A.setJobID(jobID);
-		A.setInternship(internship);
-
-		A = applicationFormRepository.save(A);
-
-		return A;
-	}
-
-	@Transactional
-	public ApplicationForm readApplicationForm (int ID) {
-		ApplicationForm A = applicationFormRepository.findFormById(ID);
-		return A;
-	}
-
-	@Transactional
-	public List<ApplicationForm> getAllApplicationForms() {
-		return toList(applicationFormRepository.findAll());
-	}
-
 	//Internship
 	@Transactional
 	public Internship createInternship(Student student, Course course) {
@@ -132,32 +109,48 @@ public class BackendApplicationService {
 
 		return internship;
 	}
-
+	
 	@Transactional
 	public Internship readInternship (int id) {
 		return internshipRepository.findInternshipById(id);
 	}
-
+	
 	@Transactional
 	public List<Internship> getAllInternships() {
 		return toList(internshipRepository.findAll());
 	}
+	
+	//ApplicationForm
+	@Transactional
+	public ApplicationForm createApplicationForm (Internship internship, String jobID) {
+		ApplicationForm A = new ApplicationForm();
+		
+		A.setJobID(jobID);
+		A.setInternship(internship);
+		
+		A = applicationFormRepository.save(A);
 
+		return A;
+	}
+	
+	@Transactional
+	public ApplicationForm readApplicationForm (int ID) {
+		ApplicationForm A = applicationFormRepository.findFormById(ID);
+		return A;
+	}
+	
+	@Transactional
+	public List<ApplicationForm> getAllApplicationForms() {
+		return toList(applicationFormRepository.findAll());
+	}
+	
 	//Reminder
 	@Transactional
 	public Reminder createReminder (Student S, String message) {
 		Reminder R = new Reminder();
 		R.setMessage(message);
-		reminderRepository.save(R);
-
-		Set<Reminder> SR = S.getReminder();
-		if (SR == null) {
-			SR = new HashSet<Reminder>();
-		}
-		SR.add(R);
-		S.setReminder(SR);
-		studentRepository.save(S);
-		
+		R.setStudent(S);
+		R = reminderRepository.save(R);
 		return R;
 	}
 	
@@ -179,6 +172,7 @@ public class BackendApplicationService {
 		}
 		return resultList;
 	}
+
 
 	// Course
 

@@ -11,6 +11,10 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
+import java.util.*;
+
+import javax.transaction.Transactional;
+
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +35,8 @@ public class BackendApplicationServiceTest {
 	@Autowired
 	private BackendApplicationService service;
 
-	
-	
+
+
 	@Autowired
 	private StudentRepository studentRepository;
 	@Autowired
@@ -43,12 +47,12 @@ public class BackendApplicationServiceTest {
 	private ReminderRepository reminderRepository;
 
 
-	@After
+	@Before
 	public void clearDatabase() {
 		studentRepository.deleteAll();
-		reminderRepository.deleteAll();
 		documentRepository.deleteAll();
-		applicationFormRepository.deleteAll();
+		applicationFormRepository.deleteAll();		
+		reminderRepository.deleteAll();
 	}
 
 	@Test
@@ -111,9 +115,9 @@ public class BackendApplicationServiceTest {
 		String message = "Reminder";
 		
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
-		
+
 		//create reminder
-		
+
 		assertEquals(0, service.getAllReminders().size());
 		
 		Reminder r = service.createReminder(teststudent, message);
@@ -129,9 +133,9 @@ public class BackendApplicationServiceTest {
 		assertEquals(r.getMessage(),"Alert");
 	
 	}
-	
 
-	public void testDocument() {
+
+	public void testDocument(){
 		assertEquals(0, service.getAllStudents().size());
 
 		String id = "000000000";
@@ -140,26 +144,26 @@ public class BackendApplicationServiceTest {
 		String email = "john.doe@mail.mcgill.ca";
 		String pass = "123456";
 
-		String jobid = "123456";	
+		String jobid = "123456";
 
-		String path = "C:";	
+		String path = "C:";
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
 		Course testCourse = service.createCourse("Facc 300");
 		Internship internship = service.createInternship(teststudent,testCourse);
-		
+
 		//create document
 		assertEquals(0, service.getAllDocuments().size());
 		ApplicationForm af = service.createApplicationForm(internship, jobid);
 		Document d = service.createDocument(af, path);
-	
+
 		assertEquals(1, service.getAllDocuments().size());
-		
+
 		//read document
-				
+
 		assertEquals(d.getPath(),path);
-		
+
 		//write document
-		d.setPath("D:");	
+		d.setPath("D:");
 		assertEquals(d.getPath(),"D:");
 
 	}
@@ -193,7 +197,7 @@ public class BackendApplicationServiceTest {
 		service.createCourse("FACC300");
 
 	}
-	
+
 
 	public void testApplicationForm() {
 		assertEquals(0, service.getAllStudents().size());
@@ -216,13 +220,13 @@ public class BackendApplicationServiceTest {
 		assertEquals(0, service.getAllApplicationForms().size());
 
 		assertEquals(1, service.getAllApplicationForms().size());
-		
+
 		//read application form
-				
+
 		assertEquals(af.getJobID(),jobid);
-		
+
 		//write application form
-		af.setJobID("654321");	
+		af.setJobID("654321");
 		assertEquals(af.getJobID(),"654321");
 
 	}

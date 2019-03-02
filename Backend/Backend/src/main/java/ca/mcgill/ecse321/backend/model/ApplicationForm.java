@@ -1,41 +1,18 @@
 package ca.mcgill.ecse321.backend.model;
-import javax.persistence.*;
+import javax.persistence.ManyToOne;
 import java.sql.Date;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
 public class ApplicationForm{
-
-	@OneToMany(mappedBy="applicationForm")
-	private Set<Document> document = new HashSet<Document>();
-
-	public Set<Document> getDocument() {
-		return this.document;
-	}
-
-	public void setDocument(Set<Document> documents) {
-		this.document = documents;
-	}
-
-
-
-	@Enumerated(EnumType.STRING)
-	private AcademicSemester academicSemester;
-
-	public AcademicSemester getAcademicSemester() {
-		return this.academicSemester;
-	}
-
-	public void setAcademicSemester(AcademicSemester academicSemester) {
-		this.academicSemester = academicSemester;
-	}
-
-
+	
 	@Id
 	@GeneratedValue(
 			strategy= GenerationType.AUTO,
@@ -47,15 +24,12 @@ public class ApplicationForm{
 			)
 	private int id;
 
-	@ManyToOne(optional=false)
-	private Student student;
-
 	private String jobID;
 	private String jobDescription;
 
 	@ManyToOne(optional=false)
 	private Internship internship;
-
+	
 	public int getId() {
 		return id;
 	}
@@ -71,7 +45,7 @@ public class ApplicationForm{
 	public void setInternship(Internship internship) {
 		this.internship = internship;
 	}
-
+	
 	public String getJobDescription() {
 		return jobDescription;
 	}
@@ -128,14 +102,6 @@ public class ApplicationForm{
 	private Date endDate;
 
 	private boolean workPermit;
-
-	public Student getStudent() {
-		return this.student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
-	}
 
 	public String getJobID() {
 		return jobID;
