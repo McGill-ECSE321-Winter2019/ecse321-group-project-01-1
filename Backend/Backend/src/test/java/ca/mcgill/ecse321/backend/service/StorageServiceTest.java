@@ -34,6 +34,9 @@ public class StorageServiceTest {
     private BackendApplicationService service;
 
     @Autowired
+    private StorageService storageService;
+
+    @Autowired
     private StudentRepository studentRepository;
     @Autowired
     private DocumentRepository documentRepository;
@@ -52,8 +55,9 @@ public class StorageServiceTest {
         String email = "john.doe@mail.mcgill.ca";
         String pass = "123456";
 
-        service.createStudent(id, fname, lname, email, pass);
-        service.createCourse("FACC300");
+        Student student = service.createStudent(id, fname, lname, email, pass);
+        Course course = service.createCourse("FACC300");
+        Internship internship = service.createInternship(student,course);
 
     }
 }

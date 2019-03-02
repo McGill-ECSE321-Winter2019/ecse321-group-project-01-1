@@ -6,6 +6,7 @@ import ca.mcgill.ecse321.backend.exception.FileStorageException;
 import ca.mcgill.ecse321.backend.model.Document;
 import ca.mcgill.ecse321.backend.exception.FileStorageException;
 import ca.mcgill.ecse321.backend.exception.FileNotFoundException;
+import ca.mcgill.ecse321.backend.model.Internship;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,10 +27,11 @@ public class StorageService {
     private DocumentRepository fileRepository;
 
     @Transactional
-    public Document storeFile(MultipartFile file) {
+    public Document storeFile(MultipartFile file, Internship internship) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        Document doc;
+        Document doc = new Document();
+
         try {
             // Check if the file's name contains invalid characters
             if (fileName.contains("..")) {
@@ -39,6 +41,8 @@ public class StorageService {
         }catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
         }
+
+        doc.setInternship(internship);
         return fileRepository.save(doc);
     }
 

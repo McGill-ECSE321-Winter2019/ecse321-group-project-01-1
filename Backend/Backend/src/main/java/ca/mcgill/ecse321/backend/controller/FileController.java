@@ -1,7 +1,11 @@
 package ca.mcgill.ecse321.backend.controller;
 
+import ca.mcgill.ecse321.backend.model.Course;
 import ca.mcgill.ecse321.backend.model.Document;
 import ca.mcgill.ecse321.backend.dto.UploadFileResponse;
+import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
+import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 import ca.mcgill.ecse321.backend.service.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +26,13 @@ public class FileController {
 
     @Autowired
     private StorageService DBFileStorageService;
+    @Autowired
+    private BackendApplicationService service;
 
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        Document dbFile = DBFileStorageService.storeFile(file);
+    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("internship") Internship internship) {
+
+        Document dbFile = DBFileStorageService.storeFile(file, internship);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")

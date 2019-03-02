@@ -17,8 +17,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Document{
-	@ManyToOne(optional=false)
-	private ApplicationForm applicationForm;
+//	@ManyToOne(optional=false)
+//	private ApplicationForm applicationForm;
 
 	public Document(String fileName, String fileType, byte[] data) {
 		this.fileName = fileName;
@@ -31,13 +31,13 @@ public class Document{
 
 	private String path;
 
-	public ApplicationForm getApplicationForm() {
-		return this.applicationForm;
-	}
-
-	public void setApplicationForm(ApplicationForm applicationForm) {
-		this.applicationForm = applicationForm;
-	}
+//	public ApplicationForm getApplicationForm() {
+//		return this.applicationForm;
+//	}
+//
+//	public void setApplicationForm(ApplicationForm applicationForm) {
+//		this.applicationForm = applicationForm;
+//	}
 
 	@Id
 	@GeneratedValue(generator = "uuid")
