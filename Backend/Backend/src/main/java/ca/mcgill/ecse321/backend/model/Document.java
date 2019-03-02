@@ -17,8 +17,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Document{
-	@ManyToOne(optional=false)
-	private ApplicationForm applicationForm;
 
 	@Id
 	@GeneratedValue(
@@ -62,6 +60,14 @@ public class Document{
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
