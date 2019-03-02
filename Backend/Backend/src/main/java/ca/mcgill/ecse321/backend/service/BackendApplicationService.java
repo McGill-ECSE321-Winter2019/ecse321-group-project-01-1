@@ -94,28 +94,50 @@ public class BackendApplicationService {
 
 	//ApplicationForm
 	@Transactional
-	public ApplicationForm createApplicationForm (Student S, String jobID) {
+	public ApplicationForm createApplicationForm (Internship internship, String jobID) {
 		ApplicationForm A = new ApplicationForm();
 
 		A.setJobID(jobID);
-		A.setStudent(S);
+		A.setInternship(internship);
 
-		applicationFormRepository.save(A);
-		
+		A = applicationFormRepository.save(A);
+
 		return A;
 	}
-	
+
 	@Transactional
 	public ApplicationForm readApplicationForm (int ID) {
 		ApplicationForm A = applicationFormRepository.findFormById(ID);
 		return A;
 	}
-	
+
 	@Transactional
 	public List<ApplicationForm> getAllApplicationForms() {
 		return toList(applicationFormRepository.findAll());
 	}
-	
+
+	//Internship
+	@Transactional
+	public Internship createInternship(Student student, Course course) {
+		Internship internship = new Internship();
+		internship.setCourse(course);
+		internship.setStudent(student);
+
+		internship = internshipRepository.save(internship);
+
+		return internship;
+	}
+
+	@Transactional
+	public Internship readInternship (int id) {
+		return internshipRepository.findInternshipById(id);
+	}
+
+	@Transactional
+	public List<Internship> getAllInternships() {
+		return toList(internshipRepository.findAll());
+	}
+
 	//Reminder
 	@Transactional
 	public Reminder createReminder (Student S, String message) {

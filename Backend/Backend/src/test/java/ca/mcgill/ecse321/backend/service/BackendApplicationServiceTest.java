@@ -48,8 +48,9 @@ public class BackendApplicationServiceTest {
 	@After
 	public void clearDatabase() {
 		studentRepository.deleteAll();
-
-		
+		reminderRepository.deleteAll();
+		documentRepository.deleteAll();
+		applicationFormRepository.deleteAll();
 	}
 	
 	@Test
@@ -96,10 +97,6 @@ public class BackendApplicationServiceTest {
 			assertEquals(test.getStudentID(),"111111111");
 			assertEquals(test.getEmail(),"bob.thing@mail.mcgill.ca");
 			assertEquals(test.getPassword(),"654321");
-			
-			
-			
-		
 	}
 	
 	@Test
@@ -117,16 +114,6 @@ public class BackendApplicationServiceTest {
 		String message = "Reminder";
 		
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
-		
-		/*
-		Reminder r = new Reminder();
-		
-		r.setMessage(message);
-		
-		List<Reminder> allReminder = service.getAllReminders();
-		assertEquals(1, allReminder.size());
-		
-		*/
 		
 		//create reminder
 		
@@ -160,10 +147,12 @@ public class BackendApplicationServiceTest {
 
 		String path = "C:";	
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
+		Course testCourse = service.createCourse("Facc 300");
+		Internship internship = service.createInternship(teststudent,testCourse);
 		
 		//create document
 		assertEquals(0, service.getAllDocuments().size());
-		ApplicationForm af = service.createApplicationForm(teststudent, jobid);
+		ApplicationForm af = service.createApplicationForm(internship, jobid);
 		Document d = service.createDocument(af, path);
 	
 		assertEquals(1, service.getAllDocuments().size());
@@ -177,6 +166,34 @@ public class BackendApplicationServiceTest {
 		assertEquals(d.getPath(),"D:");
 
 	}
+
+	public void testInternship(){
+		assertEquals(0, service.getAllInternships().size());
+
+		String id = "000000000";
+		String fname = "John";
+		String lname = "Doe";
+		String email = "john.doe@mail.mcgill.ca";
+		String pass = "123456";
+
+		Student teststudent = service.createStudent(id, fname, lname, email, pass);
+		Course testCourse = service.createCourse("FACC300");
+	}
+
+	public void testCourse(){
+
+		assertEquals(0, service.getAllCourses().size());
+
+		String id = "000000000";
+		String fname = "John";
+		String lname = "Doe";
+		String email = "john.doe@mail.mcgill.ca";
+		String pass = "123456";
+
+		Student teststudent = service.createStudent(id, fname, lname, email, pass);
+		service.createCourse("FACC300");
+
+	}
 	
 	@Test
 	public void testApplicationForm() {
@@ -188,15 +205,17 @@ public class BackendApplicationServiceTest {
 		String email = "john.doe@mail.mcgill.ca";
 		String pass = "123456";
 
-		
-		String jobid = "123456";	
+		String jobid = "123456";
+		Internship internship;
+
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
-		
+		Course testCourse = service.createCourse("FACC300");
+		internship = service.createInternship(teststudent,testCourse);
+		ApplicationForm af = service.createApplicationForm(internship, jobid);
+
 		//create application form
 		assertEquals(0, service.getAllApplicationForms().size());
-		
-		ApplicationForm af = service.createApplicationForm(teststudent, jobid);
-		
+
 		assertEquals(1, service.getAllApplicationForms().size());
 		
 		//read application form

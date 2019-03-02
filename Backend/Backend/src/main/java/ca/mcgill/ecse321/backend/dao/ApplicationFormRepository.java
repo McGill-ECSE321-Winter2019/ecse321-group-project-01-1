@@ -7,5 +7,4 @@ import ca.mcgill.ecse321.backend.model.ApplicationForm;
 public interface ApplicationFormRepository extends CrudRepository<ApplicationForm, Integer>{
 
 	ApplicationForm findFormById(int id);
-
 }
