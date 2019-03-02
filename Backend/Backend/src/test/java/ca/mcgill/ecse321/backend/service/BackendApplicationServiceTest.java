@@ -50,7 +50,7 @@ public class BackendApplicationServiceTest {
 		documentRepository.deleteAll();
 		applicationFormRepository.deleteAll();
 	}
-	
+
 	@Test
 	public void testStudent() {
 		//assert no student in repository
@@ -62,7 +62,7 @@ public class BackendApplicationServiceTest {
 		String lname = "Doe";
 		String email = "john.doe@mail.mcgill.ca";
 		String pass = "123456";
-		
+
 		try {
 			service.createStudent(id, fname, lname, email, pass);
 		} catch (IllegalArgumentException e) {
@@ -72,28 +72,28 @@ public class BackendApplicationServiceTest {
 		//assert only 1 student
 		List<Student> allStudents = service.getAllStudents();
 		assertEquals(1, allStudents.size());
-		
+
 		//read student
-			Student test = service.readStudent(id);
-			
-			assertEquals(test.getFirstName(),fname);
-			assertEquals(test.getLastName(),lname);
-			assertEquals(test.getStudentID(),id);
-			assertEquals(test.getEmail(),email);
-			assertEquals(test.getPassword(),pass);
-			
+		Student test = service.readStudent(id);
+
+		assertEquals(test.getFirstName(),fname);
+		assertEquals(test.getLastName(),lname);
+		assertEquals(test.getStudentID(),id);
+		assertEquals(test.getEmail(),email);
+		assertEquals(test.getPassword(),pass);
+
 		//write to student
-			test.setFirstName("Bob");
-			test.setLastName("Thing");
-			test.setStudentID("111111111");
-			test.setEmail("bob.thing@mail.mcgill.ca");
-			test.setPassword("654321");
-			
-			assertEquals(test.getFirstName(),"Bob");
-			assertEquals(test.getLastName(),"Thing");
-			assertEquals(test.getStudentID(),"111111111");
-			assertEquals(test.getEmail(),"bob.thing@mail.mcgill.ca");
-			assertEquals(test.getPassword(),"654321");
+		test.setFirstName("Bob");
+		test.setLastName("Thing");
+		test.setStudentID("111111111");
+		test.setEmail("bob.thing@mail.mcgill.ca");
+		test.setPassword("654321");
+
+		assertEquals(test.getFirstName(),"Bob");
+		assertEquals(test.getLastName(),"Thing");
+		assertEquals(test.getStudentID(),"111111111");
+		assertEquals(test.getEmail(),"bob.thing@mail.mcgill.ca");
+		assertEquals(test.getPassword(),"654321");
 	}
 	
 	@Test
