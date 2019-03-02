@@ -11,9 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.After;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,7 +41,7 @@ public class BackendApplicationServiceTest {
 	private ApplicationFormRepository applicationFormRepository;
 	@Autowired
 	private ReminderRepository reminderRepository;
-	
+
 
 	@After
 	public void clearDatabase() {
@@ -55,7 +53,6 @@ public class BackendApplicationServiceTest {
 	
 	@Test
 	public void testStudent() {
-		
 		//assert no student in repository
 		assertEquals(0, service.getAllStudents().size());
 
@@ -133,7 +130,7 @@ public class BackendApplicationServiceTest {
 	
 	}
 	
-	@Test
+
 	public void testDocument() {
 		assertEquals(0, service.getAllStudents().size());
 
@@ -167,6 +164,7 @@ public class BackendApplicationServiceTest {
 
 	}
 
+	@Test
 	public void testInternship(){
 		assertEquals(0, service.getAllInternships().size());
 
@@ -178,6 +176,7 @@ public class BackendApplicationServiceTest {
 
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
 		Course testCourse = service.createCourse("FACC300");
+
 	}
 
 	public void testCourse(){
@@ -195,7 +194,7 @@ public class BackendApplicationServiceTest {
 
 	}
 	
-	@Test
+
 	public void testApplicationForm() {
 		assertEquals(0, service.getAllStudents().size());
 
