@@ -59,6 +59,7 @@ public class BackendApplicationService {
 		return S;
 	}
 
+	@Transactional
 	public Student updateStudent(Student student){
 		studentRepository.save(student);
 		return student;

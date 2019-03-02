@@ -38,9 +38,14 @@ public class StudentTest {
     @Autowired
     private ReminderRepository reminderRepository;
 
-    @After
+
+
+    @Before
     public void clear(){
         studentRepository.deleteAll();
+        documentRepository.deleteAll();
+        applicationFormRepository.deleteAll();
+        reminderRepository.deleteAll();
     }
 
     @Test
@@ -74,6 +79,7 @@ public class StudentTest {
 
     @Test
     public void testStudentUpdate(){
+        assertEquals(0, service.getAllStudents().size());
         //create new student
         String id = "000000000";
         String fname = "John";

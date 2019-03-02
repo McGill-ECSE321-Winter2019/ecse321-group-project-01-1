@@ -45,6 +45,10 @@ public class BackendApplicationServiceTest {
 	private ApplicationFormRepository applicationFormRepository;
 	@Autowired
 	private ReminderRepository reminderRepository;
+	@Autowired
+	private CourseRepository courseRepository;
+	@Autowired
+	private InternshipRepository internshipRepository;
 
 
 	@Before
@@ -171,6 +175,9 @@ public class BackendApplicationServiceTest {
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
 		Course testCourse = service.createCourse("FACC300");
 
+
+
+
 	}
 
 	public void testCourse(){
@@ -186,6 +193,7 @@ public class BackendApplicationServiceTest {
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
 		service.createCourse("FACC300");
 
+		Course course = courseRepository.findCourseByCourseID("FACC300");
 	}
 
 

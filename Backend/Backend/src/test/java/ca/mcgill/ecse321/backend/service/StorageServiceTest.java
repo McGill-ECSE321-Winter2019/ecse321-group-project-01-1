@@ -28,8 +28,32 @@ import ca.mcgill.ecse321.backend.dao.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StorageServiceTest {
+
+
+    @Autowired
+    private BackendApplicationService service;
+
+    @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
+    private DocumentRepository documentRepository;
+    @Autowired
+    private ApplicationFormRepository applicationFormRepository;
+    @Autowired
+    private ReminderRepository reminderRepository;
+
+
     @Test
     public void testUpload(){
+        //create new student
+        String id = "000000000";
+        String fname = "John";
+        String lname = "Doe";
+        String email = "john.doe@mail.mcgill.ca";
+        String pass = "123456";
+
+        service.createStudent(id, fname, lname, email, pass);
+        service.createCourse("FACC300");
 
     }
 }
