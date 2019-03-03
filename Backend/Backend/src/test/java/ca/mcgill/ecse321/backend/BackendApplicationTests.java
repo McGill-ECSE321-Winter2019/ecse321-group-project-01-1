@@ -54,7 +54,7 @@ public class BackendApplicationTests {
 	@Mock
 	private StudentRepository studentDao;
 	
-	@Autowired
+	@InjectMocks
 	private BackendApplicationService service;
 	
 	@InjectMocks
@@ -115,7 +115,7 @@ public class BackendApplicationTests {
 	  when(applicationDao.findFormById(anyInt())).thenAnswer( (InvocationOnMock invocation) -> {
 		    if(invocation.getArgument(0).equals(FORM_KEY)) {
 		      ApplicationForm applicationform = new ApplicationForm();
-		      applicationform.setId(DOCUMENT_KEY);
+		      applicationform.setId(FORM_KEY);
 		      return applicationform;
 		    } else {
 		      return null;
@@ -132,7 +132,7 @@ public class BackendApplicationTests {
 		    }
 		  });
 	  
-	  when(courseDao.findCourseByCourseID(anyString())).thenAnswer( (InvocationOnMock invocation) -> {
+	  when(courseDao.findCourseById(anyInt())).thenAnswer( (InvocationOnMock invocation) -> {
 		    if(invocation.getArgument(0).equals(COURSE_KEY)) {
 		      Course course = new Course();
 		      course.setId(COURSE_KEY);
@@ -141,8 +141,9 @@ public class BackendApplicationTests {
 		      return null;
 		    }
 		  });
+		  
 	}
-	
+	  
 	@Before
 	public void setupMock() {
 		student = mock(Student.class);
@@ -167,7 +168,7 @@ public class BackendApplicationTests {
 	public void testParticipantQueryFound() {
 	  assertEquals(STUDENT_KEY, service.readStudent(STUDENT_KEY).getStudentID());
 	}
-	
+
 	@Test
 	public void testDocumentQueryFound() {
 		assertEquals(DOCUMENT_KEY, service.readDocument(DOCUMENT_KEY).getId());
@@ -185,12 +186,12 @@ public class BackendApplicationTests {
 	
 	@Test
 	public void testReminderQueryFound() {
-		assertEquals(REMINDER_KEY, service.readReminder(REMINDER_KEY));
+		assertEquals(REMINDER_KEY, service.readReminder(REMINDER_KEY).getId());
 	}
 	
 	@Test
 	public void testCourseQueryFound() {
-		assertEquals(COURSE_KEY, service.readCourse(COURSE_KEY));
+		assertEquals(COURSE_KEY, service.readCourse(COURSE_KEY).getId());
 	}
 	
 	//@Test
@@ -198,7 +199,6 @@ public class BackendApplicationTests {
 	//	List<Student> list = Arrays.asList(service.createStudent("12345", "Jack", "Black", "jack.black@mail.mcgill.ca", "54321"),
 	//			service.createStudent("13579", "Brain", "White", "brain.white@mail.mcgill.ca", "97531"));
 	//}
-	
 	
 
 	@Test
