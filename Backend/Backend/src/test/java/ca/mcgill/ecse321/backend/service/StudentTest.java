@@ -49,7 +49,7 @@ public class StudentTest {
         reminderRepository.deleteAll();
     }
 
-//    @Test
+    @Test
     public void testStudentCreation() {
         //assert no student in repository
         assertEquals(0, service.getAllStudents().size());
@@ -78,7 +78,7 @@ public class StudentTest {
     }
 
 //    @Test
-    @Transactional
+//@Transactional
     public void testStudentUpdate(){
         assertEquals(0, service.getAllStudents().size());
         //create new student

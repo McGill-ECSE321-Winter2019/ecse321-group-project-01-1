@@ -47,10 +47,8 @@ public class FileController {
         return new ArrayList<Document>(DBFileStorageService.getAllDocumentsByInternship(internship));
     }
 
-
-
-    @GetMapping("/downloadFile/{fileId}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
+    @GetMapping("/downloadFile/")
+    public ResponseEntity<Resource> downloadFile(@RequestParam("file_id") String fileId) {
         // Load file from database
         Document document = DBFileStorageService.getFile(Integer.parseInt(fileId));
 
