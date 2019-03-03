@@ -35,7 +35,6 @@ public class BackendApplicationServiceTest {
 	private BackendApplicationService service;
 
 
-
 	@Autowired
 	private StudentRepository studentRepository;
 	@Autowired
@@ -61,7 +60,6 @@ public class BackendApplicationServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void testStudent() {
 		//assert no student in repository
 		assertEquals(0, service.getAllStudents().size());
@@ -86,11 +84,11 @@ public class BackendApplicationServiceTest {
 		//read student
 		Student test = service.readStudent(id);
 
-		assertEquals(test.getFirstName(),fname);
-		assertEquals(test.getLastName(),lname);
-		assertEquals(test.getStudentID(),id);
-		assertEquals(test.getEmail(),email);
-		assertEquals(test.getPassword(),pass);
+		assertEquals(test.getFirstName(), fname);
+		assertEquals(test.getLastName(), lname);
+		assertEquals(test.getStudentID(), id);
+		assertEquals(test.getEmail(), email);
+		assertEquals(test.getPassword(), pass);
 	}
 
 	@Test
@@ -119,52 +117,11 @@ public class BackendApplicationServiceTest {
 
 		//read reminder
 
-		assertEquals(r.getMessage(),message);
+		assertEquals(r.getMessage(), message);
 
 		//write reminder
 		r.setMessage("Alert");
-		assertEquals(r.getMessage(),"Alert");
-
-	}
-
-	@Test
-	@Transactional
-	public void testInternship(){
-		assertEquals(0, service.getAllInternships().size());
-
-		String id = "000000000";
-		String fname = "John";
-		String lname = "Doe";
-		String email = "john.doe@mail.mcgill.ca";
-		String pass = "123456";
-
-		Student teststudent = service.createStudent(id, fname, lname, email, pass);
-		Course testCourse = service.createCourse("FACC300");
-
-		assertEquals(0, service.getAllInternships().size());
-		Internship internship = service.createInternship(teststudent,testCourse);
-//		assertEquals(1, service.getAllInternships().size());
-
-	}
-
-	@Test
-	@Transactional
-	public void testCourse(){
-
-		assertEquals(0, service.getAllCourses().size());
-
-		String id = "000000000";
-		String fname = "John";
-		String lname = "Doe";
-		String email = "john.doe@mail.mcgill.ca";
-		String pass = "123456";
-
-		Student teststudent = service.createStudent(id, fname, lname, email, pass);
-
-		assertEquals(0, service.getAllCourses().size());
-		Course course = service.createCourse("FACC300");
-		assertEquals(1, service.getAllCourses().size());
-
+		assertEquals(r.getMessage(), "Alert");
 
 	}
 }

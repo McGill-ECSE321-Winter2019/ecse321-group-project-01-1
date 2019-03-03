@@ -44,9 +44,8 @@ public class Internship{
 			)
 	private int id;
 
-	@OneToMany(mappedBy="internship", cascade={CascadeType.ALL})
+	@OneToOne(mappedBy="internship", cascade={CascadeType.ALL})
 	private ApplicationForm applicationForm;
-
 
 	public ApplicationForm getApplicationForm() {
 		return this.applicationForm;

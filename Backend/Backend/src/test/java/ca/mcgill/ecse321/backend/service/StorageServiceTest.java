@@ -58,6 +58,7 @@ public class StorageServiceTest {
         Student student = service.createStudent(id, fname, lname, email, pass);
         Course course = service.createCourse("FACC300");
         Internship internship = service.createInternship(student,course);
+        assertEquals(true,true);
 
     }
 }

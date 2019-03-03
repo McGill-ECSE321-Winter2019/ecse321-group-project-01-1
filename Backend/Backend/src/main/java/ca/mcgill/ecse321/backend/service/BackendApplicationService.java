@@ -120,6 +120,11 @@ public class BackendApplicationService {
 	public List<Internship> getAllInternships() {
 		return toList(internshipRepository.findAll());
 	}
+
+	@Transactional
+	public Set<Internship> getAllInternshipsByStudent(Student student){
+		return new HashSet<Internship>(internshipRepository.findAllInternshipByStudent(student));
+	}
 	
 	//ApplicationForm
 	@Transactional
