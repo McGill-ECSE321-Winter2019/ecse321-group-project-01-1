@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.backend.dto.ReminderDto;
@@ -19,8 +20,8 @@ public class ReminderController {
 	
 	BackendApplicationService service = new BackendApplicationService();
 	
-	@PostMapping(value = { "/reminders/{message}", "/reminders/{studentID}/" })
-	public ReminderDto createReminder(@PathVariable("message") String message, @PathVariable("studentID") String studentID) throws IllegalArgumentException {
+	@PostMapping(value = { "/reminders", "/reminders/" })
+	public ReminderDto createReminder(@RequestParam(name = "message") String message, @RequestParam(name = "studentID") String studentID) throws IllegalArgumentException {
 		Reminder reminder = service.createReminder(service.readStudent(studentID), message);
 		return convertToDto(reminder);
 	}
@@ -34,8 +35,8 @@ public class ReminderController {
 		return reminderDtos;
 	}
 	
-	@GetMapping(value = { "/reminders","/reminders/{studentID}/"  })
-	public List<ReminderDto> getRemindersOfSudent(@PathVariable("studentID") String studentID ) {
+	@GetMapping(value = { "/reminders","/reminders/"  })
+	public List<ReminderDto> getRemindersOfSudent(@RequestParam(name = "studentID") String studentID ) {
 		List<ReminderDto> reminderDtos = new ArrayList<>();
 		for (Reminder reminder : service.readStudent(studentID).getReminder()) {
 			reminderDtos.add(convertToDto(reminder));
