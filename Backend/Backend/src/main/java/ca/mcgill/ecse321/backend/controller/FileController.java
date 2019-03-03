@@ -42,9 +42,9 @@ public class FileController {
                 file.getContentType(), file.getSize());
     }
 
-    @GetMapping("/downloadAllFiles")
+    @GetMapping("/showAllFiles")
     public ArrayList<Document> showAllDocuments(@RequestParam("internship") Internship internship){
-        return new ArrayList<Document>(DBFileStorageService.getAllDocumentsByInternship(internship));
+        return new ArrayList<>(DBFileStorageService.getAllDocumentsByInternship(internship));
     }
 
     @GetMapping("/downloadFile/")
