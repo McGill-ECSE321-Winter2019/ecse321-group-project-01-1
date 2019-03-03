@@ -68,7 +68,7 @@ public class BackendApplicationTests {
 	private static final int DOCUMENT_KEY = 10;
 	
 	private Internship internship;
-	private static int INTERSHIP_KEY = 25;
+	private static final int INTERSHIP_KEY = 25;
 	
 	private ApplicationForm applicationform;
 	private static final int FORM_KEY = 50;
@@ -154,7 +154,7 @@ public class BackendApplicationTests {
 	}
 
 	@Test
-	public void testMockPersonCreation() {
+	public void testMockObjectCreation() {
 		assertNotNull(student);
 		assertNotNull(document);
 		assertNotNull(internship);
@@ -168,22 +168,27 @@ public class BackendApplicationTests {
 	  assertEquals(STUDENT_KEY, service.readStudent(STUDENT_KEY).getStudentID());
 	}
 	
+	@Test
 	public void testDocumentQueryFound() {
 		assertEquals(DOCUMENT_KEY, service.readDocument(DOCUMENT_KEY).getId());
 	}
 	
+	@Test
 	public void testInternshipQueryFound() {
 		assertEquals(INTERSHIP_KEY, service.readInternship(INTERSHIP_KEY).getId());
 	}
 	
+	@Test
 	public void testApplicationFormQueryFound() {
 		assertEquals(FORM_KEY, service.readApplicationForm(FORM_KEY).getId());
 	}
 	
+	@Test
 	public void testReminderQueryFound() {
 		assertEquals(REMINDER_KEY, service.readReminder(REMINDER_KEY));
 	}
 	
+	@Test
 	public void testCourseQueryFound() {
 		assertEquals(COURSE_KEY, service.readCourse(COURSE_KEY));
 	}
