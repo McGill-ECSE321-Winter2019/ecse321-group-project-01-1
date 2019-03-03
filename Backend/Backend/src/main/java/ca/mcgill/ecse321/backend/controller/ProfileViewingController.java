@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.backend.controller;
 import ca.mcgill.ecse321.backend.BackendApplication;
 import ca.mcgill.ecse321.backend.model.Document;
 import ca.mcgill.ecse321.backend.dto.UploadFileResponse;
+import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.model.Student;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 import ca.mcgill.ecse321.backend.service.StorageService;
@@ -19,6 +20,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.constraints.Email;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 @CrossOrigin(origins = "*")
 @RestController
 public class ProfileViewingController {
@@ -34,7 +40,27 @@ public class ProfileViewingController {
         if (s == null) {
             throw new IllegalArgumentException("There is no such Student!");
         }
-        StudentDto personDto = new StudentDto(s.getFirstName(),s.getLastName());
-        return personDto;
+        return new StudentDto(s.getStudentID(), s.getFirstName(), s.getLastName(), s.getEmail(), getInternshipDtos(s));
+    }
+
+    public Set<InternshipDto> getInternshipDtos(Student student){
+        Set<Internship> internshipList = student.getInternship();
+        if(internshipList == null){
+            throw new IllegalArgumentException("There is no such internship!");
+        }
+
+        Set<InternshipDto> dtoList = new HashSet<>();
+        for(Internship internship : internshipList){
+            dtoList.add(convertToDto(internship));
+        }
+        return dtoList;
+    }
+
+    public InternshipDto convertToDto(Internship internship){
+        if (internship == null) {
+            throw new IllegalArgumentException("There is no such internship!");
+        }
+        InternshipDto internshipDto = new InternshipDto(internship.getCourse(),internship.getAcademicSemester());
+        return internshipDto;
     }
 }

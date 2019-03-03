@@ -123,11 +123,17 @@ public class BackendApplicationService {
 	
 	//ApplicationForm
 	@Transactional
-	public ApplicationForm createApplicationForm (Internship internship, String jobID) {
+	public ApplicationForm createApplicationForm (String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit, Internship internship) {
 		ApplicationForm A = new ApplicationForm();
-		
+
 		A.setJobID(jobID);
 		A.setInternship(internship);
+		A.setEmployer(employer);
+		A.setEndDate(endDate);
+		A.setStartDate(startDate);
+		A.setWorkPermit(workPermit);
+		A.setLocation(location);
+		A.setJobDescription(jobDescription);
 		
 		A = applicationFormRepository.save(A);
 

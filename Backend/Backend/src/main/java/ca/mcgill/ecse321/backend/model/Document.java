@@ -26,7 +26,6 @@ public class Document{
 
 	private String path;
 
-
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -44,7 +43,6 @@ public class Document{
 
 	@Enumerated(EnumType.STRING)
 	private DocumentType documentType;
-
 
 	@ManyToOne(optional=false)
 	private Internship internship;

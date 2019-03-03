@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.ArrayList;
+
 @RestController
 public class FileController {
-
-    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @Autowired
     private StorageService DBFileStorageService;
@@ -41,6 +41,13 @@ public class FileController {
         return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
+
+    @GetMapping("/downloadAllFiles")
+    public ArrayList<Document> showAllDocuments(@RequestParam("internship") Internship internship){
+        return new ArrayList<Document>(DBFileStorageService.getAllDocumentsByInternship(internship));
+    }
+
+
 
     @GetMapping("/downloadFile/{fileId}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {

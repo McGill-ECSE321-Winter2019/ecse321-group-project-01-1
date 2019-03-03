@@ -8,6 +8,7 @@ import ca.mcgill.ecse321.backend.exception.FileStorageException;
 import ca.mcgill.ecse321.backend.exception.FileNotFoundException;
 import ca.mcgill.ecse321.backend.model.DocumentType;
 import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import static org.hibernate.internal.util.collections.ArrayHelper.toList;
 
@@ -40,12 +42,21 @@ public class StorageService {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
             doc = new Document(fileName, file.getContentType(), file.getBytes());
+            doc.setDocumentType(type);
+            doc.setInternship(internship);
         }catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
         }
-        doc.setDocumentType(type);
-        doc.setInternship(internship);
+
         return fileRepository.save(doc);
+    }
+
+    @Transactional
+    public List<Document> getAllDocumentsByInternship(Internship internship){
+        if(internship == null){
+            throw new IllegalArgumentException("Internship cannot be null");
+        }
+        return new ArrayList<>(fileRepository.findDocumentByInternship(internship));
     }
 
     @Transactional

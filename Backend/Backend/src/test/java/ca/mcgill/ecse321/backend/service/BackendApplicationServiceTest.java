@@ -29,8 +29,8 @@ import ca.mcgill.ecse321.backend.dao.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BackendApplicationServiceTest {
-	
-	
+
+
 	@Autowired
 	private BackendApplicationService service;
 
@@ -92,7 +92,7 @@ public class BackendApplicationServiceTest {
 		assertEquals(test.getEmail(),email);
 		assertEquals(test.getPassword(),pass);
 	}
-	
+
 	@Test
 	@Transactional
 	public void testReminder() {
@@ -104,27 +104,27 @@ public class BackendApplicationServiceTest {
 		String lname = "Doe";
 		String email = "john.doe@mail.mcgill.ca";
 		String pass = "123456";
-		
+
 		String message = "Reminder";
-		
+
 		Student teststudent = service.createStudent(id, fname, lname, email, pass);
 
 		//create reminder
 
 		assertEquals(0, service.getAllReminders().size());
-		
+
 		Reminder r = service.createReminder(teststudent, message);
-	
+
 		assertEquals(1, service.getAllReminders().size());
 
 		//read reminder
-				
+
 		assertEquals(r.getMessage(),message);
-		
+
 		//write reminder
-		r.setMessage("Alert");	
+		r.setMessage("Alert");
 		assertEquals(r.getMessage(),"Alert");
-	
+
 	}
 
 	@Test
@@ -167,40 +167,4 @@ public class BackendApplicationServiceTest {
 
 
 	}
-
-
-	@Transactional
-	public void testApplicationForm() {
-		assertEquals(0, service.getAllStudents().size());
-
-		String id = "000000000";
-		String fname = "John";
-		String lname = "Doe";
-		String email = "john.doe@mail.mcgill.ca";
-		String pass = "123456";
-
-		String jobid = "123456";
-		Internship internship;
-
-		Student teststudent = service.createStudent(id, fname, lname, email, pass);
-		Course testCourse = service.createCourse("FACC300");
-		internship = service.createInternship(teststudent,testCourse);
-
-
-		//create application form
-		assertEquals(0, service.getAllApplicationForms().size());
-		ApplicationForm af = service.createApplicationForm(internship, jobid);
-		assertEquals(1, service.getAllApplicationForms().size());
-
-		//read application form
-		assertEquals(af.getJobID(),jobid);
-
-		//write application form
-		af.setJobID("654321");
-		assertEquals(af.getJobID(),"654321");
-
-	}
-	
-
-
 }
