@@ -19,20 +19,28 @@ public class ReminderController {
 	
 	BackendApplicationService service = new BackendApplicationService();
 	
-	@PostMapping(value = { "/reminders/{name}", "/reminders/{name}/" })
-	public ReminderDto createReminder(@PathVariable("name") String message, String studentID) throws IllegalArgumentException {
-		// @formatter:on
+	@PostMapping(value = { "/reminders/{message}", "/reminders/{studentID}/" })
+	public ReminderDto createReminder(@PathVariable("message") String message, @PathVariable("studentID") String studentID) throws IllegalArgumentException {
 		Reminder reminder = service.createReminder(service.readStudent(studentID), message);
 		return convertToDto(reminder);
 	}
 	
 	@GetMapping(value = { "/reminders", "/reminders/" })
 	public List<ReminderDto> getAllReminders() {
-		List<ReminderDto> eventDtos = new ArrayList<>();
-		for (Reminder event : service.getAllReminders()) {
-			eventDtos.add(convertToDto(event));
+		List<ReminderDto> reminderDtos = new ArrayList<>();
+		for (Reminder reminder : service.getAllReminders()) {
+			reminderDtos.add(convertToDto(reminder));
 		}
-		return eventDtos;
+		return reminderDtos;
+	}
+	
+	@GetMapping(value = { "/reminders","/reminders/{studentID}/"  })
+	public List<ReminderDto> getRemindersOfSudent(@PathVariable("studentID") String studentID ) {
+		List<ReminderDto> reminderDtos = new ArrayList<>();
+		for (Reminder reminder : service.readStudent(studentID).getReminder()) {
+			reminderDtos.add(convertToDto(reminder));
+		}
+		return reminderDtos;
 	}
 
 	private ReminderDto convertToDto(Reminder reminder) {
