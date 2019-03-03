@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.backend.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,16 +18,16 @@ import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 @CrossOrigin(origins = "*")
 @RestController
 public class ReminderController {
-	
+
 	BackendApplicationService service = new BackendApplicationService();
-	
+
 	@PostMapping(value = { "/reminders", "/reminders/" })
 	public ReminderDto createReminder(@RequestParam(name = "message") String message, @RequestParam(name = "studentID") String studentID) throws IllegalArgumentException {
 		Reminder reminder = service.createReminder(service.readStudent(studentID), message);
 		return convertToDto(reminder);
 	}
-	
-	@GetMapping(value = { "/reminders", "/reminders/" })
+
+	@GetMapping(value = { "/remindersAll", "/remindersAll/" })
 	public List<ReminderDto> getAllReminders() {
 		List<ReminderDto> reminderDtos = new ArrayList<>();
 		for (Reminder reminder : service.getAllReminders()) {
@@ -34,9 +35,9 @@ public class ReminderController {
 		}
 		return reminderDtos;
 	}
-	
+
 	@GetMapping(value = { "/reminders","/reminders/"  })
-	public List<ReminderDto> getRemindersOfSudent(@RequestParam(name = "studentID") String studentID ) {
+	public List<ReminderDto> getRemindersOfStudent(@RequestParam(name = "studentID") String studentID ) {
 		List<ReminderDto> reminderDtos = new ArrayList<>();
 		for (Reminder reminder : service.readStudent(studentID).getReminder()) {
 			reminderDtos.add(convertToDto(reminder));
@@ -48,11 +49,11 @@ public class ReminderController {
 		if (reminder == null) {
 			throw new IllegalArgumentException("There is no such Reminder!");
 		}
-				ReminderDto reminderDto = new ReminderDto (reminder.getMessage(), reminder.getCreateDateTime());
-				return reminderDto;
+		ReminderDto reminderDto = new ReminderDto (reminder.getMessage(), reminder.getCreateDateTime());
+		return reminderDto;
 	}
-	
-	
-	
+
+
+
 
 }

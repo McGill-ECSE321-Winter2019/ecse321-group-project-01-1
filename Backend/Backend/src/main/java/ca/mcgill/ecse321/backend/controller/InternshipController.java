@@ -4,6 +4,7 @@ package ca.mcgill.ecse321.backend.controller;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,8 @@ import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 @CrossOrigin(origins = "*")
 @RestController
 public class InternshipController {
-	
+
+	@Autowired
 	BackendApplicationService service = new BackendApplicationService();
 	
 	public boolean[] getProgress(int id) {
