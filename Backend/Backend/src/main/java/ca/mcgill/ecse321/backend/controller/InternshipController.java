@@ -1,22 +1,20 @@
 package ca.mcgill.ecse321.backend.controller;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import ca.mcgill.ecse321.backend.dto.ReminderDto;
 import ca.mcgill.ecse321.backend.model.Document;
-import ca.mcgill.ecse321.backend.model.Reminder;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 
-public class StudentController {
+public class InternshipController {
 	
 	BackendApplicationService service = new BackendApplicationService();
 	
-	public boolean[] getProgress(String studentID) {
+	public boolean[] getProgress(int id) {
 		
-		List<Document> documents = new ArrayList<>();
-		documents = service.getAllDocuments();
+		Set<Document> documents = new HashSet<Document>();
+		documents = service.readInternship(id).getDocument();
 		boolean[] progress = new boolean[4];
 		
 		
