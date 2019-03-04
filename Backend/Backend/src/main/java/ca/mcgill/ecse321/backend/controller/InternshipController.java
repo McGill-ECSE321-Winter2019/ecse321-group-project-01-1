@@ -25,8 +25,6 @@ public class InternshipController {
 		documents = service.readInternship(id).getDocument();
 		boolean[] progress = new boolean[4];
 		
-		
-		
 		for (Document d:documents) {
 			switch(d.getDocumentType()){
 			case CONTRACT :
@@ -45,11 +43,7 @@ public class InternshipController {
 
 			}
 		}
-		
 		return progress;
-		
-
-		
 	}
 
 }

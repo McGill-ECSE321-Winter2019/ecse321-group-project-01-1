@@ -1,24 +1,36 @@
 package ca.mcgill.ecse321.backend.dto;
 
+import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.constraints.*;
 
+
+import ca.mcgill.ecse321.backend.model.Internship;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class StudentDto{
-	
-	public StudentDto(String studentID, String firstName, String lastName, String email, String password) {
+
+    public StudentDto(String studentID, String firstName, String lastName, @Email String email,String password) {
+        this.studentID = studentID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
+	public StudentDto(String studentID, String firstName, String lastName, @Email String email,Set<InternshipDto> internships) {
 		this.studentID = studentID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.password = password;
-
+		this.internship = internships;
 	}
 	
 	public StudentDto() {
@@ -97,13 +109,13 @@ public class StudentDto{
 		this.reminder = reminders;
 	}
 	
-	private InternshipDto internship;
+  private Set<InternshipDto> internship;
 
-	public InternshipDto getInternship() {
-		return this.internship;
-	}
+  public Set<InternshipDto> getInternship() {
+      return this.internship;
+  }
 
-	public void setInternship(InternshipDto internship) {
-		this.internship = internship;
-	}
+  public void setInternship(Set<InternshipDto> internship){
+      this.internship = internship;
+  }
 }
