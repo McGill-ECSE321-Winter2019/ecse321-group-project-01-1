@@ -82,6 +82,7 @@ public class BackendApplicationServiceTest {
 			test.setStudentID("111111111");
 			test.setEmail("bob.thing@mail.mcgill.ca");
 			test.setPassword("654321");
+			studentRepository.save(test);
 			
 			assertEquals(test.getFirstName(),"Bob");
 			assertEquals(test.getLastName(),"Thing");
