@@ -26,6 +26,7 @@ import ca.mcgill.ecse321.backend.dao.*;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @RunWith(SpringRunner.class)
@@ -53,6 +54,7 @@ public class StorageServiceTest {
 
 
     @Test
+    @Transactional
     public void testUpload(){
         //create new student
         String id = "000000000";

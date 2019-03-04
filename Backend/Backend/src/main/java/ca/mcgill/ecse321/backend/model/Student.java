@@ -84,5 +84,4 @@ public class Student{
 	public void setInternship(Set<Internship> internships) {
 		this.internship = internships;
 	}
-
 }
