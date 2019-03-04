@@ -28,6 +28,4 @@ public class ReminderDto {
 	public Time getCreateDateTime() {
 		return createDateTime;
 	}
-
-
 }

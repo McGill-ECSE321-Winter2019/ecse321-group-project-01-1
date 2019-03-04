@@ -52,8 +52,4 @@ public class ReminderController {
 		ReminderDto reminderDto = new ReminderDto (reminder.getMessage(), reminder.getCreateDateTime());
 		return reminderDto;
 	}
-
-
-
-
 }
