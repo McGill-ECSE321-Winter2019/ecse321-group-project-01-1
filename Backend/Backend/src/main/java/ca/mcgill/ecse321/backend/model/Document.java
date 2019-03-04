@@ -31,15 +31,9 @@ public class Document {
 	private String path;
 
 	@Id
-	@GeneratedValue(
-			strategy= GenerationType.AUTO,
-			generator="native"
-	)
-	@GenericGenerator(
-			name = "native",
-			strategy = "native"
-	)
-	private int id;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	private String id;
 
 	private String fileName;
 
@@ -48,6 +42,18 @@ public class Document {
 	private byte[] data;
 
 	private long size;
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
+	}
 
 	public long getSize() {
 		return size;
@@ -103,11 +109,7 @@ public class Document {
 		this.path = path;
 	}
 
-	public int getId() {
+	public String  getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 }
