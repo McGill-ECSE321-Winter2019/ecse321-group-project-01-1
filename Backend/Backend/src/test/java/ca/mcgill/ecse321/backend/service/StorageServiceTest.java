@@ -29,8 +29,7 @@ import ca.mcgill.ecse321.backend.dao.*;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import javax.print.Doc;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @RunWith(SpringRunner.class)
@@ -97,7 +96,7 @@ public class StorageServiceTest {
         // make sure it starts empty
         assertEquals(0, service.readAllDocuments().size());
 
-        Student student = service.createStudent("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword");
+        Student student = service.createStudent(id, fname, lname, email, pass);
         Course course = service.createCourse("FACC300");
         Internship internship =  service.createInternship(student,course);
 
