@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.backend;
+package ca.mcgill.ecse321.backend.controllers;
 
 
 import java.sql.Time;
