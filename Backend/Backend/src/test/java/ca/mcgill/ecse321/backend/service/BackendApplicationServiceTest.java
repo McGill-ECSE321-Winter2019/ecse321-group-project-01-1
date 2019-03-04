@@ -59,6 +59,7 @@ public class BackendApplicationServiceTest {
 	}
 
 	@Test
+	@Transactional
 	public void testStudent() {
 		//assert no student in repository
 		assertEquals(0, service.getAllStudents().size());
