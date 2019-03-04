@@ -63,6 +63,7 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + document.getFileName() + "\"")
                 .body(new ByteArrayResource(document.getData()));
     }
+
     public DocumentDto convertToDto(Document document){
         if(document == null){
             throw new IllegalArgumentException("There is no such Document!");

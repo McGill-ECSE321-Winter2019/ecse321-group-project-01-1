@@ -181,4 +181,13 @@ public class StorageServiceTest {
         Document document1 = storageService.readDocument(id);
         assertEquals("FileUploadTest.txt",document1.getFileName());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    @Transactional
+    public void testNullInternshipException(){
+        storageService.createFile(mockMultipartFile2,mockInternship,DocumentType.EVALUATION);
+        Internship emptyInternship = null;
+        List<Document> document = storageService.readAllDocumentsByInternship(emptyInternship);
+        fail();
+    }
 }
