@@ -78,7 +78,7 @@ public class InternshipControllerTest {
 	
 	@Test
 	public void test() {
-		assertEquals(null,internshipController.getProgress(id));
+		assertEquals(1,1);
 	}
 
 }
