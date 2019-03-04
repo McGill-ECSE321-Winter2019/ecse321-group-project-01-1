@@ -56,7 +56,7 @@ public class FileController {
     @GetMapping("/downloadFile/")
     public ResponseEntity<Resource> downloadFile(@RequestParam("file_id") String fileId) {
         // Load file from database
-        Document document = storageService.readDocument(Integer.parseInt(fileId));
+        Document document = storageService.readDocument(fileId);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(document.getFileType()))

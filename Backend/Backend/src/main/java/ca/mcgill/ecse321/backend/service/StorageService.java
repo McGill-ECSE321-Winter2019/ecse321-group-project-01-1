@@ -63,9 +63,8 @@ public class StorageService {
     }
 
     @Transactional
-    public Document readDocument(int fileId) {
+    public Document readDocument(String fileId) {
         return documentRepository.findById(fileId)
                 .orElseThrow(() -> new FileNotFoundException("File not found with id " + fileId));
     }
-
 }

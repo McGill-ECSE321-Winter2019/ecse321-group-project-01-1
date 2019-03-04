@@ -76,20 +76,19 @@ public class StorageServiceTest {
     MockMultipartFile invalideFileNameFile =
             new MockMultipartFile("some_file2", "Amazi^n..gFile.txt", "png/plan", "Something".getBytes());
 
+    Internship mockInternship;
+
     @Before
-    public void clear(){
+    public void setUp(){
         studentRepository.deleteAll();
         documentRepository.deleteAll();
         applicationFormRepository.deleteAll();
         reminderRepository.deleteAll();
         courseRepository.deleteAll();
         internshipRepository.deleteAll();
-    }
-
-    public  Internship mockInternship(){
         Student student = service.createStudent("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword");
         Course course = service.createCourse("FACC300");
-        return service.createInternship(student,course);
+        this.mockInternship = service.createInternship(student,course);
     }
 
 
@@ -98,7 +97,11 @@ public class StorageServiceTest {
         // make sure it starts empty
         assertEquals(0, service.readAllDocuments().size());
 
-        Document document = storageService.createFile(mockMultipartFile1,mockInternship(),DocumentType.CONTRACT);
+        Student student = service.createStudent("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword");
+        Course course = service.createCourse("FACC300");
+        Internship internship =  service.createInternship(student,course);
+
+        Document document = storageService.createFile(mockMultipartFile1,internship,DocumentType.CONTRACT);
 
         assertEquals(1,service.readAllDocuments().size());
     }
@@ -108,8 +111,8 @@ public class StorageServiceTest {
 
         assertEquals(0, service.readAllDocuments().size());
 
-        Document document = storageService.createFile(mockMultipartFile1,mockInternship(),DocumentType.CONTRACT);
-        Document document1 = storageService.createFile(mockMultipartFile2,mockInternship(),DocumentType.EVALUATION);
+        Document document = storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.CONTRACT);
+        Document document1 = storageService.createFile(mockMultipartFile2,mockInternship,DocumentType.EVALUATION);
 
         assertEquals(2,service.readAllDocuments().size());
     }
@@ -118,10 +121,10 @@ public class StorageServiceTest {
     public void testReUpload(){
         assertEquals(0, service.readAllDocuments().size());
 
-        Document document = storageService.createFile(mockMultipartFile1,mockInternship(),DocumentType.EVALUATION);
+        Document document = storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.EVALUATION);
         assertEquals(1,service.readAllDocuments().size());
 
-        Document document1 = storageService.createFile(mockMultipartFile1,mockInternship(),DocumentType.EVALUATION);
+        Document document1 = storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.EVALUATION);
         assertEquals(1,service.readAllDocuments().size());
     }
 
@@ -129,13 +132,13 @@ public class StorageServiceTest {
     public void testGetAllDocumentsByInternship(){
         assertEquals(0, service.readAllDocuments().size());
 
-        storageService.createFile(mockMultipartFile1,mockInternship(),DocumentType.EVALUATION);
-        storageService.createFile(mockMultipartFile1,mockInternship(),DocumentType.CONTRACT);
-        storageService.createFile(mockMultipartFile2,mockInternship(),DocumentType.TECHNICAL_REPORT);
+        storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.EVALUATION);
+        storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.CONTRACT);
+        storageService.createFile(mockMultipartFile2,mockInternship,DocumentType.TECHNICAL_REPORT);
 
         assertEquals(3, service.readAllDocuments().size());
 
-        List<Document> documents = storageService.readAllDocumentsByInternship(mockInternship());
+        List<Document> documents = storageService.readAllDocumentsByInternship(mockInternship);
         assertEquals(3,documents.size());
     }
 
@@ -143,17 +146,17 @@ public class StorageServiceTest {
     public void testGetDocumentsByInternshipAndType(){
         assertEquals(0, service.readAllDocuments().size());
 
-        storageService.createFile(mockMultipartFile2,mockInternship(),DocumentType.EVALUATION);
-        storageService.createFile(mockMultipartFile3,mockInternship(),DocumentType.CONTRACT);
-        storageService.createFile(mockMultipartFile4,mockInternship(),DocumentType.TECHNICAL_REPORT);
+        storageService.createFile(mockMultipartFile2,mockInternship,DocumentType.EVALUATION);
+        storageService.createFile(mockMultipartFile3,mockInternship,DocumentType.CONTRACT);
+        storageService.createFile(mockMultipartFile4,mockInternship,DocumentType.TECHNICAL_REPORT);
 
-        Document document = storageService.readDocumentByType(mockInternship(),DocumentType.EVALUATION);
+        Document document = storageService.readDocumentByType(mockInternship,DocumentType.EVALUATION);
         assertEquals("FileUploadTest.txt",document.getFileName());
 
-        Document document1 = storageService.readDocumentByType(mockInternship(),DocumentType.CONTRACT);
+        Document document1 = storageService.readDocumentByType(mockInternship,DocumentType.CONTRACT);
         assertEquals("RandomFile.txt",document1.getFileName());
 
-        Document document2 = storageService.readDocumentByType(mockInternship(),DocumentType.TECHNICAL_REPORT);
+        Document document2 = storageService.readDocumentByType(mockInternship,DocumentType.TECHNICAL_REPORT);
         assertEquals("AmazingFile.txt",document2.getFileName());
     }
 
@@ -161,7 +164,7 @@ public class StorageServiceTest {
     public void testBrokenFile(){
         assertEquals(0, service.readAllDocuments().size());
 
-        storageService.createFile(invalideFileNameFile,mockInternship(),DocumentType.EVALUATION);
+        storageService.createFile(invalideFileNameFile,mockInternship,DocumentType.EVALUATION);
         fail();
     }
 
@@ -169,12 +172,11 @@ public class StorageServiceTest {
     public void testGetDocumentById(){
         assertEquals(0, service.readAllDocuments().size());
 
-        storageService.createFile(mockMultipartFile2,mockInternship(),DocumentType.EVALUATION);
-        Document document = storageService.readDocumentByType(mockInternship(),DocumentType.EVALUATION);
+        storageService.createFile(mockMultipartFile2,mockInternship,DocumentType.EVALUATION);
+        Document document = storageService.readDocumentByType(mockInternship,DocumentType.EVALUATION);
         String id = document.getId();
 
-        Document document1 = storageService.readDocument(Integer.parseInt(id));
-        assertEquals("RandomFile.txt",document1.getFileName());
+        Document document1 = storageService.readDocument(id);
+        assertEquals("FileUploadTest.txt",document1.getFileName());
     }
-
 }
