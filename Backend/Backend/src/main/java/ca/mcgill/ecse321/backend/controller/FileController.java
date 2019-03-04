@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 
 @RestController
@@ -29,10 +30,9 @@ public class FileController {
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,
                                          @RequestParam("type") DocumentType type,
-                                         @RequestParam("internship") Internship internship) {
+                                         @RequestParam("internship") Internship internship){
 
         Document dbFile = DBFileStorageService.storeFile(file, internship, type);
-
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(dbFile.getId())
@@ -45,6 +45,12 @@ public class FileController {
     @GetMapping("/showAllFiles")
     public ArrayList<Document> showAllDocuments(@RequestParam("internship") Internship internship){
         return new ArrayList<>(DBFileStorageService.getAllDocumentsByInternship(internship));
+    }
+
+    @GetMapping("/showFile")
+    public Document showDocumentByTypeAndInternship(@RequestParam("type") DocumentType type,
+                                                    @RequestParam("internship") Internship internship){
+        return service.readDocumentByType(internship, type);
     }
 
     @GetMapping("/downloadFile/")

@@ -22,7 +22,9 @@ public class Document{
 		this.fileType = fileType;
 		this.data = data;
 	}
-	public Document(){}
+	public Document(){
+
+	}
 
 	private String path;
 

@@ -95,8 +95,13 @@ public class BackendApplicationService {
 	}
 	
 	@Transactional
-	public List<Document> getAllDocuments() {
+	public List<Document> readAllDocuments() {
 		return toList(documentRepository.findAll());
+	}
+
+	@Transactional
+	public Document readDocumentByType(Internship internship, DocumentType type){
+		return documentRepository.findDocumentByInternshipAndDocumentType(internship,type);
 	}
 
 	//Internship
@@ -117,16 +122,18 @@ public class BackendApplicationService {
 	}
 	
 	@Transactional
-	public List<Internship> getAllInternships() {
+	public List<Internship> readAllInternships() {
 		return toList(internshipRepository.findAll());
 	}
 
+
 	@Transactional
-	public Set<Internship> getAllInternshipsByStudent(Student student){
+	public Set<Internship> readAllInternshipsByStudent(Student student){
 		return new HashSet<Internship>(internshipRepository.findAllInternshipByStudent(student));
 	}
 	
 	//ApplicationForm
+
 	@Transactional
 	public ApplicationForm createApplicationForm (String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit, Internship internship) {
 		ApplicationForm A = new ApplicationForm();
@@ -152,7 +159,7 @@ public class BackendApplicationService {
 	}
 	
 	@Transactional
-	public List<ApplicationForm> getAllApplicationForms() {
+	public List<ApplicationForm> readAllApplicationForms() {
 		return toList(applicationFormRepository.findAll());
 	}
 	
@@ -187,7 +194,6 @@ public class BackendApplicationService {
 
 
 	// Course
-
 	@Transactional
 	public Course createCourse (String courseID) {
 		Course course = new Course();

@@ -8,7 +8,6 @@ import javax.validation.constraints.*;
 
 import ca.mcgill.ecse321.backend.model.Internship;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

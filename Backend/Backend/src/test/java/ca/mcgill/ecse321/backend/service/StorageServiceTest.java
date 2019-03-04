@@ -17,12 +17,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.backend.model.*;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 import ca.mcgill.ecse321.backend.dao.*;
-
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
 @RunWith(SpringRunner.class)
@@ -44,6 +47,9 @@ public class StorageServiceTest {
     private ApplicationFormRepository applicationFormRepository;
     @Autowired
     private ReminderRepository reminderRepository;
+
+    MockMultipartFile mockMultipartFile =
+            new MockMultipartFile("files", "FileUploadTest.txt", "text/plain", "This is a Test".getBytes());
 
 
     @Test
