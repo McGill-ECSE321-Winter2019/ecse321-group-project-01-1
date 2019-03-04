@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.model.Student;
 
-
-
 @Service
 public class AuthenticationService {
 	
