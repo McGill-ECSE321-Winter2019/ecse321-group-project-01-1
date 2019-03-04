@@ -11,6 +11,8 @@ import java.util.Set;
 public interface InternshipRepository extends CrudRepository<Internship, Integer>{
 
 	Internship findInternshipById(int id);
+	Internship findByIdAndStudentStudentID(int id, String studentID);
+	Internship findByIdAndStudent(int id, Student student);
 	Set<Internship> findAllInternshipByStudent(Student student);
 
 }
