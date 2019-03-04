@@ -13,4 +13,5 @@ public interface DocumentRepository extends CrudRepository<Document, Integer>{
 	Document findDocumentById(int id);
 	List<Document> findDocumentByInternship(Internship internship);
 	Document findDocumentByInternshipAndDocumentType(Internship internship, DocumentType type);
+//	Boolean findDocumentByInternshipAndDocumentTypeExists(Internship internship, DocumentType type);
 }

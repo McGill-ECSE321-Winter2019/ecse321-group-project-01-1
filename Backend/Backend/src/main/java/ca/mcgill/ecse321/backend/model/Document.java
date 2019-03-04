@@ -42,6 +42,18 @@ public class Document{
 
 	private long size;
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
+	}
+
 	public long getSize() {
 		return size;
 	}
