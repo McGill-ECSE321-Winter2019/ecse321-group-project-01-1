@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,20 +52,24 @@ public class StorageServiceTest {
     MockMultipartFile mockMultipartFile =
             new MockMultipartFile("files", "FileUploadTest.txt", "text/plain", "This is a Test".getBytes());
 
+    @Before
+    public void clear(){
+        studentRepository.deleteAll();
+        documentRepository.deleteAll();
+        applicationFormRepository.deleteAll();
+        reminderRepository.deleteAll();
+    }
 
     @Test
     public void testUpload(){
-        //create new student
-        String id = "000000000";
-        String fname = "John";
-        String lname = "Doe";
-        String email = "john.doe@mail.mcgill.ca";
-        String pass = "123456";
 
-        Student student = service.createStudent(id, fname, lname, email, pass);
+        // make sure it starts empty
+        assertEquals(0, storageService.readAllDocuments().size());
+
+        Student student = service.createStudent("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword");
         Course course = service.createCourse("FACC300");
         Internship internship = service.createInternship(student,course);
-        assertEquals(true,true);
-
+        storageService.createFile(mockMultipartFile,internship,DocumentType.CONTRACT);
+        assertEquals(1,storageService.readAllDocuments());
     }
 }

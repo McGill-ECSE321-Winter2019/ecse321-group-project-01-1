@@ -25,7 +25,7 @@ public class StorageService {
     private DocumentRepository documentRepository;
 
     @Transactional
-    public Document storeFile(MultipartFile file, Internship internship, DocumentType type) {
+    public Document createFile(MultipartFile file, Internship internship, DocumentType type) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Document doc;
@@ -45,7 +45,7 @@ public class StorageService {
     }
 
     @Transactional
-    public List<Document> getAllDocumentsByInternship(Internship internship){
+    public List<Document> readAllDocumentsByInternship(Internship internship){
         if(internship == null){
             throw new IllegalArgumentException("Internship cannot be null");
         }
@@ -53,10 +53,14 @@ public class StorageService {
     }
 
     @Transactional
+    public List readAllDocuments() {
+        return toList(documentRepository.findAll());
+    }
+
+    @Transactional
     public Document readDocumentByType(Internship internship, DocumentType type){
         return documentRepository.findDocumentByInternshipAndDocumentType(internship,type);
     }
-
 
     @Transactional
     public Document readDocument(int fileId) {
