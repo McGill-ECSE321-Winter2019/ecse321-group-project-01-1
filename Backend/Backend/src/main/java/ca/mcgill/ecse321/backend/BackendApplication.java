@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.backend;
 
-import ca.mcgill.ecse321.backend.property.FileStorageProperties;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
