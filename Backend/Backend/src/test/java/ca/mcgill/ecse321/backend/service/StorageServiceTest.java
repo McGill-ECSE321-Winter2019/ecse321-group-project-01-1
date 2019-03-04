@@ -92,6 +92,7 @@ public class StorageServiceTest {
 
 
     @Test
+    @Transactional
     public void testUploadExistence(){
         // make sure it starts empty
         assertEquals(0, service.readAllDocuments().size());
@@ -102,6 +103,7 @@ public class StorageServiceTest {
     }
 
     @Test
+    @Transactional
     public void testUploadSameName(){
 
         assertEquals(0, service.readAllDocuments().size());
@@ -113,6 +115,7 @@ public class StorageServiceTest {
     }
 
     @Test
+    @Transactional
     public void testReUpload(){
         assertEquals(0, service.readAllDocuments().size());
 
@@ -124,6 +127,7 @@ public class StorageServiceTest {
     }
 
     @Test
+    @Transactional
     public void testGetAllDocumentsByInternship(){
         assertEquals(0, service.readAllDocuments().size());
 
@@ -138,6 +142,7 @@ public class StorageServiceTest {
     }
 
     @Test
+    @Transactional
     public void testGetDocumentsByInternshipAndType(){
         assertEquals(0, service.readAllDocuments().size());
 
@@ -156,7 +161,8 @@ public class StorageServiceTest {
     }
 
     @Test(expected = FileStorageException.class)
-    public void testBrokenFile(){
+    @Transactional
+    public void testInvalidName(){
         assertEquals(0, service.readAllDocuments().size());
 
         storageService.createFile(invalideFileNameFile,mockInternship,DocumentType.EVALUATION);
@@ -164,6 +170,7 @@ public class StorageServiceTest {
     }
 
     @Test
+    @Transactional
     public void testGetDocumentById(){
         assertEquals(0, service.readAllDocuments().size());
 
