@@ -53,11 +53,6 @@ public class StorageService {
     }
 
     @Transactional
-    public List readAllDocuments() {
-        return toList(documentRepository.findAll());
-    }
-
-    @Transactional
     public Document readDocumentByType(Internship internship, DocumentType type){
         return documentRepository.findDocumentByInternshipAndDocumentType(internship,type);
     }

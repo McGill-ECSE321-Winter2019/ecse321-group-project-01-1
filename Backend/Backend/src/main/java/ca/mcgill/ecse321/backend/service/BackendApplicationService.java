@@ -93,7 +93,7 @@ public class BackendApplicationService {
 		Document D = documentRepository.findDocumentById(ID);
 		return D;
 	}
-	
+
 	@Transactional
 	public List<Document> readAllDocuments() {
 		return toList(documentRepository.findAll());

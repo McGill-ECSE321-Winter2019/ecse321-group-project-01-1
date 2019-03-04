@@ -49,8 +49,15 @@ public class StorageServiceTest {
     @Autowired
     private ReminderRepository reminderRepository;
 
-    MockMultipartFile mockMultipartFile =
+    MockMultipartFile mockMultipartFile1 =
             new MockMultipartFile("files", "FileUploadTest.txt", "text/plain", "This is a Test".getBytes());
+
+    // Another mock file with the same name for testing
+    MockMultipartFile mockMultipartFile2 =
+            new MockMultipartFile("files", "FileUploadTest.txt", "text/plain", "Hello World!".getBytes());
+
+    MockMultipartFile mockMultipartFile3 =
+            new MockMultipartFile("some_file", "RandomFile.txt", "text/plain", "Hello Stupid".getBytes());
 
     @Before
     public void clear(){
@@ -60,16 +67,34 @@ public class StorageServiceTest {
         reminderRepository.deleteAll();
     }
 
-    @Test
-    public void testUpload(){
 
+    @Test
+    public void testUploadExistence(){
         // make sure it starts empty
-        assertEquals(0, storageService.readAllDocuments().size());
+        assertEquals(0, service.readAllDocuments().size());
 
         Student student = service.createStudent("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword");
         Course course = service.createCourse("FACC300");
         Internship internship = service.createInternship(student,course);
-        storageService.createFile(mockMultipartFile,internship,DocumentType.CONTRACT);
-        assertEquals(1,storageService.readAllDocuments());
+        Document document = storageService.createFile(mockMultipartFile1,internship,DocumentType.CONTRACT);
+
+        assertEquals(1,service.readAllDocuments().size());
+
+    }
+
+    @Test
+    public void testUploadSameName(){
+
+        assertEquals(0, service.readAllDocuments().size());
+
+        Student student = service.createStudent("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword");
+        Course course = service.createCourse("FACC300");
+        Internship internship = service.createInternship(student,course);
+
+        Document document = storageService.createFile(mockMultipartFile1,internship,DocumentType.CONTRACT);
+        Document document1 = storageService.createFile(mockMultipartFile2,internship,DocumentType.EVALUATION);
+
+        assertEquals(2,service.readAllDocuments().size());
+
     }
 }
