@@ -28,8 +28,6 @@ public class Document {
 
 	}
 
-	private String path;
-
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -42,6 +40,22 @@ public class Document {
 	private byte[] data;
 
 	private long size;
+
+	private String path;
+
+	@Enumerated(EnumType.STRING)
+	private DocumentType documentType;
+
+	@ManyToOne(optional = false)
+	private Internship internship;
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
 
 	public void setId(String id) {
 		this.id = id;
@@ -62,12 +76,6 @@ public class Document {
 	public Internship getInternship() {
 		return this.internship;
 	}
-
-	@Enumerated(EnumType.STRING)
-	private DocumentType documentType;
-
-	@ManyToOne(optional = false)
-	private Internship internship;
 
 	public void setInternship(Internship internship) {
 		this.internship = internship;
@@ -99,14 +107,6 @@ public class Document {
 
 	public void setDocumentType(DocumentType documentType) {
 		this.documentType = documentType;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
 	}
 
 	public String  getId() {

@@ -43,7 +43,6 @@ public class CourseTest {
 		course.setCourseID(COURSE_ID);
 	}
 	
-	
 	@Test
 	public void getId() {
 		assertEquals(ID,course.getId());
