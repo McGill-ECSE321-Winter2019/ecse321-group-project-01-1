@@ -48,7 +48,7 @@ public class BackendApplicationServiceTest {
 	@Autowired
 	private InternshipRepository internshipRepository;
 
-
+	@AfterClass
 	@Before
 	public void clearDatabase() {
 		studentRepository.deleteAll();
