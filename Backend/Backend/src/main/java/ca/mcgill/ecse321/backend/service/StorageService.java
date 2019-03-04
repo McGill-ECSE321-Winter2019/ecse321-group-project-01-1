@@ -4,23 +4,16 @@ import ca.mcgill.ecse321.backend.dao.DocumentRepository;
 import ca.mcgill.ecse321.backend.exception.FileNotFoundException;
 import ca.mcgill.ecse321.backend.exception.FileStorageException;
 import ca.mcgill.ecse321.backend.model.Document;
-import ca.mcgill.ecse321.backend.exception.FileStorageException;
-import ca.mcgill.ecse321.backend.exception.FileNotFoundException;
 import ca.mcgill.ecse321.backend.model.DocumentType;
 import ca.mcgill.ecse321.backend.model.Internship;
-import ca.mcgill.ecse321.backend.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.print.Doc;
 import java.io.IOException;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import static org.hibernate.internal.util.collections.ArrayHelper.toList;
@@ -29,7 +22,7 @@ import static org.hibernate.internal.util.collections.ArrayHelper.toList;
 public class StorageService {
 
     @Autowired
-    private DocumentRepository fileRepository;
+    private DocumentRepository documentRepository;
 
     @Transactional
     public Document storeFile(MultipartFile file, Internship internship, DocumentType type) {
@@ -41,14 +34,14 @@ public class StorageService {
             if (fileName.contains("..")) {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
-            doc = new Document(fileName, file.getContentType(), file.getBytes());
+            doc = new Document(fileName, file.getContentType(), file.getBytes(),file.getSize());
             doc.setDocumentType(type);
             doc.setInternship(internship);
         }catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
         }
 
-        return fileRepository.save(doc);
+        return documentRepository.save(doc);
     }
 
     @Transactional
@@ -56,12 +49,18 @@ public class StorageService {
         if(internship == null){
             throw new IllegalArgumentException("Internship cannot be null");
         }
-        return new ArrayList<>(fileRepository.findDocumentByInternship(internship));
+        return new ArrayList<>(documentRepository.findDocumentByInternship(internship));
     }
 
     @Transactional
-    public Document getFile(int fileId) {
-        return fileRepository.findById(fileId)
+    public Document readDocumentByType(Internship internship, DocumentType type){
+        return documentRepository.findDocumentByInternshipAndDocumentType(internship,type);
+    }
+
+
+    @Transactional
+    public Document readDocument(int fileId) {
+        return documentRepository.findById(fileId)
                 .orElseThrow(() -> new FileNotFoundException("File not found with id " + fileId));
     }
 

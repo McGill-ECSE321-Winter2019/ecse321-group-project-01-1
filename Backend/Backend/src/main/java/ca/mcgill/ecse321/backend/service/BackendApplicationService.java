@@ -99,11 +99,6 @@ public class BackendApplicationService {
 		return toList(documentRepository.findAll());
 	}
 
-	@Transactional
-	public Document readDocumentByType(Internship internship, DocumentType type){
-		return documentRepository.findDocumentByInternshipAndDocumentType(internship,type);
-	}
-
 	//Internship
 	@Transactional
 	public Internship createInternship(Student student, Course course) {

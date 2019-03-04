@@ -7,62 +7,58 @@ import java.util.List;
 
 public class DocumentDto {
 
-    public DocumentDto(){
-
-    }
-
-    private String path;
-
-    private String id;
-
     private String fileName;
-
+    private String path;
     private String fileType;
-
-    private byte[] data;
-
-    public Internship getInternship() {
-        return this.internship;
-    }
-
+    private long size;
     private DocumentType documentType;
 
-    private Internship internship;
-
-    public void setInternship(Internship internship) {
-        this.internship = internship;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getFileType() {
-        return fileType;
-    }
-
-    public byte[] getData(){
-        return data;
+    public DocumentDto(String fileName, String path, String fileType, long size,DocumentType type) {
+        this.fileName = fileName;
+        this.path = path;
+        this.fileType = fileType;
+        this.size = size;
+        this.documentType = type;
     }
 
     public DocumentType getDocumentType() {
-        return this.documentType;
+        return documentType;
     }
 
     public void setDocumentType(DocumentType documentType) {
         this.documentType = documentType;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
     public String getPath() {
         return path;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setPath(String fileDownloadUri) {
+        this.path = fileDownloadUri;
     }
 
-    public String getId() {
-        return id;
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
     }
 
 }

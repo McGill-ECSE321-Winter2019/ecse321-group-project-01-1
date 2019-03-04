@@ -22,7 +22,6 @@ public class StudentDto{
         this.internship = internship;
     }
 
-
     @NotNull
     @NotEmpty
     private String studentID;

@@ -1,18 +1,14 @@
 package ca.mcgill.ecse321.backend.controller;
 
-import ca.mcgill.ecse321.backend.BackendApplication;
 import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
 import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.model.*;
-import ca.mcgill.ecse321.backend.dto.UploadFileResponse;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
-import ca.mcgill.ecse321.backend.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 @RestController
 public class ApplicationFormController {

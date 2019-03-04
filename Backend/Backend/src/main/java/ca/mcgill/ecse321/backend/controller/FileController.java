@@ -1,11 +1,9 @@
 package ca.mcgill.ecse321.backend.controller;
 
+import ca.mcgill.ecse321.backend.dto.DocumentDto;
 import ca.mcgill.ecse321.backend.model.*;
-import ca.mcgill.ecse321.backend.dto.UploadFileResponse;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 import ca.mcgill.ecse321.backend.service.StorageService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -23,44 +21,54 @@ import java.util.ArrayList;
 public class FileController {
 
     @Autowired
-    private StorageService DBFileStorageService;
+    private StorageService storageService;
     @Autowired
     private BackendApplicationService service;
 
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,
-                                         @RequestParam("type") DocumentType type,
-                                         @RequestParam("internship") Internship internship){
+    public DocumentDto uploadFile(@RequestParam("file") MultipartFile file,
+                                  @RequestParam("type") DocumentType type,
+                                  @RequestParam("internship") Internship internship){
 
-        Document dbFile = DBFileStorageService.storeFile(file, internship, type);
+        Document dbFile = storageService.storeFile(file, internship, type);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(dbFile.getId())
                 .toUriString();
 
-        return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
-                file.getContentType(), file.getSize());
+        return new DocumentDto(dbFile.getFileName(), fileDownloadUri, file.getContentType(), file.getSize(), type);
     }
 
     @GetMapping("/showAllFiles")
-    public ArrayList<Document> showAllDocuments(@RequestParam("internship") Internship internship){
-        return new ArrayList<>(DBFileStorageService.getAllDocumentsByInternship(internship));
+    public ArrayList<DocumentDto> showAllDocuments(@RequestParam("internship") Internship internship){
+        ArrayList<DocumentDto> documentDtos = new ArrayList<>();
+        for (Document document: storageService.getAllDocumentsByInternship(internship)){
+            documentDtos.add(convertToDto(document));
+        }
+        return documentDtos;
     }
 
     @GetMapping("/showFile")
-    public Document showDocumentByTypeAndInternship(@RequestParam("type") DocumentType type,
+    public DocumentDto showDocumentByTypeAndInternship(@RequestParam("type") DocumentType type,
                                                     @RequestParam("internship") Internship internship){
-        return service.readDocumentByType(internship, type);
+        return convertToDto(StorageService.readDocumentByType(internship, type));
     }
 
     @GetMapping("/downloadFile/")
     public ResponseEntity<Resource> downloadFile(@RequestParam("file_id") String fileId) {
         // Load file from database
-        Document document = DBFileStorageService.getFile(Integer.parseInt(fileId));
+        Document document = storageService.readDocument(Integer.parseInt(fileId));
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(document.getFileType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + document.getFileName() + "\"")
                 .body(new ByteArrayResource(document.getData()));
     }
+    public DocumentDto convertToDto(Document document){
+        if(document == null){
+            throw new IllegalArgumentException("There is no such Document!");
+        }
+        return new DocumentDto(document.getFileName(),document.getPath(),document.getFileType(),document.getSize(),document.getDocumentType());
+    }
+
 }

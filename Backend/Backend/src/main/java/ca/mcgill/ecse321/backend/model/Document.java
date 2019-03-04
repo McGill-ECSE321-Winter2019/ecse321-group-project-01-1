@@ -17,10 +17,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Document{
-	public Document(String fileName, String fileType, byte[] data) {
+	public Document(String fileName, String fileType, byte[] data, long size) {
 		this.fileName = fileName;
 		this.fileType = fileType;
 		this.data = data;
+		this.size = size;
 	}
 	public Document(){
 
@@ -39,6 +40,12 @@ public class Document{
 
 	private byte[] data;
 
+	private long size;
+
+	public long getSize() {
+		return size;
+	}
+
 	public Internship getInternship() {
 		return this.internship;
 	}
@@ -51,6 +58,14 @@ public class Document{
 
 	public void setInternship(Internship internship) {
 		this.internship = internship;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
 	}
 
 	public String getFileName() {
@@ -80,7 +95,7 @@ public class Document{
 	public void setPath(String path) {
 		this.path = path;
 	}
-  
+
 	public String getId() {
 		return id;
 	}
