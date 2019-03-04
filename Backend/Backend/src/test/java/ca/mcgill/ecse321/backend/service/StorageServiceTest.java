@@ -75,7 +75,7 @@ public class StorageServiceTest {
     MockMultipartFile invalideFileNameFile =
             new MockMultipartFile("some_file2", "Amazi^n..gFile.txt", "png/plan", "Something".getBytes());
 
-    Internship mockInternship;
+    private Internship mockInternship;
 
     @Before
     public void setUp(){
@@ -96,11 +96,7 @@ public class StorageServiceTest {
         // make sure it starts empty
         assertEquals(0, service.readAllDocuments().size());
 
-        Student student = service.createStudent(id, fname, lname, email, pass);
-        Course course = service.createCourse("FACC300");
-        Internship internship =  service.createInternship(student,course);
-
-        Document document = storageService.createFile(mockMultipartFile1,internship,DocumentType.CONTRACT);
+        Document document = storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.CONTRACT);
 
         assertEquals(1,service.readAllDocuments().size());
     }

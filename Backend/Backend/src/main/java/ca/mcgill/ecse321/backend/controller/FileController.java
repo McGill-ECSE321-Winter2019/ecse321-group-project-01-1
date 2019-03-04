@@ -32,7 +32,7 @@ public class FileController {
         Document dbFile = storageService.createFile(file, internship, type);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
-                .path(Integer.toString(dbFile.getId()))
+                .path(dbFile.getId())
                 .toUriString();
 
         return new DocumentDto(dbFile.getFileName(), fileDownloadUri, file.getContentType(), file.getSize(), type);
