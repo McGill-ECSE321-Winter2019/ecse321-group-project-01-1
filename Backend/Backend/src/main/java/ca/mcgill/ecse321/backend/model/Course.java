@@ -47,6 +47,10 @@ public class Course {
 		return this.id;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getCourseID() {
 		return courseID;
 	}
