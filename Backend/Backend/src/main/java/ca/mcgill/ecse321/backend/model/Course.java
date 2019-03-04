@@ -16,7 +16,7 @@ public class Course {
 	
 	
 	@OneToMany(cascade={CascadeType.ALL})
-	private Set<Internship> internship;
+	private Set<Internship> internship = new HashSet<Internship>();
 
 	public Set<Internship> getInternship() {
 		if (this.internship == null) {
@@ -42,6 +42,14 @@ public class Course {
 	private int id;
 
 	private String courseID;
+  
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getCourseID() {
 		return courseID;

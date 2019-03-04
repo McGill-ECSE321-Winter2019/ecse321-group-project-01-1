@@ -7,6 +7,8 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.mcgill.ecse321.backend.model.Document;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
@@ -19,7 +21,8 @@ public class InternshipController {
 	@Autowired
 	BackendApplicationService service = new BackendApplicationService();
 	
-	public boolean[] getProgress(int id) {
+	@GetMapping(value = { "/progress", "/progress/" })
+	public boolean[] getProgress(@RequestParam(name = "internshipId") int id) {
 		
 		Set<Document> documents = new HashSet<Document>();
 		documents = service.readInternship(id).getDocument();

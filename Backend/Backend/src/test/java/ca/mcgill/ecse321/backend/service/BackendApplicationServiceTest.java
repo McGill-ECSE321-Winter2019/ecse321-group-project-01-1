@@ -48,7 +48,6 @@ public class BackendApplicationServiceTest {
 	@Autowired
 	private InternshipRepository internshipRepository;
 
-
 	@Before
 	public void clearDatabase() {
 		studentRepository.deleteAll();
@@ -60,6 +59,7 @@ public class BackendApplicationServiceTest {
 	}
 
 	@Test
+	@Transactional
 	public void testStudent() {
 		//assert no student in repository
 		assertEquals(0, service.getAllStudents().size());

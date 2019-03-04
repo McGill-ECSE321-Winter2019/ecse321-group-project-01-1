@@ -89,11 +89,11 @@ public class BackendApplicationService {
 	}
 	
 	@Transactional
-	public Document readDocument (int ID) {
+	public Document readDocument (String ID) {
 		Document D = documentRepository.findDocumentById(ID);
 		return D;
 	}
-	
+
 	@Transactional
 	public List<Document> readAllDocuments() {
 		return toList(documentRepository.findAll());

@@ -16,14 +16,15 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Document{
+public class Document {
 	public Document(String fileName, String fileType, byte[] data, long size) {
 		this.fileName = fileName;
 		this.fileType = fileType;
 		this.data = data;
 		this.size = size;
 	}
-	public Document(){
+
+	public Document() {
 
 	}
 
@@ -42,6 +43,18 @@ public class Document{
 
 	private long size;
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
+	}
+
 	public long getSize() {
 		return size;
 	}
@@ -53,7 +66,7 @@ public class Document{
 	@Enumerated(EnumType.STRING)
 	private DocumentType documentType;
 
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	private Internship internship;
 
 	public void setInternship(Internship internship) {
@@ -76,7 +89,7 @@ public class Document{
 		return fileType;
 	}
 
-	public byte[] getData(){
+	public byte[] getData() {
 		return data;
 	}
 
@@ -96,9 +109,7 @@ public class Document{
 		this.path = path;
 	}
 
-	public String getId() {
+	public String  getId() {
 		return id;
 	}
-
-
 }
