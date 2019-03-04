@@ -69,5 +69,4 @@ public class Document{
 	public void setId(int id) {
 		this.id = id;
 	}
-
 }
