@@ -17,34 +17,68 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Document{
+	public Document(String fileName, String fileType, byte[] data, long size) {
+		this.fileName = fileName;
+		this.fileType = fileType;
+		this.data = data;
+		this.size = size;
+	}
+	public Document(){
+
+	}
+
+	private String path;
 
 	@Id
-	@GeneratedValue(
-			strategy= GenerationType.AUTO,
-			generator="native"
-			)
-	@GenericGenerator(
-			name = "native",
-			strategy = "native"
-			)
-	private int id;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	private String id;
 
-	@ManyToOne(optional=false)
-	private Internship internship;
+	private String fileName;
 
+	private String fileType;
+
+	private byte[] data;
+
+	private long size;
+
+	public long getSize() {
+		return size;
+	}
 
 	public Internship getInternship() {
 		return this.internship;
 	}
 
+	@Enumerated(EnumType.STRING)
+	private DocumentType documentType;
+
+	@ManyToOne(optional=false)
+	private Internship internship;
+
 	public void setInternship(Internship internship) {
 		this.internship = internship;
 	}
-	
-	private String path;
 
-	@Enumerated(EnumType.STRING)
-	private DocumentType documentType;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public byte[] getData(){
+		return data;
+	}
 
 	public DocumentType getDocumentType() {
 		return this.documentType;
@@ -62,11 +96,6 @@ public class Document{
 		this.path = path;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-}
