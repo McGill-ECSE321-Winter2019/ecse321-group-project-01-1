@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.backend;
 
-import java.sql.Time;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,61 +39,49 @@ import org.assertj.core.util.Arrays;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ReminderTest {
+public class CourseTest {
 	
 	@InjectMocks
-	private Reminder reminder; //entity to test on
+	private Course course; //entity to test on
 	@Mock
-	private Student dummyStudent; 
+	private Internship dummyInternship;
 
-	private Time dummyCreateTime = new Time(20);
-	private Time dummyReadTime = new Time (40);
-	
-	private static final int REMINDER_ID = 12345;
-	private static final String MESSAGE = "I love cats";
+	private static final int ID = 678;
+	private static final String COURSE_ID = "123";
 	
 	@Before
 	public void setupMock() {
-		dummyStudent = mock(Student.class);
+		dummyInternship = mock(Internship.class);
 	}
 	
 	@Before
-	public void setupMockOutput() {
+	public void setMockOutput() {
 	}
 	
 	@Before
-	public void setReminder() {
-		reminder.setCreateDateTime(dummyCreateTime);
-		reminder.setReadDateTime(dummyReadTime);
-		reminder.setId(REMINDER_ID);
-		reminder.setMessage(MESSAGE);
-		reminder.setStudent(dummyStudent);
+	public void setCourse() {
+		course.setId(ID);
+		course.setCourseID(COURSE_ID);
+		course.setInternship(dummyInternship);
 	}
 		
 	@Test
 	public void getId() {
-		assertEquals(REMINDER_ID,reminder.getId());
+		assertEquals(ID,course.getId());
 	}
 	
 	@Test
-	public void getMessage() {
-		assertEquals(MESSAGE,reminder.getMessage());
+	public void getCourseId() {
+		assertEquals(COURSE_ID,course.getCourseID());
 	}
+
 	
 	@Test
-	public void getStudent() {
-		assertEquals(dummyStudent,reminder.getStudent());
+	public void getInternship() {
+		assertEquals(dummyInternship,course.getInternship());
 	}
 	
-	@Test
-	public void getCreateDate() {
-		assertEquals(dummyCreateTime,reminder.getCreateDateTime());
-	}
-	
-	@Test
-	public void getReadDate() {
-		assertEquals(dummyReadTime,reminder.getReadDateTime());
-	}
+
 	
 	
 }

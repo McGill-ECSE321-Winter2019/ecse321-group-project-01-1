@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.backend;
 
+import java.sql.Date;
 import java.sql.Time;
 
 import org.junit.Before;
@@ -41,60 +42,89 @@ import org.assertj.core.util.Arrays;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ReminderTest {
+public class ApplicationFormTest {
 	
 	@InjectMocks
-	private Reminder reminder; //entity to test on
+	private ApplicationForm form; //entity to test on
 	@Mock
-	private Student dummyStudent; 
+	private Internship dummyInternship;
 
-	private Time dummyCreateTime = new Time(20);
-	private Time dummyReadTime = new Time (40);
-	
-	private static final int REMINDER_ID = 12345;
-	private static final String MESSAGE = "I love cats";
+	private static final int ID = 678;
+	private static final String JOB_ID = "12345";
+	private static final String JOB_DESCRIPTION = "Work";
+	private static final String EMPLOYER = "People";
+	private static final String LOCATION = "Earth"; 
+	private static final Date START_DATE = new Date(10);
+	private static final Date END_DATE = new Date(20);
+	private static final boolean WORK_PERMIT = true;
 	
 	@Before
 	public void setupMock() {
-		dummyStudent = mock(Student.class);
+		dummyInternship = mock(Internship.class);
 	}
 	
 	@Before
-	public void setupMockOutput() {
+	public void setMockOutput() {
 	}
 	
 	@Before
-	public void setReminder() {
-		reminder.setCreateDateTime(dummyCreateTime);
-		reminder.setReadDateTime(dummyReadTime);
-		reminder.setId(REMINDER_ID);
-		reminder.setMessage(MESSAGE);
-		reminder.setStudent(dummyStudent);
+	public void setForm() {
+		form.setId(ID);
+		form.setJobID(JOB_ID);
+		form.setJobDescription(JOB_DESCRIPTION);
+		form.setInternship(dummyInternship);
+		form.setEmployer(EMPLOYER);
+		form.setLocation(LOCATION);
+		form.setStartDate(START_DATE);
+		form.setEndDate(END_DATE);
+		form.setWorkPermit(WORK_PERMIT);
+
 	}
 		
 	@Test
 	public void getId() {
-		assertEquals(REMINDER_ID,reminder.getId());
+		assertEquals(ID,form.getId());
 	}
 	
 	@Test
-	public void getMessage() {
-		assertEquals(MESSAGE,reminder.getMessage());
+	public void getJobId() {
+		assertEquals(JOB_ID,form.getJobID());
 	}
 	
 	@Test
-	public void getStudent() {
-		assertEquals(dummyStudent,reminder.getStudent());
+	public void getJobDescription() {
+		assertEquals(JOB_DESCRIPTION,form.getJobDescription());
 	}
 	
 	@Test
-	public void getCreateDate() {
-		assertEquals(dummyCreateTime,reminder.getCreateDateTime());
+	public void getInternship() {
+		assertEquals(dummyInternship,form.getInternship());
 	}
 	
 	@Test
-	public void getReadDate() {
-		assertEquals(dummyReadTime,reminder.getReadDateTime());
+	public void getEmployer() {
+		assertEquals(EMPLOYER,form.getEmployer());
+	}
+	
+	@Test
+	public void getLocation() {
+		assertEquals(LOCATION,form.getLocation());
+	}
+	
+	@Test
+	public void getStartDate() {
+		assertEquals(START_DATE,form.getStartDate());
+	}
+	
+	@Test
+	public void getEndDate() {
+		assertEquals(END_DATE,form.getEndDate());
+	}
+
+	
+	@Test
+	public void getWorkPermit() {
+		assertEquals(WORK_PERMIT, form.isWorkPermit());
 	}
 	
 	

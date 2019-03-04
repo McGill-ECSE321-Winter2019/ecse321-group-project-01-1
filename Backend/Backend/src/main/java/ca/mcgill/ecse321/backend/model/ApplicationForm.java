@@ -17,9 +17,9 @@ public class ApplicationForm{
 			name = "native",
 			strategy = "native"
 			)
-	private int id;
+	private int id; //ID for internal use, to distinguish between different application forms
 
-	private String jobID;
+	private String jobID; //Publicly posted Job ID that can be found with the job description 
 	private String jobDescription;
 
 	public ApplicationForm(String jobID, String jobDescription, Internship internship, String employer, String location, Date startDate, Date endDate, boolean workPermit) {
