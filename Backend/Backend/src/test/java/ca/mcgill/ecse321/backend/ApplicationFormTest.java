@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.backend;
 
 import java.sql.Date;
-import java.sql.Time;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +46,7 @@ public class ApplicationFormTest {
 	@InjectMocks
 	private ApplicationForm form; //entity to test on
 	@Mock
-	private Internship dummyInternship;
+	private Internship dummyInternship = mock(Internship.class);
 
 	private static final int ID = 678;
 	private static final String JOB_ID = "12345";
@@ -59,20 +58,11 @@ public class ApplicationFormTest {
 	private static final boolean WORK_PERMIT = true;
 	
 	@Before
-	public void setupMock() {
-		dummyInternship = mock(Internship.class);
-	}
-	
-	@Before
-	public void setMockOutput() {
-	}
-	
-	@Before
 	public void setForm() {
 		form.setId(ID);
 		form.setJobID(JOB_ID);
 		form.setJobDescription(JOB_DESCRIPTION);
-		form.setInternship(dummyInternship);
+		//form.setInternship(dummyInternship);
 		form.setEmployer(EMPLOYER);
 		form.setLocation(LOCATION);
 		form.setStartDate(START_DATE);

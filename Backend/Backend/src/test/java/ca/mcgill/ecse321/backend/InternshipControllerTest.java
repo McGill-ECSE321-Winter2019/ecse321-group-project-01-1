@@ -1,6 +1,9 @@
 package ca.mcgill.ecse321.backend;
 
+
 import java.sql.Time;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import ca.mcgill.ecse321.backend.controller.InternshipController;
 import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
 import ca.mcgill.ecse321.backend.dao.CourseRepository;
 import ca.mcgill.ecse321.backend.dao.DocumentRepository;
@@ -26,6 +31,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
 import ca.mcgill.ecse321.backend.model.Course;
 import ca.mcgill.ecse321.backend.model.Document;
+import ca.mcgill.ecse321.backend.model.DocumentType;
 import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.model.Reminder;
 import ca.mcgill.ecse321.backend.model.Student;
@@ -41,52 +47,38 @@ import org.assertj.core.util.Arrays;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ReminderTest {
+public class InternshipControllerTest {
 	
-	@InjectMocks
-	private Reminder reminder; //entity to test on
+	private InternshipController internshipController;
+	
 	@Mock
-	private Student dummyStudent = mock(Student.class); 
-
-	private Time dummyCreateTime = new Time(20);
-	private Time dummyReadTime = new Time (40);
+	private Document contract;
+	@Mock
+	private Document work_report;
+	@Mock
+	private Document technical_report;
+	@Mock
+	private Document evaluation;
 	
-	private static final int REMINDER_ID = 12345;
-	private static final String MESSAGE = "I love cats";
-
 	@Before
-	public void setReminder() {
-		reminder.setCreateDateTime(dummyCreateTime);
-		reminder.setReadDateTime(dummyReadTime);
-		reminder.setId(REMINDER_ID);
-		reminder.setMessage(MESSAGE);
-		reminder.setStudent(dummyStudent);
-	}
-		
-	@Test
-	public void getId() {
-		assertEquals(REMINDER_ID,reminder.getId());
+	public void setupMock() {
+		contract = mock(Document.class);
+		work_report = mock(Document.class);
+		technical_report = mock(Document.class);
+		evaluation = mock(Document.class);
 	}
 	
-	@Test
-	public void getMessage() {
-		assertEquals(MESSAGE,reminder.getMessage());
+	@Before
+	public void setupMockOutput() {
+		when(contract.getFileType()).thenReturn("CONTRACT");
+		when(work_report.getFileType()).thenReturn("WORK_REPORT");
+		when(technical_report.getFileType()).thenReturn("TECHNICAL_REPORT");
+		when(evaluation.getFileType()).thenReturn("EVALUATION");
 	}
 	
 	@Test
-	public void getStudent() {
-		assertEquals(dummyStudent,reminder.getStudent());
+	public void test() {
+		assertEquals(null,internshipController.getProgress(id));
 	}
-	
-	@Test
-	public void getCreateDate() {
-		assertEquals(dummyCreateTime,reminder.getCreateDateTime());
-	}
-	
-	@Test
-	public void getReadDate() {
-		assertEquals(dummyReadTime,reminder.getReadDateTime());
-	}
-	
-	
+
 }

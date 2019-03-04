@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.backend;
 
-import java.sql.Time;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,51 +42,76 @@ import org.assertj.core.util.Arrays;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ReminderTest {
+public class StudentTest {
 	
 	@InjectMocks
-	private Reminder reminder; //entity to test on
+	private Student student; //entity to test on
 	@Mock
-	private Student dummyStudent = mock(Student.class); 
-
-	private Time dummyCreateTime = new Time(20);
-	private Time dummyReadTime = new Time (40);
+	private Reminder reminder = mock(Reminder.class);
+	@Mock
+	private Internship internship = mock(Internship.class);
 	
-	private static final int REMINDER_ID = 12345;
+	private Set<Reminder> reminderSet = new HashSet<Reminder>();
+	private Set<Internship> internshipSet = new HashSet<Internship>();
+	
+	private static final String STUDENT_ID = "12345";
+	private static final String FIRST_NAME = "Bob";
+	private static final String LAST_NAME = "Rob";
+	private static final String EMAIL = "@mail.mcgill.ca";
+	private static final String PASSWORD = "potato";
 	private static final String MESSAGE = "I love cats";
 
 	@Before
-	public void setReminder() {
-		reminder.setCreateDateTime(dummyCreateTime);
-		reminder.setReadDateTime(dummyReadTime);
-		reminder.setId(REMINDER_ID);
-		reminder.setMessage(MESSAGE);
-		reminder.setStudent(dummyStudent);
+	public void setupSet() {
+		reminderSet.add(reminder);
+		internshipSet.add(internship);
+	}
+	
+	@Before
+	public void setStudent() {
+		student.setStudentID(STUDENT_ID);
+		student.setFirstName(FIRST_NAME);
+		student.setLastName(LAST_NAME);
+		student.setEmail(EMAIL);
+		student.setPassword(PASSWORD);
+		student.setReminder(reminderSet);
+		student.setInternship(internshipSet);
 	}
 		
 	@Test
 	public void getId() {
-		assertEquals(REMINDER_ID,reminder.getId());
+		assertEquals(STUDENT_ID,student.getStudentID());
 	}
 	
 	@Test
-	public void getMessage() {
-		assertEquals(MESSAGE,reminder.getMessage());
+	public void getFirstName() {
+		assertEquals(FIRST_NAME,student.getFirstName());
+	}
+	
+	
+	@Test
+	public void getLastName() {
+		assertEquals(LAST_NAME,student.getLastName());
 	}
 	
 	@Test
-	public void getStudent() {
-		assertEquals(dummyStudent,reminder.getStudent());
+	public void getEmail() {
+		assertEquals(EMAIL,student.getEmail());
 	}
 	
 	@Test
-	public void getCreateDate() {
-		assertEquals(dummyCreateTime,reminder.getCreateDateTime());
+	public void getPassword() {
+		assertEquals(PASSWORD,student.getPassword());
 	}
 	
 	@Test
-	public void getReadDate() {
-		assertEquals(dummyReadTime,reminder.getReadDateTime());
+	public void getReminders() {
+		assertEquals(reminderSet,student.getReminder());
+	}
+	
+	@Test
+	public void getInternships() {
+		assertEquals(internshipSet,student.getInternship());
 	}
 	
 	

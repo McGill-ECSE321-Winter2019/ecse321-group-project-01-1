@@ -1,5 +1,9 @@
 package ca.mcgill.ecse321.backend;
 
+import java.sql.Time;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,22 +53,21 @@ public class CourseTest {
 	private static final int ID = 678;
 	private static final String COURSE_ID = "123";
 	
-	@Before
-	public void setupMock() {
-		dummyInternship = mock(Internship.class);
-	}
+	private Set<Internship> internshipSet = new HashSet<Internship>();
 	
 	@Before
-	public void setMockOutput() {
+	public void setupSet() {
+		internshipSet.add(dummyInternship);
 	}
-	
+
 	@Before
 	public void setCourse() {
+		course.setInternship(dummyInternship);
 		course.setId(ID);
 		course.setCourseID(COURSE_ID);
-		course.setInternship(dummyInternship);
 	}
-		
+	
+	
 	@Test
 	public void getId() {
 		assertEquals(ID,course.getId());
@@ -78,7 +81,7 @@ public class CourseTest {
 	
 	@Test
 	public void getInternship() {
-		assertEquals(dummyInternship,course.getInternship());
+		assertEquals(internshipSet,course.getInternship());
 	}
 	
 
