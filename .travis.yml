@@ -1,8 +1,8 @@
 language: java
-branches:
-  only:
-  - master
-  - dev
+# branches:
+#   only:
+#   - master
+#   - dev
 script:
 - "./gradlew build"
 deploy:
