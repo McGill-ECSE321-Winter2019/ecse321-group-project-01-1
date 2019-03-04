@@ -51,7 +51,7 @@ public class FileController {
     @GetMapping("/showFile")
     public DocumentDto showDocumentByTypeAndInternship(@RequestParam("type") DocumentType type,
                                                     @RequestParam("internship") Internship internship){
-        return convertToDto(StorageService.readDocumentByType(internship, type));
+        return convertToDto(storageService.readDocumentByType(internship, type));
     }
 
     @GetMapping("/downloadFile/")
