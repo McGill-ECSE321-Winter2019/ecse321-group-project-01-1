@@ -11,8 +11,13 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity
 public class CourseDto {
+	
+	public CourseDto(String courseID) {
+		this.courseID = courseID;
+	}
+	public CourseDto() {
+	}
 	
 	private Set<InternshipDto> internship = new HashSet<InternshipDto>();
 

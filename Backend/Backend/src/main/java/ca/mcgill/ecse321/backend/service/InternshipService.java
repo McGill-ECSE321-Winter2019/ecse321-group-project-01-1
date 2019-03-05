@@ -25,6 +25,7 @@ import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.dto.StudentDto;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
 import ca.mcgill.ecse321.backend.model.Course;
+import ca.mcgill.ecse321.backend.model.Document;
 import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.model.Student;
 
@@ -53,6 +54,11 @@ public class InternshipService {
 	}
 	
 	@Transactional
+	public 	Internship findInternshipById(int id) {
+		return internshipRepository.findInternshipById(id);
+	}
+
+	@Transactional
 	public Internship findByIdAndStudentStudentID(int id, String studentID) {
 		return internshipRepository.findByIdAndStudentStudentID(id, studentID);
 	}
@@ -60,6 +66,32 @@ public class InternshipService {
 	@Transactional
 	public Internship findByIdAndStudent(int id, Student student) {
 		return internshipRepository.findByIdAndStudent(id, student);
+	}
+	
+	public boolean[] generateProgress(Internship internship) {
+		boolean[] progress = new boolean[4];
+		Set<Document> documents = internship.getDocument();
+		if (documents == null) return progress;
+		
+		for (Document d:documents) {
+			switch(d.getDocumentType()){
+			case CONTRACT :
+				progress[0] = true;
+				break;
+			case WORK_REPORT:
+				progress[1] = true;
+				break;
+				
+			case TECHNICAL_REPORT:
+				progress[2] = true;
+				break;
+				
+			case EVALUATION:
+				progress[3] = true;
+
+			}
+		}
+		return progress;
 	}
 	
     public InternshipDto toDto(Internship internship) {
@@ -70,6 +102,7 @@ public class InternshipService {
     	internshipDto.setDocument(internship.getDocument());
     	internshipDto.setStudent(internship.getStudent());
     	internshipDto.setId(internship.getId());
+    	internshipDto.setProgress(generateProgress(internship));
     	return internshipDto;
     }
     

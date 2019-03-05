@@ -16,7 +16,6 @@ import ca.mcgill.ecse321.backend.dto.ReminderDto;
 import ca.mcgill.ecse321.backend.model.Reminder;
 import ca.mcgill.ecse321.backend.model.Student;
 import ca.mcgill.ecse321.backend.service.AuthenticationService;
-import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 import ca.mcgill.ecse321.backend.service.ReminderService;
 import ca.mcgill.ecse321.backend.service.StudentService;
 
@@ -32,29 +31,37 @@ public class ReminderController {
 	
     @Autowired
     private AuthenticationService authenticationService;
-	
-	@Autowired
-	BackendApplicationService service;
 
-	@PostMapping(value = { "/reminders", "/reminders/" })
-	public ReminderDto createReminder(@RequestParam(name = "message") String message, @RequestParam(name = "studentID") String studentID) throws IllegalArgumentException {
+	@PostMapping(value = { "/external/students/{student_id}/reminders", "/external/students/{student_id}/reminders/" })
+	public ReminderDto createReminder(
+			@RequestParam(name = "message") String message, 
+			@PathVariable(value="student_id") String studentID
+			) throws IllegalArgumentException {
 		Student student = studentService.findStudentByStudentID(studentID);
+		if (student == null) {
+			throw new IllegalArgumentException("No student with that Id");
+		}
+		
 		Reminder reminder = reminderService.create(new ReminderDto(message), student);
 		return reminderService.toDto(reminder);
 	}
 
 
-	@GetMapping(value = { "/reminders", "/reminders" })
-	public List<ReminderDto> getAllReminders() {
+	@GetMapping(value = { "/external/students/{student_id}/reminders", "/external/students/{student_id}/reminders/" })
+	public List<ReminderDto> getAllStudentReminders(@PathVariable(value="student_id") String studentID) {
+		Student student = studentService.findStudentByStudentID(studentID);
+		if (student == null) {
+			throw new IllegalArgumentException("No student with that Id");
+		}
 		List<ReminderDto> reminderDtos = new ArrayList<>();
-		for (Reminder reminder : reminderService.getAll()) {
+		for (Reminder reminder : student.getReminder()) {
 			reminderDtos.add(reminderService.toDto(reminder));
 		}
 		return reminderDtos;
 	}
 	
 	// internal call
-	@GetMapping(value = { "/api/reminders","/api/reminders/"  })
+	@GetMapping(value = { "/api/reminders", "/api/reminders/"  })
 	public List<ReminderDto> getRemindersOfStudent() {
 		Student student = authenticationService.getCurrentStudent();
 		List<ReminderDto> reminderDtos = new ArrayList<>();
@@ -64,7 +71,7 @@ public class ReminderController {
 		return reminderDtos;
 	}
 	
-	@GetMapping(value = { "/api/reminders/{reminder_id}","/api/reminders/{reminder_id}/"  })
+	@GetMapping(value = { "/api/reminders/{reminder_id}", "/api/reminders/{reminder_id}/"  })
 	public ReminderDto getReminder(@PathVariable(value="reminder_id") int reminderId) {
 		Student student = authenticationService.getCurrentStudent();
 		Reminder r = reminderService.findReminderByIdAndStudent(reminderId, student);

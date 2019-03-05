@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.backend.model.*;
 import ca.mcgill.ecse321.backend.dao.*;
+import ca.mcgill.ecse321.backend.dto.ReminderDto;
 import ca.mcgill.ecse321.backend.dto.StudentDto;
 
 
@@ -31,9 +32,6 @@ import ca.mcgill.ecse321.backend.dto.StudentDto;
 @SpringBootTest
 public class BackendApplicationServiceTest {
 
-
-	@Autowired
-	private BackendApplicationService service;
 	
 	@Autowired
 	private StudentService studentService;
@@ -66,39 +64,6 @@ public class BackendApplicationServiceTest {
 
 	@Test
 	@Transactional
-	public void testStudent() throws Exception {
-		//assert no student in repository
-		assertEquals(0, studentService.getAll().size());
-
-		//create new student
-		String id = "000000000";
-		String fname = "John";
-		String lname = "Doe";
-		String email = "john.doe@mail.mcgill.ca";
-		String pass = "123456";
-
-		try {
-			studentService.create(new StudentDto(id, fname, lname, email, pass));
-		} catch (IllegalArgumentException e) {
-			fail();
-		}
-
-		//assert only 1 student
-		List<Student> allStudents = studentService.getAll();
-		assertEquals(1, allStudents.size());
-
-		//read student
-		Student test = studentService.findStudentById(id);
-
-		assertEquals(test.getFirstName(), fname);
-		assertEquals(test.getLastName(), lname);
-		assertEquals(test.getStudentID(), id);
-		assertEquals(test.getEmail(), email);
-		assertEquals(test.getPassword(), pass);
-	}
-
-	@Test
-	@Transactional
 	public void testReminder() throws Exception {
 		//assert no student in repository
 		assertEquals(0, studentService.getAll().size());
@@ -115,11 +80,11 @@ public class BackendApplicationServiceTest {
 
 		//create reminder
 
-		assertEquals(0, service.getAllReminders().size());
+		assertEquals(0, reminderService.getAll().size());
 
-		Reminder r = service.createReminder(teststudent, message);
+		Reminder r = reminderService.create(new ReminderDto(message), teststudent);
 
-		assertEquals(1, service.getAllReminders().size());
+		assertEquals(1, reminderService.getAll().size());
 
 		//read reminder
 

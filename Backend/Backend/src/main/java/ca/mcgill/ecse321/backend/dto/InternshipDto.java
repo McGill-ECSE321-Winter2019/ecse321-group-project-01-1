@@ -11,7 +11,7 @@ public class InternshipDto {
 
     }
 
-    public InternshipDto(CourseDto course, AcademicSemester academicSemester) {
+    public InternshipDto(AcademicSemester academicSemester) {
         this.course = course;
         this.academicSemester = academicSemester;
     }
@@ -20,6 +20,8 @@ public class InternshipDto {
     private CourseDto course;
 
     private AcademicSemester academicSemester;
+    
+    private boolean[] progress;
 
     public int getId() {
         return id;
@@ -74,4 +76,12 @@ public class InternshipDto {
     public void setStudent(Student student) {
         this.student = student;
     }
+
+	public boolean[] getProgress() {
+		return progress;
+	}
+
+	public void setProgress(boolean[] progress) {
+		this.progress = progress;
+	}
 }

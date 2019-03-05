@@ -20,7 +20,6 @@ import ca.mcgill.ecse321.backend.dao.DocumentRepository;
 import ca.mcgill.ecse321.backend.dao.InternshipRepository;
 import ca.mcgill.ecse321.backend.dao.ReminderRepository;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
-import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 import org.mockito.invocation.InvocationOnMock;
 import org.springframework.test.context.junit4.SpringRunner;
 //import

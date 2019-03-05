@@ -16,7 +16,11 @@ import ca.mcgill.ecse321.backend.dao.DocumentRepository;
 import ca.mcgill.ecse321.backend.dao.InternshipRepository;
 import ca.mcgill.ecse321.backend.dao.ReminderRepository;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
-import ca.mcgill.ecse321.backend.service.BackendApplicationService;
+import ca.mcgill.ecse321.backend.service.ApplicationFormService;
+import ca.mcgill.ecse321.backend.service.CourseService;
+import ca.mcgill.ecse321.backend.service.InternshipService;
+import ca.mcgill.ecse321.backend.service.ReminderService;
+import ca.mcgill.ecse321.backend.service.StorageService;
 import ca.mcgill.ecse321.backend.service.StudentService;
 
 import org.mockito.invocation.InvocationOnMock;
@@ -57,10 +61,17 @@ public class BackendApplicationTests {
 	private StudentRepository studentDao;
 	
 	@InjectMocks
-	private BackendApplicationService service;
-	
-	@InjectMocks
 	private StudentService studentService;
+	@InjectMocks
+	private InternshipService internshipService;
+	@InjectMocks
+	private ApplicationFormService applicationFormService;
+	@InjectMocks
+	private StorageService storageService;
+	@InjectMocks
+	private ReminderService reminderService;
+	@InjectMocks
+	private CourseService courseService;
 	
 	@InjectMocks
 //	private BackendApplicationController controller;
@@ -117,7 +128,7 @@ public class BackendApplicationTests {
 		    }
 		  });
 	  
-	  when(applicationDao.findFormById(anyInt())).thenAnswer( (InvocationOnMock invocation) -> {
+	  when(applicationDao.findApplicationFormById(anyInt())).thenAnswer( (InvocationOnMock invocation) -> {
 		    if(invocation.getArgument(0).equals(FORM_KEY)) {
 		      ApplicationForm applicationform = new ApplicationForm();
 		      applicationform.setId(FORM_KEY);
@@ -176,27 +187,27 @@ public class BackendApplicationTests {
 
 	@Test
 	public void testDocumentQueryFound() {
-		assertEquals(DOCUMENT_KEY, service.readDocument(DOCUMENT_KEY).getId());
+		assertEquals(DOCUMENT_KEY, storageService.readDocument(DOCUMENT_KEY).getId());
 	}
 	
 	@Test
 	public void testInternshipQueryFound() {
-		assertEquals(INTERSHIP_KEY, service.readInternship(INTERSHIP_KEY).getId());
+		assertEquals(INTERSHIP_KEY, internshipService.findInternshipById(INTERSHIP_KEY).getId());
 	}
 	
 	@Test
 	public void testApplicationFormQueryFound() {
-		assertEquals(FORM_KEY, service.readApplicationForm(FORM_KEY).getId());
+		assertEquals(FORM_KEY, applicationFormService.findApplicationFormById(FORM_KEY).getId());
 	}
 	
 	@Test
 	public void testReminderQueryFound() {
-		assertEquals(REMINDER_KEY, service.readReminder(REMINDER_KEY).getId());
+		assertEquals(REMINDER_KEY, reminderService.findReminderById(REMINDER_KEY).getId());
 	}
 	
 	@Test
 	public void testCourseQueryFound() {
-		assertEquals(COURSE_KEY, service.readCourse(COURSE_KEY).getId());
+		assertEquals(COURSE_KEY, courseService.findCourseById(COURSE_KEY).getId());
 	}
 	
 	//@Test

@@ -39,11 +39,12 @@ public class CourseService {
 	public Course create(@ModelAttribute("course") @Valid CourseDto courseDto){
 		Course course = new Course();
 		course.setCourseID(courseDto.getCourseID());
+		course = courseRepository.save(course);
 		return course;
 	}
 	
 	@Transactional
-	Course findCourseById(int id) {
+	public Course findCourseById(int id) {
 		return courseRepository.findCourseById(id);
 	}
 	

@@ -64,6 +64,11 @@ public class ApplicationFormService {
 		return toList(applicationFormRepository.findAll());
 	}
 	
+	@Transactional
+	public ApplicationForm findApplicationFormById(int id) {
+		return applicationFormRepository.findApplicationFormById(id);
+	}
+	
     public ApplicationFormDto toDto(ApplicationForm applicationForm){
         ApplicationFormDto applicationFormDto = new ApplicationFormDto(
         	applicationForm.getId(),
@@ -76,18 +81,6 @@ public class ApplicationFormService {
             applicationForm.isWorkPermit()
             );
         return applicationFormDto;
-    }
-	
-	
-    public StudentDto toDto(Student student) {
-		StudentDto studentDto = new StudentDto();
-		studentDto.setStudentID(student.getStudentID());
-		studentDto.setFirstName(student.getFirstName());
-		studentDto.setLastName(student.getLastName());
-		studentDto.setEmail(student.getEmail());
-		studentDto.setPassword(student.getPassword());
-		return studentDto;
-    	
     }
     
 	private <T> List<T> toList(Iterable<T> iterable){

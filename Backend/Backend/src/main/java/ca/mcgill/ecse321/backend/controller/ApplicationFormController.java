@@ -5,7 +5,6 @@ import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.model.*;
 import ca.mcgill.ecse321.backend.service.ApplicationFormService;
 import ca.mcgill.ecse321.backend.service.AuthenticationService;
-import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 import ca.mcgill.ecse321.backend.service.InternshipService;
 
 import org.springframework.beans.factory.annotation.Autowired;

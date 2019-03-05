@@ -2,8 +2,8 @@ package ca.mcgill.ecse321.backend.controller;
 
 import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.model.Student;
-import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 import ca.mcgill.ecse321.backend.service.InternshipService;
+import ca.mcgill.ecse321.backend.service.StudentService;
 import ca.mcgill.ecse321.backend.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,19 +16,14 @@ import java.util.Set;
 public class ProfileViewingController {
     @Autowired
     private InternshipService internshipService;
+    
+    @Autowired
+    private StudentService studentService;
 
-    @GetMapping(value = {"/students","/students/"})
+
+    @GetMapping(value = {"/api/profile", "/api/profile/"})
     public StudentDto getStudentProfile(@RequestParam("student") Student student){
-        return convertToDto(student);
-    }
-
-    private StudentDto convertToDto(Student s) {
-        if (s == null) {
-            throw new IllegalArgumentException("There is no such Student!");
-        }
-        StudentDto studentDto = new StudentDto(s.getStudentID(), s.getFirstName(), s.getLastName(), s.getEmail(), s.getPassword());
-        studentDto.setInternship(getInternshipDtos(s));
-        return studentDto;
+        return studentService.toDto(student);
     }
 
     public Set<InternshipDto> getInternshipDtos(Student student){

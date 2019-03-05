@@ -17,7 +17,7 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 	
-	@PostMapping(value = { "/api/student", "/api/student/" })
+	@PostMapping(value = { "/external/student", "/external/student/" })
 	public StudentDto register(@RequestParam(name = "student_id") String studentID,
 			@RequestParam(name = "first_name") String firstName,
 			@RequestParam(name = "last_name") String lastName,
