@@ -63,7 +63,6 @@ public class BackendApplicationServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void testReminder() throws Exception {
 		//assert no student in repository
 		assertEquals(0, studentService.getAll().size());

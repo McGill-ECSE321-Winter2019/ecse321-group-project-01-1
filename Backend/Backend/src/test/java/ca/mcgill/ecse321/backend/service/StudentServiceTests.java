@@ -93,7 +93,7 @@ public class StudentServiceTests {
     	assertNotNull(student);
     }
     
-    @Test(expected = Exception.class)
+    @Test(expected = IllegalArgumentException.class)
     @Transactional
     public void createDuplicateUserEmail() throws Exception {
     	studentService.create(createMock());
@@ -103,7 +103,7 @@ public class StudentServiceTests {
     	fail();	
     }
     
-    @Test(expected = javax.persistence.EntityExistsException.class)
+    @Test(expected = IllegalArgumentException.class)
     @Transactional
     public void createDuplicateUserID() throws Exception {
     	//

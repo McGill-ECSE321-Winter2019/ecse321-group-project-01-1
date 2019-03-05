@@ -35,11 +35,16 @@ public class StudentService {
 	private PasswordEncoder passwordEncoder;
 	
 	@Transactional
-	public Student create(@ModelAttribute("student") @Valid StudentDto studentDto) throws Exception {
+	public Student create(@ModelAttribute("student") @Valid StudentDto studentDto) throws RuntimeException {
 		
 		if (emailExists(studentDto.getEmail())) {   
-            throw new Exception(
+            throw new IllegalArgumentException(
               "There is already a student with that email address: " + studentDto.getEmail());
+        }
+		
+		if (studentIDExists(studentDto.getStudentID())) {   
+            throw new IllegalArgumentException(
+              "There is already a student with that student ID: " + studentDto.getStudentID());
         }
 		
 		Student S = new Student();
@@ -70,6 +75,14 @@ public class StudentService {
 	
     private boolean emailExists(String email) {
         Student student = studentRepository.findStudentByEmail(email);
+        if (student != null) {
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean studentIDExists(String studentID) {
+        Student student = studentRepository.findStudentByStudentID(studentID);
         if (student != null) {
             return true;
         }

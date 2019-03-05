@@ -28,5 +28,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 //				"Access denied", new HttpHeaders(), HttpStatus.FORBIDDEN);
 	}
 
+	
+	@ExceptionHandler({ IllegalArgumentException.class })
+	public void handleIllegalArgumentException(
+			Exception ex, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		response.sendError(HttpServletResponse.SC_BAD_REQUEST, 
+				ex.getMessage());
+	}
 
 }

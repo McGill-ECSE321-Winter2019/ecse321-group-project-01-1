@@ -51,7 +51,7 @@ public class ReminderController {
 	public List<ReminderDto> getAllStudentReminders(@PathVariable(value="student_id") String studentID) {
 		Student student = studentService.findStudentByStudentID(studentID);
 		if (student == null) {
-			throw new IllegalArgumentException("No student with that Id");
+			throw new IllegalArgumentException("No student with that id");
 		}
 		List<ReminderDto> reminderDtos = new ArrayList<>();
 		for (Reminder reminder : student.getReminder()) {
@@ -65,6 +65,7 @@ public class ReminderController {
 	public List<ReminderDto> getRemindersOfStudent() {
 		Student student = authenticationService.getCurrentStudent();
 		List<ReminderDto> reminderDtos = new ArrayList<>();
+		if (student.getReminder() == null) return reminderDtos;
 		for (Reminder reminder : student.getReminder()) {
 			reminderDtos.add(reminderService.toDto(reminder));
 		}
