@@ -11,13 +11,13 @@ public class InternshipDto {
 
     }
 
-    public InternshipDto(Course course, AcademicSemester academicSemester) {
+    public InternshipDto(CourseDto course, AcademicSemester academicSemester) {
         this.course = course;
         this.academicSemester = academicSemester;
     }
     private int id;
 
-    private Course course;
+    private CourseDto course;
 
     private AcademicSemester academicSemester;
 
@@ -29,11 +29,11 @@ public class InternshipDto {
         this.id = id;
     }
 
-    public Course getCourse() {
+    public CourseDto getCourse() {
         return this.course;
     }
 
-    public void setCourse(Course course) {
+    public void setCourse(CourseDto course) {
         this.course = course;
     }
 

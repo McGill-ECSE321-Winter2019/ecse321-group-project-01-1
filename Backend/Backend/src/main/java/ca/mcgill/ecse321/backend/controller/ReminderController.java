@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.backend.dto.ReminderDto;
 import ca.mcgill.ecse321.backend.model.Reminder;
+import ca.mcgill.ecse321.backend.model.Student;
+import ca.mcgill.ecse321.backend.service.AuthenticationService;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
+import ca.mcgill.ecse321.backend.service.ReminderService;
 import ca.mcgill.ecse321.backend.service.StudentService;
 
 @CrossOrigin(origins = "*")
@@ -24,37 +28,49 @@ public class ReminderController {
 	private StudentService studentService;
 	
 	@Autowired
-	BackendApplicationService service = new BackendApplicationService();
+	private ReminderService reminderService;
+	
+    @Autowired
+    private AuthenticationService authenticationService;
+	
+	@Autowired
+	BackendApplicationService service;
 
 	@PostMapping(value = { "/reminders", "/reminders/" })
 	public ReminderDto createReminder(@RequestParam(name = "message") String message, @RequestParam(name = "studentID") String studentID) throws IllegalArgumentException {
-		Reminder reminder = service.createReminder(studentService.findStudentByStudentID(studentID), message);
-		return convertToDto(reminder);
+		Student student = studentService.findStudentByStudentID(studentID);
+		Reminder reminder = reminderService.create(new ReminderDto(message), student);
+		return reminderService.toDto(reminder);
 	}
 
-	@GetMapping(value = { "/remindersAll", "/remindersAll/" })
+
+	@GetMapping(value = { "/reminders", "/reminders" })
 	public List<ReminderDto> getAllReminders() {
 		List<ReminderDto> reminderDtos = new ArrayList<>();
-		for (Reminder reminder : service.getAllReminders()) {
-			reminderDtos.add(convertToDto(reminder));
+		for (Reminder reminder : reminderService.getAll()) {
+			reminderDtos.add(reminderService.toDto(reminder));
 		}
 		return reminderDtos;
 	}
-
-	@GetMapping(value = { "/reminders","/reminders/"  })
-	public List<ReminderDto> getRemindersOfStudent(@RequestParam(name = "studentID") String studentID ) {
+	
+	// internal call
+	@GetMapping(value = { "/api/reminders","/api/reminders/"  })
+	public List<ReminderDto> getRemindersOfStudent() {
+		Student student = authenticationService.getCurrentStudent();
 		List<ReminderDto> reminderDtos = new ArrayList<>();
-		for (Reminder reminder : studentService.findStudentByStudentID(studentID).getReminder()) {
-			reminderDtos.add(convertToDto(reminder));
+		for (Reminder reminder : student.getReminder()) {
+			reminderDtos.add(reminderService.toDto(reminder));
 		}
 		return reminderDtos;
 	}
-
-	private ReminderDto convertToDto(Reminder reminder) {
-		if (reminder == null) {
-			throw new IllegalArgumentException("There is no such Reminder!");
-		}
-		ReminderDto reminderDto = new ReminderDto (reminder.getMessage(), reminder.getCreateDateTime());
-		return reminderDto;
+	
+	@GetMapping(value = { "/api/reminders/{reminder_id}","/api/reminders/{reminder_id}/"  })
+	public ReminderDto getReminder(@PathVariable(value="reminder_id") int reminderId) {
+		Student student = authenticationService.getCurrentStudent();
+		Reminder r = reminderService.findReminderByIdAndStudent(reminderId, student);
+		if (r == null) throw new AccessDeniedException("");
+		return reminderService.toDto(r);
 	}
+
+
 }

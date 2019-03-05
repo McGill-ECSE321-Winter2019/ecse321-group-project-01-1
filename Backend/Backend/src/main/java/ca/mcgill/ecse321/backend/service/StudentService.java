@@ -35,7 +35,7 @@ public class StudentService {
 	private PasswordEncoder passwordEncoder;
 	
 	@Transactional
-	public Student createStudent(@ModelAttribute("student") @Valid StudentDto studentDto) throws Exception {
+	public Student create(@ModelAttribute("student") @Valid StudentDto studentDto) throws Exception {
 		
 		if (emailExists(studentDto.getEmail())) {   
             throw new Exception(
@@ -77,7 +77,7 @@ public class StudentService {
     }
     
 	@Transactional
-	public Student updateStudent(Student student){
+	public Student update(Student student){
 		studentRepository.save(student);
 		return student;
 	}

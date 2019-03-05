@@ -24,6 +24,7 @@ import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.dto.StudentDto;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
+import ca.mcgill.ecse321.backend.model.Course;
 import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.model.Student;
 
@@ -36,14 +37,18 @@ public class InternshipService {
 	@Autowired
 	InternshipRepository internshipRepository;
 	
+	@Autowired
+	CourseService courseService;
+	
 	@Transactional
-	public Internship createInternship(@ModelAttribute("internship") @Valid InternshipDto internshipDto) throws Exception {
+	public Internship createInternship(@ModelAttribute("internship") @Valid InternshipDto internshipDto, Student student, Course course) throws Exception {
 		Internship internship = new Internship();
     	internship.setAcademicSemester(internshipDto.getAcademicSemester());
     	internship.setApplicationForm(internshipDto.getApplicationForm());
-    	internship.setCourse(internshipDto.getCourse());
     	internship.setDocument(internshipDto.getDocument());
-    	internship.setStudent(internshipDto.getStudent());
+    	internship.setStudent(student);
+    	internship.setCourse(course);
+
     	return internshipRepository.save(internship);
 	}
 	
@@ -61,7 +66,7 @@ public class InternshipService {
     	InternshipDto internshipDto = new InternshipDto();
     	internshipDto.setAcademicSemester(internship.getAcademicSemester());
     	internshipDto.setApplicationForm(internship.getApplicationForm());
-    	internshipDto.setCourse(internship.getCourse());
+    	internshipDto.setCourse(courseService.toDto(internship.getCourse()));
     	internshipDto.setDocument(internship.getDocument());
     	internshipDto.setStudent(internship.getStudent());
     	internshipDto.setId(internship.getId());

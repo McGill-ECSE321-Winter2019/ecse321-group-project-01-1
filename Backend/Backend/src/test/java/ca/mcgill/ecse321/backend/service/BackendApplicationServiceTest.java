@@ -38,7 +38,9 @@ public class BackendApplicationServiceTest {
 	@Autowired
 	private StudentService studentService;
 
-
+	@Autowired
+	private ReminderService reminderService;
+	
 	@Autowired
 	private StudentRepository studentRepository;
 	@Autowired
@@ -76,7 +78,7 @@ public class BackendApplicationServiceTest {
 		String pass = "123456";
 
 		try {
-			studentService.createStudent(new StudentDto(id, fname, lname, email, pass));
+			studentService.create(new StudentDto(id, fname, lname, email, pass));
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
@@ -109,7 +111,7 @@ public class BackendApplicationServiceTest {
 
 		String message = "Reminder";
 
-		Student teststudent = studentService.createStudent(new StudentDto(id, fname, lname, email, pass));
+		Student teststudent = studentService.create(new StudentDto(id, fname, lname, email, pass));
 
 		//create reminder
 

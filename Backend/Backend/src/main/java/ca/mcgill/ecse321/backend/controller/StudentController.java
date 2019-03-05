@@ -12,7 +12,7 @@ import ca.mcgill.ecse321.backend.service.StudentService;
 
 @CrossOrigin(origins = "*")
 @RestController
-public class AuthenticationController {
+public class StudentController {
 	
 	@Autowired
 	private StudentService studentService;
@@ -27,7 +27,7 @@ public class AuthenticationController {
 		
 		StudentDto studentDto = new StudentDto(studentID, firstName, lastName, email, password);
 		
-		Student student = studentService.createStudent(studentDto);
+		Student student = studentService.create(studentDto);
 		return studentService.toDto(student);
 		
 	}

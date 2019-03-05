@@ -16,8 +16,6 @@ import java.sql.Date;
 
 @RestController
 public class ApplicationFormController {
-    @Autowired
-    private BackendApplicationService service;
     
     @Autowired
     private ApplicationFormService applicationFormService;
@@ -28,7 +26,7 @@ public class ApplicationFormController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @PostMapping("/api/internship/{internship_id}/application_form")
+    @PostMapping("/api/internships/{internship_id}/application_form")
     public ApplicationFormDto postApplication(
                       @RequestParam("job_id") String jobID,
                       @RequestParam("job_description")  String jobDescription,
@@ -47,7 +45,7 @@ public class ApplicationFormController {
         return applicationFormService.toDto(applicationForm);
     }
 
-    @GetMapping("/api/internship/{internship_id}/application_form")
+    @GetMapping("/api/internships/{internship_id}/application_form")
     public ApplicationFormDto getApplication(@PathVariable(value="internship_id") int internshipId){
     	Internship i =internshipService.findByIdAndStudent(internshipId, authenticationService.getCurrentStudent());
     	if (i == null) throw new AccessDeniedException("");

@@ -88,7 +88,7 @@ public class StudentServiceTests {
     @Test
     @Transactional
     public void createValidUser() throws Exception {
-    	Student student = studentService.createStudent(createMock());
+    	Student student = studentService.create(createMock());
     	student = studentService.findStudentByStudentID(STUDENT_ID);
     	assertNotNull(student);
     }
@@ -96,10 +96,10 @@ public class StudentServiceTests {
     @Test(expected = Exception.class)
     @Transactional
     public void createDuplicateUserEmail() throws Exception {
-    	studentService.createStudent(createMock());
+    	studentService.create(createMock());
     	Student student = student = studentService.findStudentByStudentID(STUDENT_ID);
     	assertNotNull(student);
-    	studentService.createStudent(createMock2());
+    	studentService.create(createMock2());
     	fail();	
     }
     
@@ -107,10 +107,10 @@ public class StudentServiceTests {
     @Transactional
     public void createDuplicateUserID() throws Exception {
     	//
-    	studentService.createStudent(createMock());
+    	studentService.create(createMock());
     	Student student = studentService.findStudentByStudentID(STUDENT_ID);
     	assertNotNull(student);
-    	studentService.createStudent(createMock3());
+    	studentService.create(createMock3());
     	fail();	
     }
     
@@ -121,7 +121,7 @@ public class StudentServiceTests {
     	StudentDto studentDto = createMock();
     	studentDto.setEmail("");
     	studentDto.setFirstName("");
-    	studentService.createStudent(studentDto);
+    	studentService.create(studentDto);
     	fail();	
     }
     

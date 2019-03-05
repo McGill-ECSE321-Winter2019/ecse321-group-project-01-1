@@ -132,25 +132,7 @@ public class BackendApplicationService {
 	}
 	
 	//Reminder
-	@Transactional
-	public Reminder createReminder (Student S, String message) {
-		Reminder R = new Reminder();
-		R.setMessage(message);
-		R.setStudent(S);
-		R = reminderRepository.save(R);
-		return R;
-	}
-	
-	@Transactional
-	public Reminder readReminder (int ID) {
-		Reminder R = reminderRepository.findReminderById(ID);
-		return R;
-	}
-	
-	@Transactional
-	public List<Reminder> getAllReminders() {
-		return toList(reminderRepository.findAll());
-	}
+
 	
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();
