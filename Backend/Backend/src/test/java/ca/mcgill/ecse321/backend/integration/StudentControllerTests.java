@@ -15,65 +15,92 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.WebApplicationContext;
 
+import ca.mcgill.ecse321.backend.dao.StudentRepository;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
 public class StudentControllerTests {
 	@Autowired
 	private WebApplicationContext wac;
-	
+
+	@Autowired
+	private StudentRepository studentRepository;
+
 	private MockMvc mockMvc;
-	
+
+	public void clearDatabase() {
+		// this should be enough because of the composition
+		studentRepository.deleteAll();
+	}
+
 	@Before
 	public void setup() throws Exception {
-	    this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		clearDatabase();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
-	
+
 	@Test
 	public void testCreateStudent() throws Exception {
-	    this.mockMvc.perform(post("/external/students")
-	    		.param("student_id", "260123456")
-	    		.param("first_name", "first")
-	    		.param("last_name", "last")
-	    		.param("email", "first.last@mail.mcgill.ca")
-	    		.param("password", "123456")
-	    		)
-	      .andExpect(status().isOk());
+		this.mockMvc.perform(post("/external/students")
+				.param("student_id", "260123456")
+				.param("first_name", "first")
+				.param("last_name", "last")
+				.param("email", "first.last@mail.mcgill.ca")
+				.param("password", "123456")
+				)
+		.andExpect(status().isOk());
 	}
-	
+
 	@Test
 	public void testCreateStudentDuplicateID() throws Exception {
-	    this.mockMvc.perform(post("/external/students")
-	    		.param("student_id", "260123456")
-	    		.param("first_name", "first")
-	    		.param("last_name", "last")
-	    		.param("email", "first.last1@mail.mcgill.ca")
-	    		.param("password", "123456")
-	    		)
-	      .andExpect(status().isBadRequest());
+		this.mockMvc.perform(post("/external/students")
+				.param("student_id", "260123456")
+				.param("first_name", "first")
+				.param("last_name", "last")
+				.param("email", "first.last@mail.mcgill.ca")
+				.param("password", "123456")
+				)
+		.andExpect(status().isOk());
+		this.mockMvc.perform(post("/external/students")
+				.param("student_id", "260123456")
+				.param("first_name", "first")
+				.param("last_name", "last")
+				.param("email", "first.last1@mail.mcgill.ca")
+				.param("password", "123456")
+				)
+		.andExpect(status().isBadRequest());
 	}
-	
+
 	@Test
 	public void testCreateStudentDuplicateEmail() throws Exception {
-	    this.mockMvc.perform(post("/external/students")
-	    		.param("student_id", "260123457")
-	    		.param("first_name", "first")
-	    		.param("last_name", "last")
-	    		.param("email", "first.last@mail.mcgill.ca")
-	    		.param("password", "123456")
-	    		)
-	      .andExpect(status().isBadRequest());
+		this.mockMvc.perform(post("/external/students")
+				.param("student_id", "260123456")
+				.param("first_name", "first")
+				.param("last_name", "last")
+				.param("email", "first.last@mail.mcgill.ca")
+				.param("password", "123456")
+				)
+		.andExpect(status().isOk());
+		this.mockMvc.perform(post("/external/students")
+				.param("student_id", "260123457")
+				.param("first_name", "first")
+				.param("last_name", "last")
+				.param("email", "first.last@mail.mcgill.ca")
+				.param("password", "123456")
+				)
+		.andExpect(status().isBadRequest());
 	}
-	
+
 	@Test
 	public void testCreateStudentMissingParam() throws Exception {
-	    this.mockMvc.perform(post("/external/students")
-	    		.param("student_id", "260123457")
-	    		.param("first_name", "first")
-	    		.param("last_name", "last")
-	    		.param("email", "first.last@mail.mcgill.ca")
-	    		)
-	      .andExpect(status().isBadRequest());
+		this.mockMvc.perform(post("/external/students")
+				.param("student_id", "260123457")
+				.param("first_name", "first")
+				.param("last_name", "last")
+				.param("email", "first.last@mail.mcgill.ca")
+				)
+		.andExpect(status().isBadRequest());
 	}
-	
+
 }
