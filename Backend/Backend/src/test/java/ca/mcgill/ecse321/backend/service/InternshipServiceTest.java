@@ -7,6 +7,8 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import ca.mcgill.ecse321.backend.dao.InternshipRepository;
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.model.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +26,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
-import ca.mcgill.ecse321.backend.model.Student;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,6 +35,27 @@ public class InternshipServiceTest {
     private InternshipRepository internshipRepository;
 
     @Autowired
-    private BackendApplicationService service;
+    private InternshipService service;
+
+    private ApplicationForm applicationForm;
+    private
+
+    private Course mockCourse;
+
+    @Test
+    public void createInternship() {
+    }
+
+    @Test
+    public void findByIdAndStudentStudentID() {
+    }
+
+    @Test
+    public void findByIdAndStudent() {
+    }
+
+    @Test
+    public void toDto() {
+    }
 
 }

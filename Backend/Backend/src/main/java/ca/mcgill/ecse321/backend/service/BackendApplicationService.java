@@ -76,8 +76,8 @@ public class BackendApplicationService {
 		return toList(studentRepository.findAll());
 	}
 	
-	//Document
-	@Transactional
+	@Transactional	//Document
+
 	public Document createDocument(Internship internship, String path) {
 		Document D = new Document();
 		D.setPath(path);

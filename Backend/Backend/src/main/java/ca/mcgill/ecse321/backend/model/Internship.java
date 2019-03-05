@@ -3,6 +3,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.OneToOne;
 
@@ -55,7 +56,6 @@ public class Internship{
 		this.applicationForm = applicationForms;
 	}
 
-
 	@OneToMany(mappedBy="internship", cascade={CascadeType.ALL})
 	private Set<Document> document = new HashSet<Document>();
 
@@ -97,5 +97,17 @@ public class Internship{
 		this.student = student;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Internship)) return false;
+		Internship that = (Internship) o;
+		return id == that.id &&
+				Objects.equals(course, that.course) &&
+				Objects.equals(applicationForm, that.applicationForm) &&
+				Objects.equals(document, that.document) &&
+				academicSemester == that.academicSemester &&
+				student.equals(that.student);
+	}
 
 }

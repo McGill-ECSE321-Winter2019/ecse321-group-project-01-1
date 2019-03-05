@@ -46,7 +46,7 @@ public class InternshipService {
     	internship.setStudent(internshipDto.getStudent());
     	return internshipRepository.save(internship);
 	}
-	
+
 	@Transactional
 	public Internship findByIdAndStudentStudentID(int id, String studentID) {
 		return internshipRepository.findByIdAndStudentStudentID(id, studentID);
@@ -74,6 +74,11 @@ public class InternshipService {
 			resultList.add(t);
 		}
 		return resultList;
+	}
+
+	@Transactional
+	public List<Internship> getAll() {
+		return toList(internshipRepository.findAll());
 	}
     
 }
