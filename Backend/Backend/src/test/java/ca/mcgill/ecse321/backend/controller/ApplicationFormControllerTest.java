@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContext;
@@ -20,6 +21,7 @@ import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
 import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
 import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.service.ApplicationFormService;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -34,6 +36,7 @@ import java.sql.Date;
 
  
 @RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 @WebAppConfiguration
 public class ApplicationFormControllerTest {
 	
@@ -54,6 +57,9 @@ public class ApplicationFormControllerTest {
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 	
+	@Autowired
+	private ApplicationFormService appformService;
+	
 	@Before
 	public void init() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
@@ -68,6 +74,21 @@ public class ApplicationFormControllerTest {
 		Date endDate2 = Date.valueOf("2019-02-22");
 		ApplicationForm form2 = new ApplicationForm(JOB_ID2, "Description2", internship2, "Employer2", "Location2", startDate2, endDate2, false);
 */
+	}
+	
+	@Test
+	public void testCreateApplicationForm() throws Exception {
+		this.mockMvc.perform(post("/post_application")
+				.param("job_id", "123")
+				.param("job_description", "Description")
+				.param("employer", "Employer1")
+				.param("location", "Joblocation")
+				.sessionAttr("start_date", Date.valueOf("2019-01-11"))
+				.sessionAttr("end_date", Date.valueOf("2019-01-22"))
+				.sessionAttr("work_permit", true)
+				.param("internship_id", "123456")
+				)
+		.andExpect(status().isOk());
 	}
 	
 	@Test //(expected = NestedServletException.class)
