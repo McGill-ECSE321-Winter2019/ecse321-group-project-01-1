@@ -17,6 +17,8 @@ import ca.mcgill.ecse321.backend.dao.InternshipRepository;
 import ca.mcgill.ecse321.backend.dao.ReminderRepository;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
+import ca.mcgill.ecse321.backend.service.StudentService;
+
 import org.mockito.invocation.InvocationOnMock;
 import org.springframework.test.context.junit4.SpringRunner;
 //import 
@@ -56,6 +58,9 @@ public class BackendApplicationTests {
 	
 	@InjectMocks
 	private BackendApplicationService service;
+	
+	@InjectMocks
+	private StudentService studentService;
 	
 	@InjectMocks
 //	private BackendApplicationController controller;
@@ -166,7 +171,7 @@ public class BackendApplicationTests {
 
 	@Test
 	public void testParticipantQueryFound() {
-	  assertEquals(STUDENT_KEY, service.readStudent(STUDENT_KEY).getStudentID());
+	  assertEquals(STUDENT_KEY, studentService.findStudentByStudentID(STUDENT_KEY).getStudentID());
 	}
 
 	@Test

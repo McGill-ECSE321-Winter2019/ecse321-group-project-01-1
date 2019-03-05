@@ -77,6 +77,12 @@ public class StudentService {
     }
     
 	@Transactional
+	public Student updateStudent(Student student){
+		studentRepository.save(student);
+		return student;
+	}
+    
+	@Transactional
 	public List<Student> getAll() {
 		return toList(studentRepository.findAll());
 	}

@@ -14,16 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.backend.dto.ReminderDto;
 import ca.mcgill.ecse321.backend.model.Reminder;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
+import ca.mcgill.ecse321.backend.service.StudentService;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class ReminderController {
 
+	@Autowired
+	private StudentService studentService;
+	
+	@Autowired
 	BackendApplicationService service = new BackendApplicationService();
 
 	@PostMapping(value = { "/reminders", "/reminders/" })
 	public ReminderDto createReminder(@RequestParam(name = "message") String message, @RequestParam(name = "studentID") String studentID) throws IllegalArgumentException {
-		Reminder reminder = service.createReminder(service.readStudent(studentID), message);
+		Reminder reminder = service.createReminder(studentService.findStudentByStudentID(studentID), message);
 		return convertToDto(reminder);
 	}
 
@@ -39,7 +44,7 @@ public class ReminderController {
 	@GetMapping(value = { "/reminders","/reminders/"  })
 	public List<ReminderDto> getRemindersOfStudent(@RequestParam(name = "studentID") String studentID ) {
 		List<ReminderDto> reminderDtos = new ArrayList<>();
-		for (Reminder reminder : service.readStudent(studentID).getReminder()) {
+		for (Reminder reminder : studentService.findStudentByStudentID(studentID).getReminder()) {
 			reminderDtos.add(convertToDto(reminder));
 		}
 		return reminderDtos;

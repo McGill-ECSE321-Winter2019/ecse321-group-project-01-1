@@ -45,36 +45,6 @@ public class BackendApplicationService {
 	
 	//CRUD - Create, Read, Update, Delete
 	
-	//Student
-	@Transactional
-	public Student createStudent(String studentID, String firstName, 
-								String lastName, String email, String password) {
-		Student S = new Student();
-		S.setStudentID(studentID);
-		S.setFirstName(firstName);
-		S.setLastName(lastName);
-		S.setEmail(email);
-		S.setPassword(password);
-		S = studentRepository.save(S);
-		return S;
-	}
-
-	@Transactional
-	public Student updateStudent(Student student){
-		studentRepository.save(student);
-		return student;
-	}
-
-	@Transactional
-	public Student readStudent(String studentID) {
-		Student S = studentRepository.findStudentByStudentID(studentID);
-		return S;
-	}
-	
-	@Transactional
-	public List<Student> getAllStudents() {
-		return toList(studentRepository.findAll());
-	}
 	
 	//Document
 	@Transactional
@@ -146,6 +116,9 @@ public class BackendApplicationService {
 
 		return A;
 	}
+	
+	
+	
 	
 	@Transactional
 	public ApplicationForm readApplicationForm (int ID) {

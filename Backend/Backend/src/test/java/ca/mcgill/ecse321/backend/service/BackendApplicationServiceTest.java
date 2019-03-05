@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.backend.model.*;
 import ca.mcgill.ecse321.backend.dao.*;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
 
 
 
@@ -33,6 +34,9 @@ public class BackendApplicationServiceTest {
 
 	@Autowired
 	private BackendApplicationService service;
+	
+	@Autowired
+	private StudentService studentService;
 
 
 	@Autowired
@@ -60,9 +64,9 @@ public class BackendApplicationServiceTest {
 
 	@Test
 	@Transactional
-	public void testStudent() {
+	public void testStudent() throws Exception {
 		//assert no student in repository
-		assertEquals(0, service.getAllStudents().size());
+		assertEquals(0, studentService.getAll().size());
 
 		//create new student
 		String id = "000000000";
@@ -72,17 +76,17 @@ public class BackendApplicationServiceTest {
 		String pass = "123456";
 
 		try {
-			service.createStudent(id, fname, lname, email, pass);
+			studentService.createStudent(new StudentDto(id, fname, lname, email, pass));
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
 
 		//assert only 1 student
-		List<Student> allStudents = service.getAllStudents();
+		List<Student> allStudents = studentService.getAll();
 		assertEquals(1, allStudents.size());
 
 		//read student
-		Student test = service.readStudent(id);
+		Student test = studentService.findStudentById(id);
 
 		assertEquals(test.getFirstName(), fname);
 		assertEquals(test.getLastName(), lname);
@@ -93,9 +97,9 @@ public class BackendApplicationServiceTest {
 
 	@Test
 	@Transactional
-	public void testReminder() {
+	public void testReminder() throws Exception {
 		//assert no student in repository
-		assertEquals(0, service.getAllStudents().size());
+		assertEquals(0, studentService.getAll().size());
 
 		String id = "000000000";
 		String fname = "John";
@@ -105,7 +109,7 @@ public class BackendApplicationServiceTest {
 
 		String message = "Reminder";
 
-		Student teststudent = service.createStudent(id, fname, lname, email, pass);
+		Student teststudent = studentService.createStudent(new StudentDto(id, fname, lname, email, pass));
 
 		//create reminder
 

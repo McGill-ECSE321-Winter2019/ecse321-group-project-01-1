@@ -26,6 +26,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ca.mcgill.ecse321.backend.model.*;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 import ca.mcgill.ecse321.backend.dao.*;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
+
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -40,6 +42,9 @@ public class StorageServiceTest {
     @Autowired
     private BackendApplicationService service;
 
+	@Autowired
+	private StudentService studentService;
+    
     @Autowired
     private StorageService storageService;
 
@@ -78,14 +83,14 @@ public class StorageServiceTest {
     private Internship mockInternship;
 
     @Before
-    public void setUp(){
+    public void setUp() throws Exception{
         studentRepository.deleteAll();
         documentRepository.deleteAll();
         applicationFormRepository.deleteAll();
         reminderRepository.deleteAll();
         courseRepository.deleteAll();
         internshipRepository.deleteAll();
-        Student student = service.createStudent("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword");
+        Student student = studentService.createStudent(new StudentDto("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
         Course course = service.createCourse("FACC300");
         this.mockInternship = service.createInternship(student,course);
     }

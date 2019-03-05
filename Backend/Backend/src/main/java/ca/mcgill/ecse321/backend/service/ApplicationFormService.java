@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.dto.StudentDto;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
+import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.model.Student;
 
 @Service
@@ -35,9 +37,25 @@ public class ApplicationFormService {
 	ApplicationFormRepository applicationFormRepository;
 	
 	@Transactional
-	public ApplicationForm createApplicationForm(@ModelAttribute("applicationForm") @Valid ApplicationFormDto applicationFormDto) throws Exception {
+	public ApplicationForm createApplicationForm(
+			@ModelAttribute("applicationForm") @Valid ApplicationFormDto applicationFormDto, 
+			Internship internship
+			){
 		
-		return new ApplicationForm();
+		ApplicationForm applicationForm = new ApplicationForm();
+
+		applicationForm.setJobID(applicationFormDto.getJobID());
+		applicationForm.setEmployer(applicationFormDto.getEmployer());
+		applicationForm.setEndDate(applicationFormDto.getEndDate());
+		applicationForm.setStartDate(applicationFormDto.getStartDate());
+		applicationForm.setWorkPermit(applicationFormDto.isWorkPermit());
+		applicationForm.setLocation(applicationFormDto.getLocation());
+		applicationForm.setJobDescription(applicationFormDto.getJobDescription());
+		applicationForm.setInternship(internship);
+		
+		applicationForm = applicationFormRepository.save(applicationForm);
+
+		return applicationForm;
 	}
 	
     
@@ -45,6 +63,21 @@ public class ApplicationFormService {
 	public List<ApplicationForm> getAll() {
 		return toList(applicationFormRepository.findAll());
 	}
+	
+    public ApplicationFormDto toDto(ApplicationForm applicationForm){
+        ApplicationFormDto applicationFormDto = new ApplicationFormDto(
+        	applicationForm.getId(),
+            applicationForm.getJobID(),
+            applicationForm.getJobDescription(),
+            applicationForm.getEmployer(),
+            applicationForm.getLocation(),
+            applicationForm.getStartDate(),
+            applicationForm.getEndDate(),
+            applicationForm.isWorkPermit()
+            );
+        return applicationFormDto;
+    }
+	
 	
     public StudentDto toDto(Student student) {
 		StudentDto studentDto = new StudentDto();

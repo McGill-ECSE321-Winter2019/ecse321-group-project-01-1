@@ -25,7 +25,9 @@ public class ProfileViewingController {
         if (s == null) {
             throw new IllegalArgumentException("There is no such Student!");
         }
-        return new StudentDto(s.getStudentID(), s.getFirstName(), s.getLastName(), s.getEmail(), getInternshipDtos(s));
+        StudentDto studentDto = new StudentDto(s.getStudentID(), s.getFirstName(), s.getLastName(), s.getEmail(), s.getPassword());
+        studentDto.setInternship(getInternshipDtos(s));
+        return studentDto;
     }
 
     public Set<InternshipDto> getInternshipDtos(Student student){
