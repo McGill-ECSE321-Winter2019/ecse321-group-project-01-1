@@ -18,19 +18,33 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
 import ca.mcgill.ecse321.backend.dao.DocumentRepository;
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.model.Course;
 import ca.mcgill.ecse321.backend.model.DocumentType;
 import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
+import ca.mcgill.ecse321.backend.service.InternshipService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
 public class FileControllerTest {
 	
+	private Internship internship;
+	private Student mockstudent;
+	private Course mockcourse;
+	
+	@Autowired
+	private InternshipDto internshipDto;
+	
 	@Autowired
 	private WebApplicationContext wac;
 
 	@Autowired
 	private DocumentRepository documentRepository;
+	
+	@Autowired
+	private InternshipService internshipService;
 
 	private MockMvc mockMvc;
 	
@@ -43,13 +57,14 @@ public class FileControllerTest {
 	public void setup() throws Exception {
 		clearDatabase();
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		internship = internshipService.createInternship(internshipDto, mockstudent, mockcourse);
+		internship.setId(5);
 	}
 	
 	@Test
 	public void testUploadFile() throws Exception {
 		MultipartFile file = null;
-		Internship internship = mock(Internship.class);
-		this.mockMvc.perform(post("/uploadFile")
+		this.mockMvc.perform(post("/api/internships/{internship_id}/documents", internship.getId())
 				.param("MultipartFile", String.valueOf(file))
                 .param("DcoumenType", String.valueOf(DocumentType.CONTRACT))
                 .param("internship", String.valueOf(internship))				
