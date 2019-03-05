@@ -65,7 +65,7 @@ public class BackendApplicationTests {
 	private static final String NONEXISTING_KEY = "NotAStudent";
 	
 	private Document document;
-	private static final int DOCUMENT_KEY = 10;
+	private static final String DOCUMENT_KEY = "ABCD-efgh";
 	
 	private Internship internship;
 	private static final int INTERSHIP_KEY = 25;
@@ -92,7 +92,7 @@ public class BackendApplicationTests {
 	    }
 	  });
 	  
-	  when(documentDao.findDocumentById(anyInt())).thenAnswer( (InvocationOnMock invocation) -> {
+	  when(documentDao.findDocumentById(anyString())).thenAnswer( (InvocationOnMock invocation) -> {
 		    if(invocation.getArgument(0).equals(DOCUMENT_KEY)) {
 		      Document document = new Document();
 		      document.setId(DOCUMENT_KEY);
