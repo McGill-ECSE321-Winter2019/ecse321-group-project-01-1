@@ -1,17 +1,20 @@
 package ca.mcgill.ecse321.backend.service;
 
 import ca.mcgill.ecse321.backend.dao.DocumentRepository;
+import ca.mcgill.ecse321.backend.dto.DocumentDto;
 import ca.mcgill.ecse321.backend.exception.FileNotFoundException;
 import ca.mcgill.ecse321.backend.exception.FileStorageException;
 import ca.mcgill.ecse321.backend.model.Document;
 import ca.mcgill.ecse321.backend.model.DocumentType;
 import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Reminder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 
@@ -64,7 +67,42 @@ public class StorageService {
 
     @Transactional
     public Document readDocument(String fileId) {
-        return documentRepository.findById(fileId)
-                .orElseThrow(() -> new FileNotFoundException("File not found with id " + fileId));
+        return documentRepository.findDocumentById(fileId);
+    }
+    
+    public DocumentDto toDto(Document document){
+    	DocumentDto documentDto = new DocumentDto(
+    			document.getFileName(),
+    			generateFileUri(document.getInternship().getId(), document.getId()),
+    			document.getFileType(),
+    			document.getSize(),
+    			document.getDocumentType()
+    	);
+
+        return documentDto;
+	}
+    
+    
+	@Transactional
+	public List<Document> getAll() {
+		return toList(documentRepository.findAll());
+	}
+	
+	private <T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
+	}
+	
+    public String generateFileUri(int internshipId, String documentId) {
+    	return ServletUriComponentsBuilder.fromCurrentContextPath()
+        .path("/api/internships/")
+        .path(internshipId+"")
+        .path("/documents/")
+        .path(documentId)
+        .path("/download")
+        .toUriString();
     }
 }

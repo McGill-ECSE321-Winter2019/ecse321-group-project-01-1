@@ -12,12 +12,12 @@ import ca.mcgill.ecse321.backend.service.StudentService;
 
 @CrossOrigin(origins = "*")
 @RestController
-public class AuthenticationController {
+public class StudentController {
 	
 	@Autowired
 	private StudentService studentService;
 	
-	@PostMapping(value = { "/api/student", "/api/student/" })
+	@PostMapping(value = { "/external/students", "/external/students/" })
 	public StudentDto register(@RequestParam(name = "student_id") String studentID,
 			@RequestParam(name = "first_name") String firstName,
 			@RequestParam(name = "last_name") String lastName,
@@ -27,7 +27,7 @@ public class AuthenticationController {
 		
 		StudentDto studentDto = new StudentDto(studentID, firstName, lastName, email, password);
 		
-		Student student = studentService.createStudent(studentDto);
+		Student student = studentService.create(studentDto);
 		return studentService.toDto(student);
 		
 	}
