@@ -23,6 +23,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.backend.model.*;
 import ca.mcgill.ecse321.backend.dao.*;
+import ca.mcgill.ecse321.backend.dto.ReminderDto;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
 
 
 
@@ -30,11 +32,13 @@ import ca.mcgill.ecse321.backend.dao.*;
 @SpringBootTest
 public class BackendApplicationServiceTest {
 
+	
+	@Autowired
+	private StudentService studentService;
 
 	@Autowired
-	private BackendApplicationService service;
-
-
+	private ReminderService reminderService;
+	
 	@Autowired
 	private StudentRepository studentRepository;
 	@Autowired
@@ -59,43 +63,9 @@ public class BackendApplicationServiceTest {
 	}
 
 	@Test
-	@Transactional
-	public void testStudent() {
+	public void testReminder() throws Exception {
 		//assert no student in repository
-		assertEquals(0, service.getAllStudents().size());
-
-		//create new student
-		String id = "000000000";
-		String fname = "John";
-		String lname = "Doe";
-		String email = "john.doe@mail.mcgill.ca";
-		String pass = "123456";
-
-		try {
-			service.createStudent(id, fname, lname, email, pass);
-		} catch (IllegalArgumentException e) {
-			fail();
-		}
-
-		//assert only 1 student
-		List<Student> allStudents = service.getAllStudents();
-		assertEquals(1, allStudents.size());
-
-		//read student
-		Student test = service.readStudent(id);
-
-		assertEquals(test.getFirstName(), fname);
-		assertEquals(test.getLastName(), lname);
-		assertEquals(test.getStudentID(), id);
-		assertEquals(test.getEmail(), email);
-		assertEquals(test.getPassword(), pass);
-	}
-
-	@Test
-	@Transactional
-	public void testReminder() {
-		//assert no student in repository
-		assertEquals(0, service.getAllStudents().size());
+		assertEquals(0, studentService.getAll().size());
 
 		String id = "000000000";
 		String fname = "John";
@@ -105,15 +75,15 @@ public class BackendApplicationServiceTest {
 
 		String message = "Reminder";
 
-		Student teststudent = service.createStudent(id, fname, lname, email, pass);
+		Student teststudent = studentService.create(new StudentDto(id, fname, lname, email, pass));
 
 		//create reminder
 
-		assertEquals(0, service.getAllReminders().size());
+		assertEquals(0, reminderService.getAll().size());
 
-		Reminder r = service.createReminder(teststudent, message);
+		Reminder r = reminderService.create(new ReminderDto(message), teststudent);
 
-		assertEquals(1, service.getAllReminders().size());
+		assertEquals(1, reminderService.getAll().size());
 
 		//read reminder
 

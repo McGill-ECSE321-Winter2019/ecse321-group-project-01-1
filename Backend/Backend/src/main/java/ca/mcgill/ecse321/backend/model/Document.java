@@ -28,7 +28,6 @@ public class Document {
 
 	}
 
-	private String path;
 
 	@Id
 	@GeneratedValue(generator = "uuid")
@@ -99,14 +98,6 @@ public class Document {
 
 	public void setDocumentType(DocumentType documentType) {
 		this.documentType = documentType;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
 	}
 
 	public String  getId() {

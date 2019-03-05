@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.dto.StudentDto;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
+import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.model.Student;
 
 @Service
@@ -35,9 +37,25 @@ public class ApplicationFormService {
 	ApplicationFormRepository applicationFormRepository;
 	
 	@Transactional
-	public ApplicationForm createApplicationForm(@ModelAttribute("applicationForm") @Valid ApplicationFormDto applicationFormDto) throws Exception {
+	public ApplicationForm createApplicationForm(
+			@ModelAttribute("applicationForm") @Valid ApplicationFormDto applicationFormDto, 
+			Internship internship
+			){
 		
-		return new ApplicationForm();
+		ApplicationForm applicationForm = new ApplicationForm();
+
+		applicationForm.setJobID(applicationFormDto.getJobID());
+		applicationForm.setEmployer(applicationFormDto.getEmployer());
+		applicationForm.setEndDate(applicationFormDto.getEndDate());
+		applicationForm.setStartDate(applicationFormDto.getStartDate());
+		applicationForm.setWorkPermit(applicationFormDto.isWorkPermit());
+		applicationForm.setLocation(applicationFormDto.getLocation());
+		applicationForm.setJobDescription(applicationFormDto.getJobDescription());
+		applicationForm.setInternship(internship);
+		
+		applicationForm = applicationFormRepository.save(applicationForm);
+
+		return applicationForm;
 	}
 	
     
@@ -46,15 +64,23 @@ public class ApplicationFormService {
 		return toList(applicationFormRepository.findAll());
 	}
 	
-    public StudentDto toDto(Student student) {
-		StudentDto studentDto = new StudentDto();
-		studentDto.setStudentID(student.getStudentID());
-		studentDto.setFirstName(student.getFirstName());
-		studentDto.setLastName(student.getLastName());
-		studentDto.setEmail(student.getEmail());
-		studentDto.setPassword(student.getPassword());
-		return studentDto;
-    	
+	@Transactional
+	public ApplicationForm findApplicationFormById(int id) {
+		return applicationFormRepository.findApplicationFormById(id);
+	}
+	
+    public ApplicationFormDto toDto(ApplicationForm applicationForm){
+        ApplicationFormDto applicationFormDto = new ApplicationFormDto(
+        	applicationForm.getId(),
+            applicationForm.getJobID(),
+            applicationForm.getJobDescription(),
+            applicationForm.getEmployer(),
+            applicationForm.getLocation(),
+            applicationForm.getStartDate(),
+            applicationForm.getEndDate(),
+            applicationForm.isWorkPermit()
+            );
+        return applicationFormDto;
     }
     
 	private <T> List<T> toList(Iterable<T> iterable){

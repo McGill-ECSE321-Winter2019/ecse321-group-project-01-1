@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class StudentDto{
 
-    public StudentDto(String studentID, String firstName, String lastName, @Email String email,String password) {
+    public StudentDto(String studentID, String firstName, String lastName, @Email String email, String password) {
         this.studentID = studentID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -25,11 +25,12 @@ public class StudentDto{
         this.password = password;
     }
 
-	public StudentDto(String studentID, String firstName, String lastName, @Email String email,Set<InternshipDto> internships) {
+	public StudentDto(String studentID, String firstName, String lastName, @Email String email, String password ,Set<InternshipDto> internships) {
 		this.studentID = studentID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+        this.password = password;
 		this.internship = internships;
 	}
 	
