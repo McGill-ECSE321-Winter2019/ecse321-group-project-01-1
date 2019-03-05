@@ -15,3 +15,17 @@ The main goals for our viewpoint are to create a web and mobile application capa
 |Mark Zhu          |  _15_ hours|Backend lead|
 
 Link to the first project report: [Project report 1](https://github.com/McGill-ECSE321-Winter2019/ecse321-group-project-01-1/wiki/Project-report-deliverables-1)
+
+
+## Deliverable 1
+
+|Team member's name|Total hours|Responsibility         |
+|------------------|-----------|-----------------------|
+|Zirui He          |  _12_ hours|Testing and integration|
+|Binyuan Sun       |  _27_ hours|Backend lead and general tech lead|
+|Tri-tin Truong    |  _22_ hours|Project management|
+|Zhong Yu Yang     |  _20_ hours|Backend implementation|
+|Mark Zhu          |  _21_ hours|Testing and integration|
+
+
+Link to the second project report: [Project report 2](https://github.com/McGill-ECSE321-Winter2019/ecse321-group-project-01-1/wiki/Project-report-2)
