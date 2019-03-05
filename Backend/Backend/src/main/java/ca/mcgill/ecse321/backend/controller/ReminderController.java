@@ -39,7 +39,7 @@ public class ReminderController {
 			) throws IllegalArgumentException {
 		Student student = studentService.findStudentByStudentID(studentID);
 		if (student == null) {
-			throw new IllegalArgumentException("No student with that Id");
+			throw new IllegalArgumentException("No student with that idd");
 		}
 		
 		Reminder reminder = reminderService.create(new ReminderDto(message), student);
