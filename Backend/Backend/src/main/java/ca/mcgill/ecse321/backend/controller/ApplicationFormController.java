@@ -3,7 +3,10 @@ package ca.mcgill.ecse321.backend.controller;
 import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
 import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.model.*;
+import ca.mcgill.ecse321.backend.service.AuthenticationService;
 import ca.mcgill.ecse321.backend.service.BackendApplicationService;
+import ca.mcgill.ecse321.backend.service.InternshipService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -14,20 +17,35 @@ import java.sql.Date;
 public class ApplicationFormController {
     @Autowired
     private BackendApplicationService service;
+    
+    @Autowired
+    private InternshipService internshipService;
+    
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @PostMapping("/post_application")
     public ApplicationFormDto postApplication(
-                                              @RequestParam("jobid") String jobID,
-                                              @RequestParam("jobDescription")  String jobDescription,
+                                              @RequestParam("job_id") String jobID,
+                                              @RequestParam("job_description")  String jobDescription,
                                               @RequestParam("employer")  String employer,
                                               @RequestParam("location") String location,
-                                              @RequestParam("startDate") Date startDate,
-                                              @RequestParam("endDate") Date endDate,
-                                              @RequestParam("workPermit") boolean workPermit,
-                                              @RequestParam("internship_id") int internship_id
+                                              @RequestParam("start_date") Date startDate,
+                                              @RequestParam("end_date") Date endDate,
+                                              @RequestParam("work_permit") boolean workPermit,
+                                              @RequestParam("internship_id") int internshipId
                                 ){
-        ApplicationForm applicationForm = service.createApplicationForm(jobID, jobDescription, employer, location, startDate,  endDate, workPermit,  service.readInternship(internship_id));
-        return convertToDto(applicationForm);
+    	Internship i =internshipService.findByIdAndStudent(internshipId, authenticationService.getCurrentStudent());
+    	ApplicationFormDto applicationFormDto = null;
+    	if (i == null) {
+    		
+    	} else {
+            ApplicationForm applicationForm = service.createApplicationForm(jobID, jobDescription, employer, location, startDate,  endDate, workPermit,  service.readInternship(internshipId));
+            return convertToDto(applicationForm);
+    	}
+    	return applicationFormDto;
+    	
+
     }
 
     public ApplicationFormDto convertToDto(ApplicationForm applicationForm){
