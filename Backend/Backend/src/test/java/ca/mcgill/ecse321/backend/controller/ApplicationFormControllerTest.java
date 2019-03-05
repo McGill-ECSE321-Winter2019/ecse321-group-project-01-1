@@ -80,7 +80,7 @@ public class ApplicationFormControllerTest {
 		form1.setId(ID1);
 		
 		when(service.readApplicationForm(1)).thenReturn(form1);
-		mockMvc.perform(get("/get_application/{id}", ID1))
+		mockMvc.perform(get("/get_application/{internship_id}", ID1))
 		 .andExpect(status().isOk())
 		 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 		 .andExpect(jsonPath("$.id", is(ID1)))
@@ -89,7 +89,7 @@ public class ApplicationFormControllerTest {
 		 .andExpect(jsonPath("$.internship", is("internship")))
 		 .andExpect(jsonPath("$.employer", is("Employer1")))
 		 .andExpect(jsonPath("$.location", is("Location1")))
-		 .andExpect(jsonPath("$.jobId", is("JOB_ID1")))
+		 .andExpect(jsonPath("$.jobId", is("Job1")))
 		 .andExpect(jsonPath("$.startDate", is(startDate)))
 		 .andExpect(jsonPath("$.endDate", is(endDate)))
 		 .andExpect(jsonPath("$.workPermit", is(true)));

@@ -47,11 +47,17 @@ public class ApplicationFormController {
         return applicationFormDto;
     }
 
-    @GetMapping("/get_application/{id}")
+/*    @GetMapping("/get_application/{id}")
     public ApplicationFormDto getApplication(@RequestParam("internship") InternshipDto internshipDto){
         Internship internship = service.readInternship(internshipDto.getId());
         ApplicationForm applicationForm = internship.getApplicationForm();
         return convertToDto(applicationForm);
     }
-
+*/
+    @GetMapping("/get_application/{internship_id}")
+    public ApplicationFormDto getApplication(@PathVariable(value="internship_id") int internshipId){
+        Internship internship = service.readInternship(internshipId);
+        ApplicationForm applicationForm = internship.getApplicationForm();
+        return convertToDto(applicationForm);
+    }
 }
