@@ -47,7 +47,7 @@ public class ApplicationFormController {
         return applicationFormDto;
     }
 
-    @GetMapping("/get_application")
+    @GetMapping("/get_application/{id}")
     public ApplicationFormDto getApplication(@RequestParam("internship") InternshipDto internshipDto){
         Internship internship = service.readInternship(internshipDto.getId());
         ApplicationForm applicationForm = internship.getApplicationForm();
