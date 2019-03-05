@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -36,8 +37,8 @@ import java.sql.Date;
 @WebAppConfiguration
 public class ApplicationFormControllerTest {
 	
-	private static final String JOB_ID1 = "Job1";
-	private static final String JOB_ID2 = "Job2";
+	private static final int ID1 = 1;
+//	private static final String JOB_ID2 = "Job2";
 //	private static MediaType CONTENT_TYPE = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype());
 	
 	private MockMvc mockMvc;
@@ -47,7 +48,7 @@ public class ApplicationFormControllerTest {
 	@InjectMocks
 	private BackendApplicationService service;
 	
-	@Autowired
+	@Mock
 	private ApplicationFormRepository appformRepository;
 	
 	@Autowired
@@ -75,16 +76,16 @@ public class ApplicationFormControllerTest {
 		Internship internship = mock(Internship.class);
 		Date startDate = Date.valueOf("2019-01-11");
 		Date endDate = Date.valueOf("2019-01-22");
-		ApplicationForm form1 = new ApplicationForm(JOB_ID1, "Description1", internship, "Employer1", "Location1", startDate, endDate, true);
-		form1.setId(1);
+		ApplicationForm form1 = new ApplicationForm("Job1", "Description1", internship, "Employer1", "Location1", startDate, endDate, true);
+		form1.setId(ID1);
 		
 		when(service.readApplicationForm(1)).thenReturn(form1);
-		mockMvc.perform(get("/get_application/{id}", 1))
+		mockMvc.perform(get("/get_application/{id}", ID1))
 		 .andExpect(status().isOk())
 		 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-		 .andExpect(jsonPath("$.id", is(1)))
+		 .andExpect(jsonPath("$.id", is(ID1)))
 		 .andExpect(jsonPath("$.jobDescription", is("Description1")))
-		 .andExpect(jsonPath("$.jobId", is("Job1")))
+		 .andExpect(jsonPath("$.jobID", is("Job1")))
 		 .andExpect(jsonPath("$.internship", is("internship")))
 		 .andExpect(jsonPath("$.employer", is("Employer1")))
 		 .andExpect(jsonPath("$.location", is("Location1")))
@@ -92,7 +93,7 @@ public class ApplicationFormControllerTest {
 		 .andExpect(jsonPath("$.startDate", is(startDate)))
 		 .andExpect(jsonPath("$.endDate", is(endDate)))
 		 .andExpect(jsonPath("$.workPermit", is(true)));
-		verify(service, times(1)).readApplicationForm(1);
+		verify(service, times(1)).readApplicationForm(ID1);
 	    verifyNoMoreInteractions(service);
 		
 	}
