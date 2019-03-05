@@ -48,10 +48,10 @@ public class ApplicationFormControllerTest {
 	
 	//@Autowired
 	//private BackendApplicationService serviceMock;
-	@InjectMocks
+	@Autowired
 	private BackendApplicationService service;
 	
-	@Mock
+	@Autowired
 	private ApplicationFormRepository appformRepository;
 	
 	@Autowired
@@ -100,7 +100,7 @@ public class ApplicationFormControllerTest {
 		ApplicationForm form1 = new ApplicationForm("Job1", "Description1", internship, "Employer1", "Location1", startDate, endDate, true);
 		form1.setId(ID1);
 		
-		when(service.readApplicationForm(1)).thenReturn(form1);
+		when(service.readApplicationForm(ID1)).thenReturn(form1);
 		mockMvc.perform(get("/get_application/{internship_id}", ID1))
 		 .andExpect(status().isOk())
 		 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
