@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -84,6 +85,16 @@ public class StudentServiceTests {
 		studentDto.setPassword("123456");
 		return studentDto;
 	}
+
+	public StudentDto createMock4() {
+		StudentDto studentDto = new StudentDto();
+		studentDto.setEmail(STUDENT_EMAIL+"3");
+		studentDto.setFirstName("Firstname4");
+		studentDto.setStudentID(STUDENT_ID+"1");
+		studentDto.setLastName("Lastname4");
+		studentDto.setPassword("123456");
+		return studentDto;
+	}
     
     @Test
     @Transactional
@@ -124,6 +135,43 @@ public class StudentServiceTests {
     	studentService.createStudent(studentDto);
     	fail();	
     }
+
+    @Test
+	@Transactional
+	public void findStudentByEmail() throws Exception{
+		StudentDto mockDto = createMock();
+		studentService.createStudent(mockDto);
+		Student student = studentService.findStudentByEmail(STUDENT_EMAIL);
+		StudentDto fetchedDto = studentService.toDto(student);
+		assertEquals(fetchedDto.getEmail(),mockDto.getEmail());
+		assertEquals(fetchedDto.getFirstName(),mockDto.getFirstName());
+		assertEquals(fetchedDto.getInternship(),mockDto.getInternship());
+		assertEquals(fetchedDto.getStudentID(),mockDto.getStudentID());
+	}
+
+	@Test
+	@Transactional
+	public void findStudentById() throws Exception{
+		StudentDto mockDto = createMock();
+		studentService.createStudent(mockDto);
+		Student student = studentService.findStudentById(STUDENT_ID);
+		StudentDto fetchedDto = studentService.toDto(student);
+		assertEquals(fetchedDto.getEmail(),mockDto.getEmail());
+		assertEquals(fetchedDto.getFirstName(),mockDto.getFirstName());
+		assertEquals(fetchedDto.getInternship(),mockDto.getInternship());
+		assertEquals(fetchedDto.getStudentID(),mockDto.getStudentID());
+	}
+
+	@Test
+	@Transactional
+	public void findAllStudents() throws Exception{
+		studentService.createStudent(createMock());
+		studentService.createStudent(createMock4());
+
+		List<Student> students = studentService.getAll();
+		assertEquals(2,students.size());
+	}
+
     
 }
 
