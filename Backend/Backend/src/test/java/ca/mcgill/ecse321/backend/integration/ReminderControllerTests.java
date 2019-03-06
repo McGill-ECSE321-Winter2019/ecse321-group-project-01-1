@@ -37,7 +37,6 @@ import ca.mcgill.ecse321.backend.service.StudentService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-//@Transactional
 public class ReminderControllerTests {
 	@Autowired
 	private WebApplicationContext wac;
