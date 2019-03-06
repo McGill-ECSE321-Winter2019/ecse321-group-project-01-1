@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.backend.controller;
 
 import static org.mockito.Mockito.mock;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -14,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -27,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ca.mcgill.ecse321.backend.dao.CourseRepository;
 import ca.mcgill.ecse321.backend.dao.DocumentRepository;
+import ca.mcgill.ecse321.backend.dao.InternshipRepository;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.dto.CourseDto;
 import ca.mcgill.ecse321.backend.dto.DocumentDto;
@@ -61,6 +64,8 @@ public class FileControllerTests {
 	@Autowired
 	private StudentRepository studentRepository;
 	
+	@Autowired
+	private InternshipRepository internshipRepository;
 	
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -87,8 +92,10 @@ public class FileControllerTests {
 	public void clearDatabase() {
 		// this should be enough because of the composition
 		documentRepository.deleteAll();
+		studentRepository.deleteAll();
+		courseRepository.deleteAll();
+		internshipRepository.deleteAll();
 	}
-	
 	
 	@Before
 	public void setup() throws Exception {
@@ -110,9 +117,7 @@ public class FileControllerTests {
 		internshipDto.setAcademicSemester(AcademicSemester.SUMMER);
 		mockInternship = internshipService.createInternship(internshipDto, mockStudent, mockCourse);
 		
-	//	DocumentDto documentdto = new DocumentDto("filename", "path", "filrtype", 1L, DocumentType.CONTRACT);
-	    FileInputStream fis=new FileInputStream("/Users/hezirui/Documents/~$ck 100 poster.docx");
-	    MockMultipartFile upload= new MockMultipartFile("upload",fis);
+	    MockMultipartFile upload = new MockMultipartFile("file", "hello.txt", MediaType.TEXT_PLAIN_VALUE, "Hello, World!".getBytes());
 		mockDocument = storageService.createFile(upload, mockInternship, DocumentType.CONTRACT);
 	}
 	
@@ -120,14 +125,11 @@ public class FileControllerTests {
 	@WithMockUser(username = "first.last@mail.mcgill.ca")
 	public void testUploadFile() throws Exception {
 		
-	    FileInputStream path=new FileInputStream("/Users/hezirui/Desktop/View submitted Documents.docx");
-	    MockMultipartFile file= new MockMultipartFile("file",path);
-	//	this.mockMvc.perform(post("/api/internships/{internship_id}/documents", mockInternship.getId())
-	    mockMvc.perform(MockMvcRequestBuilders.multipart("/api/internships/{internship_id}/documents", mockInternship.getId())
+	    MockMultipartFile file = new MockMultipartFile("file", "hello.txt", MediaType.TEXT_PLAIN_VALUE, "Hello, World!".getBytes());
+
+	    mockMvc.perform(fileUpload("/api/internships/{internship_id}/documents", mockInternship.getId())
 				.file(file)
-			//s	.param("MultipartFile", String.valueOf(file))
-                .param("DcoumenType", (DocumentType.CONTRACT).toString())
-                .param("internship", (mockInternship).toString())				
+                .param("type", DocumentType.EVALUATION.toString())
 				)
 		.andExpect(status().isOk());
 	}

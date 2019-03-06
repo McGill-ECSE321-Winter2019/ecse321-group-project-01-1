@@ -23,6 +23,7 @@ import org.springframework.web.util.NestedServletException;
 
 import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
 import ca.mcgill.ecse321.backend.dao.CourseRepository;
+import ca.mcgill.ecse321.backend.dao.InternshipRepository;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
 import ca.mcgill.ecse321.backend.dto.CourseDto;
@@ -68,13 +69,16 @@ public class ApplicationFormControllerTests {
 	private Internship mockInternship;
 		
 	@Autowired
-	private ApplicationFormRepository appformRepository;
+	private ApplicationFormRepository applicationFormRepository;
 	
 	@Autowired
 	private CourseRepository courseRepository;
 	
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
+	private InternshipRepository internshipRepository;
 	
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -133,8 +137,10 @@ public class ApplicationFormControllerTests {
 	
 	public void clearDatabase() {
 		// this should be enough because of the composition
+		applicationFormRepository.deleteAll();
 		studentRepository.deleteAll();
 		courseRepository.deleteAll();
+		internshipRepository.deleteAll();
 	}
 	
 	@Test
