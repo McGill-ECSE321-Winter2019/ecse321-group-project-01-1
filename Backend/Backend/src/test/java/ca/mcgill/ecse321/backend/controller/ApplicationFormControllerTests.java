@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.util.NestedServletException;
 
@@ -137,10 +138,8 @@ public class ApplicationFormControllerTests {
 	
 	public void clearDatabase() {
 		// this should be enough because of the composition
-		applicationFormRepository.deleteAll();
 		studentRepository.deleteAll();
 		courseRepository.deleteAll();
-		internshipRepository.deleteAll();
 	}
 	
 	@Test

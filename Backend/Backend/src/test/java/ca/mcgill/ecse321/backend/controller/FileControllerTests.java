@@ -91,10 +91,8 @@ public class FileControllerTests {
 	
 	public void clearDatabase() {
 		// this should be enough because of the composition
-		documentRepository.deleteAll();
 		studentRepository.deleteAll();
 		courseRepository.deleteAll();
-		internshipRepository.deleteAll();
 	}
 	
 	@Before
