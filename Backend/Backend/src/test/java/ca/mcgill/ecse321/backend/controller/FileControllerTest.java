@@ -4,6 +4,8 @@ import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ca.mcgill.ecse321.backend.dao.DocumentRepository;
 import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.model.AcademicSemester;
+import ca.mcgill.ecse321.backend.model.ApplicationForm;
 import ca.mcgill.ecse321.backend.model.Course;
+import ca.mcgill.ecse321.backend.model.Document;
 import ca.mcgill.ecse321.backend.model.DocumentType;
 import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.model.Student;
@@ -33,6 +38,9 @@ public class FileControllerTest {
 	private Internship internship;
 	private Student mockstudent;
 	private Course mockcourse;
+	private AcademicSemester academicSemester;
+	private ApplicationForm applicationForms;
+	private Set<Document> documents;
 	
 	@Autowired
 	private InternshipDto internshipDto;
@@ -57,6 +65,9 @@ public class FileControllerTest {
 	public void setup() throws Exception {
 		clearDatabase();
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		internshipDto.setAcademicSemester(academicSemester);
+		internshipDto.setApplicationForm(applicationForms);
+		internshipDto.setDocument(documents);
 		internship = internshipService.createInternship(internshipDto, mockstudent, mockcourse);
 		internship.setId(5);
 	}
