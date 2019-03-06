@@ -57,7 +57,7 @@ import java.util.Set;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-public class ApplicationFormControllerTest {
+public class ApplicationFormControllerTests {
 	
 	private MockMvc mockMvc;
 	
