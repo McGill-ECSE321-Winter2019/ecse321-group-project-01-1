@@ -7,13 +7,15 @@ import java.util.List;
 
 public class DocumentDto {
 
+    private String id;
     private String fileName;
     private String path;
     private String fileType;
     private long size;
     private DocumentType documentType;
 
-    public DocumentDto(String fileName, String path, String fileType, long size,DocumentType type) {
+    public DocumentDto(String id, String fileName, String path, String fileType, long size,DocumentType type) {
+        this.id = id;
         this.fileName = fileName;
         this.path = path;
         this.fileType = fileType;
@@ -61,4 +63,11 @@ public class DocumentDto {
         this.size = size;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

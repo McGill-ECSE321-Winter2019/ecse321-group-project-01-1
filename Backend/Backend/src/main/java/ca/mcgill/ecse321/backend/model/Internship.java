@@ -21,7 +21,21 @@ import java.sql.Date;
 
 @Entity
 public class Internship{
-	
+
+	public Internship(Course course, AcademicSemester academicSemester, Student student) {
+		this.course = course;
+		this.academicSemester = academicSemester;
+		this.student = student;
+	}
+
+	public Internship(){
+
+	}
+
+	public Internship(Course course){
+		this.course = course;
+	}
+
 	@ManyToOne(optional=false)
 	private Course course;
 
@@ -102,12 +116,7 @@ public class Internship{
 		if (this == o) return true;
 		if (!(o instanceof Internship)) return false;
 		Internship that = (Internship) o;
-		return id == that.id &&
-				Objects.equals(course, that.course) &&
-				Objects.equals(applicationForm, that.applicationForm) &&
-				Objects.equals(document, that.document) &&
-				academicSemester == that.academicSemester &&
-				student.equals(that.student);
+		return id == that.id;
 	}
 
 }

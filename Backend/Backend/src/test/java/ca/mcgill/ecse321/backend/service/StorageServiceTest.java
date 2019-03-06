@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
+import ca.mcgill.ecse321.backend.dto.DocumentDto;
 import ca.mcgill.ecse321.backend.exception.FileStorageException;
 import org.junit.After;
 import org.junit.Before;
@@ -192,5 +193,16 @@ public class StorageServiceTest {
         Internship emptyInternship = null;
         List<Document> document = storageService.readAllDocumentsByInternship(emptyInternship);
         fail();
+    }
+
+    @Test
+    public void toDto(){
+        Document document = storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.EVALUATION);
+        DocumentDto documentDto = storageService.toDto(document);
+
+        assertEquals(document.getDocumentType(),documentDto.getDocumentType());
+        assertEquals(document.getFileName(),documentDto.getFileName());
+        assertEquals(document.getId(),documentDto.getId());
+        assertEquals(document.getSize(),documentDto.getSize());
     }
 }

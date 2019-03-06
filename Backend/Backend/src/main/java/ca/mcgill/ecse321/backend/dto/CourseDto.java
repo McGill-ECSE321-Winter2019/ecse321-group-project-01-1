@@ -53,4 +53,12 @@ public class CourseDto {
 		this.courseID = courseID;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof CourseDto)) return false;
+		CourseDto courseDto = (CourseDto) o;
+		return getId() == courseDto.getId() &&
+				getCourseID().equals(courseDto.getCourseID());
+	}
 }

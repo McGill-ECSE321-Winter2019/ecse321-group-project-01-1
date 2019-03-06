@@ -140,7 +140,7 @@ public class StudentServiceTests {
 	@Transactional
 	public void findStudentByEmail() throws Exception{
 		StudentDto mockDto = createMock();
-		studentService.createStudent(mockDto);
+		studentService.create(mockDto);
 		Student student = studentService.findStudentByEmail(STUDENT_EMAIL);
 		StudentDto fetchedDto = studentService.toDto(student);
 		assertEquals(fetchedDto.getEmail(),mockDto.getEmail());
@@ -153,7 +153,7 @@ public class StudentServiceTests {
 	@Transactional
 	public void findStudentById() throws Exception{
 		StudentDto mockDto = createMock();
-		studentService.createStudent(mockDto);
+		studentService.create(mockDto);
 		Student student = studentService.findStudentById(STUDENT_ID);
 		StudentDto fetchedDto = studentService.toDto(student);
 		assertEquals(fetchedDto.getEmail(),mockDto.getEmail());
@@ -165,8 +165,8 @@ public class StudentServiceTests {
 	@Test
 	@Transactional
 	public void findAllStudents() throws Exception{
-		studentService.createStudent(createMock());
-		studentService.createStudent(createMock4());
+		studentService.create(createMock());
+		studentService.create(createMock4());
 
 		List<Student> students = studentService.getAll();
 		assertEquals(2,students.size());
