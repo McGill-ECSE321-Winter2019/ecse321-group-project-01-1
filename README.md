@@ -21,7 +21,7 @@ Link to the first project report: [Project report 1](https://github.com/McGill-E
 
 |Team member's name|Total hours|Responsibility         |
 |------------------|-----------|-----------------------|
-|Zirui He          |  _12_ hours|Testing and integration|
+|Zirui He          |  _22_ hours|Testing and integration|
 |Binyuan Sun       |  _27_ hours|Backend lead and general tech lead|
 |Tri-tin Truong    |  _22_ hours|Project management|
 |Zhong Yu Yang     |  _20_ hours|Backend implementation|
