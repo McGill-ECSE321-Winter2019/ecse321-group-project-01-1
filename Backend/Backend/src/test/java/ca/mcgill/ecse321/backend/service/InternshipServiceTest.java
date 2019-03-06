@@ -99,12 +99,6 @@ public class InternshipServiceTest {
     }
 
     @Test
-    public void getProgress(){
-        mockInternship.getAcademicSemester();
-
-    }
-
-    @Test
     public void toDto() {
         InternshipDto dto = internshipService.toDto(mockInternship);
         assertEquals(AcademicSemester.FALL,dto.getAcademicSemester());

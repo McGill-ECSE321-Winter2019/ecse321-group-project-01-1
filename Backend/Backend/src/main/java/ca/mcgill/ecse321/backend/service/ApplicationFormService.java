@@ -57,6 +57,11 @@ public class ApplicationFormService {
 
 		return applicationForm;
 	}
+
+	@Transactional
+	public ApplicationForm update(ApplicationForm form){
+		return applicationFormRepository.save(form);
+	}
 	
     
 	@Transactional
