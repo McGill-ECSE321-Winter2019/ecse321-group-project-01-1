@@ -20,9 +20,9 @@ public class ApplicationFormDto {
 
     private boolean workPermit;
 
-    private Internship internship;
+    private InternshipDto internshipDto;
 
-    public ApplicationFormDto(int id, String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit, Internship internship) {
+    public ApplicationFormDto(int id, String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit) {
         this.id = id;
         this.jobID = jobID;
         this.jobDescription = jobDescription;
@@ -31,7 +31,16 @@ public class ApplicationFormDto {
         this.startDate = startDate;
         this.endDate = endDate;
         this.workPermit = workPermit;
-        this.internship = internship;
+    }
+    
+    public ApplicationFormDto(String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit) {
+        this.jobID = jobID;
+        this.jobDescription = jobDescription;
+        this.employer = employer;
+        this.location = location;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.workPermit = workPermit;
     }
 
     public int getId() {
@@ -42,12 +51,12 @@ public class ApplicationFormDto {
         this.id = id;
     }
 
-    public Internship getInternship() {
-        return this.internship;
+    public InternshipDto getInternship() {
+        return this.internshipDto;
     }
 
-    public void setInternship(Internship internship) {
-        this.internship = internship;
+    public void setInternship(InternshipDto internship) {
+        this.internshipDto = internship;
     }
 
     public String getJobDescription() {

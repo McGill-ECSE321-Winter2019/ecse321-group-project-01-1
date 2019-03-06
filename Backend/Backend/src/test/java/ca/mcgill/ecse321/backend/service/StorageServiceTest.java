@@ -18,14 +18,18 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.backend.model.*;
-import ca.mcgill.ecse321.backend.service.BackendApplicationService;
 import ca.mcgill.ecse321.backend.dao.*;
+import ca.mcgill.ecse321.backend.dto.CourseDto;
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
+
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -36,12 +40,18 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 public class StorageServiceTest {
 
-
-    @Autowired
-    private BackendApplicationService service;
-
-    @Autowired
-    private StorageService storageService;
+	@Autowired
+	private StudentService studentService;
+	@Autowired
+	private InternshipService internshipService;
+	@Autowired
+	private ApplicationFormService applicationFormService;
+	@Autowired
+	private StorageService storageService;
+	@Autowired
+	private ReminderService reminderService;
+	@Autowired
+	private CourseService courseService;
 
     @Autowired
     private StudentRepository studentRepository;
@@ -78,73 +88,69 @@ public class StorageServiceTest {
     private Internship mockInternship;
 
     @Before
-    public void setUp(){
+    public void setUp() throws Exception{
         studentRepository.deleteAll();
         documentRepository.deleteAll();
         applicationFormRepository.deleteAll();
         reminderRepository.deleteAll();
         courseRepository.deleteAll();
         internshipRepository.deleteAll();
-        Student student = service.createStudent("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword");
-        Course course = service.createCourse("FACC300");
-        this.mockInternship = service.createInternship(student,course);
+        Student student = studentService.create(new StudentDto("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
+        Course course = courseService.create(new CourseDto("FACC300"));
+       
+        this.mockInternship = internshipService.createInternship(new InternshipDto(AcademicSemester.SUMMER), student, course);
     }
 
 
     @Test
-    @Transactional
     public void testUploadExistence(){
         // make sure it starts empty
-        assertEquals(0, service.readAllDocuments().size());
+        assertEquals(0, storageService.getAll().size());
 
         Document document = storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.CONTRACT);
 
-        assertEquals(1,service.readAllDocuments().size());
+        assertEquals(1,storageService.getAll().size());
     }
 
     @Test
-    @Transactional
     public void testUploadSameName(){
 
-        assertEquals(0, service.readAllDocuments().size());
+        assertEquals(0, storageService.getAll().size());
 
         Document document = storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.CONTRACT);
         Document document1 = storageService.createFile(mockMultipartFile2,mockInternship,DocumentType.EVALUATION);
 
-        assertEquals(2,service.readAllDocuments().size());
+        assertEquals(2,storageService.getAll().size());
     }
 
     @Test
-    @Transactional
     public void testReUpload(){
-        assertEquals(0, service.readAllDocuments().size());
+        assertEquals(0, storageService.getAll().size());
 
         Document document = storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.EVALUATION);
-        assertEquals(1,service.readAllDocuments().size());
+        assertEquals(1,storageService.getAll().size());
 
         Document document1 = storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.EVALUATION);
-        assertEquals(1,service.readAllDocuments().size());
+        assertEquals(1,storageService.getAll().size());
     }
 
     @Test
-    @Transactional
     public void testGetAllDocumentsByInternship(){
-        assertEquals(0, service.readAllDocuments().size());
+        assertEquals(0, storageService.getAll().size());
 
         storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.EVALUATION);
         storageService.createFile(mockMultipartFile1,mockInternship,DocumentType.CONTRACT);
         storageService.createFile(mockMultipartFile2,mockInternship,DocumentType.TECHNICAL_REPORT);
 
-        assertEquals(3, service.readAllDocuments().size());
+        assertEquals(3, storageService.getAll().size());
 
         List<Document> documents = storageService.readAllDocumentsByInternship(mockInternship);
         assertEquals(3,documents.size());
     }
 
     @Test
-    @Transactional
     public void testGetDocumentsByInternshipAndType(){
-        assertEquals(0, service.readAllDocuments().size());
+        assertEquals(0, storageService.getAll().size());
 
         storageService.createFile(mockMultipartFile2,mockInternship,DocumentType.EVALUATION);
         storageService.createFile(mockMultipartFile3,mockInternship,DocumentType.CONTRACT);
@@ -161,18 +167,16 @@ public class StorageServiceTest {
     }
 
     @Test(expected = FileStorageException.class)
-    @Transactional
     public void testInvalidName(){
-        assertEquals(0, service.readAllDocuments().size());
+        assertEquals(0, storageService.getAll().size());
 
         storageService.createFile(invalideFileNameFile,mockInternship,DocumentType.EVALUATION);
         fail();
     }
 
     @Test
-    @Transactional
     public void testGetDocumentById(){
-        assertEquals(0, service.readAllDocuments().size());
+        assertEquals(0, storageService.getAll().size());
 
         storageService.createFile(mockMultipartFile2,mockInternship,DocumentType.EVALUATION);
         Document document = storageService.readDocumentByType(mockInternship,DocumentType.EVALUATION);
@@ -183,7 +187,6 @@ public class StorageServiceTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    @Transactional
     public void testNullInternshipException(){
         storageService.createFile(mockMultipartFile2,mockInternship,DocumentType.EVALUATION);
         Internship emptyInternship = null;

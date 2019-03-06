@@ -1,22 +1,42 @@
 package org.hibernate.dialect.identity;
 
-import org.hibernate.MappingException;
-
 public class SQLiteIdentityColumnSupport extends IdentityColumnSupportImpl {
-	 
-    @Override
-    public boolean supportsIdentityColumns() {
-        return true;
-    }
- 
-    @Override
-    public String getIdentitySelectString(String table, String column, int type) 
-      throws MappingException {
-        return "select last_insert_rowid()";
-    }
- 
-    @Override
-    public String getIdentityColumnString(int type) throws MappingException {
-        return "integer";
-    }
+	@Override
+	public boolean supportsIdentityColumns() {
+		return true;
+	}
+
+  /*
+	public boolean supportsInsertSelectIdentity() {
+    return true; // As specified in NHibernate dialect
+  }
+  */
+
+	@Override
+	public boolean hasDataTypeInIdentityColumn() {
+		// As specified in NHibernate dialect
+		// FIXME true
+		return false;
+	}
+
+  /*
+	public String appendIdentitySelectToInsert(String insertString) {
+    return new StringBuffer(insertString.length()+30). // As specified in NHibernate dialect
+      append(insertString).
+      append("; ").append(getIdentitySelectString()).
+      toString();
+  }
+  */
+
+	@Override
+	public String getIdentitySelectString(String table, String column, int type) {
+		return "select last_insert_rowid()";
+	}
+
+	@Override
+	public String getIdentityColumnString(int type) {
+		// return "integer primary key autoincrement";
+		// FIXME "autoincrement"
+		return "integer";
+	}
 }
