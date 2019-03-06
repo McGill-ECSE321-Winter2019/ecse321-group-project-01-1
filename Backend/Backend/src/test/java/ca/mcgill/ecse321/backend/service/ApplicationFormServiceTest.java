@@ -1,15 +1,11 @@
 package ca.mcgill.ecse321.backend.service;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-
 import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
 import ca.mcgill.ecse321.backend.dao.CourseRepository;
 import ca.mcgill.ecse321.backend.dao.InternshipRepository;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
 import ca.mcgill.ecse321.backend.dto.CourseDto;
-import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.dto.StudentDto;
 import ca.mcgill.ecse321.backend.model.*;
 import org.junit.Before;
@@ -19,10 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import java.sql.Date;
 import java.util.HashSet;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

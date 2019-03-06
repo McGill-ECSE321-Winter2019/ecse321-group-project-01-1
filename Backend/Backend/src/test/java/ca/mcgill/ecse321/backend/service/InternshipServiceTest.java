@@ -63,6 +63,11 @@ public class InternshipServiceTest {
     }
 
     @Test
+    public void testInitialization(){
+        assertEquals(0,mockInternship.getId());
+    }
+
+    @Test
     @Transactional
     public void createInternship()throws Exception {
         assertEquals(0, internshipService.getAll().size());

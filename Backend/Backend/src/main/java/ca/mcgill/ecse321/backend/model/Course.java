@@ -1,21 +1,24 @@
 package ca.mcgill.ecse321.backend.model;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Course {
-	
-	
-	@OneToMany(cascade={CascadeType.ALL})
+
+	public Course(Set<Internship> internship, String courseID) {
+		this.internship = internship;
+		this.courseID = courseID;
+	}
+
+	public Course(){
+
+	}
+	@OneToMany(fetch= FetchType.EAGER, cascade={CascadeType.ALL})
 	private Set<Internship> internship = new HashSet<Internship>();
 
 	public Set<Internship> getInternship() {
@@ -59,4 +62,11 @@ public class Course {
 		this.courseID = courseID;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Course)) return false;
+		Course course = (Course) o;
+		return getId() == course.getId();
+	}
 }
