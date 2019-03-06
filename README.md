@@ -17,7 +17,7 @@ The main goals for our viewpoint are to create a web and mobile application capa
 Link to the first project report: [Project report 1](https://github.com/McGill-ECSE321-Winter2019/ecse321-group-project-01-1/wiki/Project-report-deliverables-1)
 
 
-## Deliverable 1
+## Deliverable 2
 
 |Team member's name|Total hours|Responsibility         |
 |------------------|-----------|-----------------------|
