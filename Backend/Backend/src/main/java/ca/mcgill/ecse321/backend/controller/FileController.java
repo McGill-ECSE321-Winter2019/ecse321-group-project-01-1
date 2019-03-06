@@ -32,12 +32,11 @@ public class FileController {
 
     public DocumentDto uploadFile(@RequestParam("file") MultipartFile file,
                                   @RequestParam("type") DocumentType type,
-                                  @RequestParam("internship") Internship internship,
                                   @PathVariable(value="internship_id") int internshipId){
         Student student = authenticationService.getCurrentStudent();
         Internship i = internshipService.findByIdAndStudent(internshipId, student);
         if (i == null) throw new AccessDeniedException("");
-        Document dbFile = storageService.createFile(file, internship, type);
+        Document dbFile = storageService.createFile(file, i, type);
         return storageService.toDto(dbFile);
     }
 
