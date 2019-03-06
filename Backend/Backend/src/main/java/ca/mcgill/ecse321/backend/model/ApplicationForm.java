@@ -1,6 +1,11 @@
 package ca.mcgill.ecse321.backend.model;
-import javax.persistence.*;
+import javax.persistence.ManyToOne;
 import java.sql.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -22,22 +27,7 @@ public class ApplicationForm{
 	private String jobID;
 	private String jobDescription;
 
-	public ApplicationForm(String jobID, String jobDescription, Internship internship, String employer, String location, Date startDate, Date endDate, boolean workPermit) {
-		this.jobID = jobID;
-		this.jobDescription = jobDescription;
-		this.internship = internship;
-		this.employer = employer;
-		this.location = location;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.workPermit = workPermit;
-	}
-
-	public ApplicationForm(){
-
-	}
-
-	@OneToOne(optional=false)
+	@ManyToOne(optional=false)
 	private Internship internship;
 	
 	public int getId() {

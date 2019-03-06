@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Student{
-
+	
 	@Id
 	private String studentID;
 
@@ -25,7 +25,7 @@ public class Student{
 
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="student")
 	private Set<Reminder> reminder;
-
+	
 	public String getStudentID() {
 		return studentID;
 	}
@@ -74,15 +74,14 @@ public class Student{
 		this.reminder = reminders;
 	}
 	
-	@OneToMany(mappedBy="student", cascade={CascadeType.ALL})
-	private Set<Internship> internship;
+	@OneToOne(mappedBy="student", cascade={CascadeType.ALL}, optional=false)
+	private Internship internship;
 
-	public Set<Internship> getInternship() {
+	public Internship getInternship() {
 		return this.internship;
 	}
 
-	public void setInternship(Set<Internship> internships) {
-		this.internship = internships;
+	public void setInternship(Internship internship) {
+		this.internship = internship;
 	}
-
 }

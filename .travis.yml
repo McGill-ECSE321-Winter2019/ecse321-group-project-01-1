@@ -1,14 +1,4 @@
 language: java
-# branches:
-#   only:
-#   - master
-#   - dev
+
 script:
-- "./gradlew build"
-deploy:
-  provider: heroku
-  api_key:
-    secure: i/btAMQfvmddz5oo+u7xKBX81FI7rJj0B7zzfTQCmftCvRV1GC2zIRBK5DNlcaTnmmsY0wXOkCCOZ2mLVct0WOays3P9WqATLzu7xdc7WGwK5rg3f40Vw0Y5nC7Kd7jOTrQctYizST7nUF/8vMWqtUB25n5boRE1Xx5HXbVS+c10oAZzNspNjX2b/zqwVmqf1NY0e4b/Zh40Di0EMPsdAPXiQp09DeLrLRIL09ws0KpGY9M9ldgtMWK0bh7W1ftdW07eL/TtKj2ayhrBcd4clRSctFGn3md9CSj+uRd+zsqHCdwmyz2tnox30bfU5vV9z4tXWnCqKTDYtSmpmd/D9GMZ0bW/4BJ5ZPWgXHmLjU+TaRuEV+xyKOEvT3Xj1NiDeUQQivlR3J3KiCHFoevYCKqWhULbKa/TvvJaiJX6ggeNLuyloJERH12yM1VdmWRU16HvirZe5eKvtRdZ0aRjlxdk4ivAQ7lT8vDPRERzIbMhiioXadC01zEiPwjBKAYpxfhvcKrCA1FvVuQnxXfWsWRptM0JS5i4rN7ByzjIWBKrFYqbF2euquDfWKtSLvqHeazv+nvYjpISPltQa6pcCLmqk5/1bRnT9/4CmcKXUWaz7+vFNJpCMXrOQ9ZP+NjvVnT4MhH8vHpX5A+mj9x8HRlJ6xduGgy3J0JWYpkOTrk=
-  on:
-    branch: master
-  app: student-backend-n
+- ./gradlew build

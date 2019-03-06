@@ -43,15 +43,15 @@ public class Internship{
 			strategy = "native"
 			)
 	private int id;
+	@OneToMany(mappedBy="internship", cascade={CascadeType.ALL})
+	private Set<ApplicationForm> applicationForm;
 
-	@OneToOne(mappedBy="internship", cascade={CascadeType.ALL})
-	private ApplicationForm applicationForm;
 
-	public ApplicationForm getApplicationForm() {
+	public Set<ApplicationForm> getApplicationForm() {
 		return this.applicationForm;
 	}
 
-	public void setApplicationForm(ApplicationForm applicationForms) {
+	public void setApplicationForm(Set<ApplicationForm> applicationForms) {
 		this.applicationForm = applicationForms;
 	}
 
@@ -78,7 +78,7 @@ public class Internship{
 		this.academicSemester = academicSemester;
 	}
 
-	@ManyToOne(optional=false)
+	@OneToOne(optional=false)
 	private Student student;
 
 	public int getId() {
