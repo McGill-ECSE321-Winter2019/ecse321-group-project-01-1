@@ -21,10 +21,8 @@ import static org.mockito.Mockito.mock;
 @SpringBootTest
 public class CourseTest {
 	
-	@InjectMocks
-	private Course course; //entity to test on
-	@Mock
-	private Internship dummyInternship;
+	private Course course = new Course(); //entity to test on
+	private Internship dummyInternship = new Internship();
 
 	private static final int ID = 678;
 	private static final String COURSE_ID = "123";

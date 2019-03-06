@@ -61,6 +61,7 @@ public class CourseService {
 	
     public CourseDto toDto(Course course) {
     	CourseDto courseDto = new CourseDto();
+    	courseDto.setId(course.getId());
     	courseDto.setCourseID(course.getCourseID());
 		return courseDto;
     	
