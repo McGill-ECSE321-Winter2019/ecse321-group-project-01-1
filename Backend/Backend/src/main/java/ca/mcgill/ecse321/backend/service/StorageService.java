@@ -72,13 +72,13 @@ public class StorageService {
     
     public DocumentDto toDto(Document document){
     	DocumentDto documentDto = new DocumentDto(
+    	        document.getId(),
     			document.getFileName(),
     			generateFileUri(document.getInternship().getId(), document.getId()),
     			document.getFileType(),
     			document.getSize(),
     			document.getDocumentType()
     	);
-
         return documentDto;
 	}
     

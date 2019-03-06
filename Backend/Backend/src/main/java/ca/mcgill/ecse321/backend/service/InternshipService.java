@@ -52,7 +52,7 @@ public class InternshipService {
 
     	return internshipRepository.save(internship);
 	}
-	
+
 	@Transactional
 	public 	Internship findInternshipById(int id) {
 		return internshipRepository.findInternshipById(id);
@@ -112,6 +112,11 @@ public class InternshipService {
 			resultList.add(t);
 		}
 		return resultList;
+	}
+
+	@Transactional
+	public List<Internship> getAll() {
+		return toList(internshipRepository.findAll());
 	}
     
 }

@@ -42,6 +42,22 @@ public class Document {
 
 	private long size;
 
+	private String path;
+
+	@Enumerated(EnumType.STRING)
+	private DocumentType documentType;
+
+	@ManyToOne(optional = false)
+	private Internship internship;
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -61,12 +77,6 @@ public class Document {
 	public Internship getInternship() {
 		return this.internship;
 	}
-
-	@Enumerated(EnumType.STRING)
-	private DocumentType documentType;
-
-	@ManyToOne(optional = false)
-	private Internship internship;
 
 	public void setInternship(Internship internship) {
 		this.internship = internship;

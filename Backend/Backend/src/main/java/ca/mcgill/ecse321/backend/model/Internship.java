@@ -3,6 +3,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.OneToOne;
 
@@ -20,7 +21,21 @@ import java.sql.Date;
 
 @Entity
 public class Internship{
-	
+
+	@Id
+	@GeneratedValue(
+			strategy= GenerationType.AUTO,
+			generator="native"
+	)
+	@GenericGenerator(
+			name = "native",
+			strategy = "native"
+	)
+	private int id;
+
+	@ManyToOne(optional=false)
+	private Student student;
+
 	@ManyToOne(optional=false)
 	private Course course;
 
@@ -32,20 +47,21 @@ public class Internship{
 		this.course = course;
 	}
 
-
-	@Id
-	@GeneratedValue(
-			strategy= GenerationType.AUTO,
-			generator="native"
-			)
-	@GenericGenerator(
-			name = "native",
-			strategy = "native"
-			)
-	private int id;
-
 	@OneToOne(mappedBy="internship", cascade={CascadeType.ALL})
 	private ApplicationForm applicationForm;
+
+	@OneToMany(mappedBy="internship", cascade={CascadeType.ALL})
+	private Set<Document> document = new HashSet<Document>();
+
+	public Internship(Course course, AcademicSemester academicSemester, Student student) {
+		this.course = course;
+		this.academicSemester = academicSemester;
+		this.student = student;
+	}
+
+	public Internship(){
+
+	}
 
 	public ApplicationForm getApplicationForm() {
 		return this.applicationForm;
@@ -54,10 +70,6 @@ public class Internship{
 	public void setApplicationForm(ApplicationForm applicationForms) {
 		this.applicationForm = applicationForms;
 	}
-
-
-	@OneToMany(mappedBy="internship", cascade={CascadeType.ALL})
-	private Set<Document> document = new HashSet<Document>();
 
 	public Set<Document> getDocument() {
 		return this.document;
@@ -78,9 +90,6 @@ public class Internship{
 		this.academicSemester = academicSemester;
 	}
 
-	@ManyToOne(optional=false)
-	private Student student;
-
 	public int getId() {
 		return id;
 	}
@@ -97,5 +106,16 @@ public class Internship{
 		this.student = student;
 	}
 
+	public Internship(Course course){
+		this.course = course;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Internship)) return false;
+		Internship that = (Internship) o;
+		return id == that.id;
+	}
 
 }

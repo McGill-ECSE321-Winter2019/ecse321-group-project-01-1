@@ -121,4 +121,12 @@ public class ApplicationForm{
 		this.jobID = jobID;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof ApplicationForm)) return false;
+		ApplicationForm that = (ApplicationForm) o;
+		return getId() == that.getId();
+	}
+
 }

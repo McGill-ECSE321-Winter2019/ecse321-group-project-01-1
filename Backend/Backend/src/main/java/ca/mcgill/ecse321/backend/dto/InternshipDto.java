@@ -2,7 +2,9 @@ package ca.mcgill.ecse321.backend.dto;
 
 import ca.mcgill.ecse321.backend.model.*;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class InternshipDto {
@@ -11,10 +13,10 @@ public class InternshipDto {
 
     }
 
-    public InternshipDto(AcademicSemester academicSemester) {
-        this.course = course;
+    public InternshipDto(AcademicSemester academicSemesterm) {
         this.academicSemester = academicSemester;
     }
+
     private int id;
 
     private CourseDto course;
@@ -84,4 +86,14 @@ public class InternshipDto {
 	public void setProgress(boolean[] progress) {
 		this.progress = progress;
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof InternshipDto)) return false;
+        InternshipDto that = (InternshipDto) o;
+        return getId() == that.getId() &&
+                getAcademicSemester() == that.getAcademicSemester() &&
+                Arrays.equals(getProgress(), that.getProgress());
+    }
 }
