@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
-import ca.mcgill.ecse321.backend.dao.DocumentRepository;
 import ca.mcgill.ecse321.backend.dao.CourseRepository;
 import ca.mcgill.ecse321.backend.dao.DocumentRepository;
 import ca.mcgill.ecse321.backend.dao.InternshipRepository;
@@ -58,13 +57,7 @@ public class BackendApplicationService {
 		S = studentRepository.save(S);
 		return S;
 	}
-
-	@Transactional
-	public Student updateStudent(Student student){
-		studentRepository.save(student);
-		return student;
-	}
-
+	
 	@Transactional
 	public Student readStudent(String studentID) {
 		Student S = studentRepository.findStudentByStudentID(studentID);
@@ -95,10 +88,10 @@ public class BackendApplicationService {
 	}
 	
 	@Transactional
-	public List<Document> readAllDocuments() {
+	public List<Document> getAllDocuments() {
 		return toList(documentRepository.findAll());
 	}
-
+	
 	//Internship
 	@Transactional
 	public Internship createInternship(Student student, Course course) {
@@ -107,7 +100,7 @@ public class BackendApplicationService {
 		internship.setStudent(student);
 
 		internship = internshipRepository.save(internship);
-
+		
 		return internship;
 	}
 	
@@ -117,33 +110,20 @@ public class BackendApplicationService {
 	}
 	
 	@Transactional
-	public List<Internship> readAllInternships() {
+	public List<Internship> getAllInternships() {
 		return toList(internshipRepository.findAll());
-	}
-
-
-	@Transactional
-	public Set<Internship> readAllInternshipsByStudent(Student student){
-		return new HashSet<Internship>(internshipRepository.findAllInternshipByStudent(student));
 	}
 	
 	//ApplicationForm
-
 	@Transactional
-	public ApplicationForm createApplicationForm (String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit, Internship internship) {
+	public ApplicationForm createApplicationForm (Internship internship, String jobID) {
 		ApplicationForm A = new ApplicationForm();
-
+		
 		A.setJobID(jobID);
 		A.setInternship(internship);
-		A.setEmployer(employer);
-		A.setEndDate(endDate);
-		A.setStartDate(startDate);
-		A.setWorkPermit(workPermit);
-		A.setLocation(location);
-		A.setJobDescription(jobDescription);
 		
 		A = applicationFormRepository.save(A);
-
+		
 		return A;
 	}
 	
@@ -154,7 +134,7 @@ public class BackendApplicationService {
 	}
 	
 	@Transactional
-	public List<ApplicationForm> readAllApplicationForms() {
+	public List<ApplicationForm> getAllApplicationForms() {
 		return toList(applicationFormRepository.findAll());
 	}
 	
@@ -165,6 +145,7 @@ public class BackendApplicationService {
 		R.setMessage(message);
 		R.setStudent(S);
 		R = reminderRepository.save(R);
+		
 		return R;
 	}
 	
@@ -186,9 +167,9 @@ public class BackendApplicationService {
 		}
 		return resultList;
 	}
-
-
+	
 	// Course
+	
 	@Transactional
 	public Course createCourse (String courseID) {
 		Course course = new Course();
@@ -196,12 +177,12 @@ public class BackendApplicationService {
 		course = courseRepository.save(course);
 		return course;
 	}
-
+	
 	@Transactional
 	public Course readCourse(int id) {
 		return courseRepository.findCourseById(id);
 	}
-
+	
 	@Transactional
 	public List<Course> getAllCourses() {
 		return toList(courseRepository.findAll());

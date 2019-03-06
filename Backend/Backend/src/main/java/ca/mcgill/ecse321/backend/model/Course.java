@@ -25,10 +25,6 @@ public class Course {
 		return this.internship;
 	}
 
-	public Set<Internship> setInternship(Internship new_internship){
-		internship.add(new_internship);
-		return internship;
-	}
 
 	@Id
 	@GeneratedValue(
@@ -41,7 +37,9 @@ public class Course {
 			)
 	private int id;
 
+
 	private String courseID;
+
 
 	public String getCourseID() {
 		return courseID;
