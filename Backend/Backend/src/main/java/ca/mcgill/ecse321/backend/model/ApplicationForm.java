@@ -1,11 +1,6 @@
 package ca.mcgill.ecse321.backend.model;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.sql.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -22,12 +17,27 @@ public class ApplicationForm{
 			name = "native",
 			strategy = "native"
 			)
-	private int id;
+	private int id; //ID for internal use, to distinguish between different application forms
 
-	private String jobID;
+	private String jobID; //Publicly posted Job ID that can be found with the job description 
 	private String jobDescription;
 
-	@ManyToOne(optional=false)
+	public ApplicationForm(String jobID, String jobDescription, Internship internship, String employer, String location, Date startDate, Date endDate, boolean workPermit) {
+		this.jobID = jobID;
+		this.jobDescription = jobDescription;
+		this.internship = internship;
+		this.employer = employer;
+		this.location = location;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.workPermit = workPermit;
+	}
+
+	public ApplicationForm(){
+
+	}
+
+	@OneToOne(optional=false)
 	private Internship internship;
 	
 	public int getId() {
@@ -109,6 +119,14 @@ public class ApplicationForm{
 
 	public void setJobID(String jobID) {
 		this.jobID = jobID;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof ApplicationForm)) return false;
+		ApplicationForm that = (ApplicationForm) o;
+		return getId() == that.getId();
 	}
 
 }

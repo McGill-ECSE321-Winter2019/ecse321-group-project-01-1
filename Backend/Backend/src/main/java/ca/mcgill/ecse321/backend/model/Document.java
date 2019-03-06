@@ -16,43 +16,39 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Document{
+public class Document {
+	public Document(String fileName, String fileType, byte[] data, long size) {
+		this.fileName = fileName;
+		this.fileType = fileType;
+		this.data = data;
+		this.size = size;
+	}
+
+	public Document() {
+
+	}
+
 
 	@Id
-	@GeneratedValue(
-			strategy= GenerationType.AUTO,
-			generator="native"
-			)
-	@GenericGenerator(
-			name = "native",
-			strategy = "native"
-			)
-	private int id;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	private String id;
 
-	@ManyToOne(optional=false)
-	private Internship internship;
+	private String fileName;
 
+	private String fileType;
 
-	public Internship getInternship() {
-		return this.internship;
-	}
+	private byte[] data;
 
-	public void setInternship(Internship internship) {
-		this.internship = internship;
-	}
-	
+	private long size;
+
 	private String path;
 
 	@Enumerated(EnumType.STRING)
 	private DocumentType documentType;
 
-	public DocumentType getDocumentType() {
-		return this.documentType;
-	}
-
-	public void setDocumentType(DocumentType documentType) {
-		this.documentType = documentType;
-	}
+	@ManyToOne(optional = false)
+	private Internship internship;
 
 	public String getPath() {
 		return path;
@@ -62,4 +58,59 @@ public class Document{
 		this.path = path;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
+	}
+
+	public long getSize() {
+		return size;
+	}
+
+	public Internship getInternship() {
+		return this.internship;
+	}
+
+	public void setInternship(Internship internship) {
+		this.internship = internship;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public byte[] getData() {
+		return data;
+	}
+
+	public DocumentType getDocumentType() {
+		return this.documentType;
+	}
+
+	public void setDocumentType(DocumentType documentType) {
+		this.documentType = documentType;
+	}
+
+	public String  getId() {
+		return id;
+	}
 }

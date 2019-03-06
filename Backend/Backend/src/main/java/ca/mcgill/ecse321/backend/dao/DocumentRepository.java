@@ -1,11 +1,17 @@
 package ca.mcgill.ecse321.backend.dao;
 
+import ca.mcgill.ecse321.backend.model.DocumentType;
+import ca.mcgill.ecse321.backend.model.Internship;
 import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.backend.model.Document;
 
-public interface DocumentRepository extends CrudRepository<Document, Integer>{
+import java.util.List;
 
-	Document findDocumentById(int id);
+public interface DocumentRepository extends CrudRepository<Document, String>{
 
+	Document findDocumentById(String id);
+	List<Document> findDocumentByInternship(Internship internship);
+	Document findDocumentByInternshipAndDocumentType(Internship internship, DocumentType type);
+//	Boolean findDocumentByInternshipAndDocumentTypeExists(Internship internship, DocumentType type);
 }
