@@ -1,19 +1,8 @@
 package ca.mcgill.ecse321.backend.model;
-import javax.persistence.ManyToOne;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import java.util.Set;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 @Entity
 public class Document {

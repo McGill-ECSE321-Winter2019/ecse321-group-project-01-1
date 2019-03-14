@@ -1,10 +1,12 @@
 package ca.mcgill.ecse321.backend.dto;
 
-import ca.mcgill.ecse321.backend.model.*;
+import ca.mcgill.ecse321.backend.model.AcademicSemester;
+import ca.mcgill.ecse321.backend.model.ApplicationForm;
+import ca.mcgill.ecse321.backend.model.Document;
+import ca.mcgill.ecse321.backend.model.Student;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class InternshipDto {

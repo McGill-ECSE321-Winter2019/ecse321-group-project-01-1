@@ -1,27 +1,5 @@
 package ca.mcgill.ecse321.backend.controller;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithAnonymousUser;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestContext;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.util.NestedServletException;
-
 import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
 import ca.mcgill.ecse321.backend.dao.CourseRepository;
 import ca.mcgill.ecse321.backend.dao.InternshipRepository;
@@ -30,30 +8,33 @@ import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
 import ca.mcgill.ecse321.backend.dto.CourseDto;
 import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.dto.StudentDto;
-import ca.mcgill.ecse321.backend.model.AcademicSemester;
-import ca.mcgill.ecse321.backend.model.ApplicationForm;
-import ca.mcgill.ecse321.backend.model.Course;
-import ca.mcgill.ecse321.backend.model.Document;
-import ca.mcgill.ecse321.backend.model.Internship;
-import ca.mcgill.ecse321.backend.model.Student;
+import ca.mcgill.ecse321.backend.model.*;
 import ca.mcgill.ecse321.backend.service.ApplicationFormService;
 import ca.mcgill.ecse321.backend.service.CourseService;
 import ca.mcgill.ecse321.backend.service.InternshipService;
-import ca.mcgill.ecse321.backend.service.ReminderService;
 import ca.mcgill.ecse321.backend.service.StudentService;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.*;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.sql.Date;
-import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
  
 @RunWith(SpringRunner.class)

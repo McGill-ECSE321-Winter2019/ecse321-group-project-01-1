@@ -1,13 +1,16 @@
 package ca.mcgill.ecse321.backend.controller;
 
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
 import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.model.Student;
 import ca.mcgill.ecse321.backend.service.AuthenticationService;
 import ca.mcgill.ecse321.backend.service.InternshipService;
 import ca.mcgill.ecse321.backend.service.StudentService;
-import ca.mcgill.ecse321.backend.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashSet;
 import java.util.Set;

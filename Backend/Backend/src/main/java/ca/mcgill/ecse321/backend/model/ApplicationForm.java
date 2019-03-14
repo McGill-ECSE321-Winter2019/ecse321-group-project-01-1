@@ -1,8 +1,9 @@
 package ca.mcgill.ecse321.backend.model;
-import javax.persistence.*;
-import java.sql.Date;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.sql.Date;
 
 
 @Entity

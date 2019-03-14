@@ -1,21 +1,18 @@
 package ca.mcgill.ecse321.backend.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-//import
-//ca.mcgill.ecse321.backend.BackendApplicationController;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
+
+//import
+//ca.mcgill.ecse321.backend.BackendApplicationController;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

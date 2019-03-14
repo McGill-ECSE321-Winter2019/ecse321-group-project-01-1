@@ -1,15 +1,7 @@
 package ca.mcgill.ecse321.backend.dto;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.GenericGenerator;
 
 public class CourseDto {
 	

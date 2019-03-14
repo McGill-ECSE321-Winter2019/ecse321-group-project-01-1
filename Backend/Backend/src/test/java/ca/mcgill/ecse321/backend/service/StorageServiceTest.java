@@ -1,40 +1,24 @@
 package ca.mcgill.ecse321.backend.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
-
+import ca.mcgill.ecse321.backend.dao.*;
+import ca.mcgill.ecse321.backend.dto.CourseDto;
 import ca.mcgill.ecse321.backend.dto.DocumentDto;
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
 import ca.mcgill.ecse321.backend.exception.FileStorageException;
-import org.junit.After;
+import ca.mcgill.ecse321.backend.model.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import ca.mcgill.ecse321.backend.model.*;
-import ca.mcgill.ecse321.backend.dao.*;
-import ca.mcgill.ecse321.backend.dto.CourseDto;
-import ca.mcgill.ecse321.backend.dto.InternshipDto;
-import ca.mcgill.ecse321.backend.dto.StudentDto;
+import java.util.List;
 
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 
 @RunWith(SpringRunner.class)

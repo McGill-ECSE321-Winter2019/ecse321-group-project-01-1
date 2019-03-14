@@ -1,19 +1,11 @@
 package ca.mcgill.ecse321.backend.dto;
 
-import java.util.ArrayList;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.validation.constraints.*;
-
-
-import ca.mcgill.ecse321.backend.model.Internship;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 public class StudentDto{
 

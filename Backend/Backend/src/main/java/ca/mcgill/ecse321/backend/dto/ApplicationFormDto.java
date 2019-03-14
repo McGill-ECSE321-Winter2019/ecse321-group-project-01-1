@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.backend.dto;
 
-import ca.mcgill.ecse321.backend.model.Internship;
-
 import java.sql.Date;
 
 public class ApplicationFormDto {

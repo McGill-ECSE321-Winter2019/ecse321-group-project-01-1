@@ -1,7 +1,10 @@
 package ca.mcgill.ecse321.backend.controller;
 
 import ca.mcgill.ecse321.backend.dto.DocumentDto;
-import ca.mcgill.ecse321.backend.model.*;
+import ca.mcgill.ecse321.backend.model.Document;
+import ca.mcgill.ecse321.backend.model.DocumentType;
+import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
 import ca.mcgill.ecse321.backend.service.AuthenticationService;
 import ca.mcgill.ecse321.backend.service.InternshipService;
 import ca.mcgill.ecse321.backend.service.StorageService;
@@ -14,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.ArrayList;
 

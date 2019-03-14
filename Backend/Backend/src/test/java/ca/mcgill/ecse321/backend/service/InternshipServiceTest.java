@@ -1,8 +1,5 @@
 package ca.mcgill.ecse321.backend.service;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-
 import ca.mcgill.ecse321.backend.dao.CourseRepository;
 import ca.mcgill.ecse321.backend.dao.InternshipRepository;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
@@ -17,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.HashSet;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

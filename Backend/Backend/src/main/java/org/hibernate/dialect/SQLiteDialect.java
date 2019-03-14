@@ -1,12 +1,7 @@
 package org.hibernate.dialect;
 
 
-import org.hibernate.dialect.function.AbstractAnsiTrimEmulationFunction;
-import org.hibernate.dialect.function.NoArgSQLFunction;
-import org.hibernate.dialect.function.SQLFunction;
-import org.hibernate.dialect.function.SQLFunctionTemplate;
-import org.hibernate.dialect.function.StandardSQLFunction;
-import org.hibernate.dialect.function.VarArgsSQLFunction;
+import org.hibernate.dialect.function.*;
 import org.hibernate.dialect.identity.IdentityColumnSupport;
 import org.hibernate.dialect.identity.SQLiteIdentityColumnSupport;
 import org.hibernate.dialect.unique.SQLiteUniqueDelegate;

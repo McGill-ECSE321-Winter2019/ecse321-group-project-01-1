@@ -1,31 +1,27 @@
 package ca.mcgill.ecse321.backend.service;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-
-import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
 import ca.mcgill.ecse321.backend.dao.CourseRepository;
 import ca.mcgill.ecse321.backend.dao.InternshipRepository;
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
-import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
 import ca.mcgill.ecse321.backend.dto.CourseDto;
 import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.dto.StudentDto;
-import ca.mcgill.ecse321.backend.model.*;
-import org.hibernate.Hibernate;
+import ca.mcgill.ecse321.backend.model.AcademicSemester;
+import ca.mcgill.ecse321.backend.model.Course;
+import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import org.springframework.transaction.annotation.Transactional;
-
-import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

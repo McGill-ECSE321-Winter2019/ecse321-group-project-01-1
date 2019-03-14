@@ -1,12 +1,11 @@
 package ca.mcgill.ecse321.backend.controller;
 
 import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
-import ca.mcgill.ecse321.backend.dto.InternshipDto;
-import ca.mcgill.ecse321.backend.model.*;
+import ca.mcgill.ecse321.backend.model.ApplicationForm;
+import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.service.ApplicationFormService;
 import ca.mcgill.ecse321.backend.service.AuthenticationService;
 import ca.mcgill.ecse321.backend.service.InternshipService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
