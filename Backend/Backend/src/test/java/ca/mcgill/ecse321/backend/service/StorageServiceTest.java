@@ -75,11 +75,7 @@ public class StorageServiceTest {
     @Before
     public void setUp() throws Exception{
         studentRepository.deleteAll();
-        documentRepository.deleteAll();
-        applicationFormRepository.deleteAll();
-        reminderRepository.deleteAll();
         courseRepository.deleteAll();
-        internshipRepository.deleteAll();
         Student student = studentService.create(new StudentDto("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
         Course course = courseService.create(new CourseDto("FACC300"));
        
