@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.backend.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ApplicationFormDto {
 
     private int id;
@@ -18,6 +20,7 @@ public class ApplicationFormDto {
 
     private boolean workPermit;
 
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     private InternshipDto internshipDto;
 
     public ApplicationFormDto(int id, String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit) {

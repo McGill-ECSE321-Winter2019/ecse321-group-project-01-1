@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import ca.mcgill.ecse321.backend.model.AcademicSemester;
 
-@JsonInclude(Include.NON_NULL)
+
+
 public class InternshipDto {
 
     public InternshipDto(){
@@ -43,9 +43,11 @@ public class InternshipDto {
     public void setCourse(CourseDto course) {
         this.course = course;
     }
-
+    
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     private ApplicationFormDto applicationForm;
 
+    
     public ApplicationFormDto getApplicationForm() {
         return this.applicationForm;
     }
@@ -53,9 +55,11 @@ public class InternshipDto {
     public void setApplicationForm(ApplicationFormDto applicationForms) {
         this.applicationForm = applicationForms;
     }
-
+    
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     private Set<DocumentDto> document = new HashSet<DocumentDto>();
 
+    
     public Set<DocumentDto> getDocument() {
         return this.document;
     }
@@ -72,8 +76,10 @@ public class InternshipDto {
         this.academicSemester = academicSemester;
     }
 
+    
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     private StudentDto student;
-
+    
     public StudentDto getStudent() {
         return this.student;
     }
@@ -100,3 +106,4 @@ public class InternshipDto {
                 Arrays.equals(getProgress(), that.getProgress());
     }
 }
+

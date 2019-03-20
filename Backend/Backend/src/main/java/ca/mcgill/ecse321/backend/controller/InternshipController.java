@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.backend.controller;
 
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -78,7 +77,7 @@ public class InternshipController {
     }
 	
 	@PostMapping(value = { "/external/students/{student_id}/internships", "/external/students/{student_id}/internships/" })
-	public InternshipDto createInternship(@RequestParam(name = "student_id") String studentID,
+	public InternshipDto createInternship(@PathVariable(value = "student_id") String studentID,
 			@RequestParam(name = "course_id") String courseID,
 			@RequestParam(name = "academic_semester") AcademicSemester academicSemester
 			) throws Exception {

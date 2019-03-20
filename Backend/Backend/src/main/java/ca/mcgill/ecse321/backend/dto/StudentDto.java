@@ -6,9 +6,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(Include.NON_NULL)
 public class StudentDto{
@@ -53,6 +53,7 @@ public class StudentDto{
 
     @NotNull
     @NotEmpty
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
 	private String password;
 
 	private Set<ReminderDto> reminder;
@@ -89,7 +90,6 @@ public class StudentDto{
 		this.email = email;
 	}
 
-	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
