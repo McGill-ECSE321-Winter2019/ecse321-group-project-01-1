@@ -32,7 +32,7 @@ public class StudentController {
         return studentDto;
     }
     
-    @GetMapping(value = {"/external/students}", "/external/students}/"})
+    @GetMapping(value = {"/external/students", "/external/students/"})
     public List<StudentDto> getAllStudentsExternal(){
     	List<Student> studentsList = studentService.getAll();
         ArrayList<StudentDto> studentDtos = new ArrayList<>();

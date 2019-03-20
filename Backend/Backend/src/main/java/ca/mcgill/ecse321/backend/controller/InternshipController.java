@@ -1,7 +1,9 @@
 package ca.mcgill.ecse321.backend.controller;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +49,8 @@ public class InternshipController {
 		return internshipService.toDto(i);
 	}
 	
-	@GetMapping(value = { "/api/internships}", "/api/internships/}" })
-    public Set<InternshipDto> getInternshipDtos(){
+	@GetMapping(value = { "/api/internships", "/api/internships/" })
+    public List<InternshipDto> getInternshipDtos(){
 		Student student = authenticationService.getCurrentStudent();
 
         Set<Internship> internshipList = student.getInternship();
@@ -56,7 +58,19 @@ public class InternshipController {
             throw new IllegalArgumentException("There is no such internship!");
         }
 
-        Set<InternshipDto> dtoList = new HashSet<>();
+        
+        List<InternshipDto> dtoList = new ArrayList<InternshipDto>();
+        for(Internship internship : internshipList){
+            dtoList.add(internshipService.toDto(internship));
+        }
+        return dtoList;
+    }
+	
+	@GetMapping(value = { "/external/internships", "/external/internships/" })
+    public List<InternshipDto> getAllInternship(){
+        List<Internship> internshipList = internshipService.getAll();
+
+        List<InternshipDto> dtoList = new ArrayList<InternshipDto>();
         for(Internship internship : internshipList){
             dtoList.add(internshipService.toDto(internship));
         }
