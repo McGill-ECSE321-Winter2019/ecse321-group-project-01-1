@@ -43,23 +43,23 @@ public class InternshipDto {
         this.course = course;
     }
 
-    private ApplicationForm applicationForm;
+    private ApplicationFormDto applicationForm;
 
-    public ApplicationForm getApplicationForm() {
+    public ApplicationFormDto getApplicationForm() {
         return this.applicationForm;
     }
 
-    public void setApplicationForm(ApplicationForm applicationForms) {
+    public void setApplicationForm(ApplicationFormDto applicationForms) {
         this.applicationForm = applicationForms;
     }
 
-    private Set<Document> document = new HashSet<Document>();
+    private Set<DocumentDto> document = new HashSet<DocumentDto>();
 
-    public Set<Document> getDocument() {
+    public Set<DocumentDto> getDocument() {
         return this.document;
     }
 
-    public void setDocument(Set<Document> documents) {
+    public void setDocument(Set<DocumentDto> documents) {
         this.document = documents;
     }
 
@@ -71,13 +71,13 @@ public class InternshipDto {
         this.academicSemester = academicSemester;
     }
 
-    private Student student;
+    private StudentDto student;
 
-    public Student getStudent() {
+    public StudentDto getStudent() {
         return this.student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(StudentDto student) {
         this.student = student;
     }
 

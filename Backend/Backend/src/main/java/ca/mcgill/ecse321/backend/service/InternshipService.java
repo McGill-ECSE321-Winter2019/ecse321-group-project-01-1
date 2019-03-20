@@ -1,23 +1,27 @@
 package ca.mcgill.ecse321.backend.service;
 
-import ca.mcgill.ecse321.backend.dao.InternshipRepository;
-import ca.mcgill.ecse321.backend.dto.InternshipDto;
-import ca.mcgill.ecse321.backend.model.Course;
-import ca.mcgill.ecse321.backend.model.Document;
-import ca.mcgill.ecse321.backend.model.Internship;
-import ca.mcgill.ecse321.backend.model.Student;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import ca.mcgill.ecse321.backend.dao.InternshipRepository;
+import ca.mcgill.ecse321.backend.dto.DocumentDto;
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.model.Course;
+import ca.mcgill.ecse321.backend.model.Document;
+import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
 
 @Service
 @Validated
@@ -31,12 +35,16 @@ public class InternshipService {
 	@Autowired
 	CourseService courseService;
 	
+	@Autowired
+	ApplicationFormService applicationFormService;
+
+	@Autowired
+	StorageService storageService;
+	
 	@Transactional
 	public Internship createInternship(@ModelAttribute("internship") @Valid InternshipDto internshipDto, Student student, Course course) throws Exception {
 		Internship internship = new Internship();
     	internship.setAcademicSemester(internshipDto.getAcademicSemester());
-    	internship.setApplicationForm(internshipDto.getApplicationForm());
-    	internship.setDocument(internshipDto.getDocument());
     	internship.setStudent(student);
     	internship.setCourse(course);
 
@@ -87,10 +95,23 @@ public class InternshipService {
     public InternshipDto toDto(Internship internship) {
     	InternshipDto internshipDto = new InternshipDto();
     	internshipDto.setAcademicSemester(internship.getAcademicSemester());
-    	internshipDto.setApplicationForm(internship.getApplicationForm());
     	internshipDto.setCourse(courseService.toDto(internship.getCourse()));
-    	internshipDto.setDocument(internship.getDocument());
-    	internshipDto.setStudent(internship.getStudent());
+    	internshipDto.setId(internship.getId());
+    	internshipDto.setProgress(generateProgress(internship));
+    	return internshipDto;
+    }
+    
+    public InternshipDto deepToDto(Internship internship) {
+    	InternshipDto internshipDto = new InternshipDto();
+    	internshipDto.setAcademicSemester(internship.getAcademicSemester());
+    	internshipDto.setApplicationForm(applicationFormService.toDto(internship.getApplicationForm()));
+    	internshipDto.setCourse(courseService.toDto(internship.getCourse()));
+
+		HashSet<DocumentDto> documentDtos = new HashSet<>();
+		for (Document document : internship.getDocument()) {
+			documentDtos.add(storageService.toDto(document));
+		}
+		internshipDto.setDocument(documentDtos);
     	internshipDto.setId(internship.getId());
     	internshipDto.setProgress(generateProgress(internship));
     	return internshipDto;

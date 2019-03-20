@@ -34,6 +34,11 @@ public class CourseService {
 	}
 	
 	@Transactional
+	public Course findCourseByCourseID(String courseID) {
+		return courseRepository.findCourseByCourseID(courseID);
+	}
+	
+	@Transactional
 	public Course update(Course course){
 		course = courseRepository.save(course);
 		return course;

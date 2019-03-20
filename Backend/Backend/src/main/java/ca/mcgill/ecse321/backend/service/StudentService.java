@@ -1,8 +1,13 @@
 package ca.mcgill.ecse321.backend.service;
 
-import ca.mcgill.ecse321.backend.dao.StudentRepository;
-import ca.mcgill.ecse321.backend.dto.StudentDto;
-import ca.mcgill.ecse321.backend.model.Student;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,17 +15,21 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import ca.mcgill.ecse321.backend.dao.StudentRepository;
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
+import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
 
 @Service
 @Validated
 public class StudentService {
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	
+	@Autowired
+	InternshipService internshipService;
 	
 	@Autowired
 	StudentRepository studentRepository;
@@ -100,7 +109,21 @@ public class StudentService {
 		studentDto.setFirstName(student.getFirstName());
 		studentDto.setLastName(student.getLastName());
 		studentDto.setEmail(student.getEmail());
-		studentDto.setPassword(student.getPassword());
+		return studentDto;
+    	
+    }
+    
+    public StudentDto deepToDto(Student student) {
+		StudentDto studentDto = new StudentDto();
+		studentDto.setStudentID(student.getStudentID());
+		studentDto.setFirstName(student.getFirstName());
+		studentDto.setLastName(student.getLastName());
+		studentDto.setEmail(student.getEmail());
+		HashSet<InternshipDto> internshipDtos = new HashSet<>();
+		for (Internship internship : student.getInternship()) {
+			internshipDtos.add(internshipService.deepToDto(internship));
+		}
+		studentDto.setInternship(internshipDtos);
 		return studentDto;
     	
     }
