@@ -1,14 +1,15 @@
 package ca.mcgill.ecse321.backend.dto;
 
-import ca.mcgill.ecse321.backend.model.AcademicSemester;
-import ca.mcgill.ecse321.backend.model.ApplicationForm;
-import ca.mcgill.ecse321.backend.model.Document;
-import ca.mcgill.ecse321.backend.model.Student;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import ca.mcgill.ecse321.backend.model.AcademicSemester;
+
+@JsonInclude(Include.NON_NULL)
 public class InternshipDto {
 
     public InternshipDto(){

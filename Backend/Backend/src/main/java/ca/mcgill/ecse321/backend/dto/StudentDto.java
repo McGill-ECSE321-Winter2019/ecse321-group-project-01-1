@@ -1,12 +1,16 @@
 package ca.mcgill.ecse321.backend.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
 public class StudentDto{
 
     public StudentDto(String studentID, String firstName, String lastName, @Email String email, String password) {
