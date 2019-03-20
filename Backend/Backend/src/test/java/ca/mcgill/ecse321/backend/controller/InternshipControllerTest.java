@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.backend.controllers;
+package ca.mcgill.ecse321.backend.controller;
 
 
 import ca.mcgill.ecse321.backend.controller.InternshipController;
@@ -21,6 +21,8 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class InternshipControllerTest {
 	
+	//TODO: actually code this controller??
+
 	private InternshipController internshipController;
 	
 	@Mock

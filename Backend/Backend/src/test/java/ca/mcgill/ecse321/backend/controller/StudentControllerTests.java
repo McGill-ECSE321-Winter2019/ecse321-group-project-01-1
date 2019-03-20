@@ -1,6 +1,10 @@
 package ca.mcgill.ecse321.backend.controller;
 
 import ca.mcgill.ecse321.backend.dao.StudentRepository;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,6 +53,14 @@ public class StudentControllerTests {
 				)
 		.andExpect(status().isOk());
 	}
+	
+	@Test
+	public void testGetAllStudents() throws Exception {
+		this.mockMvc.perform(get("/external/students"))
+		.andExpect(status().isOk());
+	}
+	
+	//TODO: add test for external getter for single student
 
 	@Test
 	public void testCreateStudentDuplicateID() throws Exception {

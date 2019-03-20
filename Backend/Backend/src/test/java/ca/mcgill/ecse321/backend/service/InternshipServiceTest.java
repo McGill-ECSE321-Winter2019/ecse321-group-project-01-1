@@ -103,7 +103,6 @@ public class InternshipServiceTest {
     public void toDto() {
         InternshipDto dto = internshipService.toDto(mockInternship);
         assertEquals(AcademicSemester.FALL,dto.getAcademicSemester());
-        assertEquals(student,dto.getStudent());
         assertEquals(courseService.toDto(course),dto.getCourse());
     }
 }

@@ -26,27 +26,12 @@ public class ProfileViewingController {
 
     @Autowired
     private AuthenticationService authenticationService;
-
+    
     @GetMapping(value = {"/api/profile", "/api/profile/"})
     public StudentDto getStudentProfile(){
     	Student student = authenticationService.getCurrentStudent();
         StudentDto studentDto = studentService.toDto(student);
-        studentDto.setInternship(getInternshipDtos(student));
         return studentDto;
     }
-
-    public Set<InternshipDto> getInternshipDtos(Student student){
-        Set<Internship> internshipList = student.getInternship();
-        if(internshipList == null){
-            throw new IllegalArgumentException("There is no such internship!");
-        }
-
-        Set<InternshipDto> dtoList = new HashSet<>();
-        for(Internship internship : internshipList){
-            dtoList.add(internshipService.toDto(internship));
-        }
-        return dtoList;
-    }
-
 
 }
