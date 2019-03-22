@@ -32,8 +32,6 @@ public class StudentController {
         return studentDto;
     }
     
-    
-    
     @GetMapping(value = {"/external/students", "/external/students/"})
     public List<StudentDto> getAllStudentsExternal(){
     	List<Student> studentsList = studentService.getAll();

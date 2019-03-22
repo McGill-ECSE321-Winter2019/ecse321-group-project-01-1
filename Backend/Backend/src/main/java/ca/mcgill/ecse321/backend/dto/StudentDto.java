@@ -1,12 +1,16 @@
 package ca.mcgill.ecse321.backend.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class StudentDto{
 
     public StudentDto(String studentID, String firstName, String lastName, @Email String email, String password) {
@@ -49,6 +53,7 @@ public class StudentDto{
 
     @NotNull
     @NotEmpty
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
 	private String password;
 
 	private Set<ReminderDto> reminder;
@@ -85,7 +90,6 @@ public class StudentDto{
 		this.email = email;
 	}
 
-	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
