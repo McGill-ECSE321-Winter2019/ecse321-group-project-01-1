@@ -50,8 +50,7 @@
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
-
-        this.$http.post(`/login`, this.form)
+        this.$http.post(`/login`, this.$jsonToFormData(this.form))
         .then(response => {
           // JSON responses are automatically parsed.
           this.$emit("authenticated", true);
