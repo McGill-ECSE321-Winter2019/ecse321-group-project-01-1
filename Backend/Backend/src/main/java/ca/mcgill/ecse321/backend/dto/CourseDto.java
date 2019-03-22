@@ -3,7 +3,10 @@ package ca.mcgill.ecse321.backend.dto;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CourseDto {
 	
 	public CourseDto(String courseID) {

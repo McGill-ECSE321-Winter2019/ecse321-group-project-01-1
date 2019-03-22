@@ -5,11 +5,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import ca.mcgill.ecse321.backend.model.AcademicSemester;
 
-
-
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class InternshipDto {
 
     public InternshipDto(){
