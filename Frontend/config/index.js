@@ -1,7 +1,9 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
 
-module.exports = {
+
+
+const config = {
   build: {
     env: require('./prod.env'),
     backendHost: 'eventregistration-backend-123.herokuapp.com',
@@ -43,3 +45,23 @@ module.exports = {
     cssSourceMap: false
   }
 }
+
+config.dev.proxyTable = {
+    // proxy all requests starting with /api to jsonplaceholder
+    '/api': {
+      target: 'http://' + config.dev.backendHost + ':' + config.dev.backendPort,
+      changeOrigin: true,
+      pathRewrite: {
+        '^api': ''
+      }
+    },
+    '/login' : {
+        target: 'http://' + config.dev.backendHost + ':' + config.dev.backendPort,
+        changeOrigin: true,
+        pathRewrite: {
+          '^': ''
+        }
+    }
+}
+
+module.exports = config;
