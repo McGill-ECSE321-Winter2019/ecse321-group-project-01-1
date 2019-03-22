@@ -17,7 +17,7 @@ public class InternshipDto {
 
     }
 
-    public InternshipDto(AcademicSemester academicSemesterm) {
+    public InternshipDto(AcademicSemester academicSemester) {
         this.academicSemester = academicSemester;
     }
 
