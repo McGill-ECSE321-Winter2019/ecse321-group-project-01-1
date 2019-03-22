@@ -48,7 +48,6 @@ public class InternshipDto {
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     private ApplicationFormDto applicationForm;
 
-    
     public ApplicationFormDto getApplicationForm() {
         return this.applicationForm;
     }
@@ -60,7 +59,6 @@ public class InternshipDto {
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     private Set<DocumentDto> document = new HashSet<DocumentDto>();
 
-    
     public Set<DocumentDto> getDocument() {
         return this.document;
     }
