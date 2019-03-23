@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import Login from '@/components/Login'
 import InternshipListing from "@/components/InternshipListing";
 import sidebar from "@/components/sidebar";
+import InternshipItem from "@/components/InternshipItem";
 
 
 Vue.use(Router)
@@ -20,15 +21,21 @@ export default new Router({
             name: 'login',
             component: Login
         },
-        // {
-        //     path: '/side/',
-        //     name: 'InternshipListing',
-        //     component: InternshipListing
-        // },
+        {
+            path: '/list',
+            name: 'InternshipListing',
+            component: InternshipListing
+        },
         {
             path: '/side',
             name: 'sidebar',
             component: sidebar
-        }
+        },
+        {
+            path: '/test',
+            name: 'test',
+            component: InternshipItem
+        },
+
     ]
 })

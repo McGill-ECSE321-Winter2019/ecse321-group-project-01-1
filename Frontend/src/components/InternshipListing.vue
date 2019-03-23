@@ -1,17 +1,25 @@
 <template>
     <div id="internshipListing">
-        <h2>Sup</h2>
-        <table>
-            <tr v-for="internship in internshipList">
-                <td>{{ internship.name }}</td>
-            </tr>
-        </table>
+        <template v-if="listing">
+            <h2>Current internship listings</h2>
+            <table>
+                <tr v-for="internship in internshipList">
+                    <td>{{ internship.id }}</td>
+                </tr>
+            </table>
+            <button v-on:click="showInternship"> Click me</button>
+        </template>
+        <template v-else>
+            <h2> The other side</h2>
+            <button v-on:click="showInternship"> Click me</button>
+
+        </template>
     </div>
 </template>
 
 <script>
     function PersonDto (name) {
-        this.name = name
+        this.id = name
         this.events = []
     }
     export default {
@@ -19,7 +27,9 @@
         data() {
             return {
                 internshipList: [],
-                error: false
+                error: false,
+                listing: true,
+                currentInternship: ''
             }
         },
         created: function () {
@@ -37,6 +47,12 @@
             //     .catch(e => {
             //         this.error = e;
             //     });
+        },
+        methods: {
+            showInternship: function(internship){
+                this.currentInternship = internship;
+                this.listing = !this.listing
+            }
         }
     }
 </script>

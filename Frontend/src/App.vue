@@ -43,6 +43,7 @@
                         icon: 'fa fa-download'
                     },
                     {
+                        href: '/list',
                         title: 'Internships',
                         icon: 'fa fa-code'
                     },
@@ -60,6 +61,11 @@
                         title: 'Sign out',
                         icon: 'fa fa-code'
                     },
+                    {
+                        href: '/test',
+                        title: 'test',
+                        icon: 'fa fa-code'
+                    }
                 ],
                 collapsed: false,
                 themes: ['', 'white-theme'],
@@ -112,6 +118,7 @@
 
     .container {
         max-width: 600px;
+        margin-left: 10px;
     }
 
     pre {
