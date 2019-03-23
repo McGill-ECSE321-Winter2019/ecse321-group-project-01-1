@@ -35,123 +35,31 @@
                 menu: [
                     {
                         header: true,
-                        title: 'Getting Started'
-                    },
-                    {
-                        // href: '/',
-                        title: 'Installation',
-                        icon: 'fa fa-download'
+                        title: 'Navigation'
                     },
                     {
                         href: '/hello',
-                        title: 'Basic Usage',
+                        title: 'Profile',
+                        icon: 'fa fa-download'
+                    },
+                    {
+                        title: 'Internships',
                         icon: 'fa fa-code'
                     },
                     {
-                        header: true,
-                        title: 'Usage'
-                    },
-                    {
-                        // href: '/props',
-                        title: 'Props',
-                        icon: 'fa fa-cogs'
-                    },
-                    {
-                        // href: '/events',
-                        title: 'Events',
-                        icon: 'fa fa-bell'
-                    },
-                    {
-                        // href: '/styling',
-                        title: 'Styling',
-                        icon: 'fa fa-palette'
-                    },
-                    {
-                        header: true,
-                        component: separator,
-                        visibleOnCollapse: true
-                    },
-                    {
-                        header: true,
-                        title: 'Example'
-                    },
-                    {
-                        // href: '/disabled',
-                        title: 'Disabled page',
-                        icon: 'fa fa-lock',
-                        disabled: true
-                    },
-                    {
                         // href: '#',
-                        title: 'Badge',
+                        title: 'Reminder',
                         icon: 'fa fa-cog',
+                        //TODO get reminders to change the badge number
                         badge: {
                             text: 'new',
                             class: 'badge-danger'
                         }
                     },
                     {
-                        // href: '/page',
-                        title: 'Dropdown Page',
-                        icon: 'fa fa-list-ul',
-                        child: [
-                            {
-                                href: '/page/sub-page-1',
-                                title: 'Sub Page 01',
-                                icon: 'fa fa-file-alt'
-                            },
-                            {
-                                href: '/page/sub-page-2',
-                                title: 'Sub Page 02',
-                                icon: 'fa fa-file-alt'
-                            }
-                        ]
+                        title: 'Sign out',
+                        icon: 'fa fa-code'
                     },
-                    {
-                        // title: 'Multiple Level',
-                        icon: 'fa fa-list-alt',
-                        child: [
-                            {
-                                href: '#',
-                                title: 'page'
-                            },
-                            {
-                                title: 'Level 2 ',
-                                child: [
-                                    {
-                                        href: '#',
-                                        title: 'page'
-                                    },
-                                    {
-                                        href: '#',
-                                        title: 'Page'
-                                    }
-                                ]
-                            },
-                            {
-                                href: '#',
-                                title: 'Page'
-                            },
-                            {
-                                title: 'Another Level 2',
-                                child: [
-                                    {
-                                        title: 'Level 3',
-                                        child: [
-                                            {
-                                                href: '#',
-                                                title: 'Page'
-                                            },
-                                            {
-                                                href: '#',
-                                                title: 'Page'
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
                 ],
                 collapsed: false,
                 themes: ['', 'white-theme'],
