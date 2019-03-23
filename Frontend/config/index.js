@@ -27,8 +27,8 @@ const config = {
   },
   dev: {
     env: require('./dev.env'),
-    backendHost: '127.0.0.1',
-    backendPort: 8080,
+    backendHost: 'https://student-backend-n.herokuapp.com',
+    backendPort: 443,
     // backendHost: 'eventregistration-backend-123.herokuapp.com',
     // backendPort: 443,
     host: '127.0.0.1',
@@ -49,18 +49,25 @@ const config = {
 config.dev.proxyTable = {
     // proxy all requests starting with /api to jsonplaceholder
     '/api': {
-      target: 'http://' + config.dev.backendHost + ':' + config.dev.backendPort,
+      target: config.dev.backendHost + ':' + config.dev.backendPort,
       changeOrigin: true,
       pathRewrite: {
-        '^api': ''
+        '^/api': '/api',
       }
     },
-    '/login' : {
-        target: 'http://' + config.dev.backendHost + ':' + config.dev.backendPort,
-        changeOrigin: true,
-        pathRewrite: {
-          '^': ''
-        }
+    '/login': {
+      target: config.dev.backendHost + ':' + config.dev.backendPort,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/login': '/login',
+      }
+    },
+    '/logout': {
+      target: config.dev.backendHost + ':' + config.dev.backendPort,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/logout': 'logout'
+      }
     }
 }
 
