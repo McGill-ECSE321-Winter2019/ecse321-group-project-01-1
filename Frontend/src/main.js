@@ -19,8 +19,8 @@ const frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
 Vue.use(VueSidebarMenu)
 // axios client
 const client = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+  // baseURL: backendUrl,
+  // headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
 
