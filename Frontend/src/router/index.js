@@ -11,7 +11,7 @@ Vue.use(Router)
 export default new Router({
     routes: [
         {
-            path: '/',
+            path: '/hello',
             name: 'Hello',
             component: Hello
         },
@@ -20,16 +20,15 @@ export default new Router({
             name: 'login',
             component: Login
         },
-        {
-            path: '/test',
-            name: 'InternshipListing',
-            component: InternshipListing
-        },
+        // {
+        //     path: '/side/',
+        //     name: 'InternshipListing',
+        //     component: InternshipListing
+        // },
         {
             path: '/side',
             name: 'sidebar',
             component: sidebar
         }
-
     ]
 })
