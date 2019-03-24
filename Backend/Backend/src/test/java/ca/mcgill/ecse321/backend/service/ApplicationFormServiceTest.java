@@ -1,5 +1,18 @@
 package ca.mcgill.ecse321.backend.service;
 
+import static org.junit.Assert.assertEquals;
+
+import java.sql.Date;
+import java.util.HashSet;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
 import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
 import ca.mcgill.ecse321.backend.dao.CourseRepository;
 import ca.mcgill.ecse321.backend.dao.InternshipRepository;
@@ -7,18 +20,12 @@ import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
 import ca.mcgill.ecse321.backend.dto.CourseDto;
 import ca.mcgill.ecse321.backend.dto.StudentDto;
-import ca.mcgill.ecse321.backend.model.*;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.sql.Date;
-import java.util.HashSet;
-
-import static org.junit.Assert.assertEquals;
+import ca.mcgill.ecse321.backend.model.AcademicSemester;
+import ca.mcgill.ecse321.backend.model.ApplicationForm;
+import ca.mcgill.ecse321.backend.model.Course;
+import ca.mcgill.ecse321.backend.model.Document;
+import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -55,15 +62,15 @@ public class ApplicationFormServiceTest {
     private Internship internship;
 
     @Before
+    @Transactional
     public void setMockapplicationForm() throws Exception{
-        internshipRepository.deleteAll();
         studentRepository.deleteAll();
         courseRepository.deleteAll();
-        applicationFormRepository.deleteAll();
+    	applicationFormRepository.deleteAll();
         student = studentService.create(new StudentDto("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
         course = courseService.create(new CourseDto("FACC300"));
 
-        internship = internshipService.createInternship(internshipService.toDto(new Internship(course,AcademicSemester.FALL,student)),student,course);
+        internship = internshipService.create(internshipService.toDto(new Internship(2019, AcademicSemester.FALL, course, student)),student ,course);
 
         Date startDate = new Date(1);
         Date endDate = new Date(2);
@@ -76,7 +83,7 @@ public class ApplicationFormServiceTest {
     @Test
     public void createApplicationForm() {
         assertEquals(0,applicationFormService.getAll().size());
-        ApplicationForm createdForm = applicationFormService.createApplicationForm(applicationFormService.toDto(mockapplicationForm),internship);
+        ApplicationForm createdForm = applicationFormService.create(applicationFormService.toDto(mockapplicationForm),internship);
         assertEquals(1,applicationFormService.getAll().size());
 
         assertEquals(mockapplicationForm,createdForm);
@@ -85,7 +92,7 @@ public class ApplicationFormServiceTest {
     @Test
     public void findApplicationFormById() {
         assertEquals(0,applicationFormService.getAll().size());
-        ApplicationForm createdForm = applicationFormService.createApplicationForm(applicationFormService.toDto(mockapplicationForm),internship);
+        ApplicationForm createdForm = applicationFormService.create(applicationFormService.toDto(mockapplicationForm),internship);
         assertEquals(1,applicationFormService.getAll().size());
 
         ApplicationForm queriedForm = applicationFormService.findApplicationFormById(createdForm.getId());
@@ -96,7 +103,7 @@ public class ApplicationFormServiceTest {
     @Test
     public void updateForm(){
         assertEquals(0,applicationFormService.getAll().size());
-        ApplicationForm createdForm = applicationFormService.createApplicationForm(applicationFormService.toDto(mockapplicationForm),internship);
+        ApplicationForm createdForm = applicationFormService.create(applicationFormService.toDto(mockapplicationForm),internship);
         assertEquals(1,applicationFormService.getAll().size());
 
         //updating a value

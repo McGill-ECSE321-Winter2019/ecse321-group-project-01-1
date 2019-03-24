@@ -17,7 +17,8 @@ public class InternshipDto {
 
     }
 
-    public InternshipDto(AcademicSemester academicSemester) {
+    public InternshipDto(int year, AcademicSemester academicSemester) {
+    	this.year = year;
         this.academicSemester = academicSemester;
     }
 
@@ -28,6 +29,9 @@ public class InternshipDto {
     private AcademicSemester academicSemester;
     
     private boolean[] progress;
+    
+	private int year;
+
 
     public int getId() {
         return id;
@@ -95,6 +99,14 @@ public class InternshipDto {
 		this.progress = progress;
 	}
 
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+	
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

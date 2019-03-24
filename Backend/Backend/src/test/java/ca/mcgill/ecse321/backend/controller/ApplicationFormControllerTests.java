@@ -112,14 +112,14 @@ public class ApplicationFormControllerTests {
 		
 		InternshipDto internshipDto = new InternshipDto();
 		internshipDto.setAcademicSemester(AcademicSemester.SUMMER);
-		mockInternship = internshipService.createInternship(internshipDto, mockStudent, mockCourse);
+		mockInternship = internshipService.create(internshipDto, mockStudent, mockCourse);
 		
 	
 		Date startDate = Date.valueOf("2019-01-11");
 		Date endDate = Date.valueOf("2019-01-22");
 		
 		ApplicationFormDto applicationFormDto = new ApplicationFormDto("1111111", "Description1", "Employer1", "Location1", startDate, endDate, true);
-		mockApplicationForm = applicationFormService.createApplicationForm(applicationFormDto, mockInternship);
+		mockApplicationForm = applicationFormService.create(applicationFormDto, mockInternship);
 	}
 	
 	public void clearDatabase() {
