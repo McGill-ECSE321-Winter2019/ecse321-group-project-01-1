@@ -13,12 +13,12 @@
                     <b-button v-on:click="showInternship(internship)">Details</b-button>
                 </tr>
             </table>
-            <b-button v-on:click="back"> Back </b-button>
+            <b-button v-on:click="showInternship"> Back </b-button>
         </template>
         <template v-else>
             <h2> The other side</h2>
-            <b-button v-on:click="back"> Click me</b-button>
-            <internship-item v-bind:internship="currentInternship"></internship-item>
+            <b-button v-on:click="back"> Back</b-button>
+            <internship-item v-bind:internship_id="currentInternship.id"></internship-item>
         </template>
     </div>
 </template>

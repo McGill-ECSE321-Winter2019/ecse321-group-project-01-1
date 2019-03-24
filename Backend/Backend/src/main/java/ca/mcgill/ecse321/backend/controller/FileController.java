@@ -65,16 +65,17 @@ public class FileController {
     // we don't need this one for now
     // and if we need this, it should be merged with the method above
     // taking an extra argument to filter the documents by type
-    /**
-    @GetMapping("/api/internships/{internship_id}/documents/{document_id}")
-    public DocumentDto showDocumentByTypeAndInternship(@RequestParam("type") DocumentType type,
-                                                    @RequestParam("internship") Internship internship){
-        return convertToDto(storageService.readDocumentByType(internship, type));
-    }
-    **/
+
+//    @GetMapping("/api/internships/{internship_id}/documents/{document_id}")
+//    public DocumentDto showDocumentByTypeAndInternship(@RequestParam("type") DocumentType type,
+//                                                    @RequestParam("internship") Internship internship){
+//        return storageService.toDto(storageService.readDocumentByType(internship, type));
+//    }
+
 
     @GetMapping("/api/internships/{internship_id}/documents/{document_id}/download")
-    public ResponseEntity<Resource> downloadFile(@PathVariable(value="document_id") String documentId) {
+    public ResponseEntity<Resource> downloadFile(@PathVariable(value="document_id") String documentId,
+                                                 @PathVariable(value="internship_id") String internshipId) {
         // Load file from database
         Document document = storageService.readDocument(documentId);
 

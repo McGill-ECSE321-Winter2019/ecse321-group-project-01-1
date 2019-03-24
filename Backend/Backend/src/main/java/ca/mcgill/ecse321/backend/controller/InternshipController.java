@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import ca.mcgill.ecse321.backend.dto.InternshipDeepDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,10 +43,10 @@ public class InternshipController {
     private AuthenticationService authenticationService;
 	
 	@GetMapping(value = { "/api/internships/{internship_id}", "/api/internships/{internship_id}" })
-	public InternshipDto getInternship(@PathVariable(value="internship_id") int internshipId) {
+	public InternshipDeepDto getInternship(@PathVariable(value="internship_id") int internshipId) {
 		Student student = authenticationService.getCurrentStudent();
 		Internship i = internshipService.findByIdAndStudent(internshipId, student);
-		return internshipService.toDto(i);
+		return internshipService.deepToDto(i);
 	}
 	
 	@GetMapping(value = { "/api/internships", "/api/internships/" })
