@@ -42,6 +42,8 @@ export default {
   <tr>
        <button @click="createcreateApplicationForm(id, jobID, jobDescrioption, employer, location, startDate, endDate, workPermit)">Create Person</button>
   </tr>
+<span v-if="errorApplicationForm" style="color:red">Error: {{errorApplicationForm}} </span>
+
 
 
 <style>
