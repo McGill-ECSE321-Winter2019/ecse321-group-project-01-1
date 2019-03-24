@@ -28,7 +28,7 @@ public class ApplicationFormService {
 	ApplicationFormRepository applicationFormRepository;
 	
 	@Transactional
-	public ApplicationForm createApplicationForm(
+	public ApplicationForm create(
 			@ModelAttribute("applicationForm") @Valid ApplicationFormDto applicationFormDto, 
 			Internship internship
 			){

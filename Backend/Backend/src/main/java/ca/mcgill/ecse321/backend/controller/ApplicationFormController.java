@@ -47,7 +47,7 @@ public class ApplicationFormController {
     	if (i == null) throw new AccessDeniedException("");
     	
         ApplicationFormDto applicationFormDto = new ApplicationFormDto(jobID, jobDescription, employer, location, startDate,  endDate, workPermit);
-        ApplicationForm applicationForm = applicationFormService.createApplicationForm(applicationFormDto, i);
+        ApplicationForm applicationForm = applicationFormService.create(applicationFormDto, i);
         return applicationFormService.toDto(applicationForm);
     }
 

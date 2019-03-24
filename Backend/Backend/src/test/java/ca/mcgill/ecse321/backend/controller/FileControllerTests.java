@@ -97,7 +97,7 @@ public class FileControllerTests {
 		
 		InternshipDto internshipDto = new InternshipDto();
 		internshipDto.setAcademicSemester(AcademicSemester.SUMMER);
-		mockInternship = internshipService.createInternship(internshipDto, mockStudent, mockCourse);
+		mockInternship = internshipService.create(internshipDto, mockStudent, mockCourse);
 		
 	    MockMultipartFile upload = new MockMultipartFile("file", "hello.txt", MediaType.TEXT_PLAIN_VALUE, "Hello, World!".getBytes());
 		mockDocument = storageService.createFile(upload, mockInternship, DocumentType.CONTRACT);
