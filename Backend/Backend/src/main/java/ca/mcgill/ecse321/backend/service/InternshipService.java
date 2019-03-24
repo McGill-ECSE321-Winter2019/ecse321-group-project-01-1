@@ -43,11 +43,12 @@ public class InternshipService {
 	StorageService storageService;
 	
 	@Transactional
-	public Internship createInternship(@ModelAttribute("internship") @Valid InternshipDto internshipDto, Student student, Course course) throws Exception {
+	public Internship create(@ModelAttribute("internship") @Valid InternshipDto internshipDto, Student student, Course course) throws Exception {
 		Internship internship = new Internship();
     	internship.setAcademicSemester(internshipDto.getAcademicSemester());
     	internship.setStudent(student);
     	internship.setCourse(course);
+    	internship.setYear(internshipDto.getYear());
 
     	return internshipRepository.save(internship);
 	}
@@ -101,6 +102,7 @@ public class InternshipService {
     	internshipDto.setCourse(courseService.toDto(internship.getCourse()));
     	internshipDto.setId(internship.getId());
     	internshipDto.setProgress(generateProgress(internship));
+    	internshipDto.setYear(internship.getYear());
     	return internshipDto;
     }
     
@@ -110,6 +112,7 @@ public class InternshipService {
     	internshipDto.setAcademicSemester(internship.getAcademicSemester());
     	internshipDto.setApplicationForm(applicationFormService.toDto(internship.getApplicationForm()));
     	internshipDto.setCourse(courseService.toDto(internship.getCourse()));
+    	internshipDto.setYear(internship.getYear());
 
 		HashSet<DocumentDto> documentDtos = new HashSet<>();
 		for (Document document : internship.getDocument()) {
