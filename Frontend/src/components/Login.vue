@@ -53,6 +53,7 @@
         this.$http.post(`/login`, this.$jsonToFormData(this.form))
         .then(response => {
           // JSON responses are automatically parsed.
+          console.log(response)
           this.$emit("authenticated", true);
           this.$router.replace({ name: "profile" });
         })
