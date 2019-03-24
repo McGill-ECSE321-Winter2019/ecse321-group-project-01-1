@@ -1,29 +1,35 @@
 package ca.mcgill.ecse321.backend.model;
-
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
 public class Internship{
 
-	@Id
-	@GeneratedValue(
-			strategy= GenerationType.AUTO,
-			generator="native"
-	)
-	@GenericGenerator(
-			name = "native",
-			strategy = "native"
-	)
-	private int id;
-
-	@ManyToOne(optional=false)
-	private Student student;
-
+	public Internship() {
+		
+	}
+	
+    public Internship(int year, AcademicSemester academicSemester, Course course, Student student) {
+    	this.year = year;
+        this.academicSemester = academicSemester;
+        this.course = course;
+        this.student = student;
+    }
+	
 	@ManyToOne(optional=false)
 	private Course course;
 
@@ -35,29 +41,32 @@ public class Internship{
 		this.course = course;
 	}
 
+	@Id
+	@GeneratedValue(
+			strategy= GenerationType.AUTO,
+			generator="native"
+			)
+	@GenericGenerator(
+			name = "native",
+			strategy = "native"
+			)
+	private int id;
 	@OneToOne(mappedBy="internship", cascade={CascadeType.ALL})
 	private ApplicationForm applicationForm;
 
-	@OneToMany(mappedBy="internship", cascade={CascadeType.ALL})
-	private Set<Document> document = new HashSet<Document>();
-
-	public Internship(Course course, AcademicSemester academicSemester, Student student) {
-		this.course = course;
-		this.academicSemester = academicSemester;
-		this.student = student;
-	}
-
-	public Internship(){
-
-	}
-
+	private int year;
 	public ApplicationForm getApplicationForm() {
 		return this.applicationForm;
 	}
 
-	public void setApplicationForm(ApplicationForm applicationForms) {
-		this.applicationForm = applicationForms;
+	public void setApplicationForm(ApplicationForm applicationForm) {
+		this.applicationForm = applicationForm;
 	}
+
+
+
+	@OneToMany(mappedBy="internship", cascade={CascadeType.ALL})
+	private Set<Document> document = new HashSet<Document>();
 
 	public Set<Document> getDocument() {
 		return this.document;
@@ -78,6 +87,9 @@ public class Internship{
 		this.academicSemester = academicSemester;
 	}
 
+	@ManyToOne(optional=false)
+	private Student student;
+
 	public int getId() {
 		return id;
 	}
@@ -94,8 +106,12 @@ public class Internship{
 		this.student = student;
 	}
 
-	public Internship(Course course){
-		this.course = course;
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
 	}
 
 	@Override

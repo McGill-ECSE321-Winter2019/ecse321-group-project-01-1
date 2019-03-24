@@ -80,7 +80,8 @@ public class InternshipController {
 	@PostMapping(value = { "/external/students/{student_id}/internships", "/external/students/{student_id}/internships/" })
 	public InternshipDto createInternship(@PathVariable(value = "student_id") String studentID,
 			@RequestParam(name = "course_id") String courseID,
-			@RequestParam(name = "academic_semester") AcademicSemester academicSemester
+			@RequestParam(name = "academic_semester") AcademicSemester academicSemester,
+			@RequestParam(name = "year") int year
 			) throws Exception {
 		Student student = studentService.findStudentByStudentID(studentID);
 		if (student == null) {
@@ -91,9 +92,9 @@ public class InternshipController {
 			course = courseService.create(new CourseDto(courseID));
 			
 		}
-		InternshipDto internshipDto = new InternshipDto(academicSemester);
+		InternshipDto internshipDto = new InternshipDto(year, academicSemester);
 		
-		Internship internship = internshipService.createInternship(internshipDto, student, course);
+		Internship internship = internshipService.create(internshipDto, student, course);
 		
 		return internshipService.toDto(internship);
 		
