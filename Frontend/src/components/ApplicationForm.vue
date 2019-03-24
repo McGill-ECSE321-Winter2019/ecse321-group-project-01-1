@@ -37,4 +37,15 @@
        <span v-if="errorApplicationForm" style="color:red">Error: {{errorApplicationForm}} </span>
      </p>
   </div>  
-</template>    
+</template>  
+
+<script src="./applicationform.js">
+</script>
+
+<style>
+  #applicationform {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    color: #2c3e50;
+    background: #f2ece8;
+  }
+</style>
