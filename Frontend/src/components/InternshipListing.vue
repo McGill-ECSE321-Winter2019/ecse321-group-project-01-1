@@ -4,15 +4,21 @@
             <h2>Current internship listings</h2>
             <table>
                 <tr v-for="internship in internshipList">
-                    <td>{{ internship.id }}</td>
+                    <td class="internshipSnippet" @click="showInternship">
+                        {{ internship.id }}
+                    </td>
+                    <td>
+                        {{internship.academic_semester}}
+                    </td>
+                    <b-button v-on:click="showInternship(internship)">Details</b-button>
                 </tr>
             </table>
-            <b-button v-on:click="showInternship"> Click me</b-button>
+            <b-button v-on:click="back"> Back </b-button>
         </template>
         <template v-else>
             <h2> The other side</h2>
-            <b-button v-on:click="showInternship"> Click me</b-button>
-            <internship-item internship=currentInternship></internship-item>
+            <b-button v-on:click="back"> Click me</b-button>
+            <internship-item v-bind:internship="currentInternship"></internship-item>
         </template>
     </div>
 </template>
@@ -60,7 +66,10 @@
         methods: {
             showInternship: function(internship){
                 this.currentInternship = internship;
-                this.listing = !this.listing
+                this.listing = !this.listing;
+            },
+            back: function(){
+                this.listing = !this.listing;
             }
         }
     }
@@ -71,5 +80,8 @@
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         color: #2c3e50;
         background: #f2ece8;
+    }
+    span.internshipSnippet{
+        background: blueviolet;
     }
 </style>
