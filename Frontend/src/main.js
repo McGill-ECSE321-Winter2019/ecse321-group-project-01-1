@@ -13,8 +13,8 @@ import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 
 import axios from 'axios'
 const config = require('../config')
-const backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
-const frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+const backendUrl = 'http://'+ config.dev.backendHost + ':' + config.dev.backendPort;
+const frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port;
 
 Vue.use(VueSidebarMenu)
 // axios client

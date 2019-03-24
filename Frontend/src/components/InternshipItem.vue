@@ -2,7 +2,7 @@
     <div id="internship">
         <div class="container">
             <h2> First internship</h2>
-            <button> Application Form</button>
+            <b-button> Application Form</b-button>
                 <table>
 
                     <tr>
@@ -22,7 +22,7 @@
                         {{ docType == '' ? 'selectedDocument' : docType }}
                     </option>
                 </select>
-                <input type="file" @change="onFileChange">
+                <b-button type="file" @change="onFileChange">Choose File</b-button>
             </div>
         </div>
     </div>
@@ -30,11 +30,23 @@
 
 <script>
     export default {
+        props: ['internship'],
         name: "InternshipItem",
         data (){
             return{
                 selectedDocument :'Contract',
                 DocumentTypes: ['Contract','Work report', 'Technical report', 'Evaluation']
+            }
+        },
+        methods:{
+            upload: function (formData) {
+                const url = `${BASE_URL}/photos/upload`;
+                return this.$http.post(url, formData)
+                // get data
+                    .then(x => x.data)
+                    // add url field
+                    .then(x => x.map(img => Object.assign({},
+                        img, { url: `${BASE_URL}/images/${img.id}` })));
             }
         }
     }

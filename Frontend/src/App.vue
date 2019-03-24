@@ -11,7 +11,7 @@
                 <p>An ECSE 321 project</p>
                 <hr style="margin: 50px 0px;border: 1px solid #e3e3e3;">
                 <router-view />
-            </div>
+        </div>
             <sidebar-menu
                 :menu="menu"
                 :collapsed="collapsed"
@@ -30,8 +30,16 @@
     }
     export default {
         name:'app',
+
+        created: function(){
+
+        },
         data() {
             return {
+                collapsed: false,
+                themes: ['', 'white-theme'],
+                selectedTheme: '',
+                num_reminders : '3',
                 menu: [
                     {
                         header: true,
@@ -66,10 +74,8 @@
                         title: 'test',
                         icon: 'fa fa-code'
                     }
-                ],
-                collapsed: false,
-                themes: ['', 'white-theme'],
-                selectedTheme: ''
+                ]
+
             }
         },
         methods: {
