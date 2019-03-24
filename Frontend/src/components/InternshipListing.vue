@@ -5,15 +5,14 @@
             <table>
                 <tr v-for="internship in internshipList">
                     <td class="internshipSnippet" @click="showInternship">
-                        {{ internship.id }}
+                        {{ internship.academic_semester }}
                     </td>
                     <td>
-                        {{internship.academic_semester}}
+                        {{internship.year}}
                     </td>
                     <b-button v-on:click="showInternship(internship)">Details</b-button>
                 </tr>
             </table>
-            <b-button v-on:click="showInternship"> Back </b-button>
         </template>
         <template v-else>
             <h2> The other side</h2>

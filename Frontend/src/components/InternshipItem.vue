@@ -7,45 +7,45 @@
                 <div v-if="selectedInternship.progress">
                     <div>
                         Contract status:
-                        <body v-if="selectedInternship.progress[0]">
+                        <div v-if="selectedInternship.progress[0]">
                         completed
                         <b-button v-on:click="downloadFile('CONTRACT')">Download</b-button>
-                        </body>
-                        <body v-else>
+                        </div>
+                        <div v-else>
                         Awaiting upload
 
-                        </body>
+                        </div>
 
                     </div>
                     <div>
                         Work report status:
-                        <body v-if="selectedInternship.progress[1]">
+                        <div v-if="selectedInternship.progress[1]">
                         completed
-                        <b-button v-on:click="downloadFile()">Download</b-button>
-                        </body>
-                        <body v-else>
+                        <b-button v-on:click="downloadFile('WORK_REPORT')">Download</b-button>
+                        </div>
+                        <div v-else>
                         Awaiting upload
-                        </body>
+                        </div>
                     </div>
                     <div>
                         Technical report status:
-                        <body v-if="selectedInternship.progress[2]">
+                        <div v-if="selectedInternship.progress[2]">
                         completed
-                        <b-button>Download</b-button>
-                        </body>
-                        <body v-else>
+                        <b-button v-on:click="downloadFile('TECHNICAL_REPORT')">Download</b-button>
+                        </div>
+                        <div v-else>
                         Awaiting upload
-                        </body>
+                        </div>
                     </div>
                     <div>
                         Evaluation status:
-                        <body v-if="selectedInternship.progress[3]">
+                        <div v-if="selectedInternship.progress[3]">
                         completed
-                        <b-button>Download</b-button>
-                        </body>
-                        <body v-else>
+                        <b-button v-on:click="downloadFile('EVALUATION')">Download</b-button>
+                        </div>
+                        <div v-else>
                         Awaiting upload
-                        </body>
+                        </div>
                     </div>
                     <div>
                         Progress: {{numCompleted(selectedInternship.progress)}} out of 4 documents uploaded
@@ -129,7 +129,8 @@
             downloadFile(type){
 
                 this.$http({
-                    url: this.getPathByType(type),
+                    // url: "http://127.0.0.1:8081/api/internships/1/documents/5e86f66b-74d2-4e96-82e7-9a76b35855d3/download",
+                    url: "/api/internships/"+this.internship_id.toString()+"/documents/" + this.getPathByType(type).toString() +"/download",
                     method: 'GET',
                     responseType: 'blob',
                 }).then((response) => {
@@ -146,7 +147,7 @@
             getPathByType(type){
               for(var i =0;i<this.selectedInternship.document.length; i++){
                   if(this.selectedInternship.document[i].document_type == type){
-                      return this.selectedInternship.document[i].path;
+                      return this.selectedInternship.document[i].id;
                   }
               }
             },
