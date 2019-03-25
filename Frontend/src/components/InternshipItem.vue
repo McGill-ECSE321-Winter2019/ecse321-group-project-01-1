@@ -8,7 +8,7 @@
           <b-tabs pills card vertical>
             <b-tab title="Application Form" active>
                 <b-card-text>
-                    <ApplicationForm :selectedInternship="selectedInternship"></ApplicationForm>
+                    <ApplicationForm @refresh="fetch" :selectedInternship="selectedInternship"></ApplicationForm>
                 </b-card-text>
             </b-tab>
             <b-tab title="Documents">

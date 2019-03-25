@@ -87,6 +87,7 @@
             params: this.ApplicationForm
           }).then( (response) => {
             this.editing = false;
+            this.$emit("refresh")
             console.log(response);
           }).catch((error) => {
             console.log(error);
