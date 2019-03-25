@@ -6,11 +6,13 @@ import App from './App'
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+
+
 import axios from 'axios'
 const config = require('../config')
-const backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
-const frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
-
+const backendUrl = 'http://'+ config.dev.backendHost + ':' + config.dev.backendPort;
+const frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port;
 
 // axios client
 const client = axios.create({
@@ -52,7 +54,13 @@ new Vue({
   router,
   template: '<App/>',
   components: { App },
-
 })
+
+// new Vue({
+//     el: '#main',
+//     router,
+//     render: h => h(Main)
+// })
+
 
 

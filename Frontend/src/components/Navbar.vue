@@ -9,7 +9,7 @@
 
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav>
-            <b-nav-item v-if="!!student" href="/#/Internships">Internships</b-nav-item>
+            <b-nav-item v-if="!!student" href="/#/list">Internships</b-nav-item>
             <b-nav-item v-if="!!student" href="/#/reminders">Reminder</b-nav-item>
           </b-navbar-nav>
 

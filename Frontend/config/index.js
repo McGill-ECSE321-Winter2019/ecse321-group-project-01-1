@@ -49,21 +49,21 @@ const config = {
 config.dev.proxyTable = {
     // proxy all requests starting with /api to jsonplaceholder
     '/api': {
-      target: config.dev.backendHost + ':' + config.dev.backendPort,
+      target:config.dev.backendHost + ':' + config.dev.backendPort,
       changeOrigin: true,
       pathRewrite: {
         '^/api': '/api',
       }
-    },
+},
     '/login': {
-      target: config.dev.backendHost + ':' + config.dev.backendPort,
+      target:config.dev.backendHost + ':' + config.dev.backendPort,
       changeOrigin: true,
       pathRewrite: {
         '^/login': '/login',
       }
     },
     '/logout': {
-      target: config.dev.backendHost + ':' + config.dev.backendPort,
+      target:config.dev.backendHost + ':' + config.dev.backendPort,
       changeOrigin: true,
       pathRewrite: {
         '^/logout': 'logout'
