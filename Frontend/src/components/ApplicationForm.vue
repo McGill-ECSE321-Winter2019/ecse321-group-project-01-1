@@ -42,8 +42,8 @@
                    jobDescription:'',
                    employer:'',
                    location:'',
-                   startDate:'DD-MM-YYYY',
-                   endDate:'DD-MM-YYYY',
+                   startDate:'',
+                   endDate:'',
                    workPermit:true
                }
            }
@@ -56,8 +56,8 @@
              job_description: this.jobDescription,
              employer: this.employer,
              location :this.location,
-             start_date: this.startDate,
-             end_date :this.endDate,
+             start_date: this.convertDate(this.start_date),
+             end_date :this.convertDate(this.end_date),
              work_permit :this.workPermit
            }
          }).then(function (response) {
@@ -67,6 +67,10 @@
            console.log()
          });
        },
+       convertDate: function (date) {
+         console.log(date);
+         // return date.getFullYear().toString() + '-' + date.getMonth().toString() + '-' + date.getDay().toString()
+       }
      }
    }
 </script>
