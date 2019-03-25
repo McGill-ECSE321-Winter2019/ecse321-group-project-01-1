@@ -41,4 +41,4 @@ Link to the second project report: [Project report 2](https://github.com/McGill-
 |Mark Zhu          |  _23_ hours|Front end|
 
 
-Link to the third project report: [Project report 2](https://github.com/McGill-ECSE321-Winter2019/ecse321-group-project-01-1/wiki/Project-report-2)
+Link to the third project report: [Project report 2](https://github.com/McGill-ECSE321-Winter2019/ecse321-group-project-01-1/wiki/Project-report-3)
