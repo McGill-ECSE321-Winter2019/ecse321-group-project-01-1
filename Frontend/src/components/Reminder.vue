@@ -1,7 +1,7 @@
 <template>
   <div id="reminders">
     <h2>Reminders</h2>
-    <b-table striped hover :items="reminders_list" />
+    <b-table hover :items="reminders_list" :fields="fields"/>
   </div>
 </template>
 
@@ -17,6 +17,17 @@
     },
     data() {
       return {
+        fields: [
+          {
+            key: 'message',
+            sortable: false
+          },
+          {
+            key: 'create_date_time',
+            label: 'Time created',
+            sortable: true
+          }
+        ],
         reminders_list: []
       }
     },
