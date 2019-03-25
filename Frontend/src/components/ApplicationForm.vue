@@ -1,45 +1,71 @@
 <template>
-  <div id="applicationform">
-    <table>
-      <tr>
-          <input type="number" v-model="id" placeholder="form id">
-      </tr>
-      <tr>
-          <input type="text" v-model="jobID" placeholder="jobID">
-      </tr>
-      <tr>
-          <input type="text" v-model="jobDescription" placeholder="jobDescription">
-      </tr>
-      <tr>
-          <input type="text" v-model="employer" placeholder="employer">
-      </tr>
-      <tr>
-          <input type="text" v-model="location" placeholder=" location">
-      </tr>
-      <tr>
-          <input type="date" v-model="startDate" placeholder="startDate">
-      </tr>
-      <tr>
-          <input type="date" v-model="endDate" placeholder="endDate">
-      </tr>
-      <tr>
-          <td>WorkPermit</td>
-          <td>
-             <input type="checkbox" id="checkbox" v-model="WorkPermit">
-             <label for="checkbox">{{ workPermit }}</label>
-          </td>
-      </tr>
-      <tr>
-           <button @click="createcreateApplicationForm(id, jobID, jobDescrioption, employer, location, startDate, endDate, workPermit)">Create Person</button>
-      </tr>
-     </table>
-     <p> 
-       <span v-if="errorApplicationForm" style="color:red">Error: {{errorApplicationForm}} </span>
-     </p>
-  </div>  
+  <div class="form-group">
+     +<label for="jobID">Your Job ID</label>
+     <input type="text" id="jobID" class="form-control" v-model="ApplicationForm.jobID">
+   </div> 
+   <div class="form-group">
+     <label for="jobDescription">Enter Job Description</label>
+     <input type="text" id="jobDescription" class="form-control" v-model="ApplicationForm.jobDescription">
+   </div> 
+   <div class="form-group">
+     <label for="employer">Your Employer</label>
+     <input type="text" id="employer" class="form-control" v-model="ApplicationForm.employer">
+   </div> 
+   <div class="form-group">
+     <label for="location">Enter the Location</label>
+     <input type="text" id="location" class="form-control" v-model="ApplicationForm.location">
+   </div> 
+   <div class="form-group">
+     <label for="startDate">Start Date</label>
+     <input type="date" id="startDate" class="form-control" v-model="ApplicationForm.startDate">
+   </div> 
+   <div class="form-group">
+     <label for="endDate">End Date</label>
+     <input type="date" id="endDate" class="form-control" v-model="ApplicationForm.endDate">
+   </div> 
+   <div class="form-group">
+     <input type="checkbox" id="checkbox" v-model="ApplicationForm.workPermit">
+     <label for="checkbox">{{ workPermit }}</label>
+  </div>
 </template>  
 
-<script src="./applicationform.js">
+<script>
+   export default{
+       data() {
+           return{
+               ApplicationForm:{
+                   JobID:'',
+                   jobDescription:'',
+                   employer:'',
+                   location:'',
+                   startDate:'DD-MM-YYYY',
+                   endDate:'DD-MM-YYYY',
+                   workPermit:true
+
+               }
+           }
+       }
+   }
+
+methods: {
+   createApplicationForm: function (internshipId){
+      this.$http.post('/api/internships/'+ internshipId.toString() +'/application_form',  null, {
+        params:{
+          job_id :jobID,
+          job_description: jobDescription,
+          employer: employer,
+          location :location,
+          start_date: startDate,
+          end_date :endDate,
+          work_permit :workPermit
+        }
+      }).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+} 
 </script>
 
 <style>
