@@ -29,3 +29,16 @@ Link to the first project report: [Project report 1](https://github.com/McGill-E
 
 
 Link to the second project report: [Project report 2](https://github.com/McGill-ECSE321-Winter2019/ecse321-group-project-01-1/wiki/Project-report-2)
+
+## Deliverable 3
+
+|Team member's name|Total hours|Responsibility         |
+|------------------|-----------|-----------------------|
+|Zirui He          |  _21_ hours|Front end|
+|Binyuan Sun       |  _30_ hours|Backend lead and general tech lead|
+|Tri-tin Truong    |  _27_ hours|Project management|
+|Zhong Yu Yang     |  _22_ hours|Front end|
+|Mark Zhu          |  _23_ hours|Front end|
+
+
+Link to the third project report: [Project report 2](https://github.com/McGill-ECSE321-Winter2019/ecse321-group-project-01-1/wiki/Project-report-2)
