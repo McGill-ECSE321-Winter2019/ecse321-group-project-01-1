@@ -15,6 +15,7 @@ function StudentDto(studentID, firstName, lastName, email) {
     this.firstName = firstName
     this.lastName = lastName
     this.email = email
+    this.password = password
 }
 
 export default {
@@ -23,7 +24,8 @@ export default {
         return {
             student: '',
             errorStudent: '',
-            response: ''
+            response: '',
+            password: ''
         }
     },
     created: function () {
@@ -36,26 +38,13 @@ export default {
             .catch(e => {
                 this.errorStudent = e;
             });
-    }
+    },
+
+    methods: {
+    	changePassword: function (oldPass,newPass) {
+    		if(oldPass == student.password){
+    			student.setPassword(newPass)
+    		}
+    	}
+   }
 }
-
-
-/*
-methods: {
-	createStudent: function (personName) {
-		  AXIOS.post(`/external/students/`+studentID, {}, {})
-		  .then(response => {
-		    // JSON responses are automatically parsed.
-		    this.people.push(response.data)
-		    this.newPerson = ''
-		    this.errorPerson = ''
-		  })
-		  .catch(e => {
-		    var errorMsg = e.message
-		    console.log(errorMsg)
-		    this.errorStudent = errorMsg
-		  });
-		}
-	  }
-	}
-  */

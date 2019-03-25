@@ -7,9 +7,20 @@
           Student ID: {{student.student_id}}<br>
           First Name: {{student.first_name}}<br>
           Last Name: {{student.last_name}}<br>
-          Email: {{student.email}}</td>
+          Email: {{student.email}}<br>
+          Password: {{student.password}}
+          </td>
       </tr>
+      <br>
     </table>
+    <br>
+        <td>
+			Current Password: <input type="text" name="oldPass" value="old"><br>
+			New Password: <input type="text" name="newPass" value="new"><br>
+        <button @click="changePassword(oldPass,newPass)">Change Password</button>
+			
+		</form>
+		</td>
   </div>   
 </template>
 
