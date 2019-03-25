@@ -2,10 +2,10 @@
   <div>
     <table>
       <tr>
-        <input type="number" v-model="id" placeholder="form id">
+        Enter the myFuture jobID (optional)
       </tr>
       <tr>
-        <input type="text" v-model="jobID" placeholder="jobID">
+        <input type="text" v-model="jobId" placeholder="jobId">
       </tr>
       <tr>
         <input type="text" v-model="jobDescription" placeholder="jobDescription">
@@ -30,7 +30,7 @@
         </td>
       </tr>
       <tr>
-        <button @click="createcreateApplicationForm(id, jobID, jobDescrioption, employer, location, startDate, endDate, workPermit)">Create Person</button>
+        <b-button v-on:click="createApplicationForm(jobId, jobDescription, employer, location, startDate, endDate, workPermit)">Create Person</b-button>
       </tr>
     </table>
   </div>

@@ -22,7 +22,7 @@ export default new Router({
     },
     {
       path: '/form',
-      name: 'login',
+      name: 'form',
       component: ApplicationForm
     }
   ]
