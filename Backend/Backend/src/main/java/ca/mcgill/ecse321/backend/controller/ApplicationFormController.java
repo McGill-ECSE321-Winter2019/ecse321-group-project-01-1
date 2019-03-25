@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +21,7 @@ import ca.mcgill.ecse321.backend.service.AuthenticationService;
 import ca.mcgill.ecse321.backend.service.InternshipService;
 
 @RestController
-@CrossOrigin(origins = "*")
-
+@CrossOrigin(origins="*", methods= {RequestMethod.PUT, RequestMethod.POST, RequestMethod.GET, RequestMethod.OPTIONS})
 public class ApplicationFormController {
     
     @Autowired
@@ -31,7 +32,7 @@ public class ApplicationFormController {
     
     @Autowired
     private AuthenticationService authenticationService;
-
+    
     @PostMapping("/api/internships/{internship_id}/application_form")
     public ApplicationFormDto postApplication(
                       @RequestParam("job_id") String jobID,
@@ -45,9 +46,37 @@ public class ApplicationFormController {
         ){
     	Internship i = internshipService.findByIdAndStudent(internshipId, authenticationService.getCurrentStudent());
     	if (i == null) throw new AccessDeniedException("");
-    	
+    	if (i.getApplicationForm() != null) throw new IllegalArgumentException("Application form already exists.");
         ApplicationFormDto applicationFormDto = new ApplicationFormDto(jobID, jobDescription, employer, location, startDate,  endDate, workPermit);
         ApplicationForm applicationForm = applicationFormService.create(applicationFormDto, i);
+        return applicationFormService.toDto(applicationForm);
+    }
+    
+    @PutMapping("/api/internships/{internship_id}/application_form")
+    public ApplicationFormDto putApplication(
+                      @RequestParam(value = "job_id" , required = false) String jobID,
+                      @RequestParam(value = "job_description", required = false)  String jobDescription,
+                      @RequestParam(value = "employer", required = false)  String employer,
+                      @RequestParam(value = "location", required = false) String location,
+                      @RequestParam(value = "start_date", required = false) Date startDate,
+                      @RequestParam(value = "end_date", required = false) Date endDate,
+                      @RequestParam(value = "work_permit", required = false) boolean workPermit,
+                      @PathVariable(value="internship_id") int internshipId
+        ){
+    	Internship i = internshipService.findByIdAndStudent(internshipId, authenticationService.getCurrentStudent());
+    	if (i == null) throw new AccessDeniedException("");
+    	if (i.getApplicationForm() == null) throw new IllegalArgumentException("Application form doesn't exist.");
+    	ApplicationFormDto applicationFormDto = new ApplicationFormDto();
+    	applicationFormDto.setId(i.getApplicationForm().getId());
+    	applicationFormDto.setJobID(jobID);
+    	applicationFormDto.setJobDescription( jobDescription);
+    	applicationFormDto.setEmployer( employer);
+    	applicationFormDto.setLocation( location);
+        applicationFormDto.setStartDate( startDate);
+        applicationFormDto.setEndDate( endDate);
+        applicationFormDto.setWorkPermit( workPermit);
+    	
+        ApplicationForm applicationForm = applicationFormService.update(applicationFormDto);
         return applicationFormService.toDto(applicationForm);
     }
 

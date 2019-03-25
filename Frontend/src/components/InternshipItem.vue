@@ -6,9 +6,13 @@
         </b-alert>
         <b-card no-body>
           <b-tabs pills card vertical>
-            <b-tab title="Application Form" active><b-card-text>Tab Contents 1</b-card-text></b-tab>
+            <b-tab title="Application Form" active>
+                <b-card-text>
+                    <ApplicationForm :selectedInternship="selectedInternship"></ApplicationForm>
+                </b-card-text>
+            </b-tab>
             <b-tab title="Documents">
-                <h3>Summary</h3>
+                <b>Summary</b>
                 <b-card-text>
                     <div >
                         <ul class="list-unstyled" v-if="selectedInternship.progress">
@@ -50,7 +54,7 @@
                             </li>
                         </ul>
                         <div>
-                            <h3>Upload document</h3>
+                            <b>Upload document</b>
                             <b-form @submit="submitFile">
                                 <b-form-group>
                                     <b-form-select v-model="selectedDocument" :options="DocumentTypesDisp" />
@@ -75,7 +79,10 @@
 </template>
 
 <script>
+    import ApplicationForm from "./ApplicationForm";
+
     export default {
+        components: {ApplicationForm},
         props: ['internship_id'],
         name: "InternshipItem",
 
