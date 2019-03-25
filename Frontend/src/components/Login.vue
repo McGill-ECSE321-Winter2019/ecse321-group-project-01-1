@@ -37,6 +37,9 @@
 
 <script>
   export default {
+    props: {
+      onGuestRedirect: { type: Function },
+    },
     data() {
       return {
         form: {
@@ -47,15 +50,18 @@
         show: true
       }
     },
+
+
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
         this.$http.post(`/login`, this.$jsonToFormData(this.form))
         .then(response => {
           // JSON responses are automatically parsed.
-          console.log(response)
           this.$emit("authenticated", true);
-          this.$router.replace({ name: "profile" });
+          this.$nextTick(() =>{
+            this.$router.replace({ name: "profile" });
+          })
         })
         .catch(e => {
           this.error = true
