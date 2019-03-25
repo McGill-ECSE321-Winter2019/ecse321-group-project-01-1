@@ -58,7 +58,6 @@
                                 <b-form-group>
                                     <b-form-file
                                       v-model="file"
-                                      :state="Boolean(file)"
                                       placeholder="Choose a file..."
                                       drop-placeholder="Drop file here..."
                                     />

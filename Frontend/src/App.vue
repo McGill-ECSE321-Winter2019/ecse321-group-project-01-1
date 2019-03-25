@@ -49,16 +49,16 @@ export default {
 
     },
     onGuestRedirect() {
-      if (this.authenticated === null) {
-        this.$on('authenticated', (value) => {
-          if (!value) {
-            this.$router.replace({ name: "login" });
-          }
-        })
-      } else if (this.authenticated === false) {
+
+      this.$on('authenticated', (value) => {
+        if (!value) {
+          this.$router.replace({ name: "login" });
+        }
+      })
+      if (this.authenticated === false) {
         this.$router.replace({ name: "login" });
       }
-    }
+    },
   },
   name: 'app',
   components: {
