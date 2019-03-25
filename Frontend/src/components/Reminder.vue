@@ -1,18 +1,36 @@
-
 <template>
   <div id="reminders">
     <h2>Reminders</h2>
-    <table>
-      <tr>
-          <td>
-          Message: {{Reminder.message}}<br>
-          Email: {{Reminder.createTime}}</td>
-      </tr>
-    </table>
+    <b-table striped hover :items="reminders_list" />
   </div>
 </template>
 
-<script src="./reminder.js">
+<script>
+  function ReminderDto(message, createTime) {
+      this.message = message;
+      this.createTime = createTime;
+  }
+
+  export default {
+    props: {
+      onGuestRedirect: { type: Function },
+    },
+    data() {
+      return {
+        reminders_list: []
+      }
+    },
+    created: function () {
+      this.onGuestRedirect();
+      this.$http.get('/api/reminders')
+        .then(response => {
+            this.reminders_list = response.data
+        })
+        .catch(e => {
+            this.errorreminder = e;
+        });
+    }
+  }
 </script>
 
 <style>

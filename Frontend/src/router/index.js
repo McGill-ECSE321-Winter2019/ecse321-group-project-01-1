@@ -22,13 +22,13 @@ const router = new Router({
     },
     {
       path: '/reminders',
-      name: 'reminder',
+      name: 'reminders',
       component: Reminder
     },
     {
-        path: '/profile',
-        name: 'profile',
-        component: Profile,
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
     }
 
   ]
