@@ -51,6 +51,11 @@
                         icon: 'fa fa-download'
                     },
                     {
+                        href: '/view',
+                        title: 'View Profile',
+                        icon: 'fa fa-download'
+                    },
+                    {
                         href: '/list',
                         title: 'Internships',
                         icon: 'fa fa-code'

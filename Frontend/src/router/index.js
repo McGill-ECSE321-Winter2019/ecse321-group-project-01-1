@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import Login from '@/components/Login'
 import InternshipListing from "@/components/InternshipListing";
 import InternshipItem from "@/components/InternshipItem";
+import ProfileViewing from "@/components/ProfileViewing";
 
 
 Vue.use(Router)
@@ -30,6 +31,11 @@ export default new Router({
             name: 'test',
             component: InternshipItem
         },
+    	{
+      	    path: '/view',
+      	    name: 'View',
+      	    component: ProfileViewing
+    	}
 
     ]
 })
