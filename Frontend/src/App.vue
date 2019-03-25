@@ -1,129 +1,79 @@
 <template>
-    <div
-        id="demo"
-        :class="[{'collapsed' : collapsed}]"
-    >
-        <div class="demo">
-            <div class="container">
-                <h1>
-                    Co-operator
-                </h1>
-                <p>An ECSE 321 project</p>
-                <hr style="margin: 50px 0px;border: 1px solid #e3e3e3;">
-                <router-view />
-        </div>
-        </div>
-    </div>
+  <div id="app">
+    <Navbar :student="student" @authenticated="authenticate"></Navbar>
+    <router-view :onGuestRedirect="onGuestRedirect" @authenticated="authenticate">
+      
+    </router-view>
+  </div>
 </template>
 
 <script>
-    const separator = {
-        template: `<hr style="border-color: rgba(0, 0, 0, 0.1); margin: 20px;">`
+
+
+import Navbar from './components/Navbar'
+export default {
+  data() {
+    return {
+      student: null,
+      authenticated: null,
     }
-    export default {
-        name:'app',
+  },
+  mounted: function() {
+    this.authenticate(true);
+  },
 
-        created: function(){
+  methods: {
+    authenticate(value) {
+      this.authenticated = null;
+      if (value) {
+        this.$http.get(`/api/profile`)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          this.authenticated = true;
+          this.student = response.data
+          this.$emit("authenticated", true);
+        })
+        .catch(e => {
+          // this.student = null
+          this.authenticated = false;
+          this.student = null
+          this.$emit("authenticated", false);
 
-        },
-        data() {
-            return {
-                collapsed: false,
-                themes: ['', 'white-theme'],
-                selectedTheme: '',
-                num_reminders : '3',
-                menu: [
-                    {
-                        header: true,
-                        title: 'Navigation'
-                    },
-                    {
-                        href: '/hello',
-                        title: 'Profile',
-                        icon: 'fa fa-download'
-                    },
-                    {
-                        href: '/list',
-                        title: 'Internships',
-                        icon: 'fa fa-code'
-                    },
-                    {
-                        // href: '#',
-                        title: 'Reminder',
-                        icon: 'fa fa-cog',
-                        //TODO get reminders to change the badge number
-                        badge: {
-                            text: 'new',
-                            class: 'badge-danger'
-                        }
-                    },
-                    {
-                        title: 'Sign out',
-                        icon: 'fa fa-code'
-                    },
-                    {
-                        href: '/test',
-                        title: 'test',
-                        icon: 'fa fa-code'
-                    }
-                ]
+        });
+      } else {
+        this.authenticated = false;
+        this.student = null;
+        this.$emit("authenticated", false);
 
-            }
-        },
-        methods: {
-            onCollapse (collapsed) {
-                console.log(collapsed)
-                this.collapsed = collapsed
-            },
-            onItemClick (event, item) {
-                console.log('onItemClick')
-                // console.log(event)
-                // console.log(item)
-            }
-        }
+      }
+
+    },
+    onGuestRedirect() {
+      if (this.authenticated === null) {
+        this.$on('authenticated', (value) => {
+          if (!value) {
+            this.$router.replace({ name: "login" });
+          }
+        })
+      } else if (this.authenticated === false) {
+        this.$router.replace({ name: "login" });
+      }
     }
+  },
+  name: 'app',
+  components: {
+    Navbar
+  }
+}
+
+
 </script>
 
 <style>
-    @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
-
-    body,
-    html {
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        font-family: 'Source Sans Pro', sans-serif;
-        background-color: #f2f4f7;
-    }
-
-    #demo {
-        padding-left: 350px;
-    }
-    #demo.collapsed {
-        padding-left: 50px;
-    }
-
-    .demo {
-        padding: 50px;
-    }
-
-    .badge-danger {
-        background-color: #ff2a2a;
-        color: #fff;
-    }
-
-    .container {
-        max-width: 600px;
-        margin-left: 10px;
-    }
-
-    pre {
-        color: #2a2a2e;
-        background: #fff;
-        border-radius: 2px;
-        padding: 10px;
-        overflow: auto;
-    }
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
 </style>

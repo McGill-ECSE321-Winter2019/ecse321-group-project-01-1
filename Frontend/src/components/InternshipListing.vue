@@ -2,40 +2,30 @@
     <div id="internshipListing">
         <template v-if="listing">
             <h2>Current internship listings</h2>
-            <table>
-                <tr v-for="internship in internshipList">
-                    <td class="internshipSnippet" @click="showInternship">
-                        {{ internship.academic_semester }}
-                    </td>
-                    <td>
-                        {{internship.year}}
-                    </td>
-                    <b-button v-on:click="showInternship(internship)">Details</b-button>
-                </tr>
-            </table>
+            <b-table 
+                borderless
+                hover
+                :items="getItems()"
+                :fields="['year', 'academic_semester', 'course']"
+                @row-clicked="showInternship"
+
+            ></b-table>
         </template>
         <template v-else>
-            <h2> The other side</h2>
-            <b-button v-on:click="back"> Back</b-button>
             <internship-item v-bind:internship_id="currentInternship.id"></internship-item>
+            <a href="#" v-on:click="back"> Back</a>
         </template>
     </div>
 </template>
 
 <script>
     import InternshipItem from "./InternshipItem";
-    function PersonDto (name) {
-        this.id = name
-        this.events = []
-    }
-    function InternshipDto(id){
-        this.id =id;
-        this.course = "FACC300";
-        this.progress = 3;
-    }
     export default {
         name: "InternshipListing",
         components: {InternshipItem},
+        props: {
+          onGuestRedirect: { type: Function },
+        },
         data() {
             return {
                 internshipList: [],
@@ -53,7 +43,7 @@
             // // Sample initial content
             // this.internshipList = [i1, i2];
             // this.currentInternship = i1;
-
+            this.onGuestRedirect();
             this.$http.get(`/api/internships`)
                 .then(response => {
                     this.internshipList = response.data
@@ -63,9 +53,17 @@
                 });
         },
         methods: {
-            showInternship: function(internship){
-                this.currentInternship = internship;
+
+            showInternship: function(internship, index){
+                this.currentInternship = this.internshipList[index];
                 this.listing = !this.listing;
+            },
+            getItems() {
+                return this.internshipList.map((el) => {
+                    let copy  = Object.assign({}, el)
+                    copy.course = el.course.course_id
+                    return copy
+                }) 
             },
             back: function(){
                 this.listing = !this.listing;
@@ -75,12 +73,7 @@
 </script>
 
 <style>
-    #internshipListing {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        color: #2c3e50;
-        background: #f2ece8;
-    }
-    span.internshipSnippet{
-        background: blueviolet;
-    }
+td {
+    cursor: pointer;
+}
 </style>

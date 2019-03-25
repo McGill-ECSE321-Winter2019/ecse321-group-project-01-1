@@ -1,70 +1,77 @@
 <template>
-    <div id="internship">
-        <div class="container">
-            <h2> First internship</h2>
-            <b-button> Application Form</b-button>
-            <div >
-                <div v-if="selectedInternship.progress">
-                    <div>
-                        Contract status:
-                        <div v-if="selectedInternship.progress[0]">
-                        completed
-                        <b-button v-on:click="downloadFile('CONTRACT')">Download</b-button>
-                        </div>
-                        <div v-else>
-                        Awaiting upload
+    <div id="internship" v-if="!!selectedInternship">
+        <h2 >Internship {{ selectedInternship.academic_semester +  " " + selectedInternship.year}}</h2>
+        <b-alert v-if="!!alert" show dismissible>
+          {{alert}}
+        </b-alert>
+        <b-card no-body>
+          <b-tabs pills card vertical>
+            <b-tab title="Application Form" active><b-card-text>Tab Contents 1</b-card-text></b-tab>
+            <b-tab title="Documents">
+                <h3>Summary</h3>
+                <b-card-text>
+                    <div >
+                        <ul class="list-unstyled" v-if="selectedInternship.progress">
+                            <li>
+                                Contract:
+                                <span v-if="selectedInternship.progress[0]">
+                                <a href="#" data-document-type="CONTRACT" v-on:click="downloadFile">{{getPathByType('CONTRACT').file_name}}</a>
+                                </span>
+                                <span v-else>awaiting upload
+                                </span>
+
+                            </li>
+                            <li>
+                                Work report:
+                                <span v-if="selectedInternship.progress[1]">
+                                <a href="#" data-document-type="WORK_REPORT" v-on:click="downloadFile">{{getPathByType('WORK_REPORT').file_name}}</a>
+                                </span>
+                                <span v-else>awaiting upload
+                                </span>
+                            </li>
+                            <li>
+                                Technical report:
+                                <span v-if="selectedInternship.progress[2]">
+                                <a href="#" data-document-type="TECHNICAL_REPORT" v-on:click="downloadFile">{{getPathByType('TECHNICAL_REPORT').file_name}}</a>
+                                </span>
+                                <span v-else>awaiting upload
+                                </span>
+                            </li>
+                            <li>
+                                Evaluation:
+                                <span v-if="selectedInternship.progress[3]">
+                                <a href="#" data-document-type="EVALUATION" v-on:click="downloadFile">{{getPathByType('EVALUATION').file_name}}</a>
+                                </span>
+                                <span v-else>awaiting upload
+                                </span>
+                            </li>
+                            <li>
+                                Progress: {{numCompleted(selectedInternship.progress)}} out of 4 documents uploaded
+                            </li>
+                        </ul>
+                        <div>
+                            <h3>Upload document</h3>
+                            <b-form @submit="submitFile">
+                                <b-form-group>
+                                    <b-form-select v-model="selectedDocument" :options="DocumentTypesDisp" />
+                                </b-form-group>
+                                <b-form-group>
+                                    <b-form-file
+                                      v-model="file"
+                                      :state="Boolean(file)"
+                                      placeholder="Choose a file..."
+                                      drop-placeholder="Drop file here..."
+                                    />
+                                </b-form-group>
+                                <b-button type="submit" variant="primary">Submit</b-button>
+                            </b-form>
 
                         </div>
-
                     </div>
-                    <div>
-                        Work report status:
-                        <div v-if="selectedInternship.progress[1]">
-                        completed
-                        <b-button v-on:click="downloadFile('WORK_REPORT')">Download</b-button>
-                        </div>
-                        <div v-else>
-                        Awaiting upload
-                        </div>
-                    </div>
-                    <div>
-                        Technical report status:
-                        <div v-if="selectedInternship.progress[2]">
-                        completed
-                        <b-button v-on:click="downloadFile('TECHNICAL_REPORT')">Download</b-button>
-                        </div>
-                        <div v-else>
-                        Awaiting upload
-                        </div>
-                    </div>
-                    <div>
-                        Evaluation status:
-                        <div v-if="selectedInternship.progress[3]">
-                        completed
-                        <b-button v-on:click="downloadFile('EVALUATION')">Download</b-button>
-                        </div>
-                        <div v-else>
-                        Awaiting upload
-                        </div>
-                    </div>
-                    <div>
-                        Progress: {{numCompleted(selectedInternship.progress)}} out of 4 documents uploaded
-                    </div>
-                </div>
-            </div>
-            <h3>Upload Documents</h3>
-            <div>
-                <select v-model="selectedDocument">
-                    <option
-                        v-for="(docType, index) in DocumentTypesDisp"
-                        :key="index">
-                        {{ docType == '' ? 'selectedDocument' : docType }}
-                    </option>
-                </select>
-                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" >
-                <button v-on:click="submitFile">Submit</button>
-            </div>
-        </div>
+                </b-card-text>
+            </b-tab>
+          </b-tabs>
+        </b-card>
     </div>
 </template>
 
@@ -73,28 +80,44 @@
         props: ['internship_id'],
         name: "InternshipItem",
 
-
         data (){
             return{
+                alert: "",
                 file: '',
-                num_completed: '',
-                application: true,
-                selectedInternship: '',
+                selectedInternship: null,
+                documents_table: {
+                    CONTRACT: null,
+                    WORK_REPORT: null,
+                    TECHNICAL_REPORT: null,
+                    EVALUATION: null
+                },
                 error:'',
-                selectedDocument :'Contract',
-                DocumentTypesDisp: ['CONTRACT','WORK_REPORT', 'TECHNICAL_REPORT', 'EVALUATION']
+                selectedDocument: null,
+                DocumentTypesDisp: [
+                {value: null, text: 'Please select a document type'},
+                {value: 'CONTRACT', text: 'Contract'},
+                {value: 'WORK_REPORT', text: 'Work report'},
+                {value: 'TECHNICAL_REPORT', text: 'Technical report'},
+                {value: 'EVALUATION', text: 'Evaluation'}
+                ]
             }
         },
         created: function () {
-            this.$http.get(`/api/internships/` + this.internship_id.toString())
-                .then(response => {
-                    this.selectedInternship = response.data
-                })
-                .catch(e => {
-                    this.error = e;
-                });
+            this.fetch()
         },
         methods:{
+            fetch() {
+                this.$http.get(`/api/internships/` + this.internship_id.toString())
+                    .then(response => {
+                        this.selectedInternship = response.data
+                        for(var i =0;i<this.selectedInternship.document.length; i++){
+                            this.documents_table[this.selectedInternship.document[i].document_type] = this.selectedInternship.document[i]
+                        }
+                    })
+                    .catch(e => {
+                        this.error = e;
+                    });
+            },
             numCompleted: function (arr) {
                 let count = 0;
                 let i;
@@ -105,7 +128,8 @@
                 }
                 return count;
             },
-            submitFile() {
+            submitFile(evt) {
+                evt.preventDefault()
                 let formData = new FormData();
                 formData.append('file', this.file);
 
@@ -114,30 +138,31 @@
                         params: {
                             type: this.selectedDocument
                         }
-                    }
-                ).then(function () {
+                    })
+                .then(() => {
+                    this.fetch()
+                    this.alert = "File successfully uploaded!"
+
                     console.log('SUCCESS!!');
                 })
-                    .catch(function () {
-                        console.log('FAILURE!!');
-                    });
+                .catch( (e) => {
+                    console.log(e);
+                });
             },
-            handleFileUpload() {
-                this.file = this.$refs.file.files[0];
-                console.log('>>>> 1st element in files array >>>> ', this.file);
-            },
-            downloadFile(type){
-
+            downloadFile(evt){
+                evt.preventDefault()
+                let type = evt.target.attributes['data-document-type'].value
+                let d = this.getPathByType(type)
                 this.$http({
                     // url: "http://127.0.0.1:8081/api/internships/1/documents/5e86f66b-74d2-4e96-82e7-9a76b35855d3/download",
-                    url: "/api/internships/"+this.internship_id.toString()+"/documents/" + this.getPathByType(type).toString() +"/download",
+                    url: "/api/internships/"+this.internship_id.toString()+"/documents/" + d.id +"/download",
                     method: 'GET',
                     responseType: 'blob',
                 }).then((response) => {
                     const url = window.URL.createObjectURL(new Blob([response.data]));
                     const link = document.createElement('a');
                     link.href = url;
-                    link.setAttribute('download', 'file.pdf'); //or any other extension
+                    link.setAttribute('download', d.file_name); //or any other extension
                     document.body.appendChild(link);
                     link.click();
                 }).catch(function () {
@@ -145,11 +170,7 @@
                 });
             },
             getPathByType(type){
-              for(var i =0;i<this.selectedInternship.document.length; i++){
-                  if(this.selectedInternship.document[i].document_type == type){
-                      return this.selectedInternship.document[i].id;
-                  }
-              }
+                return this.documents_table[type];
             },
         }
     }
