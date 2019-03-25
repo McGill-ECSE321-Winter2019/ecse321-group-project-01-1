@@ -1,21 +1,24 @@
 package ca.mcgill.ecse321.backend.dto;
 
-import ca.mcgill.ecse321.backend.model.AcademicSemester;
-import ca.mcgill.ecse321.backend.model.ApplicationForm;
-import ca.mcgill.ecse321.backend.model.Document;
-import ca.mcgill.ecse321.backend.model.Student;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+import ca.mcgill.ecse321.backend.model.AcademicSemester;
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class InternshipDto {
 
     public InternshipDto(){
 
     }
 
-    public InternshipDto(AcademicSemester academicSemesterm) {
+    public InternshipDto(int year, AcademicSemester academicSemester) {
+    	this.year = year;
         this.academicSemester = academicSemester;
     }
 
@@ -26,6 +29,9 @@ public class InternshipDto {
     private AcademicSemester academicSemester;
     
     private boolean[] progress;
+    
+	private int year;
+
 
     public int getId() {
         return id;
@@ -42,7 +48,8 @@ public class InternshipDto {
     public void setCourse(CourseDto course) {
         this.course = course;
     }
-
+    
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     private ApplicationFormDto applicationForm;
 
     public ApplicationFormDto getApplicationForm() {
@@ -52,7 +59,8 @@ public class InternshipDto {
     public void setApplicationForm(ApplicationFormDto applicationForms) {
         this.applicationForm = applicationForms;
     }
-
+    
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     private Set<DocumentDto> document = new HashSet<DocumentDto>();
 
     public Set<DocumentDto> getDocument() {
@@ -71,8 +79,10 @@ public class InternshipDto {
         this.academicSemester = academicSemester;
     }
 
+    
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     private StudentDto student;
-
+    
     public StudentDto getStudent() {
         return this.student;
     }
@@ -89,6 +99,14 @@ public class InternshipDto {
 		this.progress = progress;
 	}
 
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+	
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,3 +117,4 @@ public class InternshipDto {
                 Arrays.equals(getProgress(), that.getProgress());
     }
 }
+

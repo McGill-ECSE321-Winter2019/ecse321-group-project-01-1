@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ca.mcgill.ecse321.backend.dao.InternshipRepository;
 import ca.mcgill.ecse321.backend.dto.DocumentDto;
+import ca.mcgill.ecse321.backend.dto.InternshipDeepDto;
 import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.model.Course;
 import ca.mcgill.ecse321.backend.model.Document;
@@ -42,11 +43,12 @@ public class InternshipService {
 	StorageService storageService;
 	
 	@Transactional
-	public Internship createInternship(@ModelAttribute("internship") @Valid InternshipDto internshipDto, Student student, Course course) throws Exception {
+	public Internship create(@ModelAttribute("internship") @Valid InternshipDto internshipDto, Student student, Course course) throws Exception {
 		Internship internship = new Internship();
     	internship.setAcademicSemester(internshipDto.getAcademicSemester());
     	internship.setStudent(student);
     	internship.setCourse(course);
+    	internship.setYear(internshipDto.getYear());
 
     	return internshipRepository.save(internship);
 	}
@@ -66,6 +68,7 @@ public class InternshipService {
 		return internshipRepository.findByIdAndStudent(id, student);
 	}
 	
+	@Transactional
 	public boolean[] generateProgress(Internship internship) {
 		boolean[] progress = new boolean[4];
 		Set<Document> documents = internship.getDocument();
@@ -92,20 +95,24 @@ public class InternshipService {
 		return progress;
 	}
 	
+	@Transactional
     public InternshipDto toDto(Internship internship) {
     	InternshipDto internshipDto = new InternshipDto();
     	internshipDto.setAcademicSemester(internship.getAcademicSemester());
     	internshipDto.setCourse(courseService.toDto(internship.getCourse()));
     	internshipDto.setId(internship.getId());
     	internshipDto.setProgress(generateProgress(internship));
+    	internshipDto.setYear(internship.getYear());
     	return internshipDto;
     }
     
-    public InternshipDto deepToDto(Internship internship) {
-    	InternshipDto internshipDto = new InternshipDto();
+    @Transactional
+    public InternshipDeepDto deepToDto(Internship internship) {
+    	InternshipDeepDto internshipDto = new InternshipDeepDto();
     	internshipDto.setAcademicSemester(internship.getAcademicSemester());
     	internshipDto.setApplicationForm(applicationFormService.toDto(internship.getApplicationForm()));
     	internshipDto.setCourse(courseService.toDto(internship.getCourse()));
+    	internshipDto.setYear(internship.getYear());
 
 		HashSet<DocumentDto> documentDtos = new HashSet<>();
 		for (Document document : internship.getDocument()) {

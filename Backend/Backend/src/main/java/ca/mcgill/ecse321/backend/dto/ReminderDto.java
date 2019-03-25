@@ -1,6 +1,11 @@
 package ca.mcgill.ecse321.backend.dto;
 import java.sql.Time;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ReminderDto {
 	
 	private int id;
@@ -11,6 +16,7 @@ public class ReminderDto {
 
 	private Time readDateTime;
 
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
 	private StudentDto student;
 
 	public ReminderDto () {
@@ -19,6 +25,7 @@ public class ReminderDto {
 	public ReminderDto (String message) {
 		this.message = message;
 	}
+	
 	
 	public StudentDto getStudent() {
 		return this.student;

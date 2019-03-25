@@ -1,12 +1,10 @@
 package ca.mcgill.ecse321.backend.service;
 
-import ca.mcgill.ecse321.backend.dao.*;
-import ca.mcgill.ecse321.backend.dto.CourseDto;
-import ca.mcgill.ecse321.backend.dto.DocumentDto;
-import ca.mcgill.ecse321.backend.dto.InternshipDto;
-import ca.mcgill.ecse321.backend.dto.StudentDto;
-import ca.mcgill.ecse321.backend.exception.FileStorageException;
-import ca.mcgill.ecse321.backend.model.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,10 +13,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
+import ca.mcgill.ecse321.backend.dao.CourseRepository;
+import ca.mcgill.ecse321.backend.dao.DocumentRepository;
+import ca.mcgill.ecse321.backend.dao.InternshipRepository;
+import ca.mcgill.ecse321.backend.dao.ReminderRepository;
+import ca.mcgill.ecse321.backend.dao.StudentRepository;
+import ca.mcgill.ecse321.backend.dto.CourseDto;
+import ca.mcgill.ecse321.backend.dto.DocumentDto;
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
+import ca.mcgill.ecse321.backend.exception.FileStorageException;
+import ca.mcgill.ecse321.backend.model.AcademicSemester;
+import ca.mcgill.ecse321.backend.model.Course;
+import ca.mcgill.ecse321.backend.model.Document;
+import ca.mcgill.ecse321.backend.model.DocumentType;
+import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
 
 
 @RunWith(SpringRunner.class)
@@ -79,7 +90,7 @@ public class StorageServiceTest {
         Student student = studentService.create(new StudentDto("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
         Course course = courseService.create(new CourseDto("FACC300"));
        
-        this.mockInternship = internshipService.createInternship(new InternshipDto(AcademicSemester.SUMMER), student, course);
+        this.mockInternship = internshipService.create(new InternshipDto(2019, AcademicSemester.SUMMER), student, course);
     }
 
 

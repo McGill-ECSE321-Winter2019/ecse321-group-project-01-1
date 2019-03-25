@@ -103,6 +103,7 @@ public class StudentService {
 		return toList(studentRepository.findAll());
 	}
 	
+	@Transactional
     public StudentDto toDto(Student student) {
 		StudentDto studentDto = new StudentDto();
 		studentDto.setStudentID(student.getStudentID());
@@ -113,6 +114,7 @@ public class StudentService {
     	
     }
     
+    @Transactional
     public StudentDto deepToDto(Student student) {
 		StudentDto studentDto = new StudentDto();
 		studentDto.setStudentID(student.getStudentID());

@@ -1,18 +1,15 @@
 package ca.mcgill.ecse321.backend.controller;
 
-import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
-import ca.mcgill.ecse321.backend.dao.CourseRepository;
-import ca.mcgill.ecse321.backend.dao.InternshipRepository;
-import ca.mcgill.ecse321.backend.dao.StudentRepository;
-import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
-import ca.mcgill.ecse321.backend.dto.CourseDto;
-import ca.mcgill.ecse321.backend.dto.InternshipDto;
-import ca.mcgill.ecse321.backend.dto.StudentDto;
-import ca.mcgill.ecse321.backend.model.*;
-import ca.mcgill.ecse321.backend.service.ApplicationFormService;
-import ca.mcgill.ecse321.backend.service.CourseService;
-import ca.mcgill.ecse321.backend.service.InternshipService;
-import ca.mcgill.ecse321.backend.service.StudentService;
+import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.sql.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,15 +23,23 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.sql.Date;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
+import ca.mcgill.ecse321.backend.dao.CourseRepository;
+import ca.mcgill.ecse321.backend.dao.InternshipRepository;
+import ca.mcgill.ecse321.backend.dao.StudentRepository;
+import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
+import ca.mcgill.ecse321.backend.dto.CourseDto;
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
+import ca.mcgill.ecse321.backend.model.AcademicSemester;
+import ca.mcgill.ecse321.backend.model.ApplicationForm;
+import ca.mcgill.ecse321.backend.model.Course;
+import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
+import ca.mcgill.ecse321.backend.service.ApplicationFormService;
+import ca.mcgill.ecse321.backend.service.CourseService;
+import ca.mcgill.ecse321.backend.service.InternshipService;
+import ca.mcgill.ecse321.backend.service.StudentService;
 
  
 @RunWith(SpringRunner.class)
@@ -107,14 +112,14 @@ public class ApplicationFormControllerTests {
 		
 		InternshipDto internshipDto = new InternshipDto();
 		internshipDto.setAcademicSemester(AcademicSemester.SUMMER);
-		mockInternship = internshipService.createInternship(internshipDto, mockStudent, mockCourse);
+		mockInternship = internshipService.create(internshipDto, mockStudent, mockCourse);
 		
 	
 		Date startDate = Date.valueOf("2019-01-11");
 		Date endDate = Date.valueOf("2019-01-22");
 		
 		ApplicationFormDto applicationFormDto = new ApplicationFormDto("1111111", "Description1", "Employer1", "Location1", startDate, endDate, true);
-		mockApplicationForm = applicationFormService.createApplicationForm(applicationFormDto, mockInternship);
+		mockApplicationForm = applicationFormService.create(applicationFormDto, mockInternship);
 	}
 	
 	public void clearDatabase() {
@@ -144,13 +149,13 @@ public class ApplicationFormControllerTests {
 		mockMvc.perform(get("/api/internships/{internship_id}/application_form", mockInternship.getId()))
 		 .andDo(print())
 		 .andExpect(status().isOk())
-		 .andExpect(jsonPath("$.jobDescription", is(mockApplicationForm.getJobDescription())))
-		 .andExpect(jsonPath("$.jobID", is(mockApplicationForm.getJobID())))
+		 .andExpect(jsonPath("$.job_description", is(mockApplicationForm.getJobDescription())))
+		 .andExpect(jsonPath("$.job_id", is(mockApplicationForm.getJobID())))
 		 .andExpect(jsonPath("$.employer", is(mockApplicationForm.getEmployer())))
 		 .andExpect(jsonPath("$.location", is(mockApplicationForm.getLocation())))
-		 .andExpect(jsonPath("$.startDate", is(mockApplicationForm.getStartDate().toString())))
-		 .andExpect(jsonPath("$.endDate", is(mockApplicationForm.getEndDate().toString())))
-		 .andExpect(jsonPath("$.workPermit", is(true)));
+		 .andExpect(jsonPath("$.start_date", is(mockApplicationForm.getStartDate().toString())))
+		 .andExpect(jsonPath("$.end_date", is(mockApplicationForm.getEndDate().toString())))
+		 .andExpect(jsonPath("$.work_permit", is(true)));
 	}
 	
 	@Test

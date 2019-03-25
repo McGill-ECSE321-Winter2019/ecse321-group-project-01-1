@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.backend.controller;
 
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -78,9 +77,10 @@ public class InternshipController {
     }
 	
 	@PostMapping(value = { "/external/students/{student_id}/internships", "/external/students/{student_id}/internships/" })
-	public InternshipDto createInternship(@RequestParam(name = "student_id") String studentID,
+	public InternshipDto createInternship(@PathVariable(value = "student_id") String studentID,
 			@RequestParam(name = "course_id") String courseID,
-			@RequestParam(name = "academic_semester") AcademicSemester academicSemester
+			@RequestParam(name = "academic_semester") AcademicSemester academicSemester,
+			@RequestParam(name = "year") int year
 			) throws Exception {
 		Student student = studentService.findStudentByStudentID(studentID);
 		if (student == null) {
@@ -91,9 +91,9 @@ public class InternshipController {
 			course = courseService.create(new CourseDto(courseID));
 			
 		}
-		InternshipDto internshipDto = new InternshipDto(academicSemester);
+		InternshipDto internshipDto = new InternshipDto(year, academicSemester);
 		
-		Internship internship = internshipService.createInternship(internshipDto, student, course);
+		Internship internship = internshipService.create(internshipDto, student, course);
 		
 		return internshipService.toDto(internship);
 		

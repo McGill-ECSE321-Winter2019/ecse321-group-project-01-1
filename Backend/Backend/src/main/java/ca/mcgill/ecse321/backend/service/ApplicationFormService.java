@@ -1,20 +1,22 @@
 package ca.mcgill.ecse321.backend.service;
 
-import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
-import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
-import ca.mcgill.ecse321.backend.model.ApplicationForm;
-import ca.mcgill.ecse321.backend.model.Internship;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
+import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
+import ca.mcgill.ecse321.backend.model.ApplicationForm;
+import ca.mcgill.ecse321.backend.model.Internship;
 
 @Service
 @Validated
@@ -26,7 +28,7 @@ public class ApplicationFormService {
 	ApplicationFormRepository applicationFormRepository;
 	
 	@Transactional
-	public ApplicationForm createApplicationForm(
+	public ApplicationForm create(
 			@ModelAttribute("applicationForm") @Valid ApplicationFormDto applicationFormDto, 
 			Internship internship
 			){
@@ -64,6 +66,8 @@ public class ApplicationFormService {
 	}
 	
     public ApplicationFormDto toDto(ApplicationForm applicationForm){
+    	if (applicationForm == null) return null;
+
         ApplicationFormDto applicationFormDto = new ApplicationFormDto(
         	applicationForm.getId(),
             applicationForm.getJobID(),
