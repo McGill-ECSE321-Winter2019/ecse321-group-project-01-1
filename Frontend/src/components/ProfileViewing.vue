@@ -1,6 +1,6 @@
 <template>
   <div id="profileviewing">
-    <h2>Welcome Back to Co-Operator, {{student.first_name}} {{student.last_name}}!</h2>
+    <h2>Profile Menu</h2>
     <table>
       <tr>
           <td>

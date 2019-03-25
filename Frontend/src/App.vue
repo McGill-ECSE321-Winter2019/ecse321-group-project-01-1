@@ -8,53 +8,6 @@
 </template>
 
 <script>
-
-<<<<<<< HEAD
-        },
-        data() {
-            return {
-                collapsed: false,
-                themes: ['', 'white-theme'],
-                selectedTheme: '',
-                num_reminders : '3',
-                menu: [
-                    {
-                        header: true,
-                        title: 'Navigation'
-                    },
-                    {
-                        href: '/view',
-                        title: 'Profile',
-                        icon: 'fa fa-download'
-                    },
-                    {
-                        href: '/list',
-                        title: 'Internships',
-                        icon: 'fa fa-code'
-                    },
-                    {
-                        // href: '#',
-                        title: 'Reminder',
-                        icon: 'fa fa-cog',
-                        //TODO get reminders to change the badge number
-                        badge: {
-                            text: 'new',
-                            class: 'badge-danger'
-                        }
-                    },
-                    {
-                        title: 'Sign out',
-                        icon: 'fa fa-code'
-                    },
-                    {
-                        href: '/test',
-                        title: 'test',
-                        icon: 'fa fa-code'
-                    }
-                ]
-=======
->>>>>>> 619547a40beffb85b1cd1cf2bd97dae3e9c614c2
-
 import Navbar from './components/Navbar'
 export default {
   data() {
@@ -66,7 +19,6 @@ export default {
   mounted: function() {
     this.authenticate(true);
   },
-
   methods: {
     authenticate(value) {
       this.authenticated = null;
@@ -83,18 +35,14 @@ export default {
           this.authenticated = false;
           this.student = null
           this.$emit("authenticated", false);
-
         });
       } else {
         this.authenticated = false;
         this.student = null;
         this.$emit("authenticated", false);
-
       }
-
     },
     onGuestRedirect() {
-
       this.$on('authenticated', (value) => {
         if (!value) {
           this.$router.replace({ name: "login" });
@@ -110,8 +58,6 @@ export default {
     Navbar
   }
 }
-
-
 </script>
 
 <style>
