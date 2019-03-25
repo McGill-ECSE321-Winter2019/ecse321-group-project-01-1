@@ -1,38 +1,15 @@
 <template>
-    <div
-        id="demo"
-        :class="[{'collapsed' : collapsed}]"
-    >
-        <div class="demo">
-            <div class="container">
-                <h1>
-                    Co-operator
-                </h1>
-                <p>An ECSE 321 project</p>
-                <hr style="margin: 50px 0px;border: 1px solid #e3e3e3;">
-                <router-view />
-        </div>
-            <sidebar-menu
-                :menu="menu"
-                :collapsed="collapsed"
-                :theme="selectedTheme"
-                :show-one-child="true"
-                @collapse="onCollapse"
-                @itemClick="onItemClick"
-            />
-        </div>
-    </div>
+  <div id="app">
+    <Navbar :student="student" @authenticated="authenticate"></Navbar>
+    <router-view :onGuestRedirect="onGuestRedirect" @authenticated="authenticate">
+      
+    </router-view>
+  </div>
 </template>
 
 <script>
-    const separator = {
-        template: `<hr style="border-color: rgba(0, 0, 0, 0.1); margin: 20px;">`
-    }
-    export default {
-        name:'app',
 
-        created: function(){
-
+<<<<<<< HEAD
         },
         data() {
             return {
@@ -75,63 +52,73 @@
                         icon: 'fa fa-code'
                     }
                 ]
+=======
+>>>>>>> 619547a40beffb85b1cd1cf2bd97dae3e9c614c2
 
-            }
-        },
-        methods: {
-            onCollapse (collapsed) {
-                console.log(collapsed)
-                this.collapsed = collapsed
-            },
-            onItemClick (event, item) {
-                console.log('onItemClick')
-                // console.log(event)
-                // console.log(item)
-            }
-        }
+import Navbar from './components/Navbar'
+export default {
+  data() {
+    return {
+      student: null,
+      authenticated: null,
     }
+  },
+  mounted: function() {
+    this.authenticate(true);
+  },
+
+  methods: {
+    authenticate(value) {
+      this.authenticated = null;
+      if (value) {
+        this.$http.get(`/api/profile`)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          this.authenticated = true;
+          this.student = response.data
+          this.$emit("authenticated", true);
+        })
+        .catch(e => {
+          // this.student = null
+          this.authenticated = false;
+          this.student = null
+          this.$emit("authenticated", false);
+
+        });
+      } else {
+        this.authenticated = false;
+        this.student = null;
+        this.$emit("authenticated", false);
+
+      }
+
+    },
+    onGuestRedirect() {
+
+      this.$on('authenticated', (value) => {
+        if (!value) {
+          this.$router.replace({ name: "login" });
+        }
+      })
+      if (this.authenticated === false) {
+        this.$router.replace({ name: "login" });
+      }
+    },
+  },
+  name: 'app',
+  components: {
+    Navbar
+  }
+}
+
+
 </script>
 
 <style>
-    @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
-
-    body,
-    html {
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        font-family: 'Source Sans Pro', sans-serif;
-        background-color: #f2f4f7;
-    }
-
-    #demo {
-        padding-left: 350px;
-    }
-    #demo.collapsed {
-        padding-left: 50px;
-    }
-
-    .demo {
-        padding: 50px;
-    }
-
-    .badge-danger {
-        background-color: #ff2a2a;
-        color: #fff;
-    }
-
-    .container {
-        max-width: 600px;
-        margin-left: 10px;
-    }
-
-    pre {
-        color: #2a2a2e;
-        background: #fff;
-        border-radius: 2px;
-        padding: 10px;
-        overflow: auto;
-    }
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
 </style>

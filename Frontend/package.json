@@ -17,8 +17,7 @@
     "bootstrap-vue": "latest",
     "popper.js": "^1.12.9",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1",
-    "vue-sidebar-menu": "^3.6.2"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

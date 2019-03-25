@@ -27,7 +27,7 @@ const config = {
   },
   dev: {
     env: require('./dev.env'),
-    backendHost: 'http://' +'127.0.0.1',
+    backendHost: 'http://127.0.0.1',
     backendPort: 8080,
     // backendHost: 'eventregistration-backend-123.herokuapp.com',
     // backendPort: 443,
