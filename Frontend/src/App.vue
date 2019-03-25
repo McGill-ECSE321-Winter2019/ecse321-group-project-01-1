@@ -46,7 +46,7 @@
                         title: 'Navigation'
                     },
                     {
-                        href: '/hello',
+                        href: '/view',
                         title: 'Profile',
                         icon: 'fa fa-download'
                     },
