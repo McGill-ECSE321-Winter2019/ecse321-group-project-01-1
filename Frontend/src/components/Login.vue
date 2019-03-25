@@ -37,9 +37,6 @@
 
 <script>
   export default {
-    props: {
-      onGuestRedirect: { type: Function },
-    },
     data() {
       return {
         form: {
