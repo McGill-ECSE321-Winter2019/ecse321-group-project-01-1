@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <Navbar :student="student" @authenticated="authenticate"></Navbar>
-    <b-container class="mt-5">
+    <div  v-bind:class="{'mt-5': !$route.meta.no_container, container: !$route.meta.no_container}">
       <router-view :onGuestRedirect="onGuestRedirect" @authenticated="authenticate"> </router-view>
-    </b-container>
+    </div>
 
    
   </div>

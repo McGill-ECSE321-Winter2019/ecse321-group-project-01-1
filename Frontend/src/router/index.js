@@ -18,8 +18,11 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'hello',
+      component: Hello,
+      meta: {
+        no_container: true
+      }
     },
     {
       path: '/login',
