@@ -33,8 +33,8 @@ const router = new Router({
       path: '/profile',
       name: 'profile',
       component: Profile,
-    }
-
+    },
+      {
       path: '/form',
       name: 'form',
       component: ApplicationForm
