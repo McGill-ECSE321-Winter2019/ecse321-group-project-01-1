@@ -1,7 +1,7 @@
 <template>
   <div id="reminders">
     <h2>Reminders</h2>
-    <b-table hover :items="reminders_list" :fields="fields"/>
+    <b-table hover :items="getTableItems()" :fields="fields"/>
   </div>
 </template>
 
@@ -40,7 +40,20 @@
         .catch(e => {
             this.errorreminder = e;
         });
+    },
+    methods: {
+      getTableItems() {
+
+        return this.reminders_list.map((el) => {
+            let copy  = Object.assign({}, el)
+            let T = new Date(el.create_date_time)
+            copy.create_date_time = T.toString().split(" ").slice(0, 5).join(" ")
+            return copy
+        }) 
+
+      }
     }
+
   }
 </script>
 
