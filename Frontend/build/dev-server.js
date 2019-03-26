@@ -20,7 +20,33 @@ var port = process.env.PORT || config.dev.port
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
-var proxyTable = config.dev.proxyTable
+
+const ROOT_API = process.env.NODE_ENV == JSON.parse(config.build.env.NODE_ENV) ? JSON.parse(config.build.env.ROOT_API) : JSON.parse(config.build.env.ROOT_API)
+var proxyTable = 
+  {
+      // proxy all requests starting with /api to jsonplaceholder
+      '/api': {
+        target: ROOT_API,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/api',
+        }
+  },
+      '/login': {
+        target: ROOT_API,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/login': '/login',
+        }
+      },
+      '/logout': {
+        target: ROOT_API,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/logout': 'logout'
+        }
+      }
+  }
 
 var app = express()
 var compiler = webpack(webpackConfig)

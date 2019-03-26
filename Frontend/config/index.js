@@ -6,8 +6,6 @@ var path = require('path')
 const config = {
   build: {
     env: require('./prod.env'),
-    backendHost: 'eventregistration-backend-123.herokuapp.com',
-    backendPort: 443,
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
@@ -27,16 +25,11 @@ const config = {
   },
   dev: {
     env: require('./dev.env'),
-    backendHost: 'http://127.0.0.1',
-    backendPort: 8080,
-    // backendHost: 'eventregistration-backend-123.herokuapp.com',
-    // backendPort: 443,
     host: '127.0.0.1',
     port: 8081,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
@@ -44,31 +37,6 @@ const config = {
     // just be aware of this issue when enabling this option.
     cssSourceMap: false
   }
-}
-
-config.dev.proxyTable = {
-    // proxy all requests starting with /api to jsonplaceholder
-    '/api': {
-      target:config.dev.backendHost + ':' + config.dev.backendPort,
-      changeOrigin: true,
-      pathRewrite: {
-        '^/api': '/api',
-      }
-},
-    '/login': {
-      target:config.dev.backendHost + ':' + config.dev.backendPort,
-      changeOrigin: true,
-      pathRewrite: {
-        '^/login': '/login',
-      }
-    },
-    '/logout': {
-      target:config.dev.backendHost + ':' + config.dev.backendPort,
-      changeOrigin: true,
-      pathRewrite: {
-        '^/logout': 'logout'
-      }
-    }
 }
 
 module.exports = config;
