@@ -5,7 +5,7 @@ import Login from '@/components/Login'
 import ApplicationForm from '@/components/ApplicationForm'
 import InternshipListing from "@/components/InternshipListing";
 import InternshipItem from "@/components/InternshipItem";
-import Profile from '@/components/Profile'
+import ProfileViewing from '@/components/ProfileViewing'
 
 
 
@@ -30,8 +30,8 @@ const router = new Router({
     },
     {
         path: '/profile',
-        name: 'profile',
-        component: Profile,
+        name: 'ProfileViewing',
+        component: ProfileViewing
     },
     {
         path: '/list',

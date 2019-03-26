@@ -8,8 +8,6 @@
 </template>
 
 <script>
-
-
 import Navbar from './components/Navbar'
 export default {
   data() {
@@ -21,7 +19,6 @@ export default {
   mounted: function() {
     this.authenticate(true);
   },
-
   methods: {
     authenticate(value) {
       this.authenticated = null;
@@ -38,18 +35,14 @@ export default {
           this.authenticated = false;
           this.student = null
           this.$emit("authenticated", false);
-
         });
       } else {
         this.authenticated = false;
         this.student = null;
         this.$emit("authenticated", false);
-
       }
-
     },
     onGuestRedirect() {
-
       this.$on('authenticated', (value) => {
         if (!value) {
           this.$router.replace({ name: "login" });
@@ -65,8 +58,6 @@ export default {
     Navbar
   }
 }
-
-
 </script>
 
 <style>
