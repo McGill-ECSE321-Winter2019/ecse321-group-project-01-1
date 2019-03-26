@@ -48,6 +48,26 @@ public class ApplicationFormService {
 
 		return applicationForm;
 	}
+	
+	
+	@Transactional
+	public ApplicationForm update(
+			@ModelAttribute("applicationForm") @Valid ApplicationFormDto applicationFormDto){
+		
+		ApplicationForm applicationForm = findApplicationFormById(applicationFormDto.getId());
+
+		applicationForm.setJobID(applicationFormDto.getJobID());
+		applicationForm.setEmployer(applicationFormDto.getEmployer());
+		applicationForm.setEndDate(applicationFormDto.getEndDate());
+		applicationForm.setStartDate(applicationFormDto.getStartDate());
+		applicationForm.setWorkPermit(applicationFormDto.isWorkPermit());
+		applicationForm.setLocation(applicationFormDto.getLocation());
+		applicationForm.setJobDescription(applicationFormDto.getJobDescription());
+		
+		applicationForm = applicationFormRepository.save(applicationForm);
+
+		return applicationForm;
+	}
 
 	@Transactional
 	public ApplicationForm update(ApplicationForm form){

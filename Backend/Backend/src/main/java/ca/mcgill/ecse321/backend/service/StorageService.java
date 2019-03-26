@@ -39,6 +39,11 @@ public class StorageService {
                 // create new object if nothing was there before, else just update current object
                 if(doc == null){
                     doc = new Document(fileName, file.getContentType(), file.getBytes(),file.getSize());
+                } else {
+                	doc.setSize(file.getSize());
+                	doc.setFileName(fileName);
+                	doc.setData(file.getBytes());
+                	doc.setFileType(file.getContentType());
                 }
             }catch (IOException ex){
                 throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
