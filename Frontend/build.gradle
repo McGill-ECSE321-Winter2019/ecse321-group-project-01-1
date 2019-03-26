@@ -6,6 +6,11 @@ task vue(type: Exec) {
     commandLine "node", "$projectDir/build/build.js"
 }
 
+task install {
+	commandLine "npm", "install"
+}
+
 task build {
+	dependsOn 'install'
 	dependsOn 'vue'
 }
