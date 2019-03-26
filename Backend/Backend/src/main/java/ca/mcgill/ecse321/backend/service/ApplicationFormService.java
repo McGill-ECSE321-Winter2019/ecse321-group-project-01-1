@@ -2,30 +2,21 @@ package ca.mcgill.ecse321.backend.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
-import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.dto.ApplicationFormDto;
-import ca.mcgill.ecse321.backend.dto.InternshipDto;
-import ca.mcgill.ecse321.backend.dto.StudentDto;
 import ca.mcgill.ecse321.backend.model.ApplicationForm;
 import ca.mcgill.ecse321.backend.model.Internship;
-import ca.mcgill.ecse321.backend.model.Student;
 
 @Service
 @Validated
@@ -37,7 +28,7 @@ public class ApplicationFormService {
 	ApplicationFormRepository applicationFormRepository;
 	
 	@Transactional
-	public ApplicationForm createApplicationForm(
+	public ApplicationForm create(
 			@ModelAttribute("applicationForm") @Valid ApplicationFormDto applicationFormDto, 
 			Internship internship
 			){
@@ -52,6 +43,26 @@ public class ApplicationFormService {
 		applicationForm.setLocation(applicationFormDto.getLocation());
 		applicationForm.setJobDescription(applicationFormDto.getJobDescription());
 		applicationForm.setInternship(internship);
+		
+		applicationForm = applicationFormRepository.save(applicationForm);
+
+		return applicationForm;
+	}
+	
+	
+	@Transactional
+	public ApplicationForm update(
+			@ModelAttribute("applicationForm") @Valid ApplicationFormDto applicationFormDto){
+		
+		ApplicationForm applicationForm = findApplicationFormById(applicationFormDto.getId());
+
+		applicationForm.setJobID(applicationFormDto.getJobID());
+		applicationForm.setEmployer(applicationFormDto.getEmployer());
+		applicationForm.setEndDate(applicationFormDto.getEndDate());
+		applicationForm.setStartDate(applicationFormDto.getStartDate());
+		applicationForm.setWorkPermit(applicationFormDto.isWorkPermit());
+		applicationForm.setLocation(applicationFormDto.getLocation());
+		applicationForm.setJobDescription(applicationFormDto.getJobDescription());
 		
 		applicationForm = applicationFormRepository.save(applicationForm);
 
@@ -75,6 +86,8 @@ public class ApplicationFormService {
 	}
 	
     public ApplicationFormDto toDto(ApplicationForm applicationForm){
+    	if (applicationForm == null) return null;
+
         ApplicationFormDto applicationFormDto = new ApplicationFormDto(
         	applicationForm.getId(),
             applicationForm.getJobID(),

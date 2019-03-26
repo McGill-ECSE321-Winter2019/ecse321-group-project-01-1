@@ -1,32 +1,17 @@
 package ca.mcgill.ecse321.backend.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Valid;
-import javax.validation.Validator;
-
+import ca.mcgill.ecse321.backend.dao.CourseRepository;
+import ca.mcgill.ecse321.backend.dto.CourseDto;
+import ca.mcgill.ecse321.backend.model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import ca.mcgill.ecse321.backend.dao.CourseRepository;
-import ca.mcgill.ecse321.backend.dao.ReminderRepository;
-import ca.mcgill.ecse321.backend.dao.StudentRepository;
-import ca.mcgill.ecse321.backend.dto.CourseDto;
-import ca.mcgill.ecse321.backend.dto.ReminderDto;
-import ca.mcgill.ecse321.backend.dto.StudentDto;
-import ca.mcgill.ecse321.backend.model.Course;
-import ca.mcgill.ecse321.backend.model.Reminder;
-import ca.mcgill.ecse321.backend.model.Student;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Validated
@@ -46,6 +31,11 @@ public class CourseService {
 	@Transactional
 	public Course findCourseById(int id) {
 		return courseRepository.findCourseById(id);
+	}
+	
+	@Transactional
+	public Course findCourseByCourseID(String courseID) {
+		return courseRepository.findCourseByCourseID(courseID);
 	}
 	
 	@Transactional

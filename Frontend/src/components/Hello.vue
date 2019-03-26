@@ -1,24 +1,16 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+    <div class="masthead">
+        <div class="container d-flex h-100 align-items-center">
+            <div class="mx-auto text-center">
+                <h1>Co-operator</h1>
+                <h2>An ECSE 321 project</h2>
+                <a href="/#/list" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </div>
+
 </template>
+
 
 <script>
 export default {
@@ -31,23 +23,36 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
+    .masthead {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: 35rem;
+        padding: 15rem 0;
+        color: #ffffff;
+        background: -webkit-gradient(linear, left top, left bottom, from(rgba(22, 22, 22, 0.1)), color-stop(75%, rgba(22, 22, 22, 0.5)), to(#161616)), url("../assets/img/bg-masthead.jpg");
+        background: linear-gradient(to bottom, rgba(22, 22, 22, 0.1) 0%, rgba(22, 22, 22, 0.5) 75%, #161616 100%), url("../assets/img/bg-masthead.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+    }
+    @media (min-width: 992px) {
+        .masthead {
+            height: calc(100vh - 56px);
+            padding: 0;
+        }
+        .masthead h1 {
+            line-height: 3.5rem;
+        }
+        .masthead h2 {
+            max-width: 30rem;
+            line-height: 2.5rem;
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+            font-size: 1.25rem;
+        }
+    }
 
-a {
-  color: #42b983;
-}
 </style>

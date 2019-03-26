@@ -1,13 +1,64 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
+    <Navbar :student="student" @authenticated="authenticate"></Navbar>
+    <div  v-bind:class="{'mt-5': !$route.meta.no_container, container: !$route.meta.no_container}">
+      <router-view :onGuestRedirect="onGuestRedirect" @authenticated="authenticate"> </router-view>
+    </div>
+
+   
   </div>
 </template>
 
 <script>
+import Navbar from './components/Navbar'
 export default {
-  name: 'app'
+  data() {
+    return {
+      student: null,
+      authenticated: null,
+    }
+  },
+  mounted: function() {
+    this.authenticate(true);
+  },
+  methods: {
+    authenticate(value) {
+      this.authenticated = null;
+      if (value) {
+        this.$http.get(`/api/profile`)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          this.authenticated = true;
+          this.student = response.data
+          this.$emit("authenticated", true);
+        })
+        .catch(e => {
+          // this.student = null
+          this.authenticated = false;
+          this.student = null
+          this.$emit("authenticated", false);
+        });
+      } else {
+        this.authenticated = false;
+        this.student = null;
+        this.$emit("authenticated", false);
+      }
+    },
+    onGuestRedirect() {
+      this.$on('authenticated', (value) => {
+        if (!value) {
+          this.$router.replace({ name: "login" });
+        }
+      })
+      if (this.authenticated === false) {
+        this.$router.replace({ name: "login" });
+      }
+    },
+  },
+  name: 'app',
+  components: {
+    Navbar
+  }
 }
 </script>
 
@@ -16,8 +67,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

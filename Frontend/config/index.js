@@ -1,9 +1,13 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
 
-module.exports = {
+
+
+const config = {
   build: {
     env: require('./prod.env'),
+    backendHost: 'eventregistration-backend-123.herokuapp.com',
+    backendPort: 443,
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
@@ -23,6 +27,10 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
+    backendHost: 'http://127.0.0.1',
+    backendPort: 8080,
+    // backendHost: 'eventregistration-backend-123.herokuapp.com',
+    // backendPort: 443,
     host: '127.0.0.1',
     port: 8081,
     autoOpenBrowser: true,
@@ -37,3 +45,30 @@ module.exports = {
     cssSourceMap: false
   }
 }
+
+config.dev.proxyTable = {
+    // proxy all requests starting with /api to jsonplaceholder
+    '/api': {
+      target:config.dev.backendHost + ':' + config.dev.backendPort,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api': '/api',
+      }
+},
+    '/login': {
+      target:config.dev.backendHost + ':' + config.dev.backendPort,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/login': '/login',
+      }
+    },
+    '/logout': {
+      target:config.dev.backendHost + ':' + config.dev.backendPort,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/logout': 'logout'
+      }
+    }
+}
+
+module.exports = config;

@@ -1,10 +1,11 @@
 package ca.mcgill.ecse321.backend.dto;
 
-import ca.mcgill.ecse321.backend.model.DocumentType;
-import ca.mcgill.ecse321.backend.model.Internship;
-import java.util.Collections;
-import java.util.List;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+import ca.mcgill.ecse321.backend.model.DocumentType;
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DocumentDto {
 
     private String id;

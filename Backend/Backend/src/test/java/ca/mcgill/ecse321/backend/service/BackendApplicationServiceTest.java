@@ -1,30 +1,18 @@
 package ca.mcgill.ecse321.backend.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
-
-import java.util.*;
-
-import javax.transaction.Transactional;
-
-import org.junit.*;
+import ca.mcgill.ecse321.backend.dao.*;
+import ca.mcgill.ecse321.backend.dto.ReminderDto;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
+import ca.mcgill.ecse321.backend.model.Reminder;
+import ca.mcgill.ecse321.backend.model.Student;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import ca.mcgill.ecse321.backend.model.*;
-import ca.mcgill.ecse321.backend.dao.*;
-import ca.mcgill.ecse321.backend.dto.ReminderDto;
-import ca.mcgill.ecse321.backend.dto.StudentDto;
+import static org.junit.Assert.assertEquals;
 
 
 

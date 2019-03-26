@@ -3,38 +3,33 @@ package ca.mcgill.ecse321.backend.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 
-import ca.mcgill.ecse321.backend.dto.DocumentDto;
-import ca.mcgill.ecse321.backend.exception.FileStorageException;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import ca.mcgill.ecse321.backend.model.*;
-import ca.mcgill.ecse321.backend.dao.*;
+import ca.mcgill.ecse321.backend.dao.ApplicationFormRepository;
+import ca.mcgill.ecse321.backend.dao.CourseRepository;
+import ca.mcgill.ecse321.backend.dao.DocumentRepository;
+import ca.mcgill.ecse321.backend.dao.InternshipRepository;
+import ca.mcgill.ecse321.backend.dao.ReminderRepository;
+import ca.mcgill.ecse321.backend.dao.StudentRepository;
 import ca.mcgill.ecse321.backend.dto.CourseDto;
+import ca.mcgill.ecse321.backend.dto.DocumentDto;
 import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.dto.StudentDto;
-
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
+import ca.mcgill.ecse321.backend.exception.FileStorageException;
+import ca.mcgill.ecse321.backend.model.AcademicSemester;
+import ca.mcgill.ecse321.backend.model.Course;
+import ca.mcgill.ecse321.backend.model.Document;
+import ca.mcgill.ecse321.backend.model.DocumentType;
+import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
 
 
 @RunWith(SpringRunner.class)
@@ -91,15 +86,11 @@ public class StorageServiceTest {
     @Before
     public void setUp() throws Exception{
         studentRepository.deleteAll();
-        documentRepository.deleteAll();
-        applicationFormRepository.deleteAll();
-        reminderRepository.deleteAll();
         courseRepository.deleteAll();
-        internshipRepository.deleteAll();
         Student student = studentService.create(new StudentDto("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
         Course course = courseService.create(new CourseDto("FACC300"));
        
-        this.mockInternship = internshipService.createInternship(new InternshipDto(AcademicSemester.SUMMER), student, course);
+        this.mockInternship = internshipService.create(new InternshipDto(2019, AcademicSemester.SUMMER), student, course);
     }
 
 

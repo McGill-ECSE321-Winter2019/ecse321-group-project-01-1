@@ -1,6 +1,9 @@
 package ca.mcgill.ecse321.backend.model;
 
-import java.sql.Time;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+
+import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,12 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 //import
 //ca.mcgill.ecse321.backend.BackendApplicationController;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,8 +25,8 @@ public class ReminderTest {
 	@Mock
 	private Student dummyStudent = mock(Student.class); 
 
-	private Time dummyCreateTime = new Time(20);
-	private Time dummyReadTime = new Time (40);
+	private Date dummyCreateTime = new Date(20);
+	private Date dummyReadTime = new Date(40);
 	
 	private static final int REMINDER_ID = 12345;
 	private static final String MESSAGE = "I love cats";

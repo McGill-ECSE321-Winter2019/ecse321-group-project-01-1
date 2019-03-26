@@ -1,16 +1,12 @@
 package ca.mcgill.ecse321.backend.dto;
-import java.util.HashSet;
+
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-import org.hibernate.annotations.GenericGenerator;
-
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CourseDto {
 	
 	public CourseDto(String courseID) {
@@ -19,19 +15,8 @@ public class CourseDto {
 	public CourseDto() {
 	}
 	
-	private Set<InternshipDto> internship = new HashSet<InternshipDto>();
-
-	public Set<InternshipDto> getInternship() {
-		if (this.internship == null) {
-			this.internship = new HashSet<InternshipDto>();
-		}
-		return this.internship;
-	}
-
-	public Set<InternshipDto> setInternship(InternshipDto new_internship){
-		internship.add(new_internship);
-		return internship;
-	}
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
+	private Set<InternshipDto> internship;
 
 	private int id;
 
@@ -60,5 +45,14 @@ public class CourseDto {
 		CourseDto courseDto = (CourseDto) o;
 		return getId() == courseDto.getId() &&
 				getCourseID().equals(courseDto.getCourseID());
+	}
+	
+
+	public Set<InternshipDto> getInternship() {
+		return internship;
+	}
+	
+	public void setInternship(Set<InternshipDto> internship) {
+		this.internship = internship;
 	}
 }

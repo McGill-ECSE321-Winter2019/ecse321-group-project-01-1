@@ -1,13 +1,8 @@
 package ca.mcgill.ecse321.backend.service;
 
-import ca.mcgill.ecse321.backend.dao.DocumentRepository;
-import ca.mcgill.ecse321.backend.dto.DocumentDto;
-import ca.mcgill.ecse321.backend.exception.FileNotFoundException;
-import ca.mcgill.ecse321.backend.exception.FileStorageException;
-import ca.mcgill.ecse321.backend.model.Document;
-import ca.mcgill.ecse321.backend.model.DocumentType;
-import ca.mcgill.ecse321.backend.model.Internship;
-import ca.mcgill.ecse321.backend.model.Reminder;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +11,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.List;
-import static org.hibernate.internal.util.collections.ArrayHelper.toList;
+import ca.mcgill.ecse321.backend.dao.DocumentRepository;
+import ca.mcgill.ecse321.backend.dto.DocumentDto;
+import ca.mcgill.ecse321.backend.exception.FileStorageException;
+import ca.mcgill.ecse321.backend.model.Document;
+import ca.mcgill.ecse321.backend.model.DocumentType;
+import ca.mcgill.ecse321.backend.model.Internship;
 
 @Service
 public class StorageService {
@@ -43,6 +39,11 @@ public class StorageService {
                 // create new object if nothing was there before, else just update current object
                 if(doc == null){
                     doc = new Document(fileName, file.getContentType(), file.getBytes(),file.getSize());
+                } else {
+                	doc.setSize(file.getSize());
+                	doc.setFileName(fileName);
+                	doc.setData(file.getBytes());
+                	doc.setFileType(file.getContentType());
                 }
             }catch (IOException ex){
                 throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
@@ -70,6 +71,7 @@ public class StorageService {
         return documentRepository.findDocumentById(fileId);
     }
     
+    @Transactional
     public DocumentDto toDto(Document document){
     	DocumentDto documentDto = new DocumentDto(
     	        document.getId(),

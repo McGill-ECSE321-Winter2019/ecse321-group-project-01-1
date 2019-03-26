@@ -1,13 +1,16 @@
 package ca.mcgill.ecse321.backend.controller;
 
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
 import ca.mcgill.ecse321.backend.model.Internship;
 import ca.mcgill.ecse321.backend.model.Student;
 import ca.mcgill.ecse321.backend.service.AuthenticationService;
 import ca.mcgill.ecse321.backend.service.InternshipService;
 import ca.mcgill.ecse321.backend.service.StudentService;
-import ca.mcgill.ecse321.backend.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,27 +26,12 @@ public class ProfileViewingController {
 
     @Autowired
     private AuthenticationService authenticationService;
-
+    
     @GetMapping(value = {"/api/profile", "/api/profile/"})
     public StudentDto getStudentProfile(){
     	Student student = authenticationService.getCurrentStudent();
         StudentDto studentDto = studentService.toDto(student);
-        studentDto.setInternship(getInternshipDtos(student));
         return studentDto;
     }
-
-    public Set<InternshipDto> getInternshipDtos(Student student){
-        Set<Internship> internshipList = student.getInternship();
-        if(internshipList == null){
-            throw new IllegalArgumentException("There is no such internship!");
-        }
-
-        Set<InternshipDto> dtoList = new HashSet<>();
-        for(Internship internship : internshipList){
-            dtoList.add(internshipService.toDto(internship));
-        }
-        return dtoList;
-    }
-
 
 }

@@ -1,10 +1,9 @@
 package ca.mcgill.ecse321.backend.dao;
 
+import ca.mcgill.ecse321.backend.model.Document;
 import ca.mcgill.ecse321.backend.model.DocumentType;
 import ca.mcgill.ecse321.backend.model.Internship;
 import org.springframework.data.repository.CrudRepository;
-
-import ca.mcgill.ecse321.backend.model.Document;
 
 import java.util.List;
 

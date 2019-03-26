@@ -1,10 +1,7 @@
 package ca.mcgill.ecse321.backend.controller;
 
-import ca.mcgill.ecse321.backend.dto.DocumentDto;
-import ca.mcgill.ecse321.backend.model.*;
-import ca.mcgill.ecse321.backend.service.AuthenticationService;
-import ca.mcgill.ecse321.backend.service.InternshipService;
-import ca.mcgill.ecse321.backend.service.StorageService;
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -12,13 +9,26 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.ArrayList;
+import ca.mcgill.ecse321.backend.dto.DocumentDto;
+import ca.mcgill.ecse321.backend.model.Document;
+import ca.mcgill.ecse321.backend.model.DocumentType;
+import ca.mcgill.ecse321.backend.model.Internship;
+import ca.mcgill.ecse321.backend.model.Student;
+import ca.mcgill.ecse321.backend.service.AuthenticationService;
+import ca.mcgill.ecse321.backend.service.InternshipService;
+import ca.mcgill.ecse321.backend.service.StorageService;
 
 @RestController
+@CrossOrigin(origins = "*")
+
 public class FileController {
 
     @Autowired
@@ -55,16 +65,17 @@ public class FileController {
     // we don't need this one for now
     // and if we need this, it should be merged with the method above
     // taking an extra argument to filter the documents by type
-    /**
-    @GetMapping("/api/internships/{internship_id}/documents/{document_id}")
-    public DocumentDto showDocumentByTypeAndInternship(@RequestParam("type") DocumentType type,
-                                                    @RequestParam("internship") Internship internship){
-        return convertToDto(storageService.readDocumentByType(internship, type));
-    }
-    **/
+
+//    @GetMapping("/api/internships/{internship_id}/documents/{document_id}")
+//    public DocumentDto showDocumentByTypeAndInternship(@RequestParam("type") DocumentType type,
+//                                                    @RequestParam("internship") Internship internship){
+//        return storageService.toDto(storageService.readDocumentByType(internship, type));
+//    }
+
 
     @GetMapping("/api/internships/{internship_id}/documents/{document_id}/download")
-    public ResponseEntity<Resource> downloadFile(@PathVariable(value="document_id") String documentId) {
+    public ResponseEntity<Resource> downloadFile(@PathVariable(value="document_id") String documentId,
+                                                 @PathVariable(value="internship_id") String internshipId) {
         // Load file from database
         Document document = storageService.readDocument(documentId);
 

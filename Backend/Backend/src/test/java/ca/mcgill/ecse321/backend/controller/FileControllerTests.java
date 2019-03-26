@@ -1,15 +1,17 @@
 package ca.mcgill.ecse321.backend.controller;
 
-import static org.mockito.Mockito.mock;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.Set;
-
+import ca.mcgill.ecse321.backend.dao.CourseRepository;
+import ca.mcgill.ecse321.backend.dao.DocumentRepository;
+import ca.mcgill.ecse321.backend.dao.InternshipRepository;
+import ca.mcgill.ecse321.backend.dao.StudentRepository;
+import ca.mcgill.ecse321.backend.dto.CourseDto;
+import ca.mcgill.ecse321.backend.dto.InternshipDto;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
+import ca.mcgill.ecse321.backend.model.*;
+import ca.mcgill.ecse321.backend.service.CourseService;
+import ca.mcgill.ecse321.backend.service.InternshipService;
+import ca.mcgill.ecse321.backend.service.StorageService;
+import ca.mcgill.ecse321.backend.service.StudentService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,30 +23,12 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.multipart.MultipartFile;
 
-import ca.mcgill.ecse321.backend.dao.CourseRepository;
-import ca.mcgill.ecse321.backend.dao.DocumentRepository;
-import ca.mcgill.ecse321.backend.dao.InternshipRepository;
-import ca.mcgill.ecse321.backend.dao.StudentRepository;
-import ca.mcgill.ecse321.backend.dto.CourseDto;
-import ca.mcgill.ecse321.backend.dto.DocumentDto;
-import ca.mcgill.ecse321.backend.dto.InternshipDto;
-import ca.mcgill.ecse321.backend.dto.StudentDto;
-import ca.mcgill.ecse321.backend.model.AcademicSemester;
-import ca.mcgill.ecse321.backend.model.Course;
-import ca.mcgill.ecse321.backend.model.Document;
-import ca.mcgill.ecse321.backend.model.DocumentType;
-import ca.mcgill.ecse321.backend.model.Internship;
-import ca.mcgill.ecse321.backend.model.Student;
-import ca.mcgill.ecse321.backend.service.CourseService;
-import ca.mcgill.ecse321.backend.service.InternshipService;
-import ca.mcgill.ecse321.backend.service.StorageService;
-import ca.mcgill.ecse321.backend.service.StudentService;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -113,7 +97,7 @@ public class FileControllerTests {
 		
 		InternshipDto internshipDto = new InternshipDto();
 		internshipDto.setAcademicSemester(AcademicSemester.SUMMER);
-		mockInternship = internshipService.createInternship(internshipDto, mockStudent, mockCourse);
+		mockInternship = internshipService.create(internshipDto, mockStudent, mockCourse);
 		
 	    MockMultipartFile upload = new MockMultipartFile("file", "hello.txt", MediaType.TEXT_PLAIN_VALUE, "Hello, World!".getBytes());
 		mockDocument = storageService.createFile(upload, mockInternship, DocumentType.CONTRACT);

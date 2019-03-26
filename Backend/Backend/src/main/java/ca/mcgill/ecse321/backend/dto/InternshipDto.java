@@ -1,19 +1,24 @@
 package ca.mcgill.ecse321.backend.dto;
 
-import ca.mcgill.ecse321.backend.model.*;
-
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+import ca.mcgill.ecse321.backend.model.AcademicSemester;
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class InternshipDto {
 
     public InternshipDto(){
 
     }
 
-    public InternshipDto(AcademicSemester academicSemesterm) {
+    public InternshipDto(int year, AcademicSemester academicSemester) {
+    	this.year = year;
         this.academicSemester = academicSemester;
     }
 
@@ -24,6 +29,9 @@ public class InternshipDto {
     private AcademicSemester academicSemester;
     
     private boolean[] progress;
+    
+	private int year;
+
 
     public int getId() {
         return id;
@@ -40,24 +48,26 @@ public class InternshipDto {
     public void setCourse(CourseDto course) {
         this.course = course;
     }
+    
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
+    private ApplicationFormDto applicationForm;
 
-    private ApplicationForm applicationForm;
-
-    public ApplicationForm getApplicationForm() {
+    public ApplicationFormDto getApplicationForm() {
         return this.applicationForm;
     }
 
-    public void setApplicationForm(ApplicationForm applicationForms) {
+    public void setApplicationForm(ApplicationFormDto applicationForms) {
         this.applicationForm = applicationForms;
     }
+    
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
+    private Set<DocumentDto> document = new HashSet<DocumentDto>();
 
-    private Set<Document> document = new HashSet<Document>();
-
-    public Set<Document> getDocument() {
+    public Set<DocumentDto> getDocument() {
         return this.document;
     }
 
-    public void setDocument(Set<Document> documents) {
+    public void setDocument(Set<DocumentDto> documents) {
         this.document = documents;
     }
 
@@ -69,13 +79,15 @@ public class InternshipDto {
         this.academicSemester = academicSemester;
     }
 
-    private Student student;
-
-    public Student getStudent() {
+    
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
+    private StudentDto student;
+    
+    public StudentDto getStudent() {
         return this.student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(StudentDto student) {
         this.student = student;
     }
 
@@ -87,6 +99,14 @@ public class InternshipDto {
 		this.progress = progress;
 	}
 
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+	
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,3 +117,4 @@ public class InternshipDto {
                 Arrays.equals(getProgress(), that.getProgress());
     }
 }
+
