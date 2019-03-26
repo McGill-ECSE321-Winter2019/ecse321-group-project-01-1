@@ -5,7 +5,6 @@ import Login from '@/components/Login'
 import ApplicationForm from '@/components/ApplicationForm'
 import InternshipListing from "@/components/InternshipListing";
 import InternshipItem from "@/components/InternshipItem";
-import home from "@/components/home"
 import Profile from '@/components/Profile'
 
 
@@ -16,8 +15,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: home
+      name: 'hello',
+      component: Hello
     },
     {
       path: '/login',
