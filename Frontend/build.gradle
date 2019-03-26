@@ -6,7 +6,7 @@ task vue(type: Exec) {
     commandLine "node", "$projectDir/build/build.js"
 }
 
-task install {
+task install(type: Exec) {
 	commandLine "npm", "install"
 }
 
