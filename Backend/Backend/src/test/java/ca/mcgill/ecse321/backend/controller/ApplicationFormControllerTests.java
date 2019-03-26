@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -51,9 +52,14 @@ public class ApplicationFormControllerTests {
 	
 	private Student mockStudent;
 	
+	private Student mockStudent2;
+	
 	private Course mockCourse;
 	
 	private Internship mockInternship;
+	
+	private Internship mockInternship2;
+
 		
 	@Autowired
 	private ApplicationFormRepository applicationFormRepository;
@@ -84,7 +90,7 @@ public class ApplicationFormControllerTests {
 
 	private ApplicationForm mockApplicationForm;
 
-	private Student mockStudent2;
+
 	
 	@Before
 	public void init() throws Exception {
@@ -112,7 +118,11 @@ public class ApplicationFormControllerTests {
 		
 		InternshipDto internshipDto = new InternshipDto();
 		internshipDto.setAcademicSemester(AcademicSemester.SUMMER);
+		internshipDto.setYear(2019);
 		mockInternship = internshipService.create(internshipDto, mockStudent, mockCourse);
+		
+		mockInternship2 = internshipService.create(new InternshipDto(2019, AcademicSemester.WINTER), mockStudent2, mockCourse);
+		
 		
 	
 		Date startDate = Date.valueOf("2019-01-11");
@@ -128,9 +138,8 @@ public class ApplicationFormControllerTests {
 		courseRepository.deleteAll();
 	}
 	
-	@Test
 	@WithMockUser(username = "first.last@mail.mcgill.ca")
-	public void testCreateApplicationForm() throws Exception {
+	public void testCreateApplicationFormDuplicate() throws Exception {
 		this.mockMvc.perform(post("/api/internships/{internship_id}/application_form", mockInternship.getId())
 				.param("job_id", "123")
 				.param("job_description", "Description")
@@ -140,7 +149,46 @@ public class ApplicationFormControllerTests {
 				.param("end_date", (Date.valueOf("2019-01-22")).toString())
 				.param("work_permit", Boolean.toString(true))
 				)
+		.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	@WithMockUser(username = "first.last1@mail.mcgill.ca")
+	public void testCreateApplicationForm() throws Exception {
+		this.mockMvc.perform(post("/api/internships/{internship_id}/application_form", mockInternship2.getId())
+				.param("job_id", "123")
+				.param("job_description", "Description")
+				.param("employer", "Employer1")
+				.param("location", "Joblocation")
+				.param("start_date", (Date.valueOf("2019-01-11")).toString())
+				.param("end_date", (Date.valueOf("2019-01-22")).toString())
+				.param("work_permit", Boolean.toString(true))
+				)
 		.andExpect(status().isOk());
+	}
+	
+	@Test
+	@WithMockUser(username = "first.last@mail.mcgill.ca")
+	public void testUpdateApplicationForm() throws Exception {
+		this.mockMvc.perform(put("/api/internships/{internship_id}/application_form", mockInternship.getId())
+				.param("job_id", "1234")
+				.param("job_description", mockApplicationForm.getJobDescription())
+				.param("employer", mockApplicationForm.getEmployer())
+				.param("location", mockApplicationForm.getLocation())
+				.param("start_date", mockApplicationForm.getStartDate().toString())
+				.param("end_date", mockApplicationForm.getEndDate().toString())
+				.param("work_permit", Boolean.toString(mockApplicationForm.isWorkPermit()))
+				)
+		.andExpect(status().isOk())
+		 .andExpect(jsonPath("$.job_description", is(mockApplicationForm.getJobDescription())))
+		 .andExpect(jsonPath("$.job_id", is("1234")))
+		 .andExpect(jsonPath("$.employer", is(mockApplicationForm.getEmployer())))
+		 .andExpect(jsonPath("$.location", is(mockApplicationForm.getLocation())))
+		 .andExpect(jsonPath("$.start_date", is(mockApplicationForm.getStartDate().toString())))
+		 .andExpect(jsonPath("$.end_date", is(mockApplicationForm.getEndDate().toString())))
+		 .andExpect(jsonPath("$.work_permit", is(mockApplicationForm.isWorkPermit())))
+		
+		;
 	}
 	
 	@Test 
