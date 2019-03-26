@@ -85,10 +85,9 @@
         if (this.new_form) {
           this.$http.post('/api/internships/'+ this.selectedInternship.id +'/application_form',  null, {
             params: this.ApplicationForm
-          }).then( (response) => {
+          }).then((response) => {
             this.editing = false;
-            this.$emit("refresh")
-            console.log(response);
+            this.new_form = false;
           }).catch((error) => {
             console.log(error);
           });
@@ -97,17 +96,12 @@
             params: this.ApplicationForm
           }).then((response) => {
             this.editing = false;
-            console.log(response);
           }).catch((error) => {
             console.log(error);
           });
         }
 
        },
-       convertDate: function (date) {
-         console.log(date);
-         // return date.getFullYear().toString() + '-' + date.getMonth().toString() + '-' + date.getDay().toString()
-       }
      }
    }
 </script>
