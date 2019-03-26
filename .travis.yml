@@ -7,4 +7,6 @@ deploy:
     secure: KWOe5YPGeUEcMS9MP3xMKd1eQh82jk95A6RvhXCn2TDUzcZ8/kWYfg0pp/cIR2kxQ6yxRUb20IFY4Webs+K9jMuYFDMXZ3Jlwjb+cQayuO/gfYRdb8lj1yJEYQ3eUC4WFJUp+g7mhsP2Qi+wocSoHGSzS8ZOt9Zh/i79Sp337MeAlAWpFgHAecKRP/emYyBqo6ttILxbZBRZJZGs4E+K0QxAEujKGtDiMAmKYYIMBhcfatRf7xf1AOtwiq68LwbKC85CRxLzwea42XYcwfE4y5dPtFjhq3M5ajrfR+rYtQVAKdSQZjbWhqKBd/mgwOIzTZXK9CZmbH445Ge8t/qYmyCX6aySA96zSwrW+1LbfKg61aUB/s7sOgl/xkWgvmePoMr4gsjQr5I+Y3n1EbtdMCpR2SxpC6DxC2rft4E1VzM3C64ufVgrGrGa9+0Ly+6ucFbTLwvBF8l9vO4Z3nuGeHTBWxobNnZBmKay6uBFTt/Mv2Fks2cKkFPaACv87v0Pznh8/NxnCYFdMNKJp25N4ksfygl/QUW2thfjWNY/HnSdtebLQjbzUM7JKUiCn6gKdBjtC2DnMtnV4EjXhrHR72f8Lz/6cRyE8VlGOtn7FJdIcBgk0R+VDsZFOCwwDX9e8dGMajiSgjfoxNqXKjPLkbtjSzTjDQoyYxk2FwTXBv0=
   on:
     branch: master
-  app: ecse321-w2019-g01-backend
+  app:
+    master: ecse321-w2019-g01-backend
+    master: ecse321-w2019-g01-frontend
