@@ -19,7 +19,10 @@ const router = new Router({
     {
       path: '/',
       name: 'hello',
-      component: Hello
+      component: Hello,
+      meta: {
+        no_container: true
+      }
     },
     {
       path: '/login',

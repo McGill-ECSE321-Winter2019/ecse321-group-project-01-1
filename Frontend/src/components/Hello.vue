@@ -15,6 +15,9 @@
 <script>
 export default {
   name: 'hello',
+  created() {
+    console.log(this);
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -23,7 +26,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .masthead {
         position: relative;
         width: 100%;
