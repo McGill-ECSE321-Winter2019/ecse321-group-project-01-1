@@ -1,4 +1,4 @@
 task stage () {
     dependsOn ':Backend:Backend:assemble'
-    dependsOn ':Frontend:vue'
+    dependsOn ':Frontend:build'
 }
