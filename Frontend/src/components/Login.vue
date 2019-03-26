@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row align-h="center">
+    <b-row align-v="center"align-h="center">
       <b-col cols="4" >
         <b-alert show v-show="!!error" variant="danger">Incorrect email or password.</b-alert>
 

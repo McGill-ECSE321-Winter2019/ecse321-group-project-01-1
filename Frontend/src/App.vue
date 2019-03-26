@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <Navbar :student="student" @authenticated="authenticate"></Navbar>
-    <router-view :onGuestRedirect="onGuestRedirect" @authenticated="authenticate">
-      
-    </router-view>
+    <b-container class="mt-5">
+      <router-view :onGuestRedirect="onGuestRedirect" @authenticated="authenticate"> </router-view>
+    </b-container>
+
+   
   </div>
 </template>
 
