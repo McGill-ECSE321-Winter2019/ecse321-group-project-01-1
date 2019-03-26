@@ -41,7 +41,7 @@ const router = new Router({
     },
     {
         path: '/profile',
-        name: 'ProfileViewing',
+        name: 'profile',
         component: ProfileViewing
     },
     {

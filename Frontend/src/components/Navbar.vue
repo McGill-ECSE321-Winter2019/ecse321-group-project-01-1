@@ -54,7 +54,7 @@ export default {
   },
   watch: {
     student: function(newVal, oldVal) {
-      console.log(this.student);
+      
     }
   }
 }
