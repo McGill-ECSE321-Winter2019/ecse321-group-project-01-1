@@ -1,10 +1,15 @@
 package ca.mcgill.ecse321.backend.model;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
-import java.sql.Time;
 
 @Entity
 public class Reminder{
@@ -23,9 +28,9 @@ public class Reminder{
 	private String message;
 
 	@CreationTimestamp
-	private Time createDateTime;
+	private Date createDateTime;
 
-	private Time readDateTime;
+	private Date readDateTime;
 
 	@ManyToOne(optional=false)
 	private Student student;
@@ -46,11 +51,11 @@ public class Reminder{
 		this.message = message;
 	}
 
-	public Time getReadDateTime() {
+	public Date getReadDateTime() {
 		return readDateTime;
 	}
 
-	public void setReadDateTime(Time readDateTime) {
+	public void setReadDateTime(Date readDateTime) {
 		this.readDateTime = readDateTime;
 	}
 
@@ -62,11 +67,11 @@ public class Reminder{
 		this.id = id;
 	}
 
-	public Time getCreateDateTime() {
+	public Date getCreateDateTime() {
 		return createDateTime;
 	}
 
-	public void setCreateDateTime(Time createDateTime) {
+	public void setCreateDateTime(Date createDateTime) {
 		this.createDateTime = createDateTime;
 	}
 
