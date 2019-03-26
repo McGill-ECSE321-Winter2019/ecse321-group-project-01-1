@@ -1,1 +1,1 @@
-web: cd Frontend && echo $PORT && export PORT && npm start 
+web: cd Frontend && echo $PORT && export PORT && npm install semver --only=dev && NODE_ENV=production npm start 
