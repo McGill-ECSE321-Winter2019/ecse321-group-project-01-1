@@ -1,0 +1,16 @@
+task vue(type: Exec) { 
+	inputs.file("package-lock.json").withPathSensitivity(PathSensitivity.RELATIVE) 
+	inputs.dir("src").withPathSensitivity(PathSensitivity.RELATIVE)
+	outputs.dir("$buildDir/dist")
+	outputs.cacheIf { true } 
+    commandLine "node", "$projectDir/build/build.js"
+}
+
+task install(type: Exec) {
+	commandLine "npm", "install"
+}
+
+task build {
+	dependsOn 'install'
+	dependsOn 'vue'
+}
