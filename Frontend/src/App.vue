@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <Navbar :student="student" @authenticated="authenticate"></Navbar>
-    <router-view :onGuestRedirect="onGuestRedirect" @authenticated="authenticate">
-      
-    </router-view>
+    <b-container class="mt-5">
+      <router-view :onGuestRedirect="onGuestRedirect" @authenticated="authenticate"> </router-view>
+    </b-container>
+
+   
   </div>
 </template>
 
 <script>
-
-
 import Navbar from './components/Navbar'
 export default {
   data() {
@@ -21,7 +21,6 @@ export default {
   mounted: function() {
     this.authenticate(true);
   },
-
   methods: {
     authenticate(value) {
       this.authenticated = null;
@@ -38,18 +37,14 @@ export default {
           this.authenticated = false;
           this.student = null
           this.$emit("authenticated", false);
-
         });
       } else {
         this.authenticated = false;
         this.student = null;
         this.$emit("authenticated", false);
-
       }
-
     },
     onGuestRedirect() {
-
       this.$on('authenticated', (value) => {
         if (!value) {
           this.$router.replace({ name: "login" });
@@ -65,8 +60,6 @@ export default {
     Navbar
   }
 }
-
-
 </script>
 
 <style>

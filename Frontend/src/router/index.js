@@ -5,7 +5,10 @@ import Login from '@/components/Login'
 import ApplicationForm from '@/components/ApplicationForm'
 import InternshipListing from "@/components/InternshipListing";
 import InternshipItem from "@/components/InternshipItem";
-import Profile from '@/components/Profile'
+
+import Reminder from '@/components/Reminder'
+
+import ProfileViewing from '@/components/ProfileViewing'
 
 
 
@@ -24,14 +27,19 @@ const router = new Router({
       component: Login
     },
     {
+      path: '/reminders',
+      name: 'reminders',
+      component: Reminder
+    },
+      {
       path: '/form',
       name: 'form',
       component: ApplicationForm
     },
     {
         path: '/profile',
-        name: 'profile',
-        component: Profile,
+        name: 'ProfileViewing',
+        component: ProfileViewing
     },
     {
         path: '/list',
