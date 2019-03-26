@@ -19,6 +19,9 @@ function StudentDto(studentID, firstName, lastName, email) {
 
 export default {
     name: 'Viewing',
+    props: {
+      onGuestRedirect: { type: Function },
+    },
     data() {
         return {
             student: '',
@@ -27,6 +30,7 @@ export default {
         }
     },
     created: function () {
+        this.onGuestRedirect();
         // Obtaining student from backend
         this.$http.get('api/profile')
             .then(response => {
