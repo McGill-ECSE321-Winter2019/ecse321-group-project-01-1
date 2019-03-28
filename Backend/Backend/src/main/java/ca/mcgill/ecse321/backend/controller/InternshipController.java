@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import ca.mcgill.ecse321.backend.dto.InternshipDeepDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.backend.dto.CourseDto;
+import ca.mcgill.ecse321.backend.dto.InternshipDeepDto;
 import ca.mcgill.ecse321.backend.dto.InternshipDto;
 import ca.mcgill.ecse321.backend.model.AcademicSemester;
 import ca.mcgill.ecse321.backend.model.Course;
@@ -46,6 +47,7 @@ public class InternshipController {
 	public InternshipDeepDto getInternship(@PathVariable(value="internship_id") int internshipId) {
 		Student student = authenticationService.getCurrentStudent();
 		Internship i = internshipService.findByIdAndStudent(internshipId, student);
+		if (i==null) throw new AccessDeniedException("");
 		return internshipService.deepToDto(i);
 	}
 	
