@@ -10,6 +10,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
+
 public class MainActivity extends AppCompatActivity {
     private String error = null;
 
@@ -72,5 +80,33 @@ public class MainActivity extends AppCompatActivity {
         // initialize error message text view
         super.onCreate(savedInstanceState);
         refreshErrorMessage();
+    }
+
+    public void login(View v) {
+        error = "";
+        final TextView tv1 = (TextView) findViewById(R.id.email);
+        final TextView tv2 = (TextView) findViewById(R.id.password);
+
+        RequestParams rp = new RequestParams();
+        rp.add("email", tv1.getText().toString());
+        rp.add("password", tv2.getText().toString());
+
+        HttpUtils.post("login/", rp, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                refreshErrorMessage();
+                tv1.setText("Welcome Back!");
+                tv2.setText("");
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get("message").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+                refreshErrorMessage();
+            }
+        });
     }
 }
