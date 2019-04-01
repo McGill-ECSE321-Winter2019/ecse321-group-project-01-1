@@ -38,7 +38,7 @@
         <b-button v-if="editing" @click="toggleEditing" variant="danger">Cancel</b-button>
         <b-button v-if="!editing" @click="toggleEditing" variant="primary">Edit</b-button>
       </b-form>
-
+	<div id="fixedfooter">ECSE321 - Group01 - McGill Winter 2019</div>
     </b-col>
   </b-row>
 </template>
@@ -112,4 +112,14 @@
     color: #2c3e50;
     background: #f2ece8;
   }
+  
+  	div#fixedfooter {
+		position:fixed;
+		bottom:0px;
+		left:0px;
+		width:100%;
+		color:#CCC;
+		background:#333;
+		padding:8px;
+	}
 </style>

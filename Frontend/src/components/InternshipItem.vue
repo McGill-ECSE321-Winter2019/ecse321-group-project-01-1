@@ -75,6 +75,7 @@
             </b-tab>
           </b-tabs>
         </b-card>
+        <div id="fixedfooter">ECSE321 - Group01 - McGill Winter 2019</div>
     </div>
 </template>
 
@@ -183,5 +184,13 @@
 </script>
 
 <style scoped>
-
+	div#fixedfooter {
+		position:fixed;
+		bottom:0px;
+		left:0px;
+		width:100%;
+		color:#CCC;
+		background:#333;
+		padding:8px;
+	}
 </style>

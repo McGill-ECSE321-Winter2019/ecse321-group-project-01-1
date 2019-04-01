@@ -7,6 +7,7 @@
                 <a href="/#/list" class="btn btn-primary">Get Started</a>
             </div>
         </div>
+        <div id="fixedfooter">ECSE321 - Group01 - McGill Winter 2019</div>
     </div>
 
 </template>
@@ -36,8 +37,7 @@ export default {
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: scroll;
-        background-size: cover;
-
+        background-size: cover;       
     }
     @media (min-width: 992px) {
         .masthead {
@@ -54,5 +54,15 @@ export default {
             font-size: 1.25rem;
         }
     }
+    
+	div#fixedfooter {
+		position:fixed;
+		bottom:0px;
+		left:0px;
+		width:100%;
+		color:#CCC;
+		background:#333;
+		padding:8px;
+	}
 
 </style>
