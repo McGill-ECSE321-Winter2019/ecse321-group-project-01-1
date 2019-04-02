@@ -21,7 +21,7 @@
                                 <span v-if="selectedInternship.progress[0]">
                                 <a href="#" data-document-type="CONTRACT" v-on:click="downloadFile">{{getPathByType('CONTRACT').file_name}}</a>
                                 </span>
-                                <span v-else>awaiting upload
+                                <span v-else>Awaiting upload
                                 </span>
 
                             </li>
@@ -68,7 +68,6 @@
                                 </b-form-group>
                                 <b-button type="submit" variant="primary">Submit</b-button>
                             </b-form>
-
                         </div>
                     </div>
                 </b-card-text>

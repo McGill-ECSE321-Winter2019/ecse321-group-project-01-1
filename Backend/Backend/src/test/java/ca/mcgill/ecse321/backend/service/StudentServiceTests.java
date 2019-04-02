@@ -149,6 +149,18 @@ public class StudentServiceTests {
 
 	@Test
 	@Transactional
+	public void deleteStudent(){
+		studentService.create(createMock());
+		Student student = studentService.findStudentById(STUDENT_ID);
+		assertNotNull(student);
+
+		studentService.deleteStudent(STUDENT_ID);
+		student = studentService.findStudentById(STUDENT_ID);
+		assertNull(student);
+	}
+
+	@Test
+	@Transactional
 	public void findAllStudents() throws Exception{
 		studentService.create(createMock());
 		studentService.create(createMock4());

@@ -123,6 +123,14 @@ public class InternshipService {
     	internshipDto.setProgress(generateProgress(internship));
     	return internshipDto;
     }
+
+    @Transactional
+	public void deleteInternship(Internship internship){
+		if(internship==null){
+			return;
+		}
+		internshipRepository.delete(internship);
+	}
     
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();

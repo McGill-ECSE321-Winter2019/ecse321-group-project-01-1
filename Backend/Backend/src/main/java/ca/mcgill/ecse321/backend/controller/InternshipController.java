@@ -7,12 +7,7 @@ import java.util.Set;
 
 import ca.mcgill.ecse321.backend.dto.InternshipDeepDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import ca.mcgill.ecse321.backend.dto.CourseDto;
 import ca.mcgill.ecse321.backend.dto.InternshipDto;
@@ -99,5 +94,16 @@ public class InternshipController {
 		return internshipService.toDto(internship);
 		
 	}
+
+	@DeleteMapping(value = { "/external/students/{internship_id}", "/external/students/{internship_id}" })
+    public void deleteInternship(@PathVariable(value = "internship_id") int internshipID){
+	    Internship internship = internshipService.findInternshipById(internshipID);
+        if(internship == null){
+            throw new IllegalArgumentException("There is no such internship!");
+        }
+        else{
+            internshipService.deleteInternship(internship);
+        }
+    }
 
 }
