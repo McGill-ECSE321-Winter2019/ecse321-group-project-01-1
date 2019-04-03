@@ -10,10 +10,21 @@
           Email: {{student.email}}</td>
       </tr>
     </table>
+    <div id="fixedfooter">ECSE321 - Group01 - McGill Winter 2019</div>
   </div>   
 </template>
 
 <script src="./PViewing.js">
 </script>
+
 <style>
+	div#fixedfooter {
+		position:fixed;
+		bottom:0px;
+		left:0px;
+		width:100%;
+		color:#CCC;
+		background:#333;
+		padding:8px;
+	}
 </style>

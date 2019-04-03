@@ -32,11 +32,14 @@
         </b-form>
       </b-col col>
     </b-row>
+    
+    <div id="fixedfooter">ECSE321 - Group01 - McGill Winter 2019</div>
+    
   </b-container>
 </template>
 
 <script>
-  export default {
+  export default {     
     data() {
       return {
         form: {
@@ -79,3 +82,15 @@
     }
   }
 </script>
+
+<style>
+	div#fixedfooter {
+		position:fixed;
+		bottom:0px;
+		left:0px;
+		width:100%;
+		color:#CCC;
+		background:#333;
+		padding:8px;
+	}
+</style>

@@ -2,6 +2,7 @@
   <div id="reminders">
     <h2>Reminders</h2>
     <b-table hover :items="getTableItems()" :fields="fields"/>
+    <div id="fixedfooter">ECSE321 - Group01 - McGill Winter 2019</div>
   </div>
 </template>
 
@@ -58,5 +59,14 @@
 </script>
 
 <style>
+	div#fixedfooter {
+		position:fixed;
+		bottom:0px;
+		left:0px;
+		width:100%;
+		color:#CCC;
+		background:#333;
+		padding:8px;
+	}
 </style>
 

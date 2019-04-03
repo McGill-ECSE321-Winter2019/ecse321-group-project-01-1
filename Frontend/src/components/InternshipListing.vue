@@ -15,6 +15,7 @@
             <internship-item v-bind:internship_id="currentInternship.id"></internship-item>
             <a href="#" v-on:click="back"> Back</a>
         </template>
+        <div id="fixedfooter">ECSE321 - Group01 - McGill Winter 2019</div>
     </div>
 </template>
 
@@ -76,4 +77,14 @@
 td {
     cursor: pointer;
 }
+
+	div#fixedfooter {
+		position:fixed;
+		bottom:0px;
+		left:0px;
+		width:100%;
+		color:#CCC;
+		background:#333;
+		padding:8px;
+	}
 </style>
