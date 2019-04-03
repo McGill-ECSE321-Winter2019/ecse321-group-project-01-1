@@ -5,7 +5,7 @@
       <router-view :onGuestRedirect="onGuestRedirect" @authenticated="authenticate"> </router-view>
     </div>
 
-   
+   <div class="fixed-footer">ECSE321 - Group01 - McGill Winter 2019</div>
   </div>
 </template>
 
@@ -68,4 +68,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
+  
+.fixed-footer {
+  position:fixed;
+  bottom:0px;
+  left:0px;
+  width:100%;
+  color:#CCC;
+  background:#333;
+  padding:8px;
+}
+</style>
 </style>
