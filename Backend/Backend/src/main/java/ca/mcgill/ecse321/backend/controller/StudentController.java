@@ -51,15 +51,14 @@ public class StudentController {
 		return studentService.toDto(student);
 		
 	}
-	@DeleteMapping(value = { "/external/students/delete", "/external/students/delete" })
-	public StudentDto register(@RequestParam(name = "student_id") String studentID
+	@DeleteMapping(value = { "/external/students/{student_id}", "/external/students/{student_id}/" })
+	public void deleteStudent(@PathVariable(name = "student_id") String studentID
 	) throws Exception {
 		Student student = studentService.findStudentByStudentID(studentID);
 		if(student == null){
 			throw new IllegalArgumentException("There is no such student!");
 		}
 		studentService.deleteStudent(studentID);
-		return studentService.toDto(student);
 	}
 
 }
