@@ -1,6 +1,12 @@
 <template>
   <b-row>
     <b-col >
+      <b-alert v-if="!!form.info" show dismissible>
+        {{form.info}}
+      </b-alert>
+      <b-alert v-if="!!form.error" variant="danger" show dismissible>
+        {{form.error}}
+      </b-alert>
       <div v-if="new_form && !editing">
         <div class="mb-3">No application form has been submitted.</div>
         <b-button @click="toggleEditing" variant="primary">New form</b-button>
@@ -34,11 +40,10 @@
           <label for="checkbox">Do you require a work permit?</label>
           <input type="checkbox" id="checkbox" v-model="ApplicationForm.workPermit" v-bind:readonly="!editing">
         </b-form-group>
-        <b-button v-if="editing" type="submit" variant="primary">Submit</b-button>
+        <b-button v-if="editing" type="submit" variant="primary" :disabled="form.submitted"><b-spinner small v-if="form.submitted"></b-spinner>Submit</b-button>
         <b-button v-if="editing" @click="toggleEditing" variant="danger">Cancel</b-button>
-        <b-button v-if="!editing" @click="toggleEditing" variant="primary">Edit</b-button>
+        <b-button v-if="!editing" @click="toggleEditing" variant="primary" :disabled="form.submitted"><b-spinner small v-if="form.submitted"></b-spinner>Edit</b-button>
       </b-form>
-
     </b-col>
   </b-row>
 </template>
@@ -71,6 +76,11 @@
                end_date:'',
                work_permit:true
            },
+           form: {
+            submitted: false,
+            error: "",
+            info: ""
+           },
            editing: false,
            new_form: true,
        }
@@ -82,22 +92,31 @@
         },
        createApplicationForm(evt){
         evt.preventDefault()
+        this.form.error = "";
+        this.form.submitted = true;
+
         if (this.new_form) {
           this.$http.post('/api/internships/'+ this.selectedInternship.id +'/application_form',  null, {
             params: this.ApplicationForm
           }).then((response) => {
             this.editing = false;
             this.new_form = false;
+            his.form.submitted = false;
           }).catch((error) => {
             console.log(error);
+            this.form.error = "Error while submitting the form."
+            this.form.submitted = false;
           });
         } else {
           this.$http.put('/api/internships/'+ this.selectedInternship.id +'/application_form',  null, {
             params: this.ApplicationForm
           }).then((response) => {
             this.editing = false;
+            this.form.submitted = false;
           }).catch((error) => {
             console.log(error);
+            this.form.error = "Error while submitting the form."
+            his.form.submitted = false;
           });
         }
 

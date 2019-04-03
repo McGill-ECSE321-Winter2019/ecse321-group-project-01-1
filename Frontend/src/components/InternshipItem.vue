@@ -12,9 +12,9 @@
                 </b-card-text>
             </b-tab>
             <b-tab title="Documents">
-                <b>Summary</b>
                 <b-card-text>
                     <div >
+                        <b>Summary</b>
                         <ul class="list-unstyled" v-if="selectedInternship.progress">
                             <li>
                                 Contract:
@@ -66,7 +66,7 @@
                                       drop-placeholder="Drop file here..."
                                     />
                                 </b-form-group>
-                                <b-button type="submit" variant="primary">Submit</b-button>
+                                <b-button type="submit" variant="primary" :disabled="submitted"><b-spinner small v-if="submitted"></b-spinner>Submit</b-button>
                             </b-form>
 
                         </div>
@@ -97,8 +97,9 @@
                     TECHNICAL_REPORT: null,
                     EVALUATION: null
                 },
-                error:'',
+                error: "",
                 selectedDocument: null,
+                submitted: false,
                 DocumentTypesDisp: [
                 {value: null, text: 'Please select a document type'},
                 {value: 'CONTRACT', text: 'Contract'},
@@ -136,6 +137,8 @@
             },
             submitFile(evt) {
                 evt.preventDefault()
+                this.submitted = true;
+
                 let formData = new FormData();
                 formData.append('file', this.file);
 
@@ -148,11 +151,12 @@
                 .then(() => {
                     this.fetch()
                     this.alert = "File successfully uploaded!"
-
+                    this.submitted = false;
                     console.log('SUCCESS!!');
                 })
                 .catch( (e) => {
                     console.log(e);
+                    this.submitted = false;
                 });
             },
             downloadFile(evt){
