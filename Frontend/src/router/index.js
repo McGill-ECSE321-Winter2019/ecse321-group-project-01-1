@@ -41,7 +41,7 @@ const router = new Router({
     },
     {
         path: '/list',
-        name: 'InternshipListing',
+        name: 'internship_listing',
         component: InternshipListing
     },
   ]

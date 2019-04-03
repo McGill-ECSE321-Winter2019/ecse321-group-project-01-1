@@ -40,9 +40,9 @@
           <label for="checkbox">Do you require a work permit?</label>
           <input type="checkbox" id="checkbox" v-model="ApplicationForm.workPermit" v-bind:readonly="!editing">
         </b-form-group>
-        <b-button v-if="editing" type="submit" variant="primary" :disabled="form.submitted"><b-spinner small v-if="form.submitted"></b-spinner>Submit</b-button>
+        <b-button v-if="editing" type="submit" variant="primary" :disabled="form.submitted"><b-spinner small v-if="form.submitted"></b-spinner> Submit</b-button>
         <b-button v-if="editing" @click="toggleEditing" variant="danger">Cancel</b-button>
-        <b-button v-if="!editing" @click="toggleEditing" variant="primary" :disabled="form.submitted"><b-spinner small v-if="form.submitted"></b-spinner>Edit</b-button>
+        <b-button v-if="!editing" @click="toggleEditing" variant="primary" :disabled="form.submitted"><b-spinner small v-if="form.submitted"></b-spinner> Edit</b-button>
       </b-form>
     </b-col>
   </b-row>
@@ -101,7 +101,7 @@
           }).then((response) => {
             this.editing = false;
             this.new_form = false;
-            his.form.submitted = false;
+            this.form.submitted = false;
           }).catch((error) => {
             console.log(error);
             this.form.error = "An error occurred while submitting the form."
@@ -116,7 +116,7 @@
           }).catch((error) => {
             console.log(error);
             this.form.error = "An error occurred while submitting the form."
-            his.form.submitted = false;
+            this.form.submitted = false;
           });
         }
 

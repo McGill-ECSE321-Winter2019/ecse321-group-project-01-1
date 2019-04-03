@@ -1,5 +1,5 @@
 <template>
-    <div id="internshipListing">
+    <div id="internship_listing">
         <template v-if="listing">
             <h2>Current internship listings</h2>
             <b-table
@@ -21,7 +21,7 @@
 <script>
     import InternshipItem from "./InternshipItem";
     export default {
-        name: "InternshipListing",
+        name: "internship_listing",
         components: {InternshipItem},
         props: {
           onGuestRedirect: { type: Function },
@@ -64,8 +64,8 @@
     }
 </script>
 
-<style scoped>
-td {
+<style>
+#internship_listing td {
     cursor: pointer;
 }
 </style>

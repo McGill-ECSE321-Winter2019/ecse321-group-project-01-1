@@ -1,9 +1,6 @@
 <template>
     <div id="internship" v-if="!!selectedInternship">
         <h2 >Internship {{ selectedInternship.academic_semester +  " " + selectedInternship.year}}</h2>
-        <b-alert v-if="!!alert" show dismissible>
-          {{alert}}
-        </b-alert>
         <b-card no-body>
           <b-tabs pills card>
             <b-tab title="Application Form" active>
