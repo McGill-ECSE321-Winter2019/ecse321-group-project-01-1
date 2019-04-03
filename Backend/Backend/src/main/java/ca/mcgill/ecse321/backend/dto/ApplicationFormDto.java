@@ -2,6 +2,9 @@ package ca.mcgill.ecse321.backend.dto;
 
 import java.sql.Date;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -15,8 +18,12 @@ public class ApplicationFormDto {
     private String jobID;
     private String jobDescription;
 
+    @NotNull
+    @NotEmpty
     private String employer;
 
+    @NotNull
+    @NotEmpty
     private String location;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -28,7 +35,7 @@ public class ApplicationFormDto {
     private boolean workPermit;
 
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
-    private InternshipDto internshipDto;
+    private InternshipDto internship;
 
     public ApplicationFormDto() {
     	
@@ -64,11 +71,11 @@ public class ApplicationFormDto {
     }
 
     public InternshipDto getInternship() {
-        return this.internshipDto;
+        return this.internship;
     }
 
     public void setInternship(InternshipDto internship) {
-        this.internshipDto = internship;
+        this.internship = internship;
     }
 
     public String getJobDescription() {

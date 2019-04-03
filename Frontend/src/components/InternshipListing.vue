@@ -1,8 +1,8 @@
 <template>
-    <div id="internshipListing">
+    <div id="internship_listing">
         <template v-if="listing">
             <h2>Current internship listings</h2>
-            <b-table 
+            <b-table
                 borderless
                 hover
                 :items="getItems()"
@@ -21,7 +21,7 @@
 <script>
     import InternshipItem from "./InternshipItem";
     export default {
-        name: "InternshipListing",
+        name: "internship_listing",
         components: {InternshipItem},
         props: {
           onGuestRedirect: { type: Function },
@@ -31,18 +31,10 @@
                 internshipList: [],
                 error: false,
                 listing: true,
-                currentInternship: ''
+                currentInternship: '',
             }
         },
         created: function () {
-            //
-            // const p1 = new PersonDto('John');
-            // const p2 = new PersonDto('Jill');
-            // const i1 = new InternshipDto(1);
-            // const i2 = new InternshipDto(2);
-            // // Sample initial content
-            // this.internshipList = [i1, i2];
-            // this.currentInternship = i1;
             this.onGuestRedirect();
             this.$http.get(`/api/internships`)
                 .then(response => {
@@ -63,7 +55,7 @@
                     let copy  = Object.assign({}, el)
                     copy.course = el.course.course_id
                     return copy
-                }) 
+                })
             },
             back: function(){
                 this.listing = !this.listing;
@@ -73,7 +65,7 @@
 </script>
 
 <style>
-td {
+#internship_listing td {
     cursor: pointer;
 }
 </style>
