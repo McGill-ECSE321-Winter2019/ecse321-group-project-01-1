@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar :student="student" @authenticated="authenticate"></Navbar>
-    <div  v-bind:class="{'mt-5': !$route.meta.no_container, container: !$route.meta.no_container}">
+    <div  v-bind:class="{'my-5': !$route.meta.no_container, container: !$route.meta.no_container}">
       <router-view :onGuestRedirect="onGuestRedirect" @authenticated="authenticate"> </router-view>
     </div>
 
@@ -78,6 +78,7 @@ export default {
   color:#CCC;
   background:#333;
   padding:8px;
+  z-index: 99999;
 }
 </style>
 </style>
