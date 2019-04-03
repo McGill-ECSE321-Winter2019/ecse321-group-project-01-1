@@ -22,41 +22,15 @@
                             :items="getItems()"
                             :fields="fields"
 
-                        ></b-table>
-                        <ul class="list-unstyled" v-if="selectedInternship.progress">
-                            <li>
-                                Contract:
-                                <span v-if="selectedInternship.progress[0]">
-                                <a href="#" data-document-type="CONTRACT" v-on:click="downloadFile">{{getPathByType('CONTRACT').file_name}}</a>
+                        >
+                            <template slot="download" slot-scope="data">
+                                <span v-if="selectedInternship.progress[data.index]">
+                                     <a href="#" data-document-type="DocumentTypesDisp[data.index+1].value" v-on:click="downloadFile">{{getPathByType(DocumentTypesDisp[data.index+1].value).file_name}}</a>
                                 </span>
-                                <span v-else>awaiting upload
-                                </span>
-                            </li>
-                            <li>
-                                Work report:
-                                <span v-if="selectedInternship.progress[1]">
-                                <a href="#" data-document-type="WORK_REPORT" v-on:click="downloadFile">{{getPathByType('WORK_REPORT').file_name}}</a>
-                                </span>
-                                <span v-else>awaiting upload
-                                </span>
-                            </li>
-                            <li>
-                                Technical report:
-                                <span v-if="selectedInternship.progress[2]">
-                                <a href="#" data-document-type="TECHNICAL_REPORT" v-on:click="downloadFile">{{getPathByType('TECHNICAL_REPORT').file_name}}</a>
-                                </span>
-                                <span v-else>awaiting upload
-                                </span>
-                            </li>
-                            <li>
-                                Evaluation:
-                                <span v-if="selectedInternship.progress[3]">
-                                <a href="#" data-document-type="EVALUATION" v-on:click="downloadFile">{{getPathByType('EVALUATION').file_name}}</a>
-                                </span>
-                                <span v-else>awaiting upload
-                                </span>
-                            </li>
-                        </ul>
+                                <span v-else>Not Uploaded</span>
+
+                            </template>
+                        </b-table>
                                 <!--Progress: {{numCompleted(selectedInternship.progress)}} out of 4 documents uploaded-->
                                 <h4>Internship progress</h4>
                                 <b-progress :value= numCompleted(selectedInternship.progress) :max=4 show-progress></b-progress>
@@ -115,7 +89,7 @@
                 ],
                 items:[
 
-                    {type:'Contract', status:'Awaiting Upload', download: 'None'},
+                    {type:'Contract', status:'Awaiting Upload', download: '<span>Ok</span>'},
                     {type:'Work Report', status:'Awaiting Upload', download: 'None'},
                     {type:'Technical Report', status:'Awaiting Upload', download: 'None'},
                     {type:'Evaluation', status:'Awaiting Upload', download: 'None'}
@@ -154,7 +128,7 @@
                     });
             },
             getItems(){
-                let copy = Object.assign([], this.items);
+                let copy = this.items;
                 let i=0;
                 for(i;i<4;i++){
                     if(this.selectedInternship.progress[i]){
@@ -165,18 +139,6 @@
                     }
                 }
                 return copy;
-                // return this.items.map((el)=>{
-                //     let i =0;
-                //     for(i;i<4;i++){
-                //         let copy = Object.assign({}, el);
-                //         if(this.selectedInternship.progress[i]){
-                //             copy.status = "Done";
-                //         }
-                //         else{
-                //             copy.status = "Awaiting upload"
-                //         }
-                //     }
-                // })
             },
             numCompleted: function (arr) {
                 let count = 0;
