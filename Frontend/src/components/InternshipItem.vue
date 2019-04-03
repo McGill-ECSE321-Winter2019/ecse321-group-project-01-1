@@ -12,9 +12,17 @@
                 </b-card-text>
             </b-tab>
             <b-tab title="Documents">
-                <b>Summary</b>
+                <h2> Summary of documents</h2>
                 <b-card-text>
                     <div >
+                        <h4 >Current internship listings</h4>
+                        <b-table
+                            borderless
+                            hover
+                            :items="items"
+                            :fields="fields"
+
+                        ></b-table>
                         <ul class="list-unstyled" v-if="selectedInternship.progress">
                             <li>
                                 Contract:
@@ -23,7 +31,6 @@
                                 </span>
                                 <span v-else>awaiting upload
                                 </span>
-
                             </li>
                             <li>
                                 Work report:
@@ -49,10 +56,11 @@
                                 <span v-else>awaiting upload
                                 </span>
                             </li>
-                            <li>
-                                Progress: {{numCompleted(selectedInternship.progress)}} out of 4 documents uploaded
-                            </li>
                         </ul>
+                                <!--Progress: {{numCompleted(selectedInternship.progress)}} out of 4 documents uploaded-->
+                                <h4>Internship progress</h4>
+                                <b-progress :value= numCompleted(selectedInternship.progress) :max=4 show-progress></b-progress>
+
                         <div>
                             <b>Upload document</b>
                             <b-form @submit="submitFile">
@@ -68,7 +76,6 @@
                                 </b-form-group>
                                 <b-button type="submit" variant="primary">Submit</b-button>
                             </b-form>
-
                         </div>
                     </div>
                 </b-card-text>
@@ -105,6 +112,28 @@
                 {value: 'WORK_REPORT', text: 'Work report'},
                 {value: 'TECHNICAL_REPORT', text: 'Technical report'},
                 {value: 'EVALUATION', text: 'Evaluation'}
+                ],
+                items:[
+
+                    {type:'Contract', status:'Awaiting Upload', download: 'None'},
+                    {type:'Work Report', status:'Awaiting Upload', download: 'None'},
+                    {type:'Technical Report', status:'Awaiting Upload', download: 'None'},
+                    {type:'Evaluation', status:'Awaiting Upload', download: 'None'}
+
+                ],
+                fields:[
+                    {
+                        key:'type',
+                        label:'Type'
+                    },
+                    {
+                        key:'status',
+                        label:'Status'
+                    },
+                    {
+                        key:'download',
+                        label:'Download Link'
+                    },
                 ]
             }
         },
@@ -123,6 +152,31 @@
                     .catch(e => {
                         this.error = e;
                     });
+            },
+            getItems(){
+                let copy = Object.assign({}, this.items);
+                let i=0;
+                for(i;i<4;i++){
+                    if(this.selectedInternship.progress[i]){
+                        copy[i].status = "Done";
+                    }
+                    else{
+                        copy[i].status = "Awaiting upload"
+                    }
+                }
+                return copy;
+                // return this.items.map((el)=>{
+                //     let i =0;
+                //     for(i;i<4;i++){
+                //         let copy = Object.assign({}, el);
+                //         if(this.selectedInternship.progress[i]){
+                //             copy.status = "Done";
+                //         }
+                //         else{
+                //             copy.status = "Awaiting upload"
+                //         }
+                //     }
+                // })
             },
             numCompleted: function (arr) {
                 let count = 0;
