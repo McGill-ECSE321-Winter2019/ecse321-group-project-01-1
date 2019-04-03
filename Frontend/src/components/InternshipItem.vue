@@ -5,7 +5,7 @@
           {{alert}}
         </b-alert>
         <b-card no-body>
-          <b-tabs pills card vertical>
+          <b-tabs pills card>
             <b-tab title="Application Form" active>
                 <b-card-text>
                     <ApplicationForm :selectedInternship="selectedInternship"></ApplicationForm>
