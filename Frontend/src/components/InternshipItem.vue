@@ -17,8 +17,7 @@
                     <div >
                         <h4 >Current internship listings</h4>
                         <b-table
-                            borderless
-                            hover
+                            outlined
                             :items="getItems()"
                             :fields="fields"
 
