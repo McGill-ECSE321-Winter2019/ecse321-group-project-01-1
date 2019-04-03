@@ -19,7 +19,7 @@
                         <b-table
                             borderless
                             hover
-                            :items="items"
+                            :items="getItems()"
                             :fields="fields"
 
                         ></b-table>
@@ -154,7 +154,7 @@
                     });
             },
             getItems(){
-                let copy = Object.assign({}, this.items);
+                let copy = Object.assign([], this.items);
                 let i=0;
                 for(i;i<4;i++){
                     if(this.selectedInternship.progress[i]){
