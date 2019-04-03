@@ -104,7 +104,7 @@
             his.form.submitted = false;
           }).catch((error) => {
             console.log(error);
-            this.form.error = "Error while submitting the form."
+            this.form.error = "An error occurred while submitting the form."
             this.form.submitted = false;
           });
         } else {
@@ -115,7 +115,7 @@
             this.form.submitted = false;
           }).catch((error) => {
             console.log(error);
-            this.form.error = "Error while submitting the form."
+            this.form.error = "An error occurred while submitting the form."
             his.form.submitted = false;
           });
         }
@@ -126,9 +126,5 @@
 </script>
 
 <style>
-  #applicationform {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    color: #2c3e50;
-    background: #f2ece8;
-  }
+
 </style>

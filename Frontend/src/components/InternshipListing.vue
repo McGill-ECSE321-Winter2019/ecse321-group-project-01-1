@@ -2,7 +2,7 @@
     <div id="internshipListing">
         <template v-if="listing">
             <h2>Current internship listings</h2>
-            <b-table 
+            <b-table
                 borderless
                 hover
                 :items="getItems()"
@@ -31,18 +31,10 @@
                 internshipList: [],
                 error: false,
                 listing: true,
-                currentInternship: ''
+                currentInternship: '',
             }
         },
         created: function () {
-            //
-            // const p1 = new PersonDto('John');
-            // const p2 = new PersonDto('Jill');
-            // const i1 = new InternshipDto(1);
-            // const i2 = new InternshipDto(2);
-            // // Sample initial content
-            // this.internshipList = [i1, i2];
-            // this.currentInternship = i1;
             this.onGuestRedirect();
             this.$http.get(`/api/internships`)
                 .then(response => {
@@ -63,7 +55,7 @@
                     let copy  = Object.assign({}, el)
                     copy.course = el.course.course_id
                     return copy
-                }) 
+                })
             },
             back: function(){
                 this.listing = !this.listing;
@@ -72,7 +64,7 @@
     }
 </script>
 
-<style>
+<style scoped>
 td {
     cursor: pointer;
 }

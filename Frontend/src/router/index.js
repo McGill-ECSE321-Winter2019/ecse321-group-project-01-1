@@ -34,11 +34,6 @@ const router = new Router({
       name: 'reminders',
       component: Reminder
     },
-      {
-      path: '/form',
-      name: 'form',
-      component: ApplicationForm
-    },
     {
         path: '/profile',
         name: 'profile',
