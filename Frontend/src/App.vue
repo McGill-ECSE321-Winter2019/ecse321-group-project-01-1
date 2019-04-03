@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <Navbar :student="student" @authenticated="authenticate"></Navbar>
-    <div  v-bind:class="{'mt-5': !$route.meta.no_container, container: !$route.meta.no_container}">
+    <div  v-bind:class="{'my-5': !$route.meta.no_container, container: !$route.meta.no_container}">
       <router-view :onGuestRedirect="onGuestRedirect" @authenticated="authenticate"> </router-view>
     </div>
 
-   
+   <div class="fixed-footer">ECSE321 - Group01 - McGill Winter 2019</div>
   </div>
 </template>
 
@@ -64,9 +64,21 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
+  
+.fixed-footer {
+  position:fixed;
+  bottom:0px;
+  left:0px;
+  width:100%;
+  color:#CCC;
+  background:#333;
+  padding:8px;
+  z-index: 99999;
+}
+</style>
 </style>

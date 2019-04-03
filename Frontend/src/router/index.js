@@ -34,11 +34,6 @@ const router = new Router({
       name: 'reminders',
       component: Reminder
     },
-      {
-      path: '/form',
-      name: 'form',
-      component: ApplicationForm
-    },
     {
         path: '/profile',
         name: 'profile',
@@ -46,7 +41,7 @@ const router = new Router({
     },
     {
         path: '/list',
-        name: 'InternshipListing',
+        name: 'internship_listing',
         component: InternshipListing
     },
   ]
