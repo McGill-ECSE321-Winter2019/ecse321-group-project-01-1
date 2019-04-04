@@ -19,6 +19,8 @@ public class ApplicationFormDto {
 
     private String location;
 
+    private String employerEmail;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
     
@@ -34,7 +36,7 @@ public class ApplicationFormDto {
     	
     }
     
-    public ApplicationFormDto(int id, String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit) {
+    public ApplicationFormDto(int id, String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit, String employerEmail) {
         this.id = id;
         this.jobID = jobID;
         this.jobDescription = jobDescription;
@@ -43,9 +45,10 @@ public class ApplicationFormDto {
         this.startDate = startDate;
         this.endDate = endDate;
         this.workPermit = workPermit;
+        this.employerEmail = employerEmail;
     }
     
-    public ApplicationFormDto(String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit) {
+    public ApplicationFormDto(String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit,String employerEmail) {
         this.jobID = jobID;
         this.jobDescription = jobDescription;
         this.employer = employer;
@@ -53,6 +56,7 @@ public class ApplicationFormDto {
         this.startDate = startDate;
         this.endDate = endDate;
         this.workPermit = workPermit;
+        this.employerEmail = employerEmail;
     }
 
     public int getId() {
@@ -61,6 +65,14 @@ public class ApplicationFormDto {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getEmployerEmail() {
+        return employerEmail;
+    }
+
+    public void setEmployerEmail(String employerEmail) {
+        this.employerEmail = employerEmail;
     }
 
     public InternshipDto getInternship() {

@@ -18,6 +18,10 @@
           <label for="employer">Your Employer</label>
           <input type="text" id="employer" class="form-control" v-model="ApplicationForm.employer" v-bind:readonly="!editing">
         </b-form-group>
+          <b-form-group>
+              <label for="employer_email">Your Employer's contact email</label>
+              <input type="text" id="employer_email" class="form-control" v-model="ApplicationForm.employer_email" v-bind:readonly="!editing">
+          </b-form-group>
         <b-form-group>
           <label for="location">Enter the Location</label>
           <input type="text" id="location" class="form-control" v-model="ApplicationForm.location" v-bind:readonly="!editing">
@@ -38,7 +42,6 @@
         <b-button v-if="editing" @click="toggleEditing" variant="danger">Cancel</b-button>
         <b-button v-if="!editing" @click="toggleEditing" variant="primary">Edit</b-button>
       </b-form>
-
     </b-col>
   </b-row>
 </template>
@@ -66,6 +69,7 @@
                job_id:'',
                job_description:'',
                employer:'',
+               employer_email: '',
                location:'',
                start_date:'',
                end_date:'',

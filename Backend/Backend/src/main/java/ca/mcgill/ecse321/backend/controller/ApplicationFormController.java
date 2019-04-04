@@ -41,12 +41,13 @@ public class ApplicationFormController {
                       @RequestParam("start_date") Date startDate,
                       @RequestParam("end_date") Date endDate,
                       @RequestParam("work_permit") boolean workPermit,
+                      @RequestParam(value = "employer_email", required = false) String email,
                       @PathVariable(value="internship_id") int internshipId
         ){
     	Internship i = internshipService.findByIdAndStudent(internshipId, authenticationService.getCurrentStudent());
     	if (i == null) throw new AccessDeniedException("");
     	if (i.getApplicationForm() != null) throw new IllegalArgumentException("Application form already exists.");
-        ApplicationFormDto applicationFormDto = new ApplicationFormDto(jobID, jobDescription, employer, location, startDate,  endDate, workPermit);
+        ApplicationFormDto applicationFormDto = new ApplicationFormDto(jobID, jobDescription, employer, location, startDate, endDate, workPermit, email);
         ApplicationForm applicationForm = applicationFormService.create(applicationFormDto, i);
         return applicationFormService.toDto(applicationForm);
     }
@@ -60,6 +61,7 @@ public class ApplicationFormController {
                       @RequestParam(value = "start_date", required = false) Date startDate,
                       @RequestParam(value = "end_date", required = false) Date endDate,
                       @RequestParam(value = "work_permit", required = false) boolean workPermit,
+                      @RequestParam(value = "employer_email", required = false) String email,
                       @PathVariable(value="internship_id") int internshipId
         ){
     	Internship i = internshipService.findByIdAndStudent(internshipId, authenticationService.getCurrentStudent());
@@ -74,6 +76,7 @@ public class ApplicationFormController {
         applicationFormDto.setStartDate( startDate);
         applicationFormDto.setEndDate( endDate);
         applicationFormDto.setWorkPermit( workPermit);
+        applicationFormDto.setEmployerEmail(email);
     	
         ApplicationForm applicationForm = applicationFormService.update(applicationFormDto);
         return applicationFormService.toDto(applicationForm);

@@ -156,8 +156,6 @@ public class StudentServiceTests {
 		List<Student> students = studentService.getAll();
 		assertEquals(2,students.size());
 	}
-
-    
 }
 
 

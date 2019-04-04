@@ -43,6 +43,7 @@ public class ApplicationFormService {
 		applicationForm.setLocation(applicationFormDto.getLocation());
 		applicationForm.setJobDescription(applicationFormDto.getJobDescription());
 		applicationForm.setInternship(internship);
+		applicationForm.setEmployerEmail(applicationFormDto.getEmployerEmail());
 		
 		applicationForm = applicationFormRepository.save(applicationForm);
 
@@ -63,6 +64,7 @@ public class ApplicationFormService {
 		applicationForm.setWorkPermit(applicationFormDto.isWorkPermit());
 		applicationForm.setLocation(applicationFormDto.getLocation());
 		applicationForm.setJobDescription(applicationFormDto.getJobDescription());
+		applicationForm.setEmployerEmail(applicationFormDto.getEmployerEmail());
 		
 		applicationForm = applicationFormRepository.save(applicationForm);
 
@@ -96,7 +98,8 @@ public class ApplicationFormService {
             applicationForm.getLocation(),
             applicationForm.getStartDate(),
             applicationForm.getEndDate(),
-            applicationForm.isWorkPermit()
+            applicationForm.isWorkPermit(),
+				applicationForm.getEmployerEmail()
             );
         return applicationFormDto;
     }
