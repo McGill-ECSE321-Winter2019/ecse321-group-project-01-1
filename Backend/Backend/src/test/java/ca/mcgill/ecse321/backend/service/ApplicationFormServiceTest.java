@@ -74,7 +74,7 @@ public class ApplicationFormServiceTest {
 
         Date startDate = new Date(1);
         Date endDate = new Date(2);
-        mockapplicationForm = new ApplicationForm("someID", "writing code", internship, "Google",  "planet", startDate, endDate, true);
+        mockapplicationForm = new ApplicationForm("someID", "writing code", internship, "Google",  "planet", startDate, endDate, true, "abc@mail.com");
 
         // in real application the only way to create would be through service
         mockapplicationForm.setId(1);

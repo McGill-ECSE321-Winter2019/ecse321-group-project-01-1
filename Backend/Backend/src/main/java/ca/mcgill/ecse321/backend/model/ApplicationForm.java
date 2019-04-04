@@ -22,8 +22,9 @@ public class ApplicationForm{
 
 	private String jobID; //Publicly posted Job ID that can be found with the job description 
 	private String jobDescription;
+	private String employerEmail;
 
-	public ApplicationForm(String jobID, String jobDescription, Internship internship, String employer, String location, Date startDate, Date endDate, boolean workPermit) {
+	public ApplicationForm(String jobID, String jobDescription, Internship internship, String employer, String location, Date startDate, Date endDate, boolean workPermit, String employerEmail) {
 		this.jobID = jobID;
 		this.jobDescription = jobDescription;
 		this.internship = internship;
@@ -32,6 +33,15 @@ public class ApplicationForm{
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.workPermit = workPermit;
+		this.employerEmail = employerEmail;
+	}
+
+	public String getEmployerEmail() {
+		return employerEmail;
+	}
+
+	public void setEmployerEmail(String employerEmail) {
+		this.employerEmail = employerEmail;
 	}
 
 	public ApplicationForm(){
