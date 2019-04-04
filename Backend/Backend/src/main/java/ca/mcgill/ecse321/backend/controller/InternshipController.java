@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -101,5 +102,16 @@ public class InternshipController {
 		return internshipService.toDto(internship);
 		
 	}
+
+	@DeleteMapping(value = { "/external/students/{internship_id}", "/external/students/{internship_id}" })
+    public void deleteInternship(@PathVariable(value = "internship_id") int internshipID){
+	    Internship internship = internshipService.findInternshipById(internshipID);
+        if(internship == null){
+            throw new IllegalArgumentException("There is no such internship!");
+        }
+        else{
+            internshipService.deleteInternship(internship);
+        }
+    }
 
 }
