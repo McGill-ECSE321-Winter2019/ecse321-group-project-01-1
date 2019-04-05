@@ -75,7 +75,23 @@ public class FileController {
 
     @GetMapping("/api/internships/{internship_id}/documents/{document_id}/download")
     public ResponseEntity<Resource> downloadFile(@PathVariable(value="document_id") String documentId,
-                                                 @PathVariable(value="internship_id") String internshipId) {
+                                                 @PathVariable(value="internship_id") int internshipId) {
+        // Load file from database
+        Student student = authenticationService.getCurrentStudent();
+
+    	Internship i = internshipService.findByIdAndStudent(internshipId, student);
+    	
+        Document document = storageService.readDocument(documentId);
+        if (i == null || i != document.getInternship()) throw new AccessDeniedException("");
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(document.getFileType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + document.getFileName() + "\"")
+                .body(new ByteArrayResource(document.getData()));
+    }
+    
+    @GetMapping("/external/documents/{document_id}/download")
+    public ResponseEntity<Resource> downloadFileExternal(@PathVariable(value="document_id") String documentId) {
         // Load file from database
         Document document = storageService.readDocument(documentId);
 
