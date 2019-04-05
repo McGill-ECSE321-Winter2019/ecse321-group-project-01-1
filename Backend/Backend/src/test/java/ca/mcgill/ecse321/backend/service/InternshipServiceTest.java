@@ -59,7 +59,7 @@ public class InternshipServiceTest {
         internshipRepository.deleteAll();
         studentRepository.deleteAll();
         courseRepository.deleteAll();
-        student = studentService.create(new StudentDto("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
+        student = studentService.create(new StudentDto("111111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
         course = courseService.create(new CourseDto("FACC300"));
         mockInternship = new Internship(2019,AcademicSemester.FALL, course, student);
         mockInternship.setStudent(student);
@@ -84,7 +84,7 @@ public class InternshipServiceTest {
     public void findByIdAndStudentStudentID()throws Exception {
         assertEquals(0, internshipService.getAll().size());
         Internship createdInternship = internshipService.create(new InternshipDto(2019, AcademicSemester.SUMMER), student, course);
-        Internship queriedInternship = internshipService.findByIdAndStudentStudentID(createdInternship.getId(),"1111111");
+        Internship queriedInternship = internshipService.findByIdAndStudentStudentID(createdInternship.getId(),student.getStudentID());
 
         assertEquals(createdInternship,queriedInternship);
     }

@@ -21,6 +21,10 @@
           <input type="text" id="jobDescription" class="form-control" v-model="ApplicationForm.job_description" v-bind:readonly="!editing">
         </b-form-group>
         <b-form-group>
+          <label for="company">Your Company</label>
+          <input type="text" id="company" class="form-control" v-model="ApplicationForm.company" v-bind:readonly="!editing">
+        </b-form-group>
+        <b-form-group>
           <label for="employer">Your Employer</label>
           <input type="text" id="employer" class="form-control" v-model="ApplicationForm.employer" v-bind:readonly="!editing">
         </b-form-group>
@@ -74,6 +78,7 @@
            ApplicationForm:{
                job_id:'',
                job_description:'',
+               company:'',
                employer:'',
                employer_email: '',
                location:'',

@@ -36,33 +36,36 @@ public class ApplicationFormController {
     public ApplicationFormDto postApplication(
                       @RequestParam("job_id") String jobID,
                       @RequestParam("job_description")  String jobDescription,
+                      @RequestParam("company")  String company,
                       @RequestParam("employer")  String employer,
+                      @RequestParam(value = "employer_email", required = false) String email,
                       @RequestParam("location") String location,
                       @RequestParam("start_date") Date startDate,
                       @RequestParam("end_date") Date endDate,
                       @RequestParam("work_permit") boolean workPermit,
-                      @RequestParam(value = "employer_email", required = false) String email,
+        
                       @PathVariable(value="internship_id") int internshipId
         ){
     	Internship i = internshipService.findByIdAndStudent(internshipId, authenticationService.getCurrentStudent());
     	if (i == null) throw new AccessDeniedException("");
     	if (i.getApplicationForm() != null) throw new IllegalArgumentException("Application form already exists.");
-        ApplicationFormDto applicationFormDto = new ApplicationFormDto(jobID, jobDescription, employer, location, startDate, endDate, workPermit, email);
+        ApplicationFormDto applicationFormDto = new ApplicationFormDto(jobID, jobDescription, company, employer, email, location, startDate, endDate, workPermit);
         ApplicationForm applicationForm = applicationFormService.create(applicationFormDto, i);
         return applicationFormService.toDto(applicationForm);
     }
     
     @PutMapping("/api/internships/{internship_id}/application_form")
     public ApplicationFormDto putApplication(
-                      @RequestParam(value = "job_id" , required = false) String jobID,
-                      @RequestParam(value = "job_description", required = false)  String jobDescription,
-                      @RequestParam(value = "employer", required = false)  String employer,
-                      @RequestParam(value = "location", required = false) String location,
-                      @RequestParam(value = "start_date", required = false) Date startDate,
-                      @RequestParam(value = "end_date", required = false) Date endDate,
-                      @RequestParam(value = "work_permit", required = false) boolean workPermit,
+                      @RequestParam(value = "job_id") String jobID,
+                      @RequestParam(value = "job_description")  String jobDescription,
+                      @RequestParam(value = "company")  String company,
+                      @RequestParam(value = "employer")  String employer,
                       @RequestParam(value = "employer_email", required = false) String email,
-                      @PathVariable(value="internship_id") int internshipId
+                      @RequestParam(value = "location") String location,
+                      @RequestParam(value = "start_date") Date startDate,
+                      @RequestParam(value = "end_date") Date endDate,
+                      @RequestParam(value = "work_permit") boolean workPermit,
+                      @PathVariable(value= "internship_id") int internshipId
         ){
     	Internship i = internshipService.findByIdAndStudent(internshipId, authenticationService.getCurrentStudent());
     	if (i == null) throw new AccessDeniedException("");
@@ -71,6 +74,7 @@ public class ApplicationFormController {
     	applicationFormDto.setId(i.getApplicationForm().getId());
     	applicationFormDto.setJobID(jobID);
     	applicationFormDto.setJobDescription( jobDescription);
+    	applicationFormDto.setCompany( company);
     	applicationFormDto.setEmployer( employer);
     	applicationFormDto.setLocation( location);
         applicationFormDto.setStartDate( startDate);

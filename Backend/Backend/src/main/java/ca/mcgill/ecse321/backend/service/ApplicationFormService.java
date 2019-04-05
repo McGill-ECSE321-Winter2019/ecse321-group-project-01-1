@@ -36,14 +36,15 @@ public class ApplicationFormService {
 		ApplicationForm applicationForm = new ApplicationForm();
 
 		applicationForm.setJobID(applicationFormDto.getJobID());
+		applicationForm.setCompany(applicationFormDto.getCompany());
 		applicationForm.setEmployer(applicationFormDto.getEmployer());
+		applicationForm.setEmployerEmail(applicationFormDto.getEmployerEmail());
 		applicationForm.setEndDate(applicationFormDto.getEndDate());
 		applicationForm.setStartDate(applicationFormDto.getStartDate());
 		applicationForm.setWorkPermit(applicationFormDto.isWorkPermit());
 		applicationForm.setLocation(applicationFormDto.getLocation());
 		applicationForm.setJobDescription(applicationFormDto.getJobDescription());
 		applicationForm.setInternship(internship);
-		applicationForm.setEmployerEmail(applicationFormDto.getEmployerEmail());
 		
 		applicationForm = applicationFormRepository.save(applicationForm);
 
@@ -91,15 +92,15 @@ public class ApplicationFormService {
     	if (applicationForm == null) return null;
 
         ApplicationFormDto applicationFormDto = new ApplicationFormDto(
-        	applicationForm.getId(),
             applicationForm.getJobID(),
             applicationForm.getJobDescription(),
+            applicationForm.getCompany(),
             applicationForm.getEmployer(),
+            applicationForm.getEmployerEmail(),
             applicationForm.getLocation(),
             applicationForm.getStartDate(),
             applicationForm.getEndDate(),
-            applicationForm.isWorkPermit(),
-				applicationForm.getEmployerEmail()
+            applicationForm.isWorkPermit()
             );
         return applicationFormDto;
     }

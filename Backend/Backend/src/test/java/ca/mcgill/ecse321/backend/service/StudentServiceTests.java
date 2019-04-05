@@ -1,8 +1,15 @@
 package ca.mcgill.ecse321.backend.service;
 
-import ca.mcgill.ecse321.backend.dao.StudentRepository;
-import ca.mcgill.ecse321.backend.dto.StudentDto;
-import ca.mcgill.ecse321.backend.model.Student;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,11 +18,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import ca.mcgill.ecse321.backend.dao.StudentRepository;
+import ca.mcgill.ecse321.backend.dto.StudentDto;
+import ca.mcgill.ecse321.backend.model.Student;
 
 
 @RunWith(SpringRunner.class)
@@ -55,7 +60,7 @@ public class StudentServiceTests {
 		StudentDto studentDto = new StudentDto();
 		studentDto.setEmail(STUDENT_EMAIL);
 		studentDto.setFirstName("Firstname2");
-		studentDto.setStudentID(STUDENT_ID+"2");
+		studentDto.setStudentID(STUDENT_ID.substring(1)+"2");
 		studentDto.setLastName("Lastname2");
 		studentDto.setPassword("123456");
 		return studentDto;
@@ -75,7 +80,7 @@ public class StudentServiceTests {
 		StudentDto studentDto = new StudentDto();
 		studentDto.setEmail(STUDENT_EMAIL+"3");
 		studentDto.setFirstName("Firstname4");
-		studentDto.setStudentID(STUDENT_ID+"1");
+		studentDto.setStudentID(STUDENT_ID.substring(1)+"1");
 		studentDto.setLastName("Lastname4");
 		studentDto.setPassword("123456");
 		return studentDto;
