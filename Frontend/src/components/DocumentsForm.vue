@@ -17,7 +17,7 @@
                 >
                     <template slot="download" slot-scope="data">
                         <span v-if="selectedInternship.progress[data.index]">
-                             <a href="#" v-on:click="downloadFile(DocumentTypesDisp[data.index+1].value)">{{getPathByType(DocumentTypesDisp[data.index+1].value).file_name}}</a>
+                             <a href="#" :data-document-type="DocumentTypesDisp[data.index+1].value" v-on:click="downloadFile">{{getPathByType(DocumentTypesDisp[data.index+1].value).file_name}}</a>
                         </span>
                         <span v-else>Not Uploaded</span>
 
@@ -162,9 +162,9 @@
                     this.form.submitted = false;
                 });
             },
-            downloadFile(type){
-                // evt.preventDefault();
-                // let type = evt.target.attributes['data-document-type'].value;
+            downloadFile(evt){
+                evt.preventDefault();
+                let type = evt.target.attributes['data-document-type'].value;
                 let d = this.getPathByType(type);
                 this.$http({
                     // url: "http://127.0.0.1:8081/api/internships/1/documents/5e86f66b-74d2-4e96-82e7-9a76b35855d3/download",
