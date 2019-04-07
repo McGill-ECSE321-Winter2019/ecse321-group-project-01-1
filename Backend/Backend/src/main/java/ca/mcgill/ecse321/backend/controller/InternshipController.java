@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -103,9 +103,14 @@ public class InternshipController {
 		
 	}
 
-	@DeleteMapping(value = { "/external/students/{internship_id}", "/external/students/{internship_id}" })
-    public void deleteInternship(@PathVariable(value = "internship_id") int internshipID){
-	    Internship internship = internshipService.findInternshipById(internshipID);
+	@DeleteMapping(value = { "/external/students/{student_id}/{internship_id}", "/external/students/{internship_id}" })
+    public void deleteInternship(@PathVariable(value = "student_id") String studentID,
+    		@PathVariable(value = "internship_id") int internshipID){
+		Student student = studentService.findStudentByStudentID(studentID);
+		if (student == null) {
+			throw new IllegalArgumentException("No student with that id");
+		}	
+		Internship internship = internshipService.findByIdAndStudent(internshipID, student);
         if(internship == null){
             throw new IllegalArgumentException("There is no such internship!");
         }
