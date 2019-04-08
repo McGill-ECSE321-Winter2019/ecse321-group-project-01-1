@@ -81,6 +81,8 @@ public class StorageService {
     			document.getSize(),
     			document.getDocumentType()
     	);
+    	
+    	documentDto.setSubmissionDateTime(document.getSubmissionDateTime());
         return documentDto;
 	}
     

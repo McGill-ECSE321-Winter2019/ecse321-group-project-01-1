@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.backend.dto;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
@@ -14,6 +16,8 @@ public class DocumentDto {
     private String fileType;
     private long size;
     private DocumentType documentType;
+	private Date submissionDateTime;
+
 
     public DocumentDto(String id, String fileName, String path, String fileType, long size,DocumentType type) {
         this.id = id;
@@ -71,4 +75,12 @@ public class DocumentDto {
     public void setId(String id) {
         this.id = id;
     }
+
+	public Date getSubmissionDateTime() {
+		return submissionDateTime;
+	}
+
+	public void setSubmissionDateTime(Date submissionDateTime) {
+		this.submissionDateTime = submissionDateTime;
+	}
 }
