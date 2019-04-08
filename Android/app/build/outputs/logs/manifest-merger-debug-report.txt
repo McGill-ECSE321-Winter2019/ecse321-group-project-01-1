@@ -1,0 +1,176 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:2:1-23:12
+MERGED from [com.android.support:design:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/46c97765fc5e1246c8c97aebe9ff0cbb/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/dd9f8685c6582003e0f0d10162f45b9c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6b83c49e3d2fdb4892cd888531304646/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/f9d8c0e1a1f01e6ac0aac854416cfae6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/c4387d2e4e0a6295c928b2ed9bd04696/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/3e0c170e859374b91ad64d2b399422fc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/3571c1c92369a6572eae0d7fb0da9e9c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/420416eccd7592e4299cf7ca3c2e16c6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/c318f0afb0e79260bfa6c1810d0f923c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/3d3edb670aaa6f8e05106cf9aa21fb57/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/0ca08c677ea653a2b5f662feb79a7539/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/d1351eae3661fec52855cfad0faa13c1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/71f2a210b3f92f718e7b37b816434d85/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/256f9b74a1a30045de55faff02cae532/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/a60a867247c280282d6fd6cc2385519a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/d54458adc54193e53115df6f68f378fb/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/f1298cd56df000fa746a19c75cbf40af/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/58c22bc3a05e78471189da162d8f3ee4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/fad8cb45f21356bfe2a9f3f1abd90a08/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/89037060d0ae377a8923bc37340f181e/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/6af8ef8f018ff26254c4f75eca94e9a0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/b9d10b1d1f9f8ca8e71efe7af8040b27/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/d623db380fe59e928352464f0a95387e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/d858c12e6778164191942d16fe529bf7/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/b1da740185d632d0828c066f909c1379/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/f9ea7dfdc8f6c698d529f61cb15f0338/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/885c5509536da4f9812041fcab75a050/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/4b4a4315e3482ef6af4d062c92b4a487/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/81d419d0f8435c80f38a0f71c943c8fa/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/0e47a0655ef9377a85e87dfc17487868/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/5770e54bc2e7a7acce73c92c7d10fa88/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:2:1-23:12
+	package
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:3:5-47
+		INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:2:1-23:12
+		INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:2:1-23:12
+		INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:4:5-66
+	android:name
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:4:22-64
+application
+ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:5:5-22:19
+MERGED from [com.android.support:design:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/46c97765fc5e1246c8c97aebe9ff0cbb/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/46c97765fc5e1246c8c97aebe9ff0cbb/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6b83c49e3d2fdb4892cd888531304646/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6b83c49e3d2fdb4892cd888531304646/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/fad8cb45f21356bfe2a9f3f1abd90a08/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/fad8cb45f21356bfe2a9f3f1abd90a08/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/89037060d0ae377a8923bc37340f181e/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/89037060d0ae377a8923bc37340f181e/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/fad8cb45f21356bfe2a9f3f1abd90a08/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:11:9-40
+activity#ecse321.frontend.android.student.MainActivity
+ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:12:9-21:20
+	android:label
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:14:13-45
+	android:theme
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:15:13-56
+	android:name
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:13:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:16:13-20:29
+action#android.intent.action.MAIN
+ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:17:17-69
+	android:name
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:17:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:19:17-77
+	android:name
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml:19:27-74
+uses-sdk
+INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:design:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/46c97765fc5e1246c8c97aebe9ff0cbb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/46c97765fc5e1246c8c97aebe9ff0cbb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/dd9f8685c6582003e0f0d10162f45b9c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/dd9f8685c6582003e0f0d10162f45b9c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6b83c49e3d2fdb4892cd888531304646/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/6b83c49e3d2fdb4892cd888531304646/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/f9d8c0e1a1f01e6ac0aac854416cfae6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/f9d8c0e1a1f01e6ac0aac854416cfae6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/c4387d2e4e0a6295c928b2ed9bd04696/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/c4387d2e4e0a6295c928b2ed9bd04696/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/3e0c170e859374b91ad64d2b399422fc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/3e0c170e859374b91ad64d2b399422fc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/3571c1c92369a6572eae0d7fb0da9e9c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/3571c1c92369a6572eae0d7fb0da9e9c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/420416eccd7592e4299cf7ca3c2e16c6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/420416eccd7592e4299cf7ca3c2e16c6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/c318f0afb0e79260bfa6c1810d0f923c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/c318f0afb0e79260bfa6c1810d0f923c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/3d3edb670aaa6f8e05106cf9aa21fb57/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/3d3edb670aaa6f8e05106cf9aa21fb57/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/0ca08c677ea653a2b5f662feb79a7539/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/0ca08c677ea653a2b5f662feb79a7539/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/d1351eae3661fec52855cfad0faa13c1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/d1351eae3661fec52855cfad0faa13c1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/71f2a210b3f92f718e7b37b816434d85/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/71f2a210b3f92f718e7b37b816434d85/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/256f9b74a1a30045de55faff02cae532/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/256f9b74a1a30045de55faff02cae532/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/a60a867247c280282d6fd6cc2385519a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/a60a867247c280282d6fd6cc2385519a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/d54458adc54193e53115df6f68f378fb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/d54458adc54193e53115df6f68f378fb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/f1298cd56df000fa746a19c75cbf40af/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/f1298cd56df000fa746a19c75cbf40af/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/58c22bc3a05e78471189da162d8f3ee4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/58c22bc3a05e78471189da162d8f3ee4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/fad8cb45f21356bfe2a9f3f1abd90a08/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/fad8cb45f21356bfe2a9f3f1abd90a08/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/89037060d0ae377a8923bc37340f181e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/89037060d0ae377a8923bc37340f181e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/6af8ef8f018ff26254c4f75eca94e9a0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/6af8ef8f018ff26254c4f75eca94e9a0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/b9d10b1d1f9f8ca8e71efe7af8040b27/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/b9d10b1d1f9f8ca8e71efe7af8040b27/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/d623db380fe59e928352464f0a95387e/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/d623db380fe59e928352464f0a95387e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/d858c12e6778164191942d16fe529bf7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/d858c12e6778164191942d16fe529bf7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/b1da740185d632d0828c066f909c1379/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/b1da740185d632d0828c066f909c1379/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/f9ea7dfdc8f6c698d529f61cb15f0338/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/f9ea7dfdc8f6c698d529f61cb15f0338/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/885c5509536da4f9812041fcab75a050/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/885c5509536da4f9812041fcab75a050/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/4b4a4315e3482ef6af4d062c92b4a487/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/4b4a4315e3482ef6af4d062c92b4a487/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/81d419d0f8435c80f38a0f71c943c8fa/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/81d419d0f8435c80f38a0f71c943c8fa/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/0e47a0655ef9377a85e87dfc17487868/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/0e47a0655ef9377a85e87dfc17487868/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/5770e54bc2e7a7acce73c92c7d10fa88/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/sunbinyuan/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/5770e54bc2e7a7acce73c92c7d10fa88/AndroidManifest.xml:20:5-44
+INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/src/main/AndroidManifest.xml
