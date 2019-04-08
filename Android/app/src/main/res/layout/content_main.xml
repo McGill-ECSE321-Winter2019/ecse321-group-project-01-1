@@ -15,13 +15,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <TextView
-            android:id="@+id/error"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:visibility="gone"
-            android:text=""
-            android:textColor="@color/colorAccent"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,6 +25,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/password"
             android:hint="@string/password_hint"/>
+        <TextView
+            android:id="@+id/error"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:visibility="visible"
+            android:text=""
+            android:textColor="@color/colorAccent"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
