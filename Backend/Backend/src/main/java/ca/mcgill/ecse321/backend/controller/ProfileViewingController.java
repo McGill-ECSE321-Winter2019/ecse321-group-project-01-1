@@ -18,20 +18,25 @@ import java.util.Set;
 @CrossOrigin(origins = "*")
 @RestController
 public class ProfileViewingController {
-    @Autowired
-    private InternshipService internshipService;
-    
-    @Autowired
-    private StudentService studentService;
+	@Autowired
+	private InternshipService internshipService;
 
-    @Autowired
-    private AuthenticationService authenticationService;
-    
-    @GetMapping(value = {"/api/profile", "/api/profile/"})
-    public StudentDto getStudentProfile(){
-    	Student student = authenticationService.getCurrentStudent();
-        StudentDto studentDto = studentService.toDto(student);
-        return studentDto;
-    }
+	@Autowired
+	private StudentService studentService;
+
+	@Autowired
+	private AuthenticationService authenticationService;
+
+	/**
+	 * This method gets the student's profile via a GET request
+	 * 
+	 * @return Student DTO
+	 */
+	@GetMapping(value = { "/api/profile", "/api/profile/" })
+	public StudentDto getStudentProfile() {
+		Student student = authenticationService.getCurrentStudent();
+		StudentDto studentDto = studentService.toDto(student);
+		return studentDto;
+	}
 
 }
