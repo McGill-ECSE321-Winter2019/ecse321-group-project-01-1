@@ -30,7 +30,7 @@ public class ProfileViewingController {
     /**
      * This method gets the student's profile via a GET request
      * 
-     * @return
+     * @return Student DTO
      */
     @GetMapping(value = {"/api/profile", "/api/profile/"})
     public StudentDto getStudentProfile(){

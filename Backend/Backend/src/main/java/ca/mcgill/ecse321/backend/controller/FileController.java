@@ -41,10 +41,10 @@ public class FileController {
 	/**
 	 * This method uploads a file via a POST request
 	 * 
-	 * @param file
-	 * @param type
-	 * @param internshipId
-	 * @return
+	 * @param file File
+	 * @param type File Type
+	 * @param internshipId Internship ID
+	 * @return Document DTO
 	 */
 	@PostMapping("/api/internships/{internship_id}/documents")
 	public DocumentDto uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("type") DocumentType type,
@@ -60,8 +60,8 @@ public class FileController {
 	/**
 	 * This method gets all documents of an internship via a GET request
 	 * 
-	 * @param internshipId
-	 * @return
+	 * @param internshipId Internship ID
+	 * @return ArrayList of Document DTOs
 	 */
 	@GetMapping("/api/internships/{internship_id}/documents")
 	public ArrayList<DocumentDto> showAllDocuments(@PathVariable(value = "internship_id") int internshipId) {
@@ -89,9 +89,9 @@ public class FileController {
 
 	/**
 	 * This method gets a document via a GET request
-	 * @param documentId
-	 * @param internshipId
-	 * @return
+	 * @param documentId Document ID
+	 * @param internshipId Internship ID
+	 * @return Document
 	 */
 	@GetMapping("/api/internships/{internship_id}/documents/{document_id}/download")
 	public ResponseEntity<Resource> downloadFile(@PathVariable(value = "document_id") String documentId,

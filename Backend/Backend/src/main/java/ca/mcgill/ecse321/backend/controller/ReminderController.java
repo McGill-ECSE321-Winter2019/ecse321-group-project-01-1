@@ -29,9 +29,9 @@ public class ReminderController {
     /**
      * This method creates a reminder via a POST request
      * 
-     * @param message
-     * @param studentID
-     * @return
+     * @param message Message
+     * @param studentID Student ID
+     * @return Reminder DTO
      * @throws IllegalArgumentException
      */
 	@PostMapping(value = { "/external/students/{student_id}/reminders", "/external/students/{student_id}/reminders/" })
@@ -52,8 +52,8 @@ public class ReminderController {
 	/**
 	 * This method gets all reminders of a student via a GET request
 	 * 
-	 * @param studentID
-	 * @return
+	 * @param studentID Student ID
+	 * @return List of Reminder DTOs
 	 */
 	@GetMapping(value = { "/external/students/{student_id}/reminders", "/external/students/{student_id}/reminders/" })
 	public List<ReminderDto> getAllStudentReminders(@PathVariable(value="student_id") String studentID) {
@@ -72,7 +72,7 @@ public class ReminderController {
 	/**
 	 * This method gets all reminders of a student via a GET request
 	 * 
-	 * @return
+	 * @return List of Reminder DTOs
 	 */
 	@GetMapping(value = { "/api/reminders", "/api/reminders/"  })
 	public List<ReminderDto> getRemindersOfStudent() {
@@ -88,8 +88,8 @@ public class ReminderController {
 	/**
 	 * This method gets a reminder via a GET request
 	 * 
-	 * @param reminderId
-	 * @return
+	 * @param reminderId Reminder ID
+	 * @return Reminder DTO
 	 */
 	@GetMapping(value = { "/api/reminders/{reminder_id}", "/api/reminders/{reminder_id}/"  })
 	public ReminderDto getReminder(@PathVariable(value="reminder_id") int reminderId) {

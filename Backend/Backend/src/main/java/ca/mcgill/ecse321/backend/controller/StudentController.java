@@ -25,8 +25,8 @@ public class StudentController {
 	/**
 	 * This method gets a student via a GET request
 	 * 
-	 * @param studentID
-	 * @return
+	 * @param studentID Student ID
+	 * @return Student DTO
 	 */
 	@GetMapping(value = { "/external/students/{student_id}", "/external/students/{student_id}/" })
 	public StudentDto getStudentProfileExternal(@PathVariable(value = "student_id") String studentID) {
@@ -41,7 +41,7 @@ public class StudentController {
 	/**
 	 * This method gets all students via a GET request
 	 * 
-	 * @return
+	 * @return List of Student DTOs
 	 */
 	@GetMapping(value = { "/external/students", "/external/students/" })
 	public List<StudentDto> getAllStudentsExternal() {
@@ -56,12 +56,12 @@ public class StudentController {
 	/**
 	 * This method creates a student via a POST request
 	 * 
-	 * @param studentID
-	 * @param firstName
-	 * @param lastName
-	 * @param email
-	 * @param password
-	 * @return
+	 * @param studentID Student ID
+	 * @param firstName First Name
+	 * @param lastName Last Name
+	 * @param email Email, in proper Email format
+	 * @param password Password
+	 * @return Student DTO
 	 * @throws Exception
 	 */
 	@PostMapping(value = { "/external/students", "/external/students/" })
