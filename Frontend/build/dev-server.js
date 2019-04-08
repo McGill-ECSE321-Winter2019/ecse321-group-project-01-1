@@ -21,7 +21,7 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
 
-const ROOT_API = process.env.NODE_ENV == JSON.parse(config.build.env.NODE_ENV) ? JSON.parse(config.build.env.ROOT_API) : JSON.parse(config.build.env.ROOT_API)
+const ROOT_API = process.env.NODE_ENV == JSON.parse(config.build.env.NODE_ENV) ? JSON.parse(config.build.env.ROOT_API) : JSON.parse(config.dev.env.ROOT_API)
 var proxyTable = 
   {
       // proxy all requests starting with /api to jsonplaceholder

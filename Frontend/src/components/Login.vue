@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row align-v="center"align-h="center">
-      <b-col cols="4" >
+      <b-col cols="12" md="4" >
         <b-alert show v-show="!!error" variant="danger">Incorrect email or password.</b-alert>
 
         <b-form @submit="onSubmit" @reset="onReset" v-if="show">
@@ -30,7 +30,7 @@
           <b-button type="submit" variant="primary">Submit</b-button>
           <b-button type="reset" variant="danger">Reset</b-button>
         </b-form>
-      </b-col col>
+      </b-col>
     </b-row>
   </b-container>
 </template>

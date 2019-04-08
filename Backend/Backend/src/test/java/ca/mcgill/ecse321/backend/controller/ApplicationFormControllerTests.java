@@ -128,7 +128,7 @@ public class ApplicationFormControllerTests {
 		Date startDate = Date.valueOf("2019-01-11");
 		Date endDate = Date.valueOf("2019-01-22");
 		
-		ApplicationFormDto applicationFormDto = new ApplicationFormDto("1111111", "Description1", "Employer1", "Location1", startDate, endDate, true);
+		ApplicationFormDto applicationFormDto = new ApplicationFormDto("1111111", "Description1", "Google", "Employer1", "abc@mail.com", "Location1", startDate, endDate, true);
 		mockApplicationForm = applicationFormService.create(applicationFormDto, mockInternship);
 	}
 	
@@ -143,11 +143,13 @@ public class ApplicationFormControllerTests {
 		this.mockMvc.perform(post("/api/internships/{internship_id}/application_form", mockInternship.getId())
 				.param("job_id", "123")
 				.param("job_description", "Description")
+				.param("company", "Google")
 				.param("employer", "Employer1")
 				.param("location", "Joblocation")
 				.param("start_date", (Date.valueOf("2019-01-11")).toString())
 				.param("end_date", (Date.valueOf("2019-01-22")).toString())
 				.param("work_permit", Boolean.toString(true))
+				.param("employer_email", "abc@mail.com")
 				)
 		.andExpect(status().isBadRequest());
 	}
@@ -158,11 +160,14 @@ public class ApplicationFormControllerTests {
 		this.mockMvc.perform(post("/api/internships/{internship_id}/application_form", mockInternship2.getId())
 				.param("job_id", "123")
 				.param("job_description", "Description")
+				.param("company", "Google")
 				.param("employer", "Employer1")
 				.param("location", "Joblocation")
 				.param("start_date", (Date.valueOf("2019-01-11")).toString())
 				.param("end_date", (Date.valueOf("2019-01-22")).toString())
 				.param("work_permit", Boolean.toString(true))
+						.param("employer_email", "abc@mail.com")
+
 				)
 		.andExpect(status().isOk());
 	}
@@ -173,21 +178,22 @@ public class ApplicationFormControllerTests {
 		this.mockMvc.perform(put("/api/internships/{internship_id}/application_form", mockInternship.getId())
 				.param("job_id", "1234")
 				.param("job_description", mockApplicationForm.getJobDescription())
+				.param("company", "Google")
 				.param("employer", mockApplicationForm.getEmployer())
 				.param("location", mockApplicationForm.getLocation())
 				.param("start_date", mockApplicationForm.getStartDate().toString())
 				.param("end_date", mockApplicationForm.getEndDate().toString())
 				.param("work_permit", Boolean.toString(mockApplicationForm.isWorkPermit()))
-				)
+				.param("employer_email", mockApplicationForm.getEmployerEmail()))
 		.andExpect(status().isOk())
 		 .andExpect(jsonPath("$.job_description", is(mockApplicationForm.getJobDescription())))
 		 .andExpect(jsonPath("$.job_id", is("1234")))
+		 .andExpect(jsonPath("$.company", is(mockApplicationForm.getCompany())))
 		 .andExpect(jsonPath("$.employer", is(mockApplicationForm.getEmployer())))
 		 .andExpect(jsonPath("$.location", is(mockApplicationForm.getLocation())))
 		 .andExpect(jsonPath("$.start_date", is(mockApplicationForm.getStartDate().toString())))
 		 .andExpect(jsonPath("$.end_date", is(mockApplicationForm.getEndDate().toString())))
 		 .andExpect(jsonPath("$.work_permit", is(mockApplicationForm.isWorkPermit())))
-		
 		;
 	}
 	
@@ -199,11 +205,13 @@ public class ApplicationFormControllerTests {
 		 .andExpect(status().isOk())
 		 .andExpect(jsonPath("$.job_description", is(mockApplicationForm.getJobDescription())))
 		 .andExpect(jsonPath("$.job_id", is(mockApplicationForm.getJobID())))
+		 .andExpect(jsonPath("$.company", is(mockApplicationForm.getCompany())))
 		 .andExpect(jsonPath("$.employer", is(mockApplicationForm.getEmployer())))
 		 .andExpect(jsonPath("$.location", is(mockApplicationForm.getLocation())))
 		 .andExpect(jsonPath("$.start_date", is(mockApplicationForm.getStartDate().toString())))
 		 .andExpect(jsonPath("$.end_date", is(mockApplicationForm.getEndDate().toString())))
-		 .andExpect(jsonPath("$.work_permit", is(true)));
+		 .andExpect(jsonPath("$.work_permit", is(true)))
+		.andExpect(jsonPath("$.employer_email", is(mockApplicationForm.getEmployerEmail())));
 	}
 	
 	@Test
@@ -212,6 +220,7 @@ public class ApplicationFormControllerTests {
 		this.mockMvc.perform(post("/api/internships/{internship_id}/application_form", mockInternship.getId())
 				.param("job_id", "123")
 				.param("job_description", "Description")
+				.param("company", "Google")
 				.param("employer", "Employer1")
 				.param("location", "Joblocation")
 				.param("start_date", (Date.valueOf("2019-01-11")).toString())
@@ -236,6 +245,7 @@ public class ApplicationFormControllerTests {
 		this.mockMvc.perform(post("/api/internships/{internship_id}/application_form", mockInternship.getId())
 				.param("job_id", "123")
 				.param("job_description", "Description")
+				.param("company", "Google")
 				.param("employer", "Employer1")
 				.param("location", "Joblocation")
 				.param("start_date", (Date.valueOf("2019-01-11")).toString())

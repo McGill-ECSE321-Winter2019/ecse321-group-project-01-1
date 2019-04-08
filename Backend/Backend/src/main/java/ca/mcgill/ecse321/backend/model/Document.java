@@ -1,8 +1,16 @@
 package ca.mcgill.ecse321.backend.model;
 
-import org.hibernate.annotations.GenericGenerator;
+import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class Document {
@@ -39,6 +47,9 @@ public class Document {
 	@ManyToOne(optional = false)
 	private Internship internship;
 
+	@UpdateTimestamp
+	private Date submissionDateTime;
+	
 	public String getPath() {
 		return path;
 	}
@@ -102,4 +113,14 @@ public class Document {
 	public String  getId() {
 		return id;
 	}
+
+	public Date getSubmissionDateTime() {
+		return submissionDateTime;
+	}
+
+	public void setSubmissionDateTime(Date submissionDateTime) {
+		this.submissionDateTime = submissionDateTime;
+	}
+
+	
 }

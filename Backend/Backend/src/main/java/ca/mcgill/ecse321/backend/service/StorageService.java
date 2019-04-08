@@ -81,6 +81,8 @@ public class StorageService {
     			document.getSize(),
     			document.getDocumentType()
     	);
+    	
+    	documentDto.setSubmissionDateTime(document.getSubmissionDateTime());
         return documentDto;
 	}
     
@@ -99,7 +101,7 @@ public class StorageService {
 	}
 	
     public String generateFileUri(int internshipId, String documentId) {
-    	return ServletUriComponentsBuilder.fromCurrentContextPath()
+    	return ServletUriComponentsBuilder.newInstance()
         .path("/api/internships/")
         .path(internshipId+"")
         .path("/documents/")
