@@ -27,6 +27,11 @@ public class ProfileViewingController {
     @Autowired
     private AuthenticationService authenticationService;
     
+    /**
+     * This method gets the student's profile via a GET request
+     * 
+     * @return Student DTO
+     */
     @GetMapping(value = {"/api/profile", "/api/profile/"})
     public StudentDto getStudentProfile(){
     	Student student = authenticationService.getCurrentStudent();
