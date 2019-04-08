@@ -58,5 +58,5 @@ Link to the third project report: [Project report 3](https://github.com/McGill-E
 |Mark Zhu          |  _24_ hours|Mobile development|
 
 
-Link to the third project report: [Project report 4](https://github.com/McGill-ECSE321-Winter2019/ecse321-group-project-01-1/wiki/Project-report-4)
+Link to the final project report: [Project report 4](https://github.com/McGill-ECSE321-Winter2019/ecse321-group-project-01-1/wiki/Project-report-4)
 
