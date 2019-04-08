@@ -39,13 +39,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     */
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // ...
         // INSERT TO END OF THE METHOD AFTER AUTO-GENERATED CODE
         // initialize error message text view
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         refreshErrorMessage();
     }
 
