@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
+//Class representing the initial application form to be submitted by a student when applying for an internship
 @Entity
 public class ApplicationForm{
 	
