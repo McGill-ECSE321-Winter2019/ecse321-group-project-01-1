@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
+//Represents a document that is linked to an internship
 @Entity
 public class Document {
 	public Document(String fileName, String fileType, byte[] data, long size) {

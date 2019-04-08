@@ -65,7 +65,7 @@
 </script>
 
 <style>
-#internship_listing td {
-    cursor: pointer;
-}
+	#internship_listing td {
+    	cursor: pointer;
+	}
 </style>
