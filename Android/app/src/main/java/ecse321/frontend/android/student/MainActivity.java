@@ -39,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     */
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // ...
+        // INSERT TO END OF THE METHOD AFTER AUTO-GENERATED CODE
+        // initialize error message text view
+        super.onCreate(savedInstanceState);
+        refreshErrorMessage();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,16 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        // ...
-        // INSERT TO END OF THE METHOD AFTER AUTO-GENERATED CODE
-        // initialize error message text view
-        super.onCreate(savedInstanceState);
-        refreshErrorMessage();
-    }
-
 
     private void refreshErrorMessage() {
         // set the error message
