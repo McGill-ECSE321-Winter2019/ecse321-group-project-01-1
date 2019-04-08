@@ -1,11 +1,16 @@
 package ca.mcgill.ecse321.backend.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
+//Class representing the initial application form to be submitted by a student when applying for an internship
 @Entity
 public class ApplicationForm{
 	
@@ -23,15 +28,27 @@ public class ApplicationForm{
 	private String jobID; //Publicly posted Job ID that can be found with the job description 
 	private String jobDescription;
 
-	public ApplicationForm(String jobID, String jobDescription, Internship internship, String employer, String location, Date startDate, Date endDate, boolean workPermit) {
+
+	public ApplicationForm(String jobID, String jobDescription, Internship internship, String company, String employer, String employerEmail, String location, Date startDate, Date endDate, boolean workPermit) {
 		this.jobID = jobID;
 		this.jobDescription = jobDescription;
 		this.internship = internship;
+		this.company = company;
+		this.employerEmail = employerEmail;
 		this.employer = employer;
 		this.location = location;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.workPermit = workPermit;
+
+	}
+
+	public String getEmployerEmail() {
+		return employerEmail;
+	}
+
+	public void setEmployerEmail(String employerEmail) {
+		this.employerEmail = employerEmail;
 	}
 
 	public ApplicationForm(){
@@ -105,7 +122,10 @@ public class ApplicationForm{
 		this.workPermit = workPermit;
 	}
 
+	private String company;
+	
 	private String employer;
+	private String employerEmail;
 
 	private String location;
 
@@ -122,6 +142,14 @@ public class ApplicationForm{
 		this.jobID = jobID;
 	}
 
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -129,5 +157,7 @@ public class ApplicationForm{
 		ApplicationForm that = (ApplicationForm) o;
 		return getId() == that.getId();
 	}
+
+
 
 }

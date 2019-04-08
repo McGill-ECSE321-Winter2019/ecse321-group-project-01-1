@@ -24,58 +24,58 @@ import ca.mcgill.ecse321.backend.model.Student;
 @Service
 @Validated
 public class StudentService {
-	@PersistenceContext
-	private EntityManager entityManager;
-	
-	
-	@Autowired
-	InternshipService internshipService;
-	
-	@Autowired
-	StudentRepository studentRepository;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Transactional
-	public Student create(@ModelAttribute("student") @Valid StudentDto studentDto) throws RuntimeException {
-		
-		if (emailExists(studentDto.getEmail())) {   
-            throw new IllegalArgumentException(
-              "There is already a student with that email address: " + studentDto.getEmail());
-        }
-		
-		if (studentIDExists(studentDto.getStudentID())) {   
-            throw new IllegalArgumentException(
-              "There is already a student with that student ID: " + studentDto.getStudentID());
-        }
-		
-		Student S = new Student();
-		S.setStudentID(studentDto.getStudentID());
-		S.setFirstName(studentDto.getFirstName());
-		S.setLastName(studentDto.getLastName());
-		S.setEmail(studentDto.getEmail());
-		S.setPassword(passwordEncoder.encode(studentDto.getPassword()));
-		entityManager.persist(S);
+    @PersistenceContext
+    private EntityManager entityManager;
 
-		return S;
-	}
-	
-	@Transactional
-	public Student findStudentByStudentID(String studentID) {
-		return studentRepository.findStudentByStudentID(studentID);
-	}
-	
-	@Transactional
-	public Student findStudentByEmail(String email) {
-		return studentRepository.findStudentByEmail(email);
-	}
-	
-	@Transactional
-	public Student findStudentById(String studentID) {
-		return studentRepository.findStudentByStudentID(studentID);
-	}
-	
+
+    @Autowired
+    InternshipService internshipService;
+
+    @Autowired
+    StudentRepository studentRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Transactional
+    public Student create(@ModelAttribute("student") @Valid StudentDto studentDto) throws RuntimeException {
+
+        if (emailExists(studentDto.getEmail())) {
+            throw new IllegalArgumentException(
+                    "There is already a student with that email address: " + studentDto.getEmail());
+        }
+
+        if (studentIDExists(studentDto.getStudentID())) {
+            throw new IllegalArgumentException(
+                    "There is already a student with that student ID: " + studentDto.getStudentID());
+        }
+
+        Student S = new Student();
+        S.setStudentID(studentDto.getStudentID());
+        S.setFirstName(studentDto.getFirstName());
+        S.setLastName(studentDto.getLastName());
+        S.setEmail(studentDto.getEmail());
+        S.setPassword(passwordEncoder.encode(studentDto.getPassword()));
+        entityManager.persist(S);
+
+        return S;
+    }
+
+    @Transactional
+    public Student findStudentByStudentID(String studentID) {
+        return studentRepository.findStudentByStudentID(studentID);
+    }
+
+    @Transactional
+    public Student findStudentByEmail(String email) {
+        return studentRepository.findStudentByEmail(email);
+    }
+
+    @Transactional
+    public Student findStudentById(String studentID) {
+        return studentRepository.findStudentByStudentID(studentID);
+    }
+
     private boolean emailExists(String email) {
         Student student = studentRepository.findStudentByEmail(email);
         if (student != null) {
@@ -83,7 +83,15 @@ public class StudentService {
         }
         return false;
     }
-    
+
+    public void deleteStudent(String studentID){
+        Student student = studentRepository.findStudentByStudentID(studentID);
+        if(student==null){
+            return;
+        }
+        studentRepository.delete(student);
+    }
+
     private boolean studentIDExists(String studentID) {
         Student student = studentRepository.findStudentByStudentID(studentID);
         if (student != null) {
@@ -91,52 +99,50 @@ public class StudentService {
         }
         return false;
     }
-    
-	@Transactional
-	public Student update(Student student){
-		studentRepository.save(student);
-		return student;
-	}
-    
-	@Transactional
-	public List<Student> getAll() {
-		return toList(studentRepository.findAll());
-	}
-	
-	@Transactional
-    public StudentDto toDto(Student student) {
-		StudentDto studentDto = new StudentDto();
-		studentDto.setStudentID(student.getStudentID());
-		studentDto.setFirstName(student.getFirstName());
-		studentDto.setLastName(student.getLastName());
-		studentDto.setEmail(student.getEmail());
-		return studentDto;
-    	
+
+    @Transactional
+    public Student update(Student student) {
+        studentRepository.save(student);
+        return student;
     }
-    
+
+    @Transactional
+    public List<Student> getAll() {
+        return toList(studentRepository.findAll());
+    }
+
+    @Transactional
+    public StudentDto toDto(Student student) {
+        StudentDto studentDto = new StudentDto();
+        studentDto.setStudentID(student.getStudentID());
+        studentDto.setFirstName(student.getFirstName());
+        studentDto.setLastName(student.getLastName());
+        studentDto.setEmail(student.getEmail());
+        return studentDto;
+    }
+
     @Transactional
     public StudentDto deepToDto(Student student) {
-		StudentDto studentDto = new StudentDto();
-		studentDto.setStudentID(student.getStudentID());
-		studentDto.setFirstName(student.getFirstName());
-		studentDto.setLastName(student.getLastName());
-		studentDto.setEmail(student.getEmail());
-		HashSet<InternshipDto> internshipDtos = new HashSet<>();
-		for (Internship internship : student.getInternship()) {
-			internshipDtos.add(internshipService.deepToDto(internship));
-		}
-		studentDto.setInternship(internshipDtos);
-		return studentDto;
-    	
+        StudentDto studentDto = new StudentDto();
+        studentDto.setStudentID(student.getStudentID());
+        studentDto.setFirstName(student.getFirstName());
+        studentDto.setLastName(student.getLastName());
+        studentDto.setEmail(student.getEmail());
+        HashSet<InternshipDto> internshipDtos = new HashSet<>();
+        for (Internship internship : student.getInternship()) {
+            internshipDtos.add(internshipService.deepToDto(internship));
+        }
+        studentDto.setInternship(internshipDtos);
+        return studentDto;
     }
-    
-	private <T> List<T> toList(Iterable<T> iterable){
-		List<T> resultList = new ArrayList<T>();
-		for (T t : iterable) {
-			resultList.add(t);
-		}
-		return resultList;
-	}
-    
+
+    private <T> List<T> toList(Iterable<T> iterable) {
+        List<T> resultList = new ArrayList<T>();
+        for (T t : iterable) {
+            resultList.add(t);
+        }
+        return resultList;
+    }
+
 }
 

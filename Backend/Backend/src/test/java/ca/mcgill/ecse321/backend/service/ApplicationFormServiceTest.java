@@ -67,14 +67,14 @@ public class ApplicationFormServiceTest {
         studentRepository.deleteAll();
         courseRepository.deleteAll();
     	applicationFormRepository.deleteAll();
-        student = studentService.create(new StudentDto("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
+        student = studentService.create(new StudentDto("111111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
         course = courseService.create(new CourseDto("FACC300"));
 
         internship = internshipService.create(internshipService.toDto(new Internship(2019, AcademicSemester.FALL, course, student)),student ,course);
 
         Date startDate = new Date(1);
         Date endDate = new Date(2);
-        mockapplicationForm = new ApplicationForm("someID", "writing code", internship, "Google",  "planet", startDate, endDate, true);
+        mockapplicationForm = new ApplicationForm("someID", "writing code", internship, "Google", "John Doe",  "abc@mail.com",  "planet", startDate, endDate, true);
 
         // in real application the only way to create would be through service
         mockapplicationForm.setId(1);
@@ -120,7 +120,6 @@ public class ApplicationFormServiceTest {
         ApplicationFormDto applicationFormDto = applicationFormService.toDto(mockapplicationForm);
 
         assertEquals(mockapplicationForm.getEmployer(),applicationFormDto.getEmployer());
-        assertEquals(mockapplicationForm.getId(),applicationFormDto.getId());
         assertEquals(mockapplicationForm.getJobDescription(),applicationFormDto.getJobDescription());
         assertEquals(mockapplicationForm.getLocation(),applicationFormDto.getLocation());
         assertEquals(mockapplicationForm.getEndDate(),applicationFormDto.getEndDate());

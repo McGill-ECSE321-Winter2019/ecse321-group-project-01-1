@@ -53,7 +53,7 @@ public class CourseServiceTest {
         internshipRepository.deleteAll();
         studentRepository.deleteAll();
         courseRepository.deleteAll();
-        student = studentService.create(new StudentDto("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
+        student = studentService.create(new StudentDto("111111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
         course  = new Course();
         course.setCourseID("ECSE321");
         course.setId(1);

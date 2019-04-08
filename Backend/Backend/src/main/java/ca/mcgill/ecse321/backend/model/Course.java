@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
+//Represents the course that an internship is associated with (e.g. FACC250)
 @Entity
 public class Course {
 

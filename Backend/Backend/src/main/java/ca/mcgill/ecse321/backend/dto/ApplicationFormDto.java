@@ -2,6 +2,10 @@ package ca.mcgill.ecse321.backend.dto;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -14,10 +18,26 @@ public class ApplicationFormDto {
 
     private String jobID;
     private String jobDescription;
+    
+    @NotNull
+    @NotEmpty
+	private String company;
 
+    
+    @NotNull
+    @NotEmpty
     private String employer;
 
+    
+    @Email
+    private String employerEmail;
+    
+    
+    @NotNull
+    @NotEmpty
     private String location;
+
+
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
@@ -28,27 +48,19 @@ public class ApplicationFormDto {
     private boolean workPermit;
 
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
-    private InternshipDto internshipDto;
+    private InternshipDto internship;
 
     public ApplicationFormDto() {
     	
     }
+
     
-    public ApplicationFormDto(int id, String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit) {
-        this.id = id;
+    public ApplicationFormDto(String jobID, String jobDescription, String company, String employer, String employerEmail, String location, Date startDate, Date endDate, boolean workPermit) {
         this.jobID = jobID;
         this.jobDescription = jobDescription;
+        this.company = company;
         this.employer = employer;
-        this.location = location;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.workPermit = workPermit;
-    }
-    
-    public ApplicationFormDto(String jobID, String jobDescription, String employer, String location, Date startDate, Date endDate, boolean workPermit) {
-        this.jobID = jobID;
-        this.jobDescription = jobDescription;
-        this.employer = employer;
+        this.employerEmail = employerEmail;
         this.location = location;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -63,12 +75,20 @@ public class ApplicationFormDto {
         this.id = id;
     }
 
+    public String getEmployerEmail() {
+        return employerEmail;
+    }
+
+    public void setEmployerEmail(String employerEmail) {
+        this.employerEmail = employerEmail;
+    }
+
     public InternshipDto getInternship() {
-        return this.internshipDto;
+        return this.internship;
     }
 
     public void setInternship(InternshipDto internship) {
-        this.internshipDto = internship;
+        this.internship = internship;
     }
 
     public String getJobDescription() {
@@ -126,5 +146,13 @@ public class ApplicationFormDto {
     public void setJobID(String jobID) {
         this.jobID = jobID;
     }
+    
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
 
 }

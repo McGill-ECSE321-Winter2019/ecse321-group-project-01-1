@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Mon Apr 08 02:42:36 EDT 2019
+0.baseType=DIRECTORY
+0.base=/Users/sunbinyuan/Documents/ecse321-group-project-01-1/Android/app/build/intermediates/dex/debug/mergeDexDebug/out
+0.path=classes.dex
+0.set=DEX
+count=1

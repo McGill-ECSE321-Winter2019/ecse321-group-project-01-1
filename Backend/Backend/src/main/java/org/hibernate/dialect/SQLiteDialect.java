@@ -1,15 +1,20 @@
 package org.hibernate.dialect;
 
 
-import org.hibernate.dialect.function.*;
+import java.sql.Types;
+
+import org.hibernate.dialect.function.AbstractAnsiTrimEmulationFunction;
+import org.hibernate.dialect.function.NoArgSQLFunction;
+import org.hibernate.dialect.function.SQLFunction;
+import org.hibernate.dialect.function.SQLFunctionTemplate;
+import org.hibernate.dialect.function.StandardSQLFunction;
+import org.hibernate.dialect.function.VarArgsSQLFunction;
 import org.hibernate.dialect.identity.IdentityColumnSupport;
 import org.hibernate.dialect.identity.SQLiteIdentityColumnSupport;
 import org.hibernate.dialect.unique.SQLiteUniqueDelegate;
 import org.hibernate.dialect.unique.UniqueDelegate;
 import org.hibernate.exception.spi.SQLExceptionConversionDelegate;
 import org.hibernate.type.StandardBasicTypes;
-
-import java.sql.Types;
 
 /**
  * SQLite dialect for hibernate 5.
@@ -123,6 +128,11 @@ public class SQLiteDialect extends Dialect {
         return "";
     }
 
+    @Override
+    public String getAddColumnString() {
+        return "add column";
+      }
+    
     @Override
     public boolean supportsOuterJoinForUpdate() {
         return false;

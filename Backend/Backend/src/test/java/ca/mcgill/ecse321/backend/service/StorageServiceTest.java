@@ -87,7 +87,7 @@ public class StorageServiceTest {
     public void setUp() throws Exception{
         studentRepository.deleteAll();
         courseRepository.deleteAll();
-        Student student = studentService.create(new StudentDto("1111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
+        Student student = studentService.create(new StudentDto("111111111","john","dow","john.doe@mail.mcgill.ca", "passsword"));
         Course course = courseService.create(new CourseDto("FACC300"));
        
         this.mockInternship = internshipService.create(new InternshipDto(2019, AcademicSemester.SUMMER), student, course);
