@@ -62,16 +62,6 @@ public class FileController {
         }
         return documentDtos;
     }
-    // we don't need this one for now
-    // and if we need this, it should be merged with the method above
-    // taking an extra argument to filter the documents by type
-
-//    @GetMapping("/api/internships/{internship_id}/documents/{document_id}")
-//    public DocumentDto showDocumentByTypeAndInternship(@RequestParam("type") DocumentType type,
-//                                                    @RequestParam("internship") Internship internship){
-//        return storageService.toDto(storageService.readDocumentByType(internship, type));
-//    }
-
 
     @GetMapping("/api/internships/{internship_id}/documents/{document_id}/download")
     public ResponseEntity<Resource> downloadFile(@PathVariable(value="document_id") String documentId,
