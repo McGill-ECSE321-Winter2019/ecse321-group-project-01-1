@@ -26,6 +26,7 @@ import ca.mcgill.ecse321.backend.service.InternshipService;
 import ca.mcgill.ecse321.backend.service.StudentService;
 
 
+
 @CrossOrigin(origins = "*")
 @RestController
 public class InternshipController {
@@ -42,6 +43,12 @@ public class InternshipController {
     @Autowired
     private AuthenticationService authenticationService;
 	
+    /**
+     * This method gets a internship via a GET request
+     * 
+     * @param internshipId
+     * @return
+     */
 	@GetMapping(value = { "/api/internships/{internship_id}", "/api/internships/{internship_id}" })
 	public InternshipDeepDto getInternship(@PathVariable(value="internship_id") int internshipId) {
 		Student student = authenticationService.getCurrentStudent();
@@ -49,6 +56,11 @@ public class InternshipController {
 		return internshipService.deepToDto(i);
 	}
 	
+	/**
+	 * This method gets all internships via a GET request
+	 * 
+	 * @return
+	 */
 	@GetMapping(value = { "/api/internships", "/api/internships/" })
     public List<InternshipDto> getInternshipDtos(){
 		Student student = authenticationService.getCurrentStudent();
@@ -66,6 +78,10 @@ public class InternshipController {
         return dtoList;
     }
 	
+	/**
+	 * This method gets all internships via a GET request
+	 * @return
+	 */
 	@GetMapping(value = { "/external/internships", "/external/internships/" })
     public List<InternshipDto> getAllInternship(){
         List<Internship> internshipList = internshipService.getAll();
@@ -77,6 +93,16 @@ public class InternshipController {
         return dtoList;
     }
 	
+	/**
+	 * This method creates an internship via a POST request
+	 * 
+	 * @param studentID
+	 * @param courseID
+	 * @param academicSemester
+	 * @param year
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping(value = { "/external/students/{student_id}/internships", "/external/students/{student_id}/internships/" })
 	public InternshipDto createInternship(@PathVariable(value = "student_id") String studentID,
 			@RequestParam(name = "course_id") String courseID,

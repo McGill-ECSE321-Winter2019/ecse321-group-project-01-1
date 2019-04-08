@@ -32,6 +32,20 @@ public class ApplicationFormController {
     @Autowired
     private AuthenticationService authenticationService;
     
+    
+    /**
+     * This method creates a new application form via a POST request
+     * 
+     * @param jobID
+     * @param jobDescription
+     * @param employer
+     * @param location
+     * @param startDate
+     * @param endDate
+     * @param workPermit
+     * @param internshipId
+     * @return
+     */
     @PostMapping("/api/internships/{internship_id}/application_form")
     public ApplicationFormDto postApplication(
                       @RequestParam("job_id") String jobID,
@@ -51,6 +65,19 @@ public class ApplicationFormController {
         return applicationFormService.toDto(applicationForm);
     }
     
+/**
+ * This method updates a application form via a PUT request
+ * 
+ * @param jobID
+ * @param jobDescription
+ * @param employer
+ * @param location
+ * @param startDate
+ * @param endDate
+ * @param workPermit
+ * @param internshipId
+ * @return
+ */
     @PutMapping("/api/internships/{internship_id}/application_form")
     public ApplicationFormDto putApplication(
                       @RequestParam(value = "job_id" , required = false) String jobID,
@@ -79,6 +106,12 @@ public class ApplicationFormController {
         return applicationFormService.toDto(applicationForm);
     }
 
+    /**
+     * This method gets a application form via a GET request
+     * 
+     * @param internshipId
+     * @return
+     */
     @GetMapping("/api/internships/{internship_id}/application_form")
     public ApplicationFormDto getApplication(@PathVariable(value="internship_id") int internshipId){
     	Internship i =internshipService.findByIdAndStudent(internshipId, authenticationService.getCurrentStudent());
